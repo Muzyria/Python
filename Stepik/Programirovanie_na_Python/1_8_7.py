@@ -1,0 +1,6 @@
+x=int(input())
+y=int(60)
+z=int(x//y)
+z2=int(x%y)
+print(z)
+print(z2)

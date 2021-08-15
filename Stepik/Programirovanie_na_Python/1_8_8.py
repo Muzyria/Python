@@ -1,0 +1,8 @@
+X=int(input())
+H=int(input())
+M=int(input())
+Y60=int(60)
+Z=int((X+(H*Y60)+M)//Y60)
+Z2=int((X+(H*Y60)+M)%Y60)
+print(Z)
+print(Z2)
