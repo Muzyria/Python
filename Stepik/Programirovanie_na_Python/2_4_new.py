@@ -7,4 +7,4 @@ for char in text:
     else:
         dict[char] = 1
 print(dict)
-#DKSJDGJOHJKLLJDF
+
