@@ -18,10 +18,10 @@ with open(r'C:\Users\Sasha\Downloads\file.txt', 'r', encoding='utf-8') as file:
 
     '''
     with open('file.txt') as file:
-    text = file.read()
-    print('Input file contains:')
-    print(sum(map(lambda x: x.isalpha(), text)), 'letters')
-    print(len(text.split()), 'words')
-    file.seek(0)
-    print(len(file.readlines()), 'lines')
+        text = file.read()
+        print('Input file contains:')
+        print(sum(map(lambda x: x.isalpha(), text)), 'letters')
+        print(len(text.split()), 'words')
+        file.seek(0)
+        print(len(file.readlines()), 'lines')
     '''
