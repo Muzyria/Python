@@ -10,9 +10,10 @@ try:
     browser = webdriver.Chrome()
     browser.get(link) #open link
 
-    x_element = browser.find_element_by_id("input_value")
-    x = x_element.text
-    y = calc(x) # get function
+    x = browser.find_element_by_id("treasure").get_attribute("valuex") # get atribute
+    #print("x=", x)
+    y = calc(x)
+    #print("y=", y) 
 
     input1 = browser.find_element_by_id("answer")
     input1.send_keys(y) # write answer 
