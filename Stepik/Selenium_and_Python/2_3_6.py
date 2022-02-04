@@ -9,7 +9,7 @@ try:
     link = "http://suninjuly.github.io/redirect_accept.html"
     browser = webdriver.Chrome()
     browser.get(link) #open link
-    time.sleep(2)
+    time.sleep(3)
 
     button0 = browser.find_element_by_class_name("trollface.btn.btn-primary").click()
     time.sleep(1)
