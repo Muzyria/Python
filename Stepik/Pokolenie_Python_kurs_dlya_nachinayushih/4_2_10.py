@@ -1,0 +1,1 @@
+print("Принадлежит" if int(input()) in list(range(-29, -1)) + list(range(8, 26)) else "Не принадлежит")
