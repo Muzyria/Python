@@ -10,4 +10,4 @@ print(PizzaMaker.__dict__.keys())
 
 maker = PizzaMaker()
 maker._make_barbecue()
-#maker.__make_pepperoni()
+maker._PizzaMaker__make_pepperoni()
