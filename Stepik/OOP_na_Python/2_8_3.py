@@ -1,15 +1,14 @@
 class Date:
-    def __init__(self, d, m, y):
-        self.__date = f"{d:02}/{m:02}/{y:04}"
-        self.__usa_date = f"{m:02}-{d:02}-{y:04}"
+    def __init__(self, *args):
+        self.__args = args
     
     @property
     def date(self):
-        return self.__date
+        return f"{self.__args[0]:02}/{self.__args[1]:02}/{self.__args[2]:04}"
 
     @property
     def usa_date(self):
-        return self.__usa_date
+        return f"{self.__args[1]:02}-{self.__args[0]:02}-{self.__args[2]:04}"
 
 
 d1 = Date(5, 10, 2001)
