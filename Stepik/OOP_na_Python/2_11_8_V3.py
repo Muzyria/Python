@@ -39,31 +39,30 @@ class Cart:
         self.user = User
         self.goods = dict()
         self.__total = 0
-        self.price_pro = dict()
+        
 
     @property
     def total(self):
         return self.__total
 
     def add(self, Product, ad_amount=1):
-        if Product.name not in self.goods:
-            Cart.price_pro.update({Product.name: Product.price})
-            Cart.goods.update({Product.name: ad_amount})
+        if Product not in self.goods:
+            Cart.goods.update({Product: ad_amount})
             self.__total += ad_amount * Product.price
         else:
-            Cart.goods[Product.name] = Cart.goods[Product.name] + ad_amount
+            Cart.goods[Product] = Cart.goods[Product] + ad_amount
             self.__total += ad_amount * Product.price
-
+            
     def remove(self, Product, re_amount=1):
-        if Product.name in self.goods and Cart.goods[Product.name] >= re_amount:
-            Cart.goods[Product.name] = Cart.goods[Product.name] - re_amount
+        if Product in self.goods and Cart.goods[Product] >= re_amount:
+            Cart.goods[Product] = Cart.goods[Product] - re_amount
             self.__total -= re_amount * Product.price
-        if Product.name in self.goods and Cart.goods[Product.name] < re_amount:
-            re_amount = Cart.goods[Product.name]
-            Cart.goods[Product.name] = Cart.goods[Product.name] - re_amount
+        if Product in self.goods and Cart.goods[Product] < re_amount:
+            re_amount = Cart.goods[Product]
+            Cart.goods[Product] = Cart.goods[Product] - re_amount
             self.__total -= re_amount * Product.price
-        if Cart.goods[Product.name] == 0:
-            del Cart.goods[Product.name]
+        if Cart.goods[Product] == 0:
+            del Cart.goods[Product]
         
     def order(self):
         if User.payment(self.user, self.__total):
@@ -73,8 +72,9 @@ class Cart:
 
     def print_check(self):
         print("---Yor check---")
-        for k, v in sorted(Cart.goods.items()):
-            print(f"{k} {Cart.price_pro[k]} {v} {v * Cart.price_pro[k]}")
+        for k, v in sorted(self.goods.items(), key=lambda x: x[0].name):
+        #for k, v in self.goods.items():
+            print(k.name, k.price, v, k.price * v)
         print(f"---Total: {self.total}---")
 
 
