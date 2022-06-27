@@ -48,10 +48,8 @@ class Registration:
 
     @staticmethod
     def check_password_dictionary(password):
-        list_pass = []
-        with open("easy_passwords.txt") as file:
-            for word in file:
-                list_pass.append(word[:-1])    
+        with open('easy_passwords.txt', 'r', encoding='utf-8') as file:
+            list_pass = list(map(str.strip, file.readlines()))  
         if password in list_pass:
             return False
         return True                          
