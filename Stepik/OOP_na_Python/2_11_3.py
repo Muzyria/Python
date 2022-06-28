@@ -71,7 +71,7 @@ class Registration:
         self.__password = value    
 
 
-r1 = Registration('qwerty@rambler.ru', 'QwerTy123') # здесь хороший логин
+r1 = Registration('qwerty@rambler.ru', '1235464Tt') # здесь хороший логин
 print(r1.login, r1.password)  # qwerty@rambler.ru QwrRt124    
 
 # теперь пытаемся запись плохие пароли
