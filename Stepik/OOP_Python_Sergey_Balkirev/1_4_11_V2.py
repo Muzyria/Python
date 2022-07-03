@@ -1,8 +1,8 @@
+
 class Translator:
-    
     def __init__(self):
         self.di = {}
-
+  
     def add(self, eng, rus):
         self.di.setdefault(eng, []).append(rus)  
 
@@ -11,6 +11,8 @@ class Translator:
 
     def translate(self, eng):
         return self.di[eng]   
+
+
 
 tr = Translator()
 tr2 = Translator()
@@ -27,11 +29,11 @@ tr.add("milk", "молоко")
 tr.remove("car")
 print(*tr.translate("go"))
 
-print(tr.di)
+print(tr.__dict__)
 
 tr2.add("go", "идти")
 tr2.add("go", "ехать")
 tr2.add("go", "ходить")
 
-print(tr2.di)
+print(tr2.__dict__)
 
