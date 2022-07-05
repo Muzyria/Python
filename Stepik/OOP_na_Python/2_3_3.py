@@ -16,7 +16,8 @@ class Stack:
         return self.values == []           
 
     def size(self):
-        return len(self.values)    
+        return len(self.values)
+            
         
 
 s = Stack()
