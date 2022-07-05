@@ -1,4 +1,4 @@
-class LoggableList(Loggable, list):
+class LoggableList(list, Loggable):
     def append(self, x):
-        self += [x]
-        return self.log(x)
+        self.log(x)
+        return super().append(x)
