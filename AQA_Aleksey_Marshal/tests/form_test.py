@@ -8,7 +8,7 @@ class TestFormPade:
         form_page.open()
         person = form_page.fill_fields_and_submit()
         result = form_page.form_result()
-        #print(person)
-        #print(result)
+        # print(person)
+        # print(result)
         assert f"{person.first_name} {person.last_name}" == result[0], "the form has not been field"
         assert  person.email == result[1]
