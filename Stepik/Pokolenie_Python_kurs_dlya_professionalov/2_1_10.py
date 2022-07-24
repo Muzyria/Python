@@ -1,11 +1,13 @@
 
 def likes(names):
-    l = len(names)
-    if l == 0: return f"Никто не оценил данную запись"
-    if l == 1: return f"{names[0]} оценил(а) данную запись"
-    if l == 2: return f"{names[0]} и {names[1]} оценили данную запись"
-    if l == 3: return f"{names[0]}, {names[1]} и {names[2]} оценили данную запись"
-    return f"{names[0]}, {names[1]} и {len(names) - 2} других оценили данную запись"
+    answer = {
+        0: "Никто не оценил данную запись",
+        1: "{0} оценил(а) данную запись",
+        2: "{0} и {1} оценили данную запись",
+        3: "{0}, {1} и {2} оценили данную запись",
+        4: "{0}, {1} и {2} других оценили данную запись"
+        }
+    return answer[len(names)].format(*names) if len(names) <=3 else answer[4].format(names[0], names[1], len(names) - 2)
 
 
 print(likes([]))
