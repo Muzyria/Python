@@ -1,14 +1,14 @@
-
-from re import L
-
-
 def choose_plural(amount, declensions):
-    last_digit = amount % 10
-    before_last_digit = (amount // 10) % 10
-     
+    if amount % 10 == 1 and amount % 100 != 11:
+        return f'{amount} {declensions[0]}'
+    elif 2 <= amount % 10 <= 4 and amount % 100 not in (12, 13, 14):
+        return f'{amount} {declensions[1]}'
+    else:
+        return f'{amount} {declensions[2]}'
     
 
-
-print(choose_plural(11, ('пример', 'примера', 'примеров')))
-print(choose_plural(92, ('гвоздь', 'гвоздя', 'гвоздей')))
-print(choose_plural(8, ('яблоко', 'яблока', 'яблок')))
+print(choose_plural(512312, ('пример', 'примера', 'примеров')))
+print(choose_plural(512312, ('гвоздь', 'гвоздя', 'гвоздей')))
+print(choose_plural(11, ('яблоко', 'яблока', 'яблок')))
+print(choose_plural(512312, ('цент', 'цента', 'центов')))
+print(choose_plural(11, ('стул', 'стула', 'стульев')))
