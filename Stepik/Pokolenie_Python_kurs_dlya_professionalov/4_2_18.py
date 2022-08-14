@@ -7,7 +7,6 @@ with open('titanic.csv', encoding='utf-8') as file:
     result_male = []
     result_female = []
     for row in data:
-        # print(float(row['age']), type(row['age']))
         if float(row['age']) < 18 and row['survived'] == '1':
             if row['sex'] == 'male':
                 result_male.append(row['name'])
