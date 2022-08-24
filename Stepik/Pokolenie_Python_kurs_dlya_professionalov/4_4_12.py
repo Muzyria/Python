@@ -1,7 +1,6 @@
 import json
 import csv
 
-columns = ['name', 'phone']
 with open('students.json', 'r', encoding='utf-8') as file:
     data = json.load(file)
     result = []
