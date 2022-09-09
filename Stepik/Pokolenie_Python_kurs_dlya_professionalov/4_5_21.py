@@ -7,4 +7,3 @@ def extract_this(zip_name, *args):
             [zip_file.extract(i) for i in args]
         else:
             zip_file.extractall()
-
