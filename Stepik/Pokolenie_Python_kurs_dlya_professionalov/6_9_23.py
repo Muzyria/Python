@@ -1,8 +1,7 @@
 from collections import Counter, ChainMap
+y = input()
 
-# y = 'ржаная булочка,ржаная булочка,говяжий бифштекс,сыр,сыр,салат,барбекю,помидор'
-y = 'сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр,сыр'
-data = sorted(set(y.split(',')))  #change to input()
+data = sorted(set(y.split(',')))
 counter = Counter(y.split(','))
 
 bread = {'булочка с кунжутом': 15, 'обычная булочка': 10, 'ржаная булочка': 15}
