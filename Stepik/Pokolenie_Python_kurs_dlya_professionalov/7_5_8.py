@@ -35,6 +35,7 @@ try:
     print(is_good_password('41157081231232'))
 except Exception as err:
     print(type(err))
+    print(err.args)
 
 try:
     print(is_good_password('abc12345678ansdfjkasdkjfbsdk'))
