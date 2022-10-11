@@ -1,10 +1,10 @@
+cache = {1: 1, 2: 1, 3: 1}
 def tribonacci(n):
-    if n in range(1, 4):
-        return 1
-    elif n == 4:
-        return 3
-    else:
-        return tribonacci(n-1) + tribonacci(n-2) + tribonacci(n-3)
+    result = cache.get(n)
+    if result is None:
+        result = tribonacci(n - 3) + tribonacci(n - 2) + tribonacci(n - 1)
+        cache[n] = result
+    return result
 
 
 print(tribonacci(1))
