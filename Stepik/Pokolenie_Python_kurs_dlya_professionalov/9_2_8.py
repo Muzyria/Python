@@ -1,12 +1,11 @@
 def hash_as_key(objects):
+    objects_2 = [hash(i) for i in objects]
     my_dict = {}
-    for i, j in zip([hash(i) for i in objects], objects):
-        print(i, j)
-        if i not in my_dict:
-            my_dict[i] = j
+    for i, j in zip(objects_2, objects):
+        if objects_2.count(i) > 1:
+            my_dict.setdefault(i, []).append(j)
         else:
-            my_dict[i] = [j]
-            my_dict[i].append(j)
+            my_dict.setdefault(i, j)
     return my_dict
 
 
