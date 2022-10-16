@@ -6,7 +6,12 @@ def zip_longest(*args, fill=None):
         for i in range(len(args)):
             if len(args[i]) != len(args[max_len_ind]):
                 args[i].extend([fill] * ex_len)
-    return list()
+    return list(zip(*args))
+
+# def zip_longest(*args, fill=None):
+#     max_len = max(map(len, args))
+#     lst = [i + [fill] * (max_len - len(i)) for i in args]
+#     return list(zip(*lst))
 
 
 print(zip_longest([1, 2, 3, 4, 5], ['a', 'b', 'c'], fill='_'))
