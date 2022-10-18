@@ -5,4 +5,6 @@ data = ['Timur', -16.648911695768902, 'six', -202, 883.0093275936454, -765, (3, 
         None, -708.3036176571618]
 
 
-[print(int(i), sep='\n') for i in filter(lambda x: type(x) in (int, float), data)]
+# [print(int(i), sep='\n') for i in filter(lambda x: type(x) in (int, float), data)]
+
+print(*map(int, filter(lambda x: type(x) in (int, float), data)), sep='\n')
