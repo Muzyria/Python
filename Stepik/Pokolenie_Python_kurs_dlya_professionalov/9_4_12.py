@@ -12,4 +12,5 @@ def print(*args,  sep=' ', end='\n'):
     lst = map(lambda x: x.upper() if type(x) is str else x, args)
     my_func(*lst, sep=sep.upper(), end=end.upper())
 
+
 print('beegeek', [1, 2, 3], 4)
