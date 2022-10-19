@@ -11,7 +11,6 @@ def date_formatter(country_code):
 
     def func(x):
         return date.strftime(x, d_f[country_code])
-
     return func
 
 
