@@ -1,9 +1,8 @@
 def takes_positive(func):
     def wrapper(*args, **kwargs):
-        if any(filter(lambda x: not type(x) is int, args)) or any([type(v) != int for v in kwargs.values()]):
+        if any(map(lambda x: not type(x) is int, [*args, *kwargs.values()])):
             raise TypeError
-        # elif any(filter(lambda x: x < 1, args)): я хз почему это не срабатывает
-        elif any([i <= 0 for i in args]) or any([v <= 0 for v in kwargs.values()]):
+        elif any(map(lambda x: x <= 0, [*args, *kwargs.values()])):
             raise ValueError
         else:
             return func(*args, **kwargs)
