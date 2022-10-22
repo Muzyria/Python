@@ -6,13 +6,10 @@ def retry(times):
     def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-
             for i in range(1, times + 1):
-                try:
-                    # print(f'{i}-ый запуск функции.')
-                    func(*args, **kwargs)
-                except MaxRetriesException as err:
-                    return type(err).__name__
+                print(f'{i}-ый запуск функции.')
+                func(*args, **kwargs)
+                retry(times)
             return func(*args, **kwargs)
         return wrapper
     return decorator
