@@ -5,9 +5,10 @@ def strip_range(start: int, end: int, char='.'):
     def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
-            value = func(*args, **kwargs)
+            value = list(func(*args, **kwargs))
 
-            return value
+
+            return ''.join(value)
         return wrapper
     return decorator
 
