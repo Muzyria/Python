@@ -1,16 +1,11 @@
-
-
-def get_all_values(nested_dicts, key, d=set()):
+def get_all_values(nested_dicts: dict, key):
+    keys = set()
     if key in nested_dicts:
-        d.add(str(nested_dicts[key]))
-        # return str(nested_dicts[key])
-
+        keys.add(nested_dicts[key])
     for k, v in nested_dicts.items():
         if type(v) == dict:
-            get_all_values(v, key)
-
-    return d
-
+            keys.update(get_all_values(v, key))
+    return keys
 
 my_dict = {'users': {'Arthur': {'grades': [4, 4, 3], 'top_grade': 4}, 'Timur': {'grades': [5, 5, 5], 'top_grade': 5}}}
 result = get_all_values(my_dict, 'top_grade')
