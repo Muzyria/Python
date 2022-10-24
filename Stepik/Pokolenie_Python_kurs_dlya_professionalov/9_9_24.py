@@ -3,7 +3,7 @@ from functools import lru_cache
 
 
 @lru_cache()
-def func(word):
+def func(word: str) -> str:
     return ''.join(sorted(list(word)))
 
 
