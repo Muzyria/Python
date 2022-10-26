@@ -1,17 +1,16 @@
 class Square:
     def __init__(self, n):
         self.n = n
-        self.i = 0
+        self.counter = 0
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        if self.i != self.n:
-            self.i += 1
-            return self.i ** 2
-        else:
-            raise StopIteration
+        if self.counter < self.n:
+            self.counter += 1
+            return self.counter ** 2
+        raise StopIteration
 
 
 squares = Square(2)
