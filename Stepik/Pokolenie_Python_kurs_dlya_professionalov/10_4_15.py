@@ -1,7 +1,7 @@
 from random import randint
 
 
-class RandomNumbers():
+class RandomNumbers:
     def __init__(self, left, right, n):
         self.n = n
         self.left = left
