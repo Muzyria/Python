@@ -26,3 +26,7 @@ print(*xrange)
 
 xrange = Xrange(5, 10)
 print(*xrange)
+
+xrange = Xrange(10, -21, -6)
+print(list(xrange))
+# [10, 4, -2, -8, -14, -20]
