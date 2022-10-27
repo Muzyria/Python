@@ -8,11 +8,12 @@ class Xrange:
         return self
 
     def __next__(self):
-        if self.start != self.end - self.step:
-            self.start += self.step
-            return self.start
-        else:
+        self.start += self.step
+        if self.start >= self.end and self.step > 0:
             raise StopIteration
+        elif self.start <= self.end and self.step < 0:
+            raise StopIteration
+        return self.start
 
 
 evens = Xrange(0, 10, 2)
