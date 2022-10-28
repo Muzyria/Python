@@ -18,15 +18,19 @@ class Xrange:
 
 evens = Xrange(0, 10, 2)
 print(*evens)
+# 0 2 4 6 8
 
 xrange = Xrange(0, 3, 0.5)
 print(*xrange, sep='; ')
+# 0.0; 0.5; 1.0; 1.5; 2.0; 2.5
 
 xrange = Xrange(10, 1, -1)
 print(*xrange)
+# 10 9 8 7 6 5 4 3 2
 
 xrange = Xrange(5, 10)
 print(*xrange)
+# 5 6 7 8 9
 
 xrange = Xrange(10, -21, -6)
 print(list(xrange))
