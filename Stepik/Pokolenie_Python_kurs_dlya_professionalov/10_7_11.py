@@ -12,6 +12,10 @@ def txt_to_dict():
     for planet in planets_info:
         yield dict(planet)
 
+# def txt_to_dict():
+#     with open('planets.txt', 'r', encoding='utf-8') as file:
+#         items = (i.split('\n') for i in file.read().split('\n\n'))
+#         return (dict(i.split(' = ') for i in planet) for planet in items)
 
 planets = txt_to_dict()
 print(next(planets))
