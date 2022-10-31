@@ -1,10 +1,20 @@
-# def txt_to_dict():
-with open('planets.txt', 'r', encoding='utf-8') as file:
-    file_lines = (line for line in file)
-    line_values = (line.rstrip().split(' = ') for line in file_lines)
-    line_dicts = ({data[0]: data[1]} for data in line_values)
+def txt_to_dict():
+    with open('planets.txt', encoding='utf-8') as fi:
+        # генератор объектов вида:
+        # ['Name = Mercury', 'Diameter = 4879.4', 'Mass = 3.302×10^23', 'OrbitalPeriod = 0.241']
+        planets = (planet.split('\n') for planet in fi.read().split('\n\n'))
+
+        # генератор объектов вида:
+        # [['Name', 'Mercury'], ['Diameter', '4879.4'], ['Mass', '3.302×10^23'], ['OrbitalPeriod', '0.241']]
+        planets_info = ((p.split(' = ') for p in planet) for planet in planets)
+
+    # преобразование объектов генератора в словари согласно условию
+    for planet in planets_info:
+        yield dict(planet)
 
 
+planets = txt_to_dict()
+print(next(planets))
 
-# planets = txt_to_dict()
-# print(next(planets))
+planets = txt_to_dict()
+print(*planets)
