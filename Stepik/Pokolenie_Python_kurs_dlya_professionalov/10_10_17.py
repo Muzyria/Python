@@ -1,7 +1,8 @@
-from itertools import zip_longest
+from itertools import zip_longest, chain, tee, pairwise
 
 
 def grouper(iterable, n):
+    pass
 
 
 numbers = [1, 2, 3, 4, 5, 6]
@@ -15,3 +16,7 @@ print(*grouper(iterator, 3))
 iterator = iter([1, 2, 3])
 print(*grouper(iterator, 5))
 # (1, 2, 3, None, None)
+
+iterator = iter([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+print(*grouper(iterator, 4))
+# (1, 2, 3, 4) (5, 6, 7, 8) (9, 10, None, None)
