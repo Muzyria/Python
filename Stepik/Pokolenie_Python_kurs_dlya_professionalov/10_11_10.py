@@ -9,3 +9,6 @@ persons = [Person('Tim', 63, 193), Person('Eva', 47, 158),
            Person('Ariana', 28, 158), Person('Liam', 69, 193)]
 
 
+val = groupby(sorted(persons, key=lambda x: x.height), key=lambda x: x.height)
+for k, v in val:
+    print(f'{k}: {", ".join(sorted(str(x.name) for x in v))}')
