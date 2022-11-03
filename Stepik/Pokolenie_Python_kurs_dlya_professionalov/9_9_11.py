@@ -5,14 +5,13 @@ def send_email(name, email_address, text):
     return f'В письме для {name} на адрес {email_address} сказано следующее: {text}'
 
 
-# to_Timur = partial(send_email, 'Тимур', 'timyrik20@beegeek.ru')
+t = 'Школа BEEGEEK приглашает Вас на новый курс по программированию на языке Python. тутут....'
+e = "timyrik20@beegeek.ru"
+n = "Тимур"
 
-def to_Timur(text, *args, **kwargs):
-    return send_email('Тимур', 'timyrik20@beegeek.ru', text)
+to_Timur = partial(send_email, t)
 
-
-send_an_invitation = partial(to_Timur, 'Школа BEEGEEK приглашает Вас на новый курс по программированию на языке Python. тутут....')
-
+send_an_invitation = partial(to_Timur, n, e)
 
 
 print(send_an_invitation())
