@@ -1,4 +1,4 @@
-from collections import namedtuple
+from collections import namedtuple, Counter
 from itertools import groupby
 
 Student = namedtuple('Student', ['surname', 'name', 'grade'])
@@ -14,6 +14,9 @@ students = [Student('Гагиев', 'Александр', 10), Student('Деде
             Student('Денисов', 'Илья', 11), Student('Букулова', 'Диана', 10), Student('Акоева', 'Лера', 11)]
 
 
-group_iter = groupby(sorted(students, key=lambda x: x.name), key=lambda x: x.name)
-max_result = max(group_iter, key=lambda tpl: sum(1 for i in tpl[1]))
-print(max_result[0])
+# group_iter = groupby(sorted(students, key=lambda x: x.name), key=lambda x: x.name)
+# max_result = max(group_iter, key=lambda tpl: sum(1 for i in tpl[1]))
+# print(max_result[0])
+
+students_name = Counter(student.name for student in students)
+print(max(students_name.items(), key=lambda x: x[1])[0])
