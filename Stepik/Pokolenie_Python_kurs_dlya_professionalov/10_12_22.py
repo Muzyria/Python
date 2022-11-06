@@ -7,4 +7,4 @@ n = 2
 m = 3
 
 for i in product(range(n), repeat=m):
-    print(i)
+    print(''.join(map(lambda x: d[x], i)), end=' ')
