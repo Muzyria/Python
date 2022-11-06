@@ -1,7 +1,5 @@
 from collections import namedtuple
-import itertools
-
-s = 500
+import itertools as it
 
 Item = namedtuple('Item', ['name', 'mass', 'price'])
 
@@ -16,7 +14,13 @@ items = [Item('Обручальное кольцо', 7, 49_000),
          Item('Фотоаппарат', 720, 79_000),
          Item('Лимитированные кроссовки', 300, 80_000)]
 
-
-
-
-
+w = int(input())
+result = []
+for i in range(1, len(items)+1):
+    for item in set(it.combinations(items, i)):
+        if sum(m.mass for m in item) <= w:
+            result.append((sum(m.price for m in item), [n.name for n in item]))
+try:
+    print(*sorted(max(result, key=lambda x: x[0])[1]), sep='\n')
+except:
+    print('Рюкзак собрать не удастся')
