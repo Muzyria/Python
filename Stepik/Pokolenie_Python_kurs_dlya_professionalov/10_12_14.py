@@ -24,3 +24,4 @@ try:
     print(*sorted(max(result, key=lambda x: x[0])[1]), sep='\n')
 except:
     print('Рюкзак собрать не удастся')
+
