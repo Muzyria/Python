@@ -1,6 +1,8 @@
 from collections import namedtuple
 import itertools
 
+s = 500
+
 Item = namedtuple('Item', ['name', 'mass', 'price'])
 
 items = [Item('Обручальное кольцо', 7, 49_000),
@@ -13,4 +15,8 @@ items = [Item('Обручальное кольцо', 7, 49_000),
          Item('Золотая монета', 8, 140_000),
          Item('Фотоаппарат', 720, 79_000),
          Item('Лимитированные кроссовки', 300, 80_000)]
+
+
+
+
 
