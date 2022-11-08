@@ -13,3 +13,15 @@ for i in sys.stdin.readlines():
     elif re.search(pattern_1, i.strip()):
         points += 1
 print(points)
+
+# import sys
+# import re
+# text = map(str.rstrip, sys.stdin)
+# total = 0
+# for line in text:
+#     res = re.search(r'(^beegeek.*beegeek$)|(^beegeek.+|.+beegeek$)|(.+beegeek.+)', line)
+#     if res:
+#         for i, val in enumerate(res.groups()):
+#             if val is not None:
+#                 total += 3 - i
+# print(total)
