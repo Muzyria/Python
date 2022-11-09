@@ -2,8 +2,8 @@ import re
 
 
 def abbreviate(phrase):
-    pat = r'[A-Z]|\b(\w)'
-    return re.findall(pat, phrase)
+    pat = r'(\b\w|[A-Z])'
+    return (''.join(re.findall(pat, phrase))).upper()
 
 
 print(abbreviate('javaScript object notation'))
