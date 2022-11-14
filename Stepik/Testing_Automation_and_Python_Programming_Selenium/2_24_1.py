@@ -8,4 +8,4 @@ for line in sys.stdin:
     except ZeroDivisionError:
         print('На ноль делить нельзя')
     except Exception:
-        print('Не коректные данные')
+        print('Не корректные данные')
