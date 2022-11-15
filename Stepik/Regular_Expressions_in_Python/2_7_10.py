@@ -1,0 +1,1 @@
+regex = r'\bhttps?\b'
