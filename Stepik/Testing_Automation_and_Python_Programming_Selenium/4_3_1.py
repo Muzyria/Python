@@ -3,7 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-s = Service(r'C:\Git_Muzyria\Python\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\chromedriver.exe')
+# s = Service(r'C:\Git_Muzyria\Python\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\chromedriver.exe')  # win
+s = Service(r'/home/fila/Git_Muzyria/Stepik/Testing_Automation_and_Python_Programming_Selenium/chromedriver')  # linux
 driver = webdriver.Chrome(service=s)
 
 driver.get('https://www.saucedemo.com/')
