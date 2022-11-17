@@ -1,12 +1,12 @@
 
 class Car:
-    def __init__(self, model, year, engine_size, price, mileage):
+    def __init__(self, model, year, engine_size, price, mileage, wheels=4):
         self.model = model
         self.year = year
         self.engine_size = engine_size
         self.price = price
         self.mileage = mileage
-        self.wheels = 4
+        self.wheels = wheels
 
     def description(self):
         print(f'Характеристики автомобиля \nмодель - {self.model},\nгод выпуска - {self.year},\nобъем двигателя - {self.engine_size}, '
@@ -15,9 +15,9 @@ class Car:
 
 
 class Track(Car):
-    def __init__(self, model, year, engine_size, price, mileage):
+    def __init__(self, model, year, engine_size, price, mileage, wheels=8):
         super().__init__(model, year, engine_size, price, mileage)
-        self.wheels = 8
+        self.wheels = wheels
 
     def description(self):
         print(f'Характеристики грузовика\nмодель - {self.model},\nгод выпуска - {self.year},\nобъем двигателя - {self.engine_size},'
