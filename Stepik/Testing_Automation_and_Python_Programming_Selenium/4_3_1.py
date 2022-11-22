@@ -11,7 +11,9 @@ driver.maximize_window()
 
 # user_name = driver.find_element(By.ID, "user-name")  # ID
 # user_name = driver.find_element(By.NAME, "user-name")  # NAME
-user_name = driver.find_element(By.XPATH, '//*[@id="user-name"]')  # XPATH
+# user_name = driver.find_element(By.XPATH, '//*[@id="user-name"]')  # XPATH
+user_name = driver.find_element(By.XPATH, '//input[@id="user-name"]')  # XPATH
+
 user_name.send_keys("standart_user")
 
 time.sleep(3)
