@@ -25,15 +25,15 @@ button_login = driver.find_element(By.XPATH, "//input[@id='login-button']")  # i
 button_login.click()
 print('Click Login Button')
 
-text_products = driver.find_element(By.XPATH, "//span[@class='title']")
-value_text_products = text_products.text
-print(value_text_products)
-try:
-    assert value_text_products == 'PRODUCTS'
-except AssertionError:
-    print('No match')
-else:
-    print('Good')
+# text_products = driver.find_element(By.XPATH, "//span[@class='title']")
+# value_text_products = text_products.text
+# print(value_text_products)
+# try:
+#     assert value_text_products == 'PRODUCTS'
+# except AssertionError:
+#     print('No match')
+# else:
+#     print('Good')
 
 url = r'https://www.saucedemo.com/inventory.html'
 get_url = driver.current_url
