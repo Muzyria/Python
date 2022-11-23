@@ -6,14 +6,18 @@ from selenium.webdriver.common.by import By
 s = Service(r'C:\Git_Muzyria\Python\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\chromedriver.exe')
 driver = webdriver.Chrome(service=s)
 
-driver.get('https://www.saucedemo.com/')
+base_url = 'https://www.saucedemo.com/'
+driver.get(base_url)
 driver.maximize_window()
 
+login_standard_user = "standard_user"
+pass_word = "secret_sauce"
+
 user_name = driver.find_element(By.XPATH, '//input[@id="user-name"]')  # id XPATH
-user_name.send_keys("standard_user")
+user_name.send_keys(login_standard_user)
 
 password = driver.find_element(By.XPATH, '//input[@id="password"]')  # id XPATH
-password.send_keys("secret_sauce")
+password.send_keys(pass_word)
 
 button_login = driver.find_element(By.XPATH, "//input[@id='login-button']")  # id XPATH
 button_login.click()
