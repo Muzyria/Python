@@ -35,5 +35,16 @@ except AssertionError:
 else:
     print('Good')
 
+url = r'https://www.saucedemo.com/inventory.html'
+get_url = driver.current_url
+print(get_url)
+
+try:
+    assert url == get_url
+except AssertionError:
+    print('No match url')
+else:
+    print('Good url')
+
 time.sleep(2)
 driver.close()
