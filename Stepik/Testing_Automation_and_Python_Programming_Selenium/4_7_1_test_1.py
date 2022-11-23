@@ -28,6 +28,12 @@ print('Click Login Button')
 text_products = driver.find_element(By.XPATH, "//span[@class='title']")
 value_text_products = text_products.text
 print(value_text_products)
+try:
+    assert value_text_products == 'PRODUCTS'
+except AssertionError:
+    print('No match')
+else:
+    print('Good')
 
-time.sleep(3)
+time.sleep(2)
 driver.close()
