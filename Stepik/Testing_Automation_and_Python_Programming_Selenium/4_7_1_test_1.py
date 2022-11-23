@@ -15,12 +15,19 @@ password_all = "secret_sauce"
 
 user_name = driver.find_element(By.XPATH, '//input[@id="user-name"]')  # id XPATH
 user_name.send_keys(login_standard_user)
+print('Input Login')
 
 password = driver.find_element(By.XPATH, '//input[@id="password"]')  # id XPATH
 password.send_keys(password_all)
+print('Input Password')
 
 button_login = driver.find_element(By.XPATH, "//input[@id='login-button']")  # id XPATH
 button_login.click()
+print('Click Login Button')
+
+text_products = driver.find_element(By.XPATH, "//span[@class='title']")
+value_text_products = text_products.text
+print(value_text_products)
 
 time.sleep(3)
 driver.close()
