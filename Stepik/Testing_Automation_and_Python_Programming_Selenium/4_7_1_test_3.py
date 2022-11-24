@@ -17,12 +17,17 @@ password_all = "secret_sauce"
 user_name = driver.find_element(By.XPATH, '//input[@id="user-name"]')  # id XPATH
 user_name.send_keys(login_standard_user)
 print('Input Login')
-time.sleep(2)
-user_name.send_keys(Keys.BACKSPACE)
-time.sleep(2)
-user_name.send_keys(Keys.BACKSPACE)
-time.sleep(2)
-user_name.send_keys('er')
+# time.sleep(2)
+# user_name.send_keys(Keys.BACKSPACE)
+# time.sleep(2)
+# user_name.send_keys(Keys.BACKSPACE)
+# time.sleep(2)
+# user_name.send_keys('er')
+
+password = driver.find_element(By.XPATH, '//input[@id="password"]')  # id XPATH
+password.send_keys(password_all)
+print('Input Password')
+password.send_keys(Keys.RETURN)
 
 # password = driver.find_element(By.XPATH, '//input[@id="password"]')  # id XPATH
 # password.send_keys(password_all)
