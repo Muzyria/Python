@@ -37,6 +37,14 @@ password.send_keys(Keys.RETURN)
 # button_login.click()
 # print('Click Login Button')
 
+filter_1 = driver.find_element(By.XPATH, '//select[@data-test="product_sort_container"]')
+filter_1.click()
+print('Click filter_1')
+time.sleep(2)
+filter_1.send_keys(Keys.DOWN)
+time.sleep(2)
+filter_1.send_keys(Keys.RETURN)
+
 
 time.sleep(2)
 driver.close()
