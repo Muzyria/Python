@@ -31,7 +31,7 @@ print('Click Login Button')
 # driver.execute_script('window.scrollTo(0, 500)')
 # time.sleep(2)
 action = ActionChains(driver)
-red_t_short = driver.find_element(By.XPATH, '//button[@id="add-to-cart-sauce-labs-onesie"]')  # id XPATH
+red_t_short = driver.find_element(By.XPATH, '//footer[@class="footer"]')  # id XPATH
 action.move_to_element(red_t_short)
 
 time.sleep(2)
