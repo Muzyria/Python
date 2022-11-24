@@ -1,6 +1,7 @@
 import time
 import datetime
 from selenium import webdriver
+from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
@@ -26,8 +27,13 @@ button_login = driver.find_element(By.XPATH, "//input[@id='login-button']")  # i
 button_login.click()
 print('Click Login Button')
 
-time.sleep(2)
-driver.execute_script('window.scrollTo(0, 200)')
+# time.sleep(2)
+# driver.execute_script('window.scrollTo(0, 500)')
+# time.sleep(2)
+action = ActionChains(driver)
+red_t_short = driver.find_element(By.XPATH, '//button[@id="add-to-cart-sauce-labs-onesie"]')  # id XPATH
+action.move_to_element(red_t_short)
+
 time.sleep(2)
 
 now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
