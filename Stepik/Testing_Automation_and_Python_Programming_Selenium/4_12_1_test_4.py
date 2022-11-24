@@ -26,10 +26,13 @@ button_login = driver.find_element(By.XPATH, "//input[@id='login-button']")  # i
 button_login.click()
 print('Click Login Button')
 
-now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-name_screenshot = 'screenshot_' + now_date + '.png'
-driver.save_screenshot(r'C:\Git_Muzyria\Python\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\screen\\'
-                       + name_screenshot)
+# now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
+# name_screenshot = 'screenshot_' + now_date + '.png'
+# driver.save_screenshot(r'C:\Git_Muzyria\Python\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\screen\\'
+#                        + name_screenshot)
+
+time.sleep(2)
+driver.execute_script('window.scrollTo(0, 200)')
 
 
 time.sleep(2)
