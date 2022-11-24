@@ -25,5 +25,11 @@ button_login = driver.find_element(By.XPATH, "//input[@id='login-button']")  # i
 button_login.click()
 print('Click Login Button')
 
+warring_text = driver.find_element(By.XPATH, '//h3[@data-test="error"]')
+value_warring_text = warring_text.text
+
+assert value_warring_text == "Epic sadface: Username and password do not match any user in this service"
+print('Good test')
+
 time.sleep(2)
 driver.close()
