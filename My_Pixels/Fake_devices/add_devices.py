@@ -33,7 +33,10 @@ time.sleep(3)
 input_search = driver.find_element(By.XPATH, '//input[@class="search"]')
 input_search.send_keys('salt')
 input_search.send_keys(Keys.RETURN)
+print('input search')
 time.sleep(3)
+
+
 
 
 # driver.execute_script('window.scrollTo(0, 500)')
