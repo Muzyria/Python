@@ -54,10 +54,15 @@ for i in range(70, 91):
     action.move_to_element(add_new_car).perform()
     add_new_car.click()
     print('Click add new car')
-    time.sleep(1)
+    time.sleep(2)
 
     select_devise_model = driver.find_element(By.XPATH, '//select[@name="id_deviceModel"]')
     select_devise_model.click()
+    time.sleep(2)
+
+    select_devise_model_YTR = driver.find_element(By.XPATH, '//option[text()="Utility Tablet - YTR"]')
+    select_devise_model_YTR.click()
+    time.sleep(2)
 
     driver.refresh()
     time.sleep(4)
