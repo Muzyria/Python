@@ -28,16 +28,29 @@ button_login = driver.find_element(By.XPATH, '//button[@id="btn-submit"]')  # id
 button_login.click()
 print('Click Login Button')
 
-time.sleep(3)
+time.sleep(2)
 
 input_search = driver.find_element(By.XPATH, '//input[@class="search"]')
 input_search.send_keys('salt')
 input_search.send_keys(Keys.RETURN)
 print('input search')
-time.sleep(3)
+time.sleep(1)
 
+result_salt = driver.find_element(By.XPATH, '//*[text()="Salt Creek Golf Club"]')
+result_salt.click()
+print('Click result')
+time.sleep(1)
 
+action = ActionChains(driver)
+add_new_car = driver.find_element(By.XPATH, '//*[@id="workarea"]/div[2]/section/div[3]/div[5]/table[3]/thead/tr/th[4]')
+action.move_to_element(add_new_car).perform()
+add_new_car.click()
+print('Click add new car')
+time.sleep(1)
 
+id_car_start = 'S101500002110180'  #  without two simbol
+for i in range(70, 91):
+    new_id = f'{id_car_start}{i}'
 
 # driver.execute_script('window.scrollTo(0, 500)')
 # time.sleep(2)
