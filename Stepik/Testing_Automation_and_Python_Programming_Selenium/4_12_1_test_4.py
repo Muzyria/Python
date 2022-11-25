@@ -30,10 +30,11 @@ print('Click Login Button')
 # time.sleep(2)
 # driver.execute_script('window.scrollTo(0, 500)')
 # time.sleep(2)
-action = ActionChains(driver)
-red_t_short = driver.find_element(By.XPATH, '//footer[@class="footer"]')  # id XPATH
-action.move_to_element(red_t_short)
+time.sleep(2)
 
+action = ActionChains(driver)
+red_t_shirt = driver.find_element(By.XPATH, '//button[@id="add-to-cart-sauce-labs-onesie"]')
+action.move_to_element(red_t_shirt).perform()
 time.sleep(2)
 
 now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
