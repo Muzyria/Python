@@ -12,6 +12,7 @@ base_url = 'https://www.saucedemo.com/'
 driver.get(base_url)
 driver.maximize_window()
 
+
 login_standard_user = "standard_user"
 password_all = "secret_sauce"
 
@@ -33,7 +34,7 @@ print('Click Login Button')
 time.sleep(2)
 
 action = ActionChains(driver)
-red_t_shirt = driver.find_element(By.XPATH, '//button[@id="add-to-cart-sauce-labs-onesie"]')
+red_t_shirt = driver.find_element(By.XPATH, '//div[@class="footer_copy"]')
 action.move_to_element(red_t_shirt).perform()
 time.sleep(2)
 
