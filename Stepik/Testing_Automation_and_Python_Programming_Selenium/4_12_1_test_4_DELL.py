@@ -37,10 +37,10 @@ red_t_shirt = driver.find_element(By.XPATH, '//button[@id="add-to-cart-sauce-lab
 action.move_to_element(red_t_shirt).perform()
 time.sleep(2)
 
-now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-name_screenshot = 'screenshot_' + now_date + '.png'
-driver.save_screenshot(r'C:\Git_Muzyria\Python\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\screen\\'
-                       + name_screenshot)
+# now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
+# name_screenshot = 'screenshot_' + now_date + '.png'
+# driver.save_screenshot(r'C:\Git_Muzyria\Stepik\Testing_Automation_and_Python_Programming_Selenium\screen\\'
+#                        + name_screenshot)
 
 
 time.sleep(2)
