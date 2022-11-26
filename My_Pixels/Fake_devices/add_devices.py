@@ -14,8 +14,8 @@ driver.get(base_url)
 driver.maximize_window()
 time.sleep(1)
 
-login_standard_user = "superadmin"
-password_all = "superadmin"
+login_standard_user = ""
+password_all = ""
 
 user_name = driver.find_element(By.XPATH, '//input[@id="username"]')  # id XPATH
 user_name.send_keys(login_standard_user)
