@@ -51,7 +51,7 @@ for i in range(70, 91):
     new_id = f'{id_car_start}{i}'
     print(new_id + ' will deleted')
 
-    # Нажатие на кнопку ADD
+    # Ищем машинку и нажимем на нее
     try:
         action = ActionChains(driver)
         car = driver.find_element(By.XPATH, f'//*[text()="{new_id}"]')
@@ -62,3 +62,11 @@ for i in range(70, 91):
         time.sleep(2)
     except Exception:
         print(f'Не найден {new_id}')
+
+    # Нажимаем удалить девайс
+    button_remove_device = driver.find_element(By.XPATH, '//*[text()="Remove Device"]')
+    button_remove_device.click()
+    time.sleep(3)
+
+
+driver.close()
