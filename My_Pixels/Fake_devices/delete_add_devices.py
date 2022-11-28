@@ -60,13 +60,14 @@ for i in range(70, 91):
         car.click()
         print(f'Click {new_id} car')
         time.sleep(2)
+        # Нажимаем удалить девайс
+        button_remove_device = driver.find_element(By.XPATH, '//*[text()="Remove Device"]')
+        button_remove_device.click()
+        time.sleep(3)
     except Exception:
         print(f'Не найден {new_id}')
 
-    # Нажимаем удалить девайс
-    button_remove_device = driver.find_element(By.XPATH, '//*[text()="Remove Device"]')
-    button_remove_device.click()
-    time.sleep(3)
+
 
 
 driver.close()
