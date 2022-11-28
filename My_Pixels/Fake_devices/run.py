@@ -1,6 +1,18 @@
-
-
-
-
 import os
-os.system('adb shell am broadcast -a com.yama.fake.ADBCom --es id "S10150000211018049" --es lat "50.08593724592065" --es lng "36.21560508169411"')
+from random import choice, randrange
+import time
+
+test_49 = 'S10150000211018049'
+
+for _ in range(100):
+    car_id = choice(['S101500002110180' + str(i) for i in range(70, 91)])
+    x = '32.6' + str(randrange(6739266744535, 7320189906043))
+    y = '-116.9' + str(randrange(5185681343078, 6095486640930))
+    print(car_id, x, y)
+    os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{test_49}" --es lat "{x}" --es lng "{y}"')
+    time.sleep(3)
+
+# lst_car = ['S101500002110180' + str(i) for i in range(70, 91)]
+
+# os.system('adb shell am broadcast -a com.yama.fake.ADBCom --es id "S10150000211018049" --es lat "50.08593724592065" --es lng "36.21560508169411"')
+
