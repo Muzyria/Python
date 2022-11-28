@@ -19,3 +19,5 @@
 
 lst_car = ['S101500002110180' + str(i) for i in range(70, 91)]
 print(lst_car)
+for i in lst_car:
+    print(i[-2::])

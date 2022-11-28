@@ -75,6 +75,11 @@ for i in range(70, 91):
     input_id_device.send_keys(new_id)
     time.sleep(1)
 
+    # Вставляем имя машинки
+    input_name_device = driver.find_element(By.XPATH, '//input[@name="cartName"]')
+    input_name_device.send_keys(new_id[-2::])
+    time.sleep(1)
+
     # Нажимаем кнопку SAVE
     button_save = driver.find_element(By.XPATH, '//*[text()="Save"]')
     button_save.click()
