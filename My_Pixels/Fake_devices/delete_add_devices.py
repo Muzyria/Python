@@ -60,6 +60,7 @@ for i in range(70, 91):
         car.click()
         print(f'Click {new_id} car')
         time.sleep(2)
+
         # Нажимаем удалить девайс
         button_remove_device = driver.find_element(By.XPATH, '//*[text()="Remove Device"]')
         button_remove_device.click()
