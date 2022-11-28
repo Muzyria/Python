@@ -41,7 +41,7 @@ time.sleep(1)
 result_salt = driver.find_element(By.XPATH, '//*[text()="Salt Creek Golf Club"]')
 result_salt.click()
 print('Click result')
-time.sleep(1)
+time.sleep(5)
 
 
 # Удаление автомобилей
@@ -63,7 +63,7 @@ for i in range(70, 91):
         # Нажимаем удалить девайс
         button_remove_device = driver.find_element(By.XPATH, '//*[text()="Remove Device"]')
         button_remove_device.click()
-        time.sleep(3)
+        time.sleep(4)
     except Exception:
         print(f'Не найден {new_id}')
 
