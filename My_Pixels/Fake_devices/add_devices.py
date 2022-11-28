@@ -83,7 +83,7 @@ for i in range(70, 91):
     # Нажимаем кнопку SAVE
     button_save = driver.find_element(By.XPATH, '//*[text()="Save"]')
     button_save.click()
-    time.sleep(10)
+    time.sleep(12)
 
     # # Перезагружаем
     # driver.refresh()
