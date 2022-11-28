@@ -14,7 +14,8 @@ driver.get(base_url)
 driver.maximize_window()
 time.sleep(1)
 
-login_standard_user = input('Enter User Login')
+# login_standard_user = input('Enter User Login -> ')  # Enter login
+login_standard_user = ''  # Закомитить это
 password_all = login_standard_user
 
 user_name = driver.find_element(By.XPATH, '//input[@id="username"]')  # id XPATH
@@ -43,40 +44,44 @@ print('Click result')
 time.sleep(1)
 
 
+# Добавление новых автомобилей
 id_car_start = 'S101500002110180'  #  without two simbol
 for i in range(70, 91):
     new_id = f'{id_car_start}{i}'
     print(new_id)
 
+    # Нажатие на кнопку ADD
     action = ActionChains(driver)
-    add_new_car = driver.find_element(By.XPATH,
-                                      '//*[@id="workarea"]/div[2]/section/div[3]/div[5]/table[3]/thead/tr/th[4]')
+    add_new_car = driver.find_element(By.XPATH, '//th[@class="bt control add"]')
     action.move_to_element(add_new_car).perform()
+    time.sleep(2)
     add_new_car.click()
     print('Click add new car')
     time.sleep(2)
 
+    # Нажимаем на выпадающий список
     select_devise_model = driver.find_element(By.XPATH, '//select[@name="id_deviceModel"]')
     select_devise_model.click()
     time.sleep(2)
 
+    # Выбираем YTR
     select_devise_model_YTR = driver.find_element(By.XPATH, '//option[text()="Utility Tablet - YTR"]')
     select_devise_model_YTR.click()
     time.sleep(2)
 
+    # ставляем номер машинки
+    input_id_device = driver.find_element(By.XPATH, '//input[@name="id_device"]')
+    input_id_device.send_keys(new_id)
+    time.sleep(1)
+
+    # Нажимаем кнопку SAVE
+    button_save = driver.find_element(By.XPATH, '//*[text()="Save"]')
+    button_save.click()
+    time.sleep(10)
+
+    # Перезагружаем
     driver.refresh()
     time.sleep(4)
-
-
-
-# driver.execute_script('window.scrollTo(0, 500)')
-# time.sleep(2)
-# time.sleep(2)
-#
-# action = ActionChains(driver)
-# red_t_shirt = driver.find_element(By.XPATH, '//button[@id="add-to-cart-sauce-labs-onesie"]')
-# action.move_to_element(red_t_shirt).perform()
-# time.sleep(2)
 
 
 time.sleep(2)
