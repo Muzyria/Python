@@ -44,45 +44,21 @@ print('Click result')
 time.sleep(1)
 
 
-# Добавление новых автомобилей
+# Удаление автомобилей
+# lst_car = ['S101500002110180' + str(i) for i in range(70, 91)]
 id_car_start = 'S101500002110180'  #  without two simbol
 for i in range(70, 91):
     new_id = f'{id_car_start}{i}'
-    print(new_id + 'will added')
+    print(new_id + 'will deleted')
 
     # Нажатие на кнопку ADD
-    action = ActionChains(driver)
-    add_new_car = driver.find_element(By.XPATH, '//th[@class="bt control add"]')
-    action.move_to_element(add_new_car).perform()
-    time.sleep(2)
-    add_new_car.click()
-    print('Click add new car')
-    time.sleep(2)
-
-    # Нажимаем на выпадающий список
-    select_devise_model = driver.find_element(By.XPATH, '//select[@name="id_deviceModel"]')
-    select_devise_model.click()
-    time.sleep(2)
-
-    # Выбираем YTR
-    select_devise_model_YTR = driver.find_element(By.XPATH, '//option[text()="Utility Tablet - YTR"]')
-    select_devise_model_YTR.click()
-    time.sleep(2)
-
-    # ставляем номер машинки
-    input_id_device = driver.find_element(By.XPATH, '//input[@name="id_device"]')
-    input_id_device.send_keys(new_id)
-    time.sleep(1)
-
-    # Нажимаем кнопку SAVE
-    button_save = driver.find_element(By.XPATH, '//*[text()="Save"]')
-    button_save.click()
-    time.sleep(10)
-
-    # # Перезагружаем
-    # driver.refresh()
-    # time.sleep(4)
-
-
-time.sleep(2)
-driver.close()
+    try:
+        action = ActionChains(driver)
+        car = driver.find_element(By.XPATH, f'//*[text()="{new_id}"]')
+        action.move_to_element(car).perform()
+        time.sleep(2)
+        car.click()
+        print(f'Click {new_id} car')
+        time.sleep(2)
+    except Exception:
+        print(f'Не найден {new_id}')
