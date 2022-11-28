@@ -7,12 +7,12 @@ from selenium.webdriver.common.by import By
 
 s = Service(r'C:\Git_Muzyria\Python\Python\My_Pixels\driver\chromedriver.exe')
 driver = webdriver.Chrome(service=s)
-driver.implicitly_wait(20)
+# driver.implicitly_wait(20)
 
 base_url = 'https://control.syncwise360.com/#login'
 driver.get(base_url)
 driver.maximize_window()
-time.sleep(1)
+time.sleep(5)
 
 # login_standard_user = input('Enter User Login -> ')  # Enter login
 login_standard_user = ''  # Закомитить это

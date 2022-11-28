@@ -7,15 +7,15 @@ from selenium.webdriver.common.by import By
 
 s = Service(r'C:\Git_Muzyria\Python\Python\My_Pixels\driver\chromedriver.exe')
 driver = webdriver.Chrome(service=s)
-driver.implicitly_wait(20)
+# driver.implicitly_wait(20)
 
 base_url = 'https://control.syncwise360.com/#login'
 driver.get(base_url)
 driver.maximize_window()
-time.sleep(1)
+time.sleep(5)
 
-# login_standard_user = input('Enter User Login -> ')  # Enter login
-login_standard_user = ''  # Закомитить это
+login_standard_user = input('Enter User Login -> ')  # Enter login
+# login_standard_user = ''  # Закомитить это
 password_all = login_standard_user
 
 user_name = driver.find_element(By.XPATH, '//input[@id="username"]')  # id XPATH
@@ -49,7 +49,7 @@ time.sleep(1)
 id_car_start = 'S101500002110180'  #  without two simbol
 for i in range(70, 91):
     new_id = f'{id_car_start}{i}'
-    print(new_id + 'will deleted')
+    print(new_id + ' will deleted')
 
     # Нажатие на кнопку ADD
     try:
