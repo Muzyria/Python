@@ -4,13 +4,22 @@ import time
 
 test_49 = 'S10150000211018049'
 
+# Высадка дисанта
+for id in ['S101500002110180' + str(i) for i in range(70, 91)]:
+    x = '32.6' + str(randrange(6739266744535, 7320189906043))
+    y = '-116.9' + str(randrange(5185681343078, 6095486640930))
+    print(id, x, y)
+    os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{id}" --es lat "{x}" --es lng "{y}"')
+    time.sleep(3)
+
+
 for _ in range(100):
     car_id = choice(['S101500002110180' + str(i) for i in range(70, 91)])
     x = '32.6' + str(randrange(6739266744535, 7320189906043))
     y = '-116.9' + str(randrange(5185681343078, 6095486640930))
     print(car_id, x, y)
-    os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{test_49}" --es lat "{x}" --es lng "{y}"')
-    time.sleep(3)
+    os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{car_id}" --es lat "{x}" --es lng "{y}"')
+    time.sleep(10)
 
 # lst_car = ['S101500002110180' + str(i) for i in range(70, 91)]
 
