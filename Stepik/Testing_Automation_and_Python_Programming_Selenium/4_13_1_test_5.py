@@ -16,16 +16,20 @@ password_all = "secret_sauce"
 user_name = driver.find_element(By.XPATH, '//input[@id="user-name"]')  # id XPATH
 user_name.send_keys(login_standard_user)
 print('Input Login')
-time.sleep(3)
-user_name.clear()
+# time.sleep(3)
+# user_name.clear()
 
-# password = driver.find_element(By.XPATH, '//input[@id="password"]')  # id XPATH
-# password.send_keys(password_all)
-# print('Input Password')
-#
-# button_login = driver.find_element(By.XPATH, "//input[@id='login-button']")  # id XPATH
-# button_login.click()
-# print('Click Login Button')
+password = driver.find_element(By.XPATH, '//input[@id="password"]')  # id XPATH
+password.send_keys(password_all)
+print('Input Password')
+
+button_login = driver.find_element(By.XPATH, "//input[@id='login-button']")  # id XPATH
+button_login.click()
+print('Click Login Button')
+
+menu = driver.find_element(By.XPATH, '//button[@id="react-burger-menu-btn"]')
+menu.click()
+time.sleep(2)
 
 
 
