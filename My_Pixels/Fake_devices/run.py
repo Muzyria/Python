@@ -3,8 +3,7 @@ from datetime import datetime
 from random import choice, randrange
 import time
 
-test_49 = 'S10150000211018049'
-
+# test_49 = 'S10150000211018049'
 
 # Высадка дисанта
 for i in ['S101500002110180' + str(i) for i in range(70, 91)]:
@@ -24,9 +23,7 @@ for j in range(count_iter):
     print(car_id, x, y, ' -------------------------> ' + str(count_iter - j), ' прошло времени ' + count_time,
           datetime.now().strftime('%H:%M:%S'))
     os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{car_id}" --es lat "{x}" --es lng "{y}"')
-    time.sleep(5)
+    time.sleep(4)
 
 # lst_car = ['S101500002110180' + str(i) for i in range(70, 91)]
-
 # os.system('adb shell am broadcast -a com.yama.fake.ADBCom --es id "S10150000211018049" --es lat "50.08593724592065" --es lng "36.21560508169411"')
-
