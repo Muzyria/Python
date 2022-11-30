@@ -23,5 +23,15 @@ button_login = driver.find_element(By.XPATH, "//input[@id='login-button']")  # i
 button_login.click()
 print('Click Login Button')
 
+"""INFO product #1"""
+product_1 = driver.find_element(By.XPATH, '//a[@id="item_4_title_link"]')
+value_product_1 = product_1.text
+print(value_product_1)
+
+price_product_1 = driver.find_element(By.XPATH, '//*[@id="inventory_container"]/div/div[1]/div[2]/div[2]/div')
+value_price_product_1 = price_product_1.text
+print(value_price_product_1)
+
+
 time.sleep(2)
 driver.close()
