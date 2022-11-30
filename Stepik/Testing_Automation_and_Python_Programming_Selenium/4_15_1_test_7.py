@@ -32,6 +32,26 @@ price_product_1 = driver.find_element(By.XPATH, '//*[@id="inventory_container"]/
 value_price_product_1 = price_product_1.text
 print(value_price_product_1)
 
+select_price_product_1 = driver.find_element(By.XPATH, '//button[@id="add-to-cart-sauce-labs-backpack"]')
+select_price_product_1.click()
+print('Select Product 1')
+
+cart = driver.find_element(By.XPATH, '//a[@class="shopping_cart_link"]')
+cart.click()
+print('Enter cart')
+
+"""INFO Cart Product 1"""
+cart_product_1 = driver.find_element(By.XPATH, '//div[@class="inventory_item_name"]')
+value_cart_product_1 = cart_product_1.text
+print(value_product_1)
+assert value_product_1 == value_cart_product_1
+print('INFO Cart Product 1 GOOD')
+
+price_cart_product_1 = driver.find_element(By.XPATH, '//*[@id="cart_contents_container"]/div/div[1]/div[3]/div[2]/div[2]/div')
+value_cart_price_product_1 = price_cart_product_1.text
+print(value_cart_price_product_1)
+assert value_price_product_1 == value_cart_price_product_1
+print('INFO Cart Price Product 1 GOOD')
 
 time.sleep(2)
 driver.close()
