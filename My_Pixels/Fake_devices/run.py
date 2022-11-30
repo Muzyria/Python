@@ -14,7 +14,7 @@ for i in ['S101500002110180' + str(i) for i in range(70, 91)]:
     time.sleep(0)
 
 count_iter = 3600
-start_time = datetime.now() # включаем счетчик
+start_time = datetime.now()  # включаем счетчик
 for j in range(count_iter):
     count_time = str(datetime.now() - start_time).split('.')[0]
     car_id = choice(['S101500002110180' + str(i) for i in range(70, 91)])
