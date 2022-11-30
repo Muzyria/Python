@@ -128,9 +128,10 @@ print('INFO Finish Price Product 2 GOOD')
 summery_price = driver.find_element(By.XPATH, '//div[@class="summary_subtotal_label"]')
 value_summery_price = summery_price.text
 print(value_summery_price)
-item_total = 'Item total: ' + value_finish_price_product_1
+sum_price_product = float(value_finish_price_product_1.replace('$', '')) + float(value_finish_price_product_2.replace('$', ''))
+item_total = 'Item total: ' + '$' + str(sum_price_product)
 print(item_total)
-# assert value_summery_price == item_total
+assert value_summery_price == item_total
 print('Total Summary price GOOD')
 
 finish_button = driver.find_element(By.XPATH, '//button[@id="finish"]')

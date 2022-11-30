@@ -1,5 +1,1 @@
-# import subprocess
-# subprocess.call("test.sh")
-
-import os
-os.system('adb version')
+print(sum([2.1, 5]))
