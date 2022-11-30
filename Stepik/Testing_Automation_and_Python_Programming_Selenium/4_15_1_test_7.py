@@ -43,7 +43,7 @@ print('Enter cart')
 """INFO Cart Product 1"""
 cart_product_1 = driver.find_element(By.XPATH, '//div[@class="inventory_item_name"]')
 value_cart_product_1 = cart_product_1.text
-print(value_product_1)
+print(value_cart_product_1)
 assert value_product_1 == value_cart_product_1
 print('INFO Cart Product 1 GOOD')
 
@@ -53,5 +53,41 @@ print(value_cart_price_product_1)
 assert value_price_product_1 == value_cart_price_product_1
 print('INFO Cart Price Product 1 GOOD')
 
-time.sleep(2)
+checkout = driver.find_element(By.XPATH, '//button[@id="checkout"]')
+checkout.click()
+print('Click Checkout')
+
+"""Select User INFO"""
+first_name = driver.find_element(By.XPATH, '//input[@id="first-name"]')
+first_name.send_keys('Alex')
+print('Input First Name')
+second_name = driver.find_element(By.XPATH, '//input[@id="last-name"]')
+second_name.send_keys('Ivanov')
+print('Input Second Name')
+postal_code = driver.find_element(By.XPATH, '//input[@id="postal-code"]')
+postal_code.send_keys('1234')
+print('Input Postal Code')
+
+button_continue = driver.find_element(By.XPATH, '//input[@id="continue"]')
+button_continue.click()
+print('Click Button Continue')
+
+"""INFO Finish Product 1"""
+finish_product_1 = driver.find_element(By.XPATH, '//div[@class="inventory_item_name"]')
+value_finish_product_1 = finish_product_1.text
+print(value_finish_product_1)
+assert value_product_1 == value_finish_product_1
+print('INFO Finish Product 1 GOOD')
+
+price_finish_product_1 = driver.find_element(By.XPATH, '//*[@id="checkout_summary_container"]/div/div[1]/div[3]/div[2]/div[2]/div')
+value_finish_price_product_1 = price_finish_product_1.text
+print(value_finish_price_product_1)
+assert value_cart_price_product_1 == value_finish_price_product_1
+print('INFO Finish Price Product 1 GOOD')
+
+finish_button = driver.find_element(By.XPATH, '//button[@id="finish"]')
+finish_button.click()
+print('Click Finish Button')
+
+time.sleep(3)
 driver.close()
