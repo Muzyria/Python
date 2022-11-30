@@ -22,4 +22,4 @@ import time
 #     os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "S10150000211018076" --es lat "32.66993723927314" --es lng "-116.9582867329039"')
 #     time.sleep(5)
 
-
+time.sleep(5)
