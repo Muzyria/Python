@@ -91,6 +91,7 @@ print(value_summery_price)
 item_total = 'Item total: ' + value_finish_price_product_1
 print(item_total)
 assert value_summery_price == item_total
+print('Total Summary price GOOD')
 
 finish_button = driver.find_element(By.XPATH, '//button[@id="finish"]')
 finish_button.click()
