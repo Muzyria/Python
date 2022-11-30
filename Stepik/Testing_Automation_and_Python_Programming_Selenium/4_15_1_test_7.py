@@ -85,6 +85,13 @@ print(value_finish_price_product_1)
 assert value_cart_price_product_1 == value_finish_price_product_1
 print('INFO Finish Price Product 1 GOOD')
 
+summery_price = driver.find_element(By.XPATH, '//div[@class="summary_subtotal_label"]')
+value_summery_price = summery_price.text
+print(value_summery_price)
+item_total = 'Item total: ' + value_finish_price_product_1
+print(item_total)
+assert value_summery_price == item_total
+
 finish_button = driver.find_element(By.XPATH, '//button[@id="finish"]')
 finish_button.click()
 print('Click Finish Button')
