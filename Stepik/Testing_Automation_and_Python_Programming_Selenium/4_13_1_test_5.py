@@ -36,7 +36,7 @@ link_about.click()
 print('Click link button')
 driver.back()
 print('Go Back')
-time.sleep(2)
+time.sleep(4)
 driver.forward()
 print('Go Forward')
 
