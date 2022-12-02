@@ -16,6 +16,9 @@ action = ActionChains(driver)
 double = driver.find_element(By.XPATH, '//button[@id="doubleClickBtn"]')
 action.double_click(double).perform()
 
+right_click = driver.find_element(By.XPATH, '//button[@id="rightClickBtn"]')
+action.context_click(right_click).perform()
 
-time.sleep(2)
+
+time.sleep(3)
 driver.close()
