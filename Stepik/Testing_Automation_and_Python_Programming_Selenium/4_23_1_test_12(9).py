@@ -12,9 +12,9 @@ base_url = 'https://html5css.ru/howto/howto_js_rangeslider.php'
 driver.get(base_url)
 driver.maximize_window()
 
-# action = ActionChains(driver)
-# double = driver.find_element(By.XPATH, '//button[@id="doubleClickBtn"]')
-# action.double_click(double).perform()
+action = ActionChains(driver)
+slider = driver.find_element(By.XPATH, '//input[@class="slider-square"]')
+action.click_and_hold(slider).move_by_offset(250, 0).release().perform()
 
 
 time.sleep(3)
