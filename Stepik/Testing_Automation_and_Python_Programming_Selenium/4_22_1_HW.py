@@ -14,32 +14,16 @@ driver.maximize_window()
 
 # Находим поле календаря
 new_date = driver.find_element(By.XPATH, '//input[@id="datePickerMonthYearInput"]')
-print(new_date.get_attribute('value'))
+print(new_date.get_attribute('value'))  # Выводим текущую дату
 new_date.click()  # Кликаем по полю календаря
 [new_date.send_keys(Keys.BACKSPACE) for _ in range(10)]  # Стираем поле календаря
 time.sleep(2)
 
-new_date.send_keys(datetime.now() + timedelta(days=10))
+#  Заполняем поле календаря новыми данными
+[new_date.send_keys(i) for i in str((datetime.now() + timedelta(days=10)).strftime('%d/%m/%Y'))]
 time.sleep(2)
 new_date.send_keys(Keys.RETURN)
-print(new_date.get_attribute('value'))
-
-
-# new_date = driver.find_element(By.XPATH, '//input[@id="datePickerMonthYearInput"]')
-# new_date.click()
-# time.sleep(2)
-#
-# now_date = datetime.datetime.utcnow().strftime("%d")
-# print(now_date)
-# date = int(now_date) + 1
-# locator = f'//div[@aria-label="Choose Saturday, December {str(date)}rd, 2022"]'
-# print(locator)
-#
-# date_3 = driver.find_element(By.XPATH, locator)
-# # date_today = driver.find_element(By.XPATH, '//div[contains(@class, "react-datepicker__day--today")]')
-# date_3.click()
-# print(new_date.get_attribute('value'))
-
+print(new_date.get_attribute('value'))  # Выводим новую дату
 
 time.sleep(3)
 driver.close()
