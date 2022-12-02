@@ -1,1 +1,5 @@
-print(sum([2.1, 5]))
+from datetime import datetime, timedelta
+
+dt = datetime.now() + timedelta(days=10)
+
+print(dt.strftime('%d/%m/%Y'))
