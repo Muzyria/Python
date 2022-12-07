@@ -3,9 +3,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
+# Приветствие и выбор товара
 print('Приветствую тебя в нашем интеренет магазине')
-print('Выбери один из следующих товаров и укажи его номер: 1 - ')
-
+print('Выбери один из следующих товаров и укажи его номер: 1 - Sauce Labs Backpack, 2 - Sauce Labs Bike Light,'
+      ' 3 - Sauce Labs Bolt T-Shirt, 4 - Sauce Labs Fleece Jacket, 5 - Sauce Labs Onesie,'
+      ' 6 - Test.allTheThings() T-Shirt (Red)')
+product = int(input())
 
 s = Service(r'C:\Git_Muzyria\Python\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\chromedriver.exe')
 driver = webdriver.Chrome(service=s)
