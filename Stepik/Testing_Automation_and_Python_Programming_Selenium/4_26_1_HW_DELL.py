@@ -53,7 +53,6 @@ print('Click Login Button')
 # Выбираем продукт
 """INFO product #1"""
 # Название продукта
-# product_1 = driver.find_element(By.XPATH, '//a[@id="item_4_title_link"]')
 product_1 = driver.find_element(By.XPATH, locators[product]['name_product'])
 
 value_product_1 = product_1.text
@@ -104,12 +103,12 @@ postal_code = driver.find_element(By.XPATH, '//input[@id="postal-code"]')
 postal_code.send_keys('1234')
 print('Input Postal Code')
 
-# Нажимеаем кнопку Continue
+# Нажимаем кнопку Continue
 button_continue = driver.find_element(By.XPATH, '//input[@id="continue"]')
 button_continue.click()
 print('Click Button Continue')
 
-# Провекрка заказа
+# Проверка заказа
 """INFO Finish Product 1"""
 finish_product_1 = driver.find_element(By.XPATH, '//div[@class="inventory_item_name"]')
 value_finish_product_1 = finish_product_1.text
