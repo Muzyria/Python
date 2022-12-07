@@ -56,10 +56,12 @@ print(value_cart_price_product_1)
 assert value_price_product_1 == value_cart_price_product_1
 print('INFO Cart Price Product 1 GOOD')
 
+# Нажимаем кнопку Checkout в корзине
 checkout = driver.find_element(By.XPATH, '//button[@id="checkout"]')
 checkout.click()
 print('Click Checkout')
 
+# Оформление заказа заполняем поля клиента
 """Select User INFO"""
 first_name = driver.find_element(By.XPATH, '//input[@id="first-name"]')
 first_name.send_keys('Alex')
@@ -71,10 +73,12 @@ postal_code = driver.find_element(By.XPATH, '//input[@id="postal-code"]')
 postal_code.send_keys('1234')
 print('Input Postal Code')
 
+# Нажимеаем кнопку Continue
 button_continue = driver.find_element(By.XPATH, '//input[@id="continue"]')
 button_continue.click()
 print('Click Button Continue')
 
+# Провекрка заказа
 """INFO Finish Product 1"""
 finish_product_1 = driver.find_element(By.XPATH, '//div[@class="inventory_item_name"]')
 value_finish_product_1 = finish_product_1.text
@@ -96,6 +100,7 @@ print(item_total)
 assert value_summery_price == item_total
 print('Total Summary price GOOD')
 
+# Нажимаем кнопку Finish
 finish_button = driver.find_element(By.XPATH, '//button[@id="finish"]')
 finish_button.click()
 print('Click Finish Button')
