@@ -3,6 +3,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
+print('Приветствую тебя в нашем интеренет магазине')
+print('Выбери один из следующих товаров и укажи его номер: 1 - ')
+
+
 s = Service(r'C:\Git_Muzyria\Python\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\chromedriver.exe')
 driver = webdriver.Chrome(service=s)
 
