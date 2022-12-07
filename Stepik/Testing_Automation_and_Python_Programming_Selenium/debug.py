@@ -1,4 +1,4 @@
-locators = {1: 'qqqqqqqqqqqq', 2: 'wwwwwwwwww'}
+locators = {1: [''], 2: []}
 
 n = int(input())
 print(locators[n])

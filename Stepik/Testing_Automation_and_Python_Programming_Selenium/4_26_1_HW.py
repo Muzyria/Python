@@ -33,14 +33,17 @@ print('Click Login Button')
 
 # Выбираем продукт
 """INFO product #1"""
+# Название продукта
 product_1 = driver.find_element(By.XPATH, '//a[@id="item_4_title_link"]')
 value_product_1 = product_1.text
 print(value_product_1)
 
+# Цена продукта
 price_product_1 = driver.find_element(By.XPATH, '//*[@id="inventory_container"]/div/div[1]/div[2]/div[2]/div')
 value_price_product_1 = price_product_1.text
 print(value_price_product_1)
 
+# Нажатие на кнопку (Добавления в корзину)
 select_price_product_1 = driver.find_element(By.XPATH, '//button[@id="add-to-cart-sauce-labs-backpack"]')
 select_price_product_1.click()
 print('Select Product 1')
