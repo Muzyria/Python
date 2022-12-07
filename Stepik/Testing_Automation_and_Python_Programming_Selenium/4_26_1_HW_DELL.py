@@ -15,19 +15,19 @@ locators = {1: {'name_product': '//a[@id="item_4_title_link"]',
                 'button_product': '//button[@id="add-to-cart-sauce-labs-backpack"]'},
             2: {'name_product': '//a[@id="item_0_title_link"]',
                 'price_product': '//*[@id="inventory_container"]/div/div[2]/div[2]/div[2]/div',
-                'button_product': '//button[@id="add-to-cart-sauce-labs-backpack"]'},
+                'button_product': '//button[@id="add-to-cart-sauce-labs-bike-light"]'},
             3: {'name_product': '//a[@id="item_1_title_link"]',
                 'price_product': '//*[@id="inventory_container"]/div/div[3]/div[2]/div[2]/div',
-                'button_product': '//button[@id="add-to-cart-sauce-labs-backpack"]'},
+                'button_product': '//button[@id="add-to-cart-sauce-labs-bolt-t-shirt"]'},
             4: {'name_product': '//a[@id="item_5_title_link"]',
                 'price_product': '//*[@id="inventory_container"]/div/div[4]/div[2]/div[2]/div',
-                'button_product': '//button[@id="add-to-cart-sauce-labs-backpack"]'},
+                'button_product': '//button[@id="add-to-cart-sauce-labs-fleece-jacket"]'},
             5: {'name_product': '//a[@id="item_2_title_link"]',
                 'price_product': '//*[@id="inventory_container"]/div/div[5]/div[2]/div[2]/div',
-                'button_product': '//button[@id="add-to-cart-sauce-labs-backpack"]'},
+                'button_product': '//button[@id="add-to-cart-sauce-labs-onesie"]'},
             6: {'name_product': '//a[@id="item_3_title_link"]',
                 'price_product': '//*[@id="inventory_container"]/div/div[6]/div[2]/div[2]/div',
-                'button_product': '//button[@id="add-to-cart-sauce-labs-backpack"]'}}
+                'button_product': '//button[@id="add-to-cart-test.allthethings()-t-shirt-(red)"]'}}
 
 s = Service(r'C:\Git_Muzyria\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\chromedriver.exe')
 driver = webdriver.Chrome(service=s)
