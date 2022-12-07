@@ -10,6 +10,15 @@ print('Выбери один из следующих товаров и укаж�
       ' 6 - Test.allTheThings() T-Shirt (Red)')
 product = int(input())
 
+locators = {1: {'name_product': '//a[@id="item_4_title_link"]',
+                'price_product': '//*[@id="inventory_container"]/div/div[1]/div[2]/div[2]/div',
+                'button_product': '//button[@id="add-to-cart-sauce-labs-backpack"]'},
+            2: {},
+            3: {},
+            4: {},
+            5: {},
+            6: {}}
+
 s = Service(r'C:\Git_Muzyria\Python\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\chromedriver.exe')
 driver = webdriver.Chrome(service=s)
 
@@ -34,17 +43,19 @@ print('Click Login Button')
 # Выбираем продукт
 """INFO product #1"""
 # Название продукта
-product_1 = driver.find_element(By.XPATH, '//a[@id="item_4_title_link"]')
+# product_1 = driver.find_element(By.XPATH, '//a[@id="item_4_title_link"]')
+product_1 = driver.find_element(By.XPATH, locators[product]['name_product'])
+
 value_product_1 = product_1.text
 print(value_product_1)
 
 # Цена продукта
-price_product_1 = driver.find_element(By.XPATH, '//*[@id="inventory_container"]/div/div[1]/div[2]/div[2]/div')
+price_product_1 = driver.find_element(By.XPATH, locators[product]['price_product'])
 value_price_product_1 = price_product_1.text
 print(value_price_product_1)
 
 # Нажатие на кнопку (Добавления в корзину)
-select_price_product_1 = driver.find_element(By.XPATH, '//button[@id="add-to-cart-sauce-labs-backpack"]')
+select_price_product_1 = driver.find_element(By.XPATH, locators[product]['button_product'])
 select_price_product_1.click()
 print('Select Product 1')
 
