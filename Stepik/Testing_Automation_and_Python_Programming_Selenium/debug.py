@@ -1,5 +1,4 @@
-from datetime import datetime, timedelta
+locators = {1: 'qqqqqqqqqqqq', 2: 'wwwwwwwwww'}
 
-dt = datetime.now() + timedelta(days=10)
-
-print(str(dt.strftime('%d/%m/%Y')))
+n = int(input())
+print(locators[n])
