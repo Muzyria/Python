@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
+
 # Приветствие и выбор товара
 while True:
     product = None
@@ -18,7 +19,6 @@ while True:
             break
     except ValueError:
         continue
-print(product)
 
 
 locators = {1: {'name_product': '//a[@id="item_4_title_link"]',
