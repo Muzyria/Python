@@ -13,11 +13,21 @@ product = int(input())
 locators = {1: {'name_product': '//a[@id="item_4_title_link"]',
                 'price_product': '//*[@id="inventory_container"]/div/div[1]/div[2]/div[2]/div',
                 'button_product': '//button[@id="add-to-cart-sauce-labs-backpack"]'},
-            2: {},
-            3: {},
-            4: {},
-            5: {},
-            6: {}}
+            2: {'name_product': '//a[@id="item_0_title_link"]',
+                'price_product': '//*[@id="inventory_container"]/div/div[2]/div[2]/div[2]/div',
+                'button_product': '//button[@id="add-to-cart-sauce-labs-bike-light"]'},
+            3: {'name_product': '//a[@id="item_1_title_link"]',
+                'price_product': '//*[@id="inventory_container"]/div/div[3]/div[2]/div[2]/div',
+                'button_product': '//button[@id="add-to-cart-sauce-labs-bolt-t-shirt"]'},
+            4: {'name_product': '//a[@id="item_5_title_link"]',
+                'price_product': '//*[@id="inventory_container"]/div/div[4]/div[2]/div[2]/div',
+                'button_product': '//button[@id="add-to-cart-sauce-labs-fleece-jacket"]'},
+            5: {'name_product': '//a[@id="item_2_title_link"]',
+                'price_product': '//*[@id="inventory_container"]/div/div[5]/div[2]/div[2]/div',
+                'button_product': '//button[@id="add-to-cart-sauce-labs-onesie"]'},
+            6: {'name_product': '//a[@id="item_3_title_link"]',
+                'price_product': '//*[@id="inventory_container"]/div/div[6]/div[2]/div[2]/div',
+                'button_product': '//button[@id="add-to-cart-test.allthethings()-t-shirt-(red)"]'}}
 
 s = Service(r'C:\Git_Muzyria\Python\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\chromedriver.exe')
 driver = webdriver.Chrome(service=s)
@@ -43,7 +53,6 @@ print('Click Login Button')
 # Выбираем продукт
 """INFO product #1"""
 # Название продукта
-# product_1 = driver.find_element(By.XPATH, '//a[@id="item_4_title_link"]')
 product_1 = driver.find_element(By.XPATH, locators[product]['name_product'])
 
 value_product_1 = product_1.text
@@ -94,12 +103,12 @@ postal_code = driver.find_element(By.XPATH, '//input[@id="postal-code"]')
 postal_code.send_keys('1234')
 print('Input Postal Code')
 
-# Нажимеаем кнопку Continue
+# Нажимаем кнопку Continue
 button_continue = driver.find_element(By.XPATH, '//input[@id="continue"]')
 button_continue.click()
 print('Click Button Continue')
 
-# Провекрка заказа
+# Проверка заказа
 """INFO Finish Product 1"""
 finish_product_1 = driver.find_element(By.XPATH, '//div[@class="inventory_item_name"]')
 value_finish_product_1 = finish_product_1.text
