@@ -12,8 +12,8 @@ while True:
         ' 3 - Sauce Labs Bolt T-Shirt, 4 - Sauce Labs Fleece Jacket, 5 - Sauce Labs Onesie,'
         ' 6 - Test.allTheThings() T-Shirt (Red)')
     try:
-        product = int(input())
-        if product not in range(1, 7):
+        product = input()
+        if len(product) != 1 or int(product) not in range(1, 7):
             continue
         else:
             break
