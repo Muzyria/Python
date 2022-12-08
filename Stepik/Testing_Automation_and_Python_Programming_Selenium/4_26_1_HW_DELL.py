@@ -3,23 +3,23 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-
 # Приветствие и выбор товара
 while True:
     product = None
     print('Приветствую тебя в нашем интеренет магазине')
     print('Выбери один из следующих товаров и укажи его номер: 1 - Sauce Labs Backpack, 2 - Sauce Labs Bike Light,'
-        ' 3 - Sauce Labs Bolt T-Shirt, 4 - Sauce Labs Fleece Jacket, 5 - Sauce Labs Onesie,'
-        ' 6 - Test.allTheThings() T-Shirt (Red)')
+          ' 3 - Sauce Labs Bolt T-Shirt, 4 - Sauce Labs Fleece Jacket, 5 - Sauce Labs Onesie,'
+          ' 6 - Test.allTheThings() T-Shirt (Red)')
+
     try:
         product = input()
         if len(product) != 1 or int(product) not in range(1, 7):
             continue
         else:
+            product = int(product)
             break
     except ValueError:
         continue
-
 
 locators = {1: {'name_product': '//a[@id="item_4_title_link"]',
                 'price_product': '//*[@id="inventory_container"]/div/div[1]/div[2]/div[2]/div',
@@ -91,7 +91,8 @@ print(value_cart_product_1)
 assert value_product_1 == value_cart_product_1
 print('INFO Cart Product 1 GOOD')
 
-price_cart_product_1 = driver.find_element(By.XPATH, '//*[@id="cart_contents_container"]/div/div[1]/div[3]/div[2]/div[2]/div')
+price_cart_product_1 = driver.find_element(By.XPATH,
+                                           '//*[@id="cart_contents_container"]/div/div[1]/div[3]/div[2]/div[2]/div')
 value_cart_price_product_1 = price_cart_product_1.text
 print(value_cart_price_product_1)
 assert value_price_product_1 == value_cart_price_product_1
@@ -127,7 +128,8 @@ print(value_finish_product_1)
 assert value_product_1 == value_finish_product_1
 print('INFO Finish Product 1 GOOD')
 
-price_finish_product_1 = driver.find_element(By.XPATH, '//*[@id="checkout_summary_container"]/div/div[1]/div[3]/div[2]/div[2]/div')
+price_finish_product_1 = driver.find_element(By.XPATH,
+                                             '//*[@id="checkout_summary_container"]/div/div[1]/div[3]/div[2]/div[2]/div')
 value_finish_price_product_1 = price_finish_product_1.text
 print(value_finish_price_product_1)
 assert value_cart_price_product_1 == value_finish_price_product_1

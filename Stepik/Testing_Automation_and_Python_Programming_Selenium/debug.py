@@ -10,6 +10,7 @@ while True:
         if len(product) != 1 or int(product) not in range(1, 7):
             continue
         else:
+
             break
     except ValueError:
         continue
