@@ -49,7 +49,9 @@ class NoTest1:
 
         success_test = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//span[@class="title"]')))
         value_success_test = success_test.text
-        # assert
+        print(value_success_test)
+        assert value_success_test == 'YOUR CART'
+        print('Test Succcess !!!')
 
 
 test = NoTest1()
