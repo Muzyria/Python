@@ -10,10 +10,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 class NoTest1:
 
     def select_product(self):
-        # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        s = Service(r'C:\Git_Muzyria\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\OOP\resource'
-                    r'\chromedriver.exe')
-        driver = webdriver.Chrome(service=s)
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        # s = Service(r'C:\Git_Muzyria\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\OOP\resource'
+        #             r'\chromedriver.exe')
+        # driver = webdriver.Chrome(service=s)
         base_url = 'https://www.saucedemo.com/'
         driver.get(base_url)
         driver.maximize_window()
