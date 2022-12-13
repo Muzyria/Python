@@ -37,7 +37,17 @@ class NoTest1:
         print('Click Login Button')
         time.sleep(2)
 
-# WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="enableAfter"]')))
+        select_product = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="add-to-cart-sauce-labs-backpack"]')))
+        select_product.click()
+        print('Click Select Product')
+        time.sleep(2)
+
+        enter_shopping_cart = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//a[@class="shopping_cart_link"]')))
+        enter_shopping_cart.click()
+        print('Click Enter Shopping Cart')
+        time.sleep(2)
+
+
 
 test = NoTest1()
 test.select_product()
