@@ -20,7 +20,7 @@ class NoTest2:
 
         print('Start test')
 
-        login_standard_user = "problem_user"
+        login_standard_user = "performance_glitch_user"
         password_all = "secret_sauce"
 
         login = Login_page(driver)
