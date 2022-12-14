@@ -55,6 +55,8 @@ class NoTest1:
                 time.sleep(2)
             except Exception:
                 print('Error ---------------------------------')
+                continue
+
 
 test = NoTest1()
 test.select_product()
