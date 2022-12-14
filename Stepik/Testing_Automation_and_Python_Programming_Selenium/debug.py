@@ -13,7 +13,6 @@ def my_fun(n):
     else:
         return False
 
-
 print(my_fun(1))
 
 
