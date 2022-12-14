@@ -7,4 +7,11 @@
 #
 # asyncio.run(main())
 
-print('Your Cart'.upper())
+def my_fun(n):
+    if n == 1:
+        return True
+    else:
+        return False
+
+
+print(my_fun(1))
