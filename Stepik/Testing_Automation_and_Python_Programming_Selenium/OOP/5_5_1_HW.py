@@ -17,22 +17,25 @@ class NoTest1:
         self.driver.maximize_window()
 
     def login_user(self, login, password_all, number):
-
-        user_name = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="user-name"]')))
+        # Находим поле LOGIN
+        user_name = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="user-name"]')))
         user_name.send_keys(login)
         print('Input Login')
 
-        password = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="password"]')))
+        # Находим поле PASSWORD
+        password = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="password"]')))
         password.send_keys(password_all)
         print('Input Password')
 
-        button_login = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@id='login-button']")))
+        # Находим кнопку
+        button_login = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//input[@id='login-button']")))
         button_login.click()
         print('Click Login Button')
         time.sleep(2)
 
         try:
-            success_test = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//span[@class="title"]')))
+            # Находим надпись PRODUCT
+            success_test = WebDriverWait(self.driver, 6).until(EC.element_to_be_clickable((By.XPATH, '//span[@class="title"]')))
             value_success_test = success_test.text
             print(value_success_test)
             assert value_success_test == 'PRODUCTS'
@@ -40,7 +43,7 @@ class NoTest1:
             time.sleep(2)
             return True
         except Exception:
-            print('Test Fail')
+            print(f'Test {number} Fail !!!')
             return False
 
     def select_product(self):
@@ -52,21 +55,23 @@ class NoTest1:
         for number, login in enumerate(lst_login_user, 1):
             print(f'Start test {number} with {login}')
             if self.login_user(login, password_all, number):
-                button_menu = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="react-burger-menu-btn"]')))
+                # Если удачно залогинились то ищем меню и выход
+                button_menu = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="react-burger-menu-btn"]')))
                 button_menu.click()
                 print('Click Button Menu')
                 time.sleep(1)
 
-                items_logout = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//a[@id="logout_sidebar_link"]')))
+                items_logout = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//a[@id="logout_sidebar_link"]')))
                 items_logout.click()
                 print('Click Item Logout')
                 time.sleep(2)
             else:
-                user_name = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="user-name"]')))
+                # Если не полчилось залогинится то очищаем поля LOGIN и PASSWORD
+                user_name = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="user-name"]')))
                 [user_name.send_keys(Keys.BACKSPACE) for _ in range(len(login))]  # Стираем поле login
                 print('Clear Login')
 
-                password = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="password"]')))
+                password = WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="password"]')))
                 [password.send_keys(Keys.BACKSPACE) for _ in range(len(password_all))]  # Стираем поле password
                 print('Clear Password')
                 time.sleep(1)
