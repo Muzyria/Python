@@ -23,22 +23,6 @@ class NoTest1:
 
         print('Start test')
 
-        # login_standard_user = "standard_user"
-        # password_all = "secret_sauce"
-
-        # user_name = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="user-name"]')))
-        # user_name.send_keys(login_standard_user)
-        # print('Input Login')
-        #
-        # password = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="password"]')))
-        # password.send_keys(password_all)
-        # print('Input Password')
-        #
-        # button_login = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, "//input[@id='login-button']")))
-        # button_login.click()
-        # print('Click Login Button')
-        # time.sleep(2)
-
         login = Login_page(driver)
         login.authorization(login_name="standard_user", login_password="secret_sauce")
 
