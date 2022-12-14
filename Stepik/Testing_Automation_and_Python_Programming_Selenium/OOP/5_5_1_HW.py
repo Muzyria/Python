@@ -30,7 +30,20 @@ class NoTest1:
         print('Click Login Button')
         time.sleep(2)
 
+        try:
+            success_test = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//span[@class="title"]')))
+            value_success_test = success_test.text
+            print(value_success_test)
+            assert value_success_test == 'PRODUCTS'
+            print('Test Succcess !!!')
+        except Exception:
+            user_name = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="user-name"]')))
+            user_name.clear()
+            print('Clear Login')
 
+            password = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="password"]')))
+            password.clear()
+            print('Clear Password')
 
     def select_product(self):
 
@@ -44,11 +57,8 @@ class NoTest1:
 
 
 
-            success_test = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//span[@class="title"]')))
-            value_success_test = success_test.text
-            print(value_success_test)
-            assert value_success_test == 'PRODUCTS'
-            print('Test Succcess !!!')
+
+
 
             button_menu = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="react-burger-menu-btn"]')))
             button_menu.click()
