@@ -11,9 +11,6 @@ class NoTest1:
 
     def select_product(self):
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        # s = Service(r'C:\Git_Muzyria\Python\Stepik\Testing_Automation_and_Python_Programming_Selenium\OOP\resource'
-        #             r'\chromedriver.exe')
-        # driver = webdriver.Chrome(service=s)
         base_url = 'https://www.saucedemo.com/'
         driver.get(base_url)
         driver.maximize_window()
@@ -37,20 +34,10 @@ class NoTest1:
         print('Click Login Button')
         time.sleep(2)
 
-        select_product = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="add-to-cart-sauce-labs-backpack"]')))
-        select_product.click()
-        print('Click Select Product')
-        time.sleep(2)
-
-        enter_shopping_cart = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//a[@class="shopping_cart_link"]')))
-        enter_shopping_cart.click()
-        print('Click Enter Shopping Cart')
-        time.sleep(2)
-
         success_test = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//span[@class="title"]')))
         value_success_test = success_test.text
         print(value_success_test)
-        assert value_success_test == 'YOUR CART'
+        assert value_success_test == 'PRODUCTS'
         print('Test Succcess !!!')
 
 
