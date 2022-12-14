@@ -40,6 +40,16 @@ class NoTest1:
         assert value_success_test == 'PRODUCTS'
         print('Test Succcess !!!')
 
+        button_menu = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="react-burger-menu-btn"]')))
+        button_menu.click()
+        print('Click Button Menu')
+        time.sleep(1)
+
+        items_logout = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//a[@id="logout_sidebar_link"]')))
+        items_logout.click()
+        print('Click Item Logout')
+        time.sleep(2)
+
 
 test = NoTest1()
 test.select_product()
