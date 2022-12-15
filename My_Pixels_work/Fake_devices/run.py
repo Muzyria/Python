@@ -21,6 +21,14 @@ for i in ['S101500002110180' + str(i) for i in range(70, 91)]:
     os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{i}" --es lat "{x}" --es lng "{y}"')
     time.sleep(10)
 
+# В геофенс !!!
+for i in ['S101500002110180' + str(i) for i in range(70, 91)]:
+    x = '32.669960327330166'
+    y = '-116.9582589120025'
+    print(i, 'В ГЕОФЕНС АЛЕРТ 1')
+    os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{i}" --es lat "{x}" --es lng "{y}"')
+    time.sleep(10)
+
 
 # Высадка дисанта
 for i in ['S101500002110180' + str(i) for i in range(70, 91)]:
