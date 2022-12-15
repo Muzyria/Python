@@ -66,8 +66,6 @@ class NoTest1:
 
         actions = ActionChains(driver)
         time.sleep(5)
-        # map_geofence = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//canvas[@id="Microsoft.Maps.Imagery.Aerial"]')))
-        # map_geofence = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="labelCanvasId"]')))
 
         actions.move_by_offset(200, 200).click().perform()
         actions.move_by_offset(70, 0).click().perform()
