@@ -11,7 +11,7 @@ for i in ['S101500002110180' + str(i) for i in range(70, 91)]:
     y = '-116.95939616862482'
     print(i, 'На RETURN AREA')
     os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{i}" --es lat "{x}" --es lng "{y}"')
-    time.sleep(2)
+    time.sleep(10)
 
 # HOLE 1
 for i in ['S101500002110180' + str(i) for i in range(70, 91)]:
