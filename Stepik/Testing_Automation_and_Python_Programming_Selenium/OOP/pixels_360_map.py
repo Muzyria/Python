@@ -19,8 +19,8 @@ class NoTest1:
 
         print('Start test')
 
-        login_standard_user = " "
-        password_all = "  "
+        login_standard_user = "nessayurassic"
+        password_all = "10583021"
 
         #  LOGON PAGE
         user_name = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="login-form-username"]')))
@@ -65,37 +65,19 @@ class NoTest1:
         #  Рисуем геофенс -------------------->
 
         actions = ActionChains(driver)
-        map_geofence = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//canvas[@id="Microsoft.Maps.Imagery.Aerial"]')))
+        time.sleep(5)
+        # map_geofence = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//canvas[@id="Microsoft.Maps.Imagery.Aerial"]')))
+        # map_geofence = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="labelCanvasId"]')))
+
+        actions.move_by_offset(200, 200).click().perform()
+        actions.move_by_offset(70, 0).click().perform()
+        actions.move_by_offset(0, 70).click().perform()
+        actions.move_by_offset(-70, 0).click().perform()
 
 
-        # actions.move_by_offset(100, 10).perform()
-        actions.move_by_offset(100, 100)
-        actions.click().perform()
-        time.sleep(1)
 
-        actions.move_by_offset(100, 200)
-        actions.click().perform()
-        time.sleep(1)
-
-        # actions.move_by_offset(200, 200)
-        # actions.click().perform()
-        # time.sleep(1)
-        #
-        # actions.move_by_offset(200, 100)
-        # actions.click().perform()
-        # time.sleep(1)
-
-        # actions.click().perform()
-
-        # actions.click(map_geofence).move_by_offset(1, 1).perform()
-        # actions.click(map_geofence).move_by_offset(100, 1).perform()
-        # actions.click(map_geofence).move_by_offset(100, 100).perform()
-        # actions.click(map_geofence).move_by_offset(1, 100).perform()
-
-        #action.click_and_hold(slider).move_by_offset(250, 0).release().perform()
-        # actions.click().perform()
+        time.sleep(5)
         time.sleep(4)
-
 
 
 test = NoTest1()
