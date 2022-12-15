@@ -5,7 +5,7 @@ from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-s = Service(r'C:\Git_Muzyria\Python\Python\My_Pixels\driver\chromedriver.exe')
+s = Service(r'C:\Git_Muzyria\Python\Python\My_Pixels_work\resource\chromedriver.exe')
 driver = webdriver.Chrome(service=s)
 # driver.implicitly_wait(20)
 
