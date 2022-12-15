@@ -20,7 +20,7 @@ class NoTest1:
         print('Start test')
 
         login_standard_user = " "
-        password_all = " "
+        password_all = "  "
 
         #  LOGON PAGE
         user_name = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="login-form-username"]')))
