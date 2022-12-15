@@ -19,7 +19,7 @@ class NoTest1:
 
         print('Start test')
 
-        login_standard_user = ""
+        login_standard_user = " "
         password_all = ""
 
         #  LOGON PAGE
