@@ -7,27 +7,28 @@ import time
 
 
 for i in ['S101500002110180' + str(i) for i in range(70, 91)]:
+    time_value = 1  # Величина паузы между командами
 
     # Return area
     x = '32.67211882231258'
     y = '-116.95939616862482'
     print(i, 'На RETURN AREA')
     os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{i}" --es lat "{x}" --es lng "{y}"')
-    time.sleep(1)
+    time.sleep(time_value)
 
     # HOLE 1
     x = '32.67075509305431'
     y = '-116.95889191333002'
     print(i, 'На HOLE 1')
     os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{i}" --es lat "{x}" --es lng "{y}"')
-    time.sleep(1)
+    time.sleep(time_value)
 
     # В геофенс !!!
     x = '32.669960327330166'
     y = '-116.9582589120025'
     print(i, 'В ГЕОФЕНС АЛЕРТ 1')
     os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{i}" --es lat "{x}" --es lng "{y}"')
-    time.sleep(1)
+    time.sleep(time_value)
 
 
 # # Высадка дисанта
@@ -48,7 +49,7 @@ for j in range(count_iter):
     print(car_id, x, y, ' -------------------------> ' + str(count_iter - j), ' прошло времени ' + count_time,
           datetime.now().strftime('%H:%M:%S'))
     os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{car_id}" --es lat "{x}" --es lng "{y}"')
-    time.sleep(1)
+    time.sleep(time_value)
 
 # lst_car = ['S101500002110180' + str(i) for i in range(70, 91)]
 # os.system('adb shell am broadcast -a com.yama.fake.ADBCom --es id "S10150000211018049" --es lat "50.08593724592065" --es lng "36.21560508169411"')
