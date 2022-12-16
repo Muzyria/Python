@@ -6,10 +6,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
-from pages.login_page import Login_page
+from Stepik.Testing_Automation_and_Python_Programming_Selenium.OOP.login_page import Login_page
 
 
-class NoTest1:
+class Test_1():
 
     def select_product(self):
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -24,7 +24,7 @@ class NoTest1:
         password_all = "secret_sauce"
 
         login = Login_page(driver)
-        login.authorization(login_name=login_standard_user, login_password=password_all)
+        login.authorization(login_standard_user, password_all)
 
         select_product = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="add-to-cart-sauce-labs-backpack"]')))
         select_product.click()
@@ -43,6 +43,6 @@ class NoTest1:
         print('Test Succcess !!!')
 
 
-test = NoTest1()
+test = Test_1()
 test.select_product()
 

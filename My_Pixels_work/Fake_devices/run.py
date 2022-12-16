@@ -4,10 +4,9 @@ from random import choice, randrange
 import time
 
 # test_49 = 'S10150000211018049'
-
+time_value = 4  # Величина паузы между командами
 
 for i in ['S101500002110180' + str(i) for i in range(70, 91)]:
-    time_value = 1  # Величина паузы между командами
 
     # Return area
     x = '32.67211882231258'
