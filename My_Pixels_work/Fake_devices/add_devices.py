@@ -46,7 +46,7 @@ time.sleep(3)
 
 # Добавление новых автомобилей
 id_car_start = 'S101500002110180'  #  without two simbol
-for i in range(70, 91):
+for i in range(72, 91):
     new_id = f'{id_car_start}{i}'
     print(new_id + ' will added')
 
