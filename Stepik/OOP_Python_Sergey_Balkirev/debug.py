@@ -1,22 +1,22 @@
 import sys
 
-# здесь объявляется класс Stream
-class StreamData:
-    def create(self, fields, lst_values):
-        self.fields = fields
-        self.lst_values = lst_values
-        self.__dict__ = dict(zip(fields, lst_values))
+# программу не менять, только добавить два метода
+lst_in = list(map(str.strip, sys.stdin.readlines()))  # считывание списка строк из входного потока
 
 
-class StreamReader:
-    FIELDS = ('id', 'title', 'pages')
+class DataBase:
+    lst_data = []
+    FIELDS = ('id', 'name', 'old', 'salary')
 
-    def readlines(self):
-        lst_in = list(map(str.strip, sys.stdin.readlines()))  # считывание списка строк из входного потока
-        sd = StreamData()
-        res = sd.create(self.FIELDS, lst_in)
-        return sd, res
+    # здесь добавлять методы
+    def select(self, a, b):
+        if b >= len(DataBase.lst_data):
+            b = len(DataBase.lst_data) - 1
+        return [DataBase.lst_data[1] for i in range(a, b)]
+
+    def insert(self, data):
+        DataBase.lst_data.append(zip(DataBase.FIELDS, data))
 
 
-sr = StreamReader()
-data, result = sr.readlines()
+db = DataBase()
+db.insert(lst_in)
