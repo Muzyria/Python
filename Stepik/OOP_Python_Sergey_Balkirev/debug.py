@@ -1,22 +1,28 @@
-import sys
+class Translator:
+    dict_data = {}
 
-# программу не менять, только добавить два метода
-lst_in = list(map(str.strip, sys.stdin.readlines()))  # считывание списка строк из входного потока
+    def add(self, eng, rus):
+        self.dict_data.setdefault(eng, [])
+        if rus not in self.dict_data[eng]:
+            self.dict_data[eng].append(rus)
 
+    def translate(self, eng):
+        return self.dict_data[eng]
 
-class DataBase:
-    lst_data = []
-    FIELDS = ('id', 'name', 'old', 'salary')
-
-    # здесь добавлять методы
-    def select(self, a, b):
-        if b >= len(DataBase.lst_data):
-            b = len(DataBase.lst_data) - 1
-        return [DataBase.lst_data[1] for i in range(a, b)]
-
-    def insert(self, data):
-        DataBase.lst_data.append(zip(DataBase.FIELDS, data))
+    def remove(self, eng):
+        del self.dict_data[eng]
 
 
-db = DataBase()
-db.insert(lst_in)
+tr = Translator()
+
+tr.add('tree', 'дерево')
+tr.add('car', 'машина')
+tr.add('car', 'автомобиль')
+tr.add('leaf', 'лист')
+tr.add('river', 'река')
+tr.add('go', 'идти')
+tr.add('go', 'ехать')
+tr.add('go', 'ходить')
+tr.add('milk', 'молоко')
+tr.remove("car")
+print(*tr.translate("go"))
