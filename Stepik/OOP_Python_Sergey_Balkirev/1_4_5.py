@@ -1,19 +1,13 @@
-
-class MediaPlayer:
+class Graph:
+    LIMIT_Y = [0, 10]
     
-    def open(self, file):
-        self.filename = file
-        
-    def play(self):
-        print(f"Воспроизведение {self.filename}")
+    def set_data(self, data):
+        self.data = data
 
+    def draw(self):
+        print(*list(filter(lambda x: Graph.LIMIT_Y[0] <= x <= Graph.LIMIT_Y[1], self.data)))
 
-media1 = MediaPlayer()
-media2 = MediaPlayer()
+graph_1 = Graph()
 
-
-media1.open("filemedia1")
-media2.open("filemedia2")
-
-media1.play()
-media2.play()
+graph_1.set_data([10, -5, 100, 20, 0, 80, 45, 2, 5, 7])
+graph_1.draw()
