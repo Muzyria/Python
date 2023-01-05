@@ -1,17 +1,22 @@
-class MediaPlayer:
+import sys
 
-    def open(self, file):
-        self.filename = file
+# здесь объявляется класс Stream
+class StreamData:
+    def create(self, fields, lst_values):
+        self.fields = fields
+        self.lst_values = lst_values
+        self.__dict__ = dict(zip(fields, lst_values))
 
-    def play(self):
-        print(f'Воспроизведение {self.filename}')
+
+class StreamReader:
+    FIELDS = ('id', 'title', 'pages')
+
+    def readlines(self):
+        lst_in = list(map(str.strip, sys.stdin.readlines()))  # считывание списка строк из входного потока
+        sd = StreamData()
+        res = sd.create(self.FIELDS, lst_in)
+        return sd, res
 
 
-media1 = MediaPlayer()
-media2 = MediaPlayer()
-
-media1.open("filemedia1")
-media2.open("filemedia2")
-
-media1.play()
-media2.play()
+sr = StreamReader()
+data, result = sr.readlines()
