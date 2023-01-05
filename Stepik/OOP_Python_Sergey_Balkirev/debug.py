@@ -1,14 +1,17 @@
-class Figure:
-    type_fig = 'ellipse'
-    color = 'red'
+class MediaPlayer:
+
+    def open(self, file):
+        self.filename = file
+
+    def play(self):
+        print(f'Воспроизведение {self.filename}')
 
 
-fig1 = Figure()
+media1 = MediaPlayer()
+media2 = MediaPlayer()
 
-fig1.start_pt = (10, 5)
-fig1.end_pt = (100, 20)
-fig1.color = 'blue'
+media1.open("filemedia1")
+media2.open("filemedia2")
 
-delattr(fig1, 'color')
-
-print(*[i for i in fig1.__dict__.keys()])
+media1.play()
+media2.play()

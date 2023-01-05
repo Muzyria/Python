@@ -17,4 +17,3 @@ media2.open("filemedia2")
 
 media1.play()
 media2.play()
-
