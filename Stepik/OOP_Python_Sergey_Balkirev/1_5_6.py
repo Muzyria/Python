@@ -14,6 +14,8 @@ class TriangleChecker:
             return 2
         return 3      
 
+# tr = TriangleChecker(a, b, c)
+# print(tr.is_triangle())
 
 """
 class TriangleChecker:
