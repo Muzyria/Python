@@ -45,8 +45,8 @@ time.sleep(3)
 
 
 # Добавление новых автомобилей
-id_car_start = 'S101500002110180'  #  without two simbol
-for i in range(72, 91):
+id_car_start = 'S10150000211018'  #  without two simbol
+for i in range(200, 301):
     new_id = f'{id_car_start}{i}'
     print(new_id + ' will added')
 
@@ -77,7 +77,7 @@ for i in range(72, 91):
 
     # Вставляем имя машинки
     input_name_device = driver.find_element(By.XPATH, '//input[@name="cartName"]')
-    input_name_device.send_keys(new_id[-2::])
+    input_name_device.send_keys(new_id[-3::])
     time.sleep(1)
 
     # Нажимаем кнопку SAVE
