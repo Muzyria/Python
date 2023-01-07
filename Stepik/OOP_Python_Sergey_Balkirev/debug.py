@@ -1,28 +1,9 @@
-class Translator:
-    dict_data = {}
-
-    def add(self, eng, rus):
-        self.dict_data.setdefault(eng, [])
-        if rus not in self.dict_data[eng]:
-            self.dict_data[eng].append(rus)
-
-    def translate(self, eng):
-        return self.dict_data[eng]
-
-    def remove(self, eng):
-        del self.dict_data[eng]
+class Point:
+    def __init__(self, x, y, color='black'):
+        self.x = x
+        self.y = y
+        self.color = color
 
 
-tr = Translator()
-
-tr.add('tree', 'дерево')
-tr.add('car', 'машина')
-tr.add('car', 'автомобиль')
-tr.add('leaf', 'лист')
-tr.add('river', 'река')
-tr.add('go', 'идти')
-tr.add('go', 'ехать')
-tr.add('go', 'ходить')
-tr.add('milk', 'молоко')
-tr.remove("car")
-print(*tr.translate("go"))
+points = [ i for i in range(1, 2001, 2)]
+print(len(points))
