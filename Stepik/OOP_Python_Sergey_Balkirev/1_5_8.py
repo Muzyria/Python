@@ -11,7 +11,7 @@ class Memory:
 
 
 class MotherBoard:
-    def __init__(self, name, cpu, mem_slots, total_mem_slots = 4):
+    def __init__(self, name, cpu, mem_slots, total_mem_slots=4):
         self.name = name
         self.cpu = cpu
         self.mem_slots = mem_slots

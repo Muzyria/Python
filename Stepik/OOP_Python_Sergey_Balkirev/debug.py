@@ -1,37 +1,24 @@
-class Graph:
-    def __init__(self, data, is_show=True):
-        self.data = data
-        self.is_show = is_show
-
-    def set_data(self, data):
-        self.data.append(data)
-
-    def show_table(self):
-        if self.is_show:
-            print(" ".join(map(str, self.data)))
-        else:
-            print("Отображение данных закрыто")
-
-    def show_graph(self):
-        if self.is_show:
-            print(f'Графическое отображение данных: {" ".join(map(str, self.data))}')
-        else:
-            print("Отображение данных закрыто")
-
-    def show_bar(self):
-        if self.is_show:
-            print(f'Столбчатая диаграмма: {" ".join(map(str, self.data))}')
-        else:
-            print("Отображение данных закрыто")
-
-    def set_show(self, fl_show):
-        self.is_show = fl_show
+class CPU:
+    def __init__(self, name, fr):
+        self.name = name
+        self.fr = fr
 
 
-data_graph = list(map(int, input().split()))
+class Memory:
+    def __init__(self, name, volume):
+        self.name = name
+        self.volume = volume
 
-gp = Graph(data_graph)
 
-gp.show_bar()
-gp.set_show(fl_show=False)
-gp.show_table()
+class MotherBoard:
+    def __init__(self, name, cpu, mem_slots, total_mem_slots=4):
+        self.name = name
+        self.cpu = cpu
+        self.mem_slots = mem_slots
+        self.total_mem_slots = total_mem_slots
+
+
+cpu = CPU('asus', 1333)
+mem1, mem2 = Memory('Kingstone', 4000), Memory('Kingstone', 4000)
+mb = MotherBoard('Asus', cpu, [mem1, mem2])
+print(mb.get_config())
