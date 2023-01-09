@@ -1,24 +1,51 @@
-class CPU:
-    def __init__(self, name, fr):
+class Cart:
+    def __init__(self):
+        self.goods = []
+
+    def add(self, gd):
+        self.goods.append(gd)
+
+    def remove(self, indx):
+        del self.goods[indx]
+
+    def get_list(self):
+        return [f"{i.name}: {i.price}" for i in self.goods]
+
+class Table:
+    def __init__(self, name, price):
         self.name = name
-        self.fr = fr
+        self.price = price
 
-
-class Memory:
-    def __init__(self, name, volume):
+class TV:
+    def __init__(self, name, price):
         self.name = name
-        self.volume = volume
+        self.price = price
 
-
-class MotherBoard:
-    def __init__(self, name, cpu, mem_slots, total_mem_slots=4):
+class Notebook:
+    def __init__(self, name, price):
         self.name = name
-        self.cpu = cpu
-        self.mem_slots = mem_slots
-        self.total_mem_slots = total_mem_slots
+        self.price = price
+
+class Cup:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
 
 
-cpu = CPU('asus', 1333)
-mem1, mem2 = Memory('Kingstone', 4000), Memory('Kingstone', 4000)
-mb = MotherBoard('Asus', cpu, [mem1, mem2])
-print(mb.get_config())
+cart = Cart()
+
+tv1 = TV("samsung", 1111)
+tv2 = TV("LG", 1234)
+table = Table("ikea", 2345)
+n1 = Notebook("msi", 5433)
+n2 = Notebook("apple", 542)
+c = Cup("keepcup", 43)
+
+cart.add(tv1)
+cart.add(tv2)
+cart.add(table)
+cart.add(n1)
+cart.add(n2)
+cart.add(c)
+
+# print(cart.get_list())
