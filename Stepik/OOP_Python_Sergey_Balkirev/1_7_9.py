@@ -28,3 +28,22 @@ class CardCheck:
 is_number = CardCheck.check_card_number("1234-5678-9012-0000")
 is_name = CardCheck.check_name("SERGEI BALAKIREV")
 print(CardCheck.CHARS_FOR_NAME)
+
+"""
+from string import ascii_lowercase, digits
+import re
+
+
+class CardCheck:
+    CHARS_FOR_NAME = ascii_lowercase.upper() + digits
+    PATTERN_NUMBER = r'\d{4}-\d{4}-\d{4}-\d{4}'
+    PATTERN_NAME = r'^[A-Z]+ [A-Z]+$'
+
+    @classmethod
+    def check_card_number(cls, number):
+        return bool(re.fullmatch(cls.PATTERN_NUMBER, number))
+
+    @classmethod
+    def check_name(cls, name):
+        return bool(re.fullmatch(cls.PATTERN_NAME, name))
+"""

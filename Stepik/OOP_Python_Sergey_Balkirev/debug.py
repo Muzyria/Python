@@ -1,55 +1,18 @@
 from string import ascii_lowercase, digits
+import re
 
 
-# здесь объявляйте классы TextInput и PasswordInput
-class TextInput:
-    CHARS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя " + ascii_lowercase
-    CHARS_CORRECT = CHARS + CHARS.upper() + digits
+class CardCheck:
+    CHARS_FOR_NAME = ascii_lowercase.upper() + digits
+    PATTERN_NUMBER = r'\d{4}-\d{4}-\d{4}-\d{4}'
+    PATTERN_NAME = r'^[A-Z]+ [A-Z]+$'
 
-    def __init__(self, name, size=10):
-        if self.check_name(name):
-            self.name = name
-            self.size = size
-        else:
-            raise ValueError("некорректное поле name")
-
-    def get_html(self):
-        return f"<p class='login'>{self.name}: <input type='text' size={self.size} />"
+    @classmethod
+    def check_card_number(cls, number):
+        return bool(re.fullmatch(cls.PATTERN_NUMBER, number))
 
     @classmethod
     def check_name(cls, name):
-        if 3 <= len(name) <= 50 and all(char in TextInput.CHARS_CORRECT for char in name):
-            return True
-        return False
+        return bool(re.fullmatch(cls.PATTERN_NAME, name))
 
-
-class PasswordInput:
-    CHARS = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя " + ascii_lowercase
-    CHARS_CORRECT = CHARS + CHARS.upper() + digits
-
-    def __init__(self, name, size=10):
-        self.name = name
-        self.size = size
-
-    def get_html(self):
-        return f"<p class='password'>{self.name}: <input type='text' size={self.size} />"
-
-    @classmethod
-    def check_name(cls, name):
-        if 3 <= len(name) <= 50 and all(char in PasswordInput.CHARS_CORRECT for char in name):
-            return True
-        return False
-
-
-class FormLogin:
-    def __init__(self, lgn, psw):
-        self.login = lgn
-        self.password = psw
-
-    def render_template(self):
-        return "\n".join(['<form action="#">', self.login.get_html(), self.password.get_html(), '</form>'])
-
-
-# эти строчки не менять
-login = FormLogin(TextInput("Логин"), PasswordInput("Пароль"))
-html = login.render_template()
+print(CardCheck.check_card_number("1244-5678-9012-0000-5643"))
