@@ -8,11 +8,18 @@ class TextInput:
         self.name = name
         self.size = size
 
+    def get_html(self):
+        return f"<p class='login'>{self.name}: <input type='text' size={self.size} />"
+
 
 class PasswordInput:
+
     def __init__(self, name, size=10):
         self.name = name
         self.size = size
+
+    def get_html(self):
+        return f"<p class='password'>{self.name}: <input type='text' size={self.size} />"
 
 
 class FormLogin:
