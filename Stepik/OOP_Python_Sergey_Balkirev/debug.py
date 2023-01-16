@@ -1,18 +1,32 @@
-from string import ascii_lowercase, digits
-import re
+
+class Video:
+
+    def __init__(self):
+        self.name = None
+
+    def create(self, name):
+        self.name = name
+
+    def play(self):
+        print(f"воспроизведение видео {self.name}")
 
 
-class CardCheck:
-    CHARS_FOR_NAME = ascii_lowercase.upper() + digits
-    PATTERN_NUMBER = r'\d{4}-\d{4}-\d{4}-\d{4}'
-    PATTERN_NAME = r'^[A-Z]+ [A-Z]+$'
+class YouTube:
+    videos = []
 
     @classmethod
-    def check_card_number(cls, number):
-        return bool(re.fullmatch(cls.PATTERN_NUMBER, number))
+    def add_video(cls, video):
+        cls.videos.append(video)
 
     @classmethod
-    def check_name(cls, name):
-        return bool(re.fullmatch(cls.PATTERN_NAME, name))
+    def play(cls, video_indx):
+        Video.play(cls.videos[video_indx])
 
-print(CardCheck.check_card_number("1244-5678-9012-0000-5643"))
+
+v1, v2 = Video(), Video()
+v1.create('Python')
+v2.create('Python ООП')
+YouTube.add_video(v1)
+YouTube.add_video(v2)
+YouTube.play(0)
+YouTube.play(1)
