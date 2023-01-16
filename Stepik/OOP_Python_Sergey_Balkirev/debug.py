@@ -1,32 +1,52 @@
 
-class Video:
-
-    def __init__(self):
-        self.name = None
-
-    def create(self, name):
-        self.name = name
-
-    def play(self):
-        print(f"воспроизведение видео {self.name}")
 
 
-class YouTube:
-    videos = []
+class Viber:
+    list_msg = []
 
-    @classmethod
-    def add_video(cls, video):
-        cls.videos.append(video)
+    def __init__(self, msg):
+        self.msg = msg
 
-    @classmethod
-    def play(cls, video_indx):
-        Video.play(cls.videos[video_indx])
+    @staticmethod
+    def add_message(msg):
+        Viber.list_msg.append(msg)
+
+    @staticmethod
+    def remove_message(msg):
+        Viber.list_msg.remove(msg)
+
+    @staticmethod
+    def set_like(msg):
+        if not Viber.list_msg[Viber.list_msg.index(msg)].fl_like:
+            Viber.list_msg[Viber.list_msg.index(msg)].fl_like = True
+        else:
+            Viber.list_msg[Viber.list_msg.index(msg)].fl_like = False
+
+    @staticmethod
+    def show_last_message(x):
+        print(*Viber.list_msg[-x:])
+
+    @staticmethod
+    def total_messages():
+        print(len(Viber.list_msg))
 
 
-v1, v2 = Video(), Video()
-v1.create('Python')
-v2.create('Python ООП')
-YouTube.add_video(v1)
-YouTube.add_video(v2)
-YouTube.play(0)
-YouTube.play(1)
+class Message:
+    def __init__(self, text, fl_like=False):
+        self.text = text
+        self.fl_like = fl_like
+
+
+
+msg = Message("Всем привет!")
+Viber.add_message(msg)
+Viber.add_message(Message("Это курс по Python ООП."))
+Viber.add_message(Message("Что вы о нем думаете?"))
+Viber.set_like(msg)
+
+Viber.total_messages()
+#Viber.remove_message(msg)   - ставим в комент, чтобы посмотреть проставился ли лайк для msg
+for i in Viber.list_msg:
+    print(i.__dict__)
+
+Viber.show_last_message(2)
