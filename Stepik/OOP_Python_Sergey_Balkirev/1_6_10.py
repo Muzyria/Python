@@ -8,4 +8,4 @@ class Point:
 
 
 pt = Point(5, 10)
-pt_clone = pt.clone()     
+pt_clone = pt.clone()

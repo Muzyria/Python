@@ -1,12 +1,29 @@
-class SingletonFive:
-    __instans = None
-    __count = 0
-    def __new__(cls, *args, **kwargs):
-        if cls.__count < 5:
-            super().__new__(cls)
-            cls.__count += 1
+from string import ascii_lowercase, digits
 
-        return cls.__instans
 
-    def __init__(self, name):
+# здесь объявляйте классы TextInput и PasswordInput
+class TextInput:
+
+    def __init__(self, name, size=10):
         self.name = name
+        self.size = size
+
+
+class PasswordInput:
+    def __init__(self, name, size=10):
+        self.name = name
+        self.size = size
+
+
+class FormLogin:
+    def __init__(self, lgn, psw):
+        self.login = lgn
+        self.password = psw
+
+    def render_template(self):
+        return "\n".join(['<form action="#">', self.login.get_html(), self.password.get_html(), '</form>'])
+
+
+# эти строчки не менять
+login = FormLogin(TextInput("Логин"), PasswordInput("Пароль"))
+html = login.render_template()
