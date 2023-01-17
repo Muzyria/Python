@@ -6,7 +6,7 @@ import time
 # test_49 = 'S10150000211018049'
 time_value = 8  # Величина паузы между командами
 
-for i in ['S10150000211018' + str(i) for i in range(200, 301)]:
+for i in ['S10150000211018' + str(i) for i in range(201, 209)]:
 
     # Return area
     x = '32.67211882231258'
@@ -42,7 +42,7 @@ count_iter = 3600
 start_time = datetime.now()  # включаем счетчик
 for j in range(count_iter):
     count_time = str(datetime.now() - start_time).split('.')[0]
-    car_id = choice(['S10150000211018' + str(i) for i in range(200, 301)])
+    car_id = choice(['S10150000211018' + str(i) for i in range(201, 209)])
     x = '32.6' + str(randrange(6739266744535, 7320189906043))
     y = '-116.9' + str(randrange(5185681343078, 6095486640930))
     print(car_id, x, y, ' -------------------------> ' + str(count_iter - j), ' прошло времени ' + count_time,

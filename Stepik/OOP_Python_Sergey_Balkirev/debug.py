@@ -1,6 +1,3 @@
-
-
-
 class Viber:
     list_msg = []
 
@@ -17,14 +14,15 @@ class Viber:
 
     @staticmethod
     def set_like(msg):
-        if not Viber.list_msg[Viber.list_msg.index(msg)].fl_like:
-            Viber.list_msg[Viber.list_msg.index(msg)].fl_like = True
+        if msg.fl_like:
+            msg.fl_like = False
         else:
-            Viber.list_msg[Viber.list_msg.index(msg)].fl_like = False
+            msg.fl_like = True
 
     @staticmethod
-    def show_last_message(x):
-        print(*Viber.list_msg[-x:])
+    def show_last_message(n: int):
+        for i in range(n):
+            print(Viber.list_msg[i])
 
     @staticmethod
     def total_messages():
@@ -38,15 +36,4 @@ class Message:
 
 
 
-msg = Message("Всем привет!")
-Viber.add_message(msg)
-Viber.add_message(Message("Это курс по Python ООП."))
-Viber.add_message(Message("Что вы о нем думаете?"))
-Viber.set_like(msg)
 
-Viber.total_messages()
-#Viber.remove_message(msg)   - ставим в комент, чтобы посмотреть проставился ли лайк для msg
-for i in Viber.list_msg:
-    print(i.__dict__)
-
-Viber.show_last_message(2)

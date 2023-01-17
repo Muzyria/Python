@@ -62,3 +62,41 @@ for i in Viber.msg_list:
     print(i.__dict__)
 
 Viber.show_last_message(2)
+
+"""
+class Message:
+    def __init__(self, text, fl_like=False):
+        self.text = text
+        self.fl_like = fl_like
+
+
+class Viber:
+    list_msg = []
+    
+    def __init__(self, msg):
+        self.msg = msg
+
+    @staticmethod
+    def add_message(msg):
+        Viber.list_msg.append(msg)
+
+    @staticmethod
+    def remove_message(msg):
+        Viber.list_msg.remove(msg)
+
+    @staticmethod
+    def set_like(msg):
+        if not Viber.list_msg[Viber.list_msg.index(msg)].fl_like:
+            Viber.list_msg[Viber.list_msg.index(msg)].fl_like = True
+        else:
+            Viber.list_msg[Viber.list_msg.index(msg)].fl_like = False
+
+    @staticmethod
+    def show_last_message(x):
+        print(*Viber.list_msg[-x:])
+
+    @staticmethod
+    def total_messages():
+        return len(Viber.list_msg)
+"""
+
