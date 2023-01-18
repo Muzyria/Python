@@ -1,15 +1,23 @@
-class Person:
-    def __init__(self, name, old):
-        self.__name = name
-        self.__old = old
+class Car:
+    def __init__(self):
+        self.__model = None
 
-    def get_old(self):
-        return self.__old
+    @property
+    def model(self):
+        return self.__model
 
-    def set_old(self, old):
-        self.__old = old
+    @model.setter
+    def model(self, x):
+        if self.check_model(x):
+            self.__model = x
+
+    @classmethod
+    def check_model(cls, x):
+        if type(x) == str and len(x) in range(2, 101):
+            return True
+        return False
 
 
-p = Person("Mishal", 20)
-p.set_old(35)
-print(p.get_old())
+car = Car()
+car.model = "Toyota"
+print(car.model)
