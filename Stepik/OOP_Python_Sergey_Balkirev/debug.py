@@ -1,45 +1,31 @@
-class WindowDlg:
-    def __init__(self, title, width, height):
-        self.__title = title
-        self.__width = None
-        self.__height = None
-        self.width = width
-        self.height = height
-
-    def show(self):
-        print(f'{self.__title}: {self.__width}, {self.__height}')
-
+class Integer:
     @classmethod
-    def check_val(cls, value):
-        return type(value) == int and value in range(10001)
+    def verify_coord(cls, coord):
+        if type(coord) != int:
+            raise TypeError("NO integer")
 
-    @property
-    def width(self):
-        return self.__width
+    def __set_name__(self, owner, name):
+        self.name = "_" + name
 
-    @width.setter
-    def width(self, value):
-        if self.check_val(value):
-            if self.__width:
-                self.show()
-            self.__width = value
+    def __get__(self, instance, owner):
+        return instance.__dict__[self.name]
 
-    @property
-    def height(self):
-        return self.__height
-
-    @height.setter
-    def height(self, value):
-        if self.check_val(value):
-            if self.__height:
-                self.show()
-            self.__height = value
+    def __set__(self, instance, value):
+        self.verify_coord(value)
+        print(f"__set__: {self.name} = {value}")
+        instance.__dict__[self.name] = value
 
 
-w = WindowDlg("qwerty", -10, 20)
-w.show()
-w.width = 50
-w.height = 50
+class Point3D:
+    x = Integer()
+    y = Integer()
+    z = Integer()
 
-q = WindowDlg("qwerty", -10, 20)
-q.show()
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+
+
+pt = Point3D(1, 2, 3)
+print(pt.__dict__)
