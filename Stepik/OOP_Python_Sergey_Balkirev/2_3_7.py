@@ -27,3 +27,13 @@ class Cell:
 class TableSheet:
     def __init__(self, n: int, m: int):
         self.cells = [[Cell() for _ in range(m)] for _ in range(n)]
+
+
+gen_num = (float(i) for i in range(1, 16))
+table = TableSheet(5, 3)
+for row in table.cells:
+    for cell in row:
+        cell.value = next(gen_num)
+
+
+        print(cell.value)
