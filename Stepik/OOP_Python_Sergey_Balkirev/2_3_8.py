@@ -9,8 +9,8 @@ class ValidateString:
 
 class StringValue:
 
-    def __init__(self, validate):
-        self.validate = validate
+    def __init__(self, validator):
+        self.validator = validator
 
     def __set_name__(self, owner, name):
         self.name = f'_{name}'
@@ -19,14 +19,14 @@ class StringValue:
         return getattr(instance, self.name)
 
     def __set__(self, instance, value):
-        if self.validate.validate(value):
+        if self.validator.validate(value):
             setattr(instance, self.name, value)
 
 
 class RegisterForm:
-    login = StringValue(validate=ValidateString())
-    password = StringValue(validate=ValidateString())
-    email = StringValue(validate=ValidateString())
+    login = StringValue(validator=ValidateString())
+    password = StringValue(validator=ValidateString())
+    email = StringValue(validator=ValidateString())
 
     def __init__(self, login, password, email):
         self.login = login
