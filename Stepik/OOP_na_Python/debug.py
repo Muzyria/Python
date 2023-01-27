@@ -1,21 +1,33 @@
-class Date:
-    def __init__(self, d, m, y):
-        self.d = d
-        self.m = m
-        self.y = y
+class User:
+    def __init__(self, name, role):
+        self.name = name
+        self.role = role
 
-    @property
-    def date(self):
-        return f'{self.d:02}/{self.m:02}/{self.y:04}'
 
-    @property
-    def usa_date(self):
-        return f'{self.m:02}-{self.d:02}-{self.y:04}'
+class Access:
+    __access_list = ['admin', 'developer']
 
-d1 = Date(5, 10, 2001)
-d2 = Date(15, 3, 999)
+    @staticmethod
+    def __check_access(role):
+        if role in Access.__access_list:
+            return True
+        return False
 
-print(d1.date) # 05/10/2001
-print(d1.usa_date) # 10-05-2001
-print(d2.date) # 15/03/0999
-print(d2.usa_date) # 03-15-0999
+    @staticmethod
+    def get_access(user):
+        if isinstance(user, User):
+            if Access.__check_access(user.role):
+                print(f'User {user.name}: success')
+            else:
+                print(f'AccessDenied')
+        else:
+            print(f'AccessTypeError')
+
+
+user1 = User('batya99', 'admin')
+Access.get_access(user1) # печатает "User batya99: success"
+
+zaya = User('milaya_zaya999', 'user')
+Access.get_access(zaya) # печатает AccessDenied
+
+Access.get_access(5) # печатает AccessTypeError
