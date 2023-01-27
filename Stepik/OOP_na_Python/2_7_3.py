@@ -9,3 +9,14 @@ class Notebook:
 
 note = Notebook(['Buy Potato', 'Buy Carrot', 'Wash car'])
 note.notes_list
+
+
+"""
+class Notebook:
+    def __init__(self, notes):
+        self._notes = notes
+
+    @property
+    def notes_list(self):
+        [print(f'{k}.{v}', sep='\n') for k, v in enumerate(self._notes, 1)]
+"""

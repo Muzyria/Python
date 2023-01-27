@@ -1,17 +1,10 @@
-import re
-class UserMail:
-    def __init__(self, login, email):
-        self.__email = None
-        self.login = login
-        self.set_email(email)
+class Notebook:
+    def __init__(self, notes):
+        self._notes = notes
 
-    def get_email(self):
-        return self.__email
+    @property
+    def notes_list(self):
+        [print(f'{k}.{v}', sep='\n') for k, v in enumerate(self._notes, 1)]
 
-    def set_email(self, email):
-        if isinstance(email, str) and re.findall(r'^\w+@\w+\.\w+$', email):
-            self.__email = email
-        else:
-            print(f"ErrorMail:{email}")
-
-    email = property(fget=get_email, fset=set_email)
+note = Notebook(['Buy Potato', 'Buy Carrot', 'Wash car'])
+note.notes_list
