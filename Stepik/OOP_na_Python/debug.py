@@ -1,38 +1,21 @@
-class Money:
-    def __init__(self, dollars, cents):
-        self.total_cents = dollars * 100 + cents
+class Date:
+    def __init__(self, d, m, y):
+        self.d = d
+        self.m = m
+        self.y = y
 
     @property
-    def dollars(self):
-        return self.total_cents // 100
-
-    @dollars.setter
-    def dollars(self, val):
-        if type(val) == int and val >= 0:
-            self.total_cents = self.cents + val * 100
-        else:
-            print("Error dollars")
+    def date(self):
+        return f'{self.d:02}/{self.m:02}/{self.y:04}'
 
     @property
-    def cents(self):
-        return self.total_cents % 100
+    def usa_date(self):
+        return f'{self.m:02}-{self.d:02}-{self.y:04}'
 
-    @cents.setter
-    def cents(self, val):
-        if type(val) == int and 0 <= val < 100:
-            self.total_cents = self.total_cents - self.cents + val
-        else:
-            print("Error cents")
+d1 = Date(5, 10, 2001)
+d2 = Date(15, 3, 999)
 
-    def __str__(self):
-        return f"Ваше состояние составляет {self.dollars} долларов {self.cents} центов"
-
-
-Bill = Money(101, 99)
-print(Bill)  # Ваше состояние составляет 101 долларов 99 центов
-print(Bill.dollars, Bill.cents)  # 101 99
-print(Bill.total_cents) # 10199
-Bill.dollars = 666
-print(Bill)  # Ваше состояние составляет 666 долларов 99 центов
-Bill.cents = 12
-print(Bill)  # Ваше состояние составляет 666 долларов 12 центов
+print(d1.date) # 05/10/2001
+print(d1.usa_date) # 10-05-2001
+print(d2.date) # 15/03/0999
+print(d2.usa_date) # 03-15-0999
