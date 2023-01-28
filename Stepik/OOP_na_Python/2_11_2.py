@@ -20,6 +20,23 @@ print(r1.login)  # qwerty@rambler.ru
 
 # теперь пытаемся запись плохой логин
 
+"""
+class Registration:
+    def __init__(self, login):
+        self.login = login
 
+    @property
+    def login(self):
+        return self.__login
+
+    @login.setter
+    def login(self, value):
+        if value.count("@") != 1:
+            raise ValueError("Логин должен содержать один символ '@'")
+        elif "." not in value[value.index("@"):]:
+            raise ValueError("Логин должен содержать символ '.'")
+        else:
+            self.__login = value
+"""
   
 

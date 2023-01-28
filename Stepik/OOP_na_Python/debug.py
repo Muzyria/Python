@@ -1,33 +1,26 @@
-class User:
-    def __init__(self, name, role):
-        self.name = name
-        self.role = role
+class Registration:
+    def __init__(self, login):
+        self.login = login
 
+    @property
+    def login(self):
+        return self.__login
 
-class Access:
-    __access_list = ['admin', 'developer']
-
-    @staticmethod
-    def __check_access(role):
-        if role in Access.__access_list:
-            return True
-        return False
-
-    @staticmethod
-    def get_access(user):
-        if isinstance(user, User):
-            if Access.__check_access(user.role):
-                print(f'User {user.name}: success')
-            else:
-                print(f'AccessDenied')
+    @login.setter
+    def login(self, value):
+        if value.count("@") != 1:
+            raise ValueError("Логин должен содержать один символ '@'")
+        elif "." not in value[value.index("@"):]:
+            raise ValueError("Логин должен содержать символ '.'")
         else:
-            print(f'AccessTypeError')
+            self.__login = value
 
 
-user1 = User('batya99', 'admin')
-Access.get_access(user1) # печатает "User batya99: success"
+r1 = Registration('qwerty@rambler.ru') # здесь хороший логин
+print(r1.login)  # qwerty@rambler.ru
 
-zaya = User('milaya_zaya999', 'user')
-Access.get_access(zaya) # печатает AccessDenied
+# теперь пытаемся запись плохой логин
+r1.login = '123456'  # ValueError("Логин должен содержать один символ '@'")
 
-Access.get_access(5) # печатает AccessTypeError
+r2 = Registration('qwerty.ru')  # ValueError("Логин должен содержать один символ '@'")
+r3 = Registration('qwerty@ru')  # ValueError("Логин должен содержать символ '.'")
