@@ -1,28 +1,8 @@
-class Vector:
-    def __init__(self, *args):
-        self.values = sorted([i for i in args if type(i) == int])
+class Elevator:
+    def __init__(self, amount_flor=5, current_flor=3):
+        self.amount_flor = amount_flor
+        self.current_flor = current_flor
 
-    def __str__(self):
-        return f"Вектор{tuple(self.values)}" if self.values else "Пустой вектор"
-
-    def __add__(self, other):
-        if isinstance(other, int):
-            return Vector(*[i + other for i in self.values])
-        elif isinstance(other, Vector):
-            if len(self.values) == len(other.values):
-                return Vector(*[i + j for i, j in zip(self.values, other.values)])
-            else:
-                print("Сложение векторов разной длины недопустимо")
-        else:
-            print(f"Вектор нельзя сложить с {other}")
-
-    def __mul__(self, other):
-        if isinstance(other, int):
-            return Vector(*[i * other for i in self.values])
-        elif isinstance(other, Vector):
-            if len(self.values) == len(other.values):
-                return Vector(*[i * j for i, j in zip(self.values, other.values)])
-            else:
-                print("Умножение векторов разной длины недопустимо")
-        else:
-            print(f"Вектор нельзя умножать с {other}")
+    def up(self):
+        if self.current_flor < self.amount_flor:
+            print(f'')
