@@ -1,65 +1,43 @@
-from string import ascii_letters
+class Vector:
+    def __init__(self, *args):
+        self.values = [i for i in args if type(i) == int]
 
-class Registration:
-    def __init__(self, login, password):
-        self.login = login
-        self.password = password
+    def __str__(self):
+        return f"Вектор{tuple(sorted(self.values))}" if self.values else "Пустой вектор"
 
-    @property
-    def login(self):
-        return self.__login
-
-    @login.setter
-    def login(self, value):
-        if value.count("@") != 1:
-            raise ValueError("Логин должен содержать один символ '@'")
-        elif "." not in value[value.index("@"):]:
-            raise ValueError("Логин должен содержать символ '.'")
+    def __add__(self, other):
+        if isinstance(other, int):
+            return Vector(*[i + other for i in self.values])
+        elif isinstance(other, Vector):
+            if len(self.values) == len(other.values):
+                # return Vector(*[i + j for i, j in zip(self.values, other.values)])
+                return Vector(*[self.values[i] + other.values[i] for i in range(len(other.values))])
+            else:
+                print("Сложение векторов разной длины недопустимо")
         else:
-            self.__login = value
+            print(f"Вектор нельзя сложить с {other}")
 
-    @property
-    def password(self):
-        return self.__password
-
-    @password.setter
-    def password(self, value):
-        if not type(value) == str:
-            raise TypeError("Пароль должен быть строкой")
-        elif not 4 < len(value) < 12:
-            raise ValueError('Пароль должен быть длиннее 4 и меньше 12 символов')
-        elif not self.is_include_digit(value):
-            raise ValueError('Пароль должен содержать хотя бы одну цифру')
-        elif not self.is_include_all_register(value):
-            raise ValueError('Пароль должен содержать хотя бы один символ верхнего и нижнего регистра')
-        elif not self.is_include_only_latin(value):
-            raise ValueError('Пароль должен содержать только латинский алфавит')
-        elif self.check_password_dictionary(value):
-            raise ValueError('Ваш пароль содержится в списке самых легких')
+    def __mul__(self, other):
+        if isinstance(other, int):
+            return Vector(*[i * other for i in self.values])
+        elif isinstance(other, Vector):
+            if len(self.values) == len(other.values):
+                return Vector(*[i * j for i, j in zip(self.values, other.values)])
+            else:
+                print("Умножение векторов разной длины недопустимо")
         else:
-            self.__password = value
-
-    @staticmethod
-    def is_include_digit(value):
-        return any(i.isdigit() for i in value)
-
-    @staticmethod
-    def is_include_all_register(value):
-        return any(i.islower() for i in value) and any(i.isupper() for i in value)
-
-    @staticmethod
-    def is_include_only_latin(value):
-        return all(i in ascii_letters for i in value if i.isalpha())
-
-    @staticmethod
-    def check_password_dictionary(value):
-        with open('easy_passwords.txt', 'r', encoding='utf-8') as f:
-            return value in f.read().split()
+            print(f"Вектор нельзя умножать с {other}")
 
 
-r1 = Registration('qwerty@rambler.ru', 'QwrRt124') # здесь хороший логин
-print(r1.login, r1.password)  # qwerty@rambler.ru QwrRt124
+v1 = Vector(1,2,3)
+print(v1) # печатает "Вектор(1, 2, 3)"
+v2 = Vector(3,4,5)
+print(v2) # печатает "Вектор(3, 4, 5)"
+v3 = v1 + v2
+print(v3) # печатает "Вектор(4, 6, 8)"
+v4 = v3 + 5
+print(v4) # печатает "Вектор(9, 11, 13)"
+v5 = v1 * 2
+print(v5) # печатает "Вектор(2, 4, 6)"
+v5 + 'hi' # печатает "Вектор нельзя сложить с hi"
 
-r1.password = '123456'  # ValueError('Пароль должен содержать хотя бы один символ верхнего и нижнего регистра')
-# r1.password = 'LoW'  # raise ValueError('Пароль должен быть длиннее 4 и меньше 12 символов')
-# r1.password = 43  # raise TypeError("Пароль должен быть строкой")
