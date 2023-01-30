@@ -1,6 +1,6 @@
 class Person:
     def __init__(self, name, surname, gender="male"):
-        self.name  = name
+        self.name = name
         self.surname = surname
         if gender in ("male", "female"):
             self.gender = gender

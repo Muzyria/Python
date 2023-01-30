@@ -98,3 +98,70 @@ cart_billy.order()
 cart_billy.user.deposit(150)
 cart_billy.order() # Заказ оплачен
 print(cart_billy.user.balance) # 20
+
+"""
+class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+
+class User:
+    def __init__(self, login, balance=0):
+        self.login = login
+        self.balance = balance
+
+    @property
+    def balance(self):
+        return self.__balance
+
+    @balance.setter
+    def balance(self, value):
+        self.__balance = value
+
+    def __str__(self):
+        return f'Пользователь {self.login}, баланс - {self.balance}'
+
+    def deposit(self, value):
+        self.__balance += value
+
+    def payment(self, value):
+        if self.__balance < value:
+            print('Не хватает средств на балансе. Пополните счет')
+            return False
+        self.__balance -= value
+        return True
+
+class Cart:
+    def __init__(self, user: User):
+        self.user = user
+        self.goods = {}
+        self.__total = 0
+
+    def add(self, product: Product, count=1):
+        self.goods[product] = self.goods.get(product, 0) + count
+        self.__total += product.price * count
+
+    def remove(self, product: Product, count=1):
+        if self.goods[product] - count <= 0:
+            self.__total -= self.goods[product] * product.price
+            del self.goods[product]
+        else:
+            self.goods[product] -= count
+            self.__total -= self.goods[product] * product.price
+
+    @property
+    def total(self):
+        return self.__total
+
+    def order(self):
+        if User.payment(self.user, self.__total):
+            print('Заказ оплачен')
+        else:
+            print('Проблема с оплатой')
+
+    def print_check(self):
+        print('---Your check---')
+        [print(f'{k.name} {k.price} {v} {k.price * v}') for k, v in sorted(self.goods.items(), key=lambda x: x[0].name)]
+        print(f'---Total: {self.total}---')
+"""
