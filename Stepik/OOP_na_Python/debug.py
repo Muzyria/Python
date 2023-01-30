@@ -1,76 +1,41 @@
-class File:
-    def __init__(self, name):
+class Product:
+    def __init__(self, name, price):
         self.name = name
-        self.in_trash = False
-        self.is_deleted = False
-
-    def restore_from_trash(self):
-        print(f"Файл {self.name} восстановлен из корзины")
-        self.in_trash = False
-
-    def remove(self):
-        print(f"Файл {self.name} был удален")
-        self.is_deleted = True
-
-    def read(self):
-        if self.is_deleted:
-            print(f"ErrorReadFileDeleted({self.name})")
-        elif self.in_trash:
-            print(f"ErrorReadFileTrashed({self.name})")
-        else:
-            print(f"Прочитали все содержимое файла {self.name}")
-
-    def write(self, content):
-        if self.is_deleted:
-            print(f"ErrorWriteFileDeleted({self.name})")
-        elif self.in_trash:
-            print(f"ErrorWriteFileTrashed({self.name})")
-        else:
-            print(f"Записали значение {content} в файл {self.name}")
+        self.price = price
 
 
-class Trash:
-    content = []
+class User:
+    def __init__(self, login, balance=0):
+        self.login = login
+        self.balance = balance
 
-    @staticmethod
-    def add(file):
-        if not isinstance(file, File):
-            print('В корзину добавлять можно только файл')
-        else:
-            Trash.content.append(file)
-            file.in_trash = True
+    @property
+    def balance(self):
+        return self.__balance
 
-    @staticmethod
-    def clear():
-        print('Очищаем корзину')
-        [File.remove(i) for i in Trash.content]
-        Trash.content = []
-        print('Корзина пуста')
+    @balance.setter
+    def balance(self, value):
+        self.__balance = value
 
-    @staticmethod
-    def restore():
-        print('Восстанавливаем файлы из корзины')
-        [File.restore_from_trash(i) for i in Trash.content]
-        Trash.content = []
-        print('Корзина пуста')
+    def __str__(self):
+        return f'Пользователь {self.login}, баланс - {self.balance}'
 
-f1 = File('puppies.jpg')
-f2 = File('cat.jpg')
-passwords = File('pass.txt')
+    def deposit(self, value):
+        self.__balance += value
 
-f1.read() # Прочитали все содержимое файла puppies.jpg
-Trash.add(f1)
-f1.read() # ErrorReadFileTrashed(puppies.jpg)
+    def payment(self, value):
+        if self.__balance < value:
+            print('Не хватает средств на балансе. Пополните счет')
+            return False
+        self.__balance -= value
+        return True
 
-Trash.add(f2)
-Trash.add(passwords)
-Trash.clear() # после этой команды вывод должен быть таким
-'''
-Очищаем корзину
-Файл puppies.jpg был удален
-Файл cat.jpg был удален
-Файл pass.txt был удален
-Корзина пуста
-'''
 
-f1.read() # ErrorReadFileTrashed(puppies.jpg)
+billy = User('billy@rambler.ru')
+print(billy) # Пользователь billy@rambler.ru, баланс - 0
+billy.deposit(100)
+billy.deposit(300)
+print(billy) # Пользователь billy@rambler.ru, баланс - 400
+billy.payment(500) # Не хватает средств на балансе. Пополните счет
+billy.payment(150)
+print(billy) # Пользователь billy@rambler.ru, баланс - 250
