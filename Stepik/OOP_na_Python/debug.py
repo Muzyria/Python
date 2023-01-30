@@ -37,14 +37,21 @@ class Cart:
         self.__total = 0
 
     def add(self, product: Product, count=1):
-        self.goods[product.name] = [product.price, count]
-        self.__total += product.price * count
+        if product.name not in self.goods:
+            self.goods[product.name] = [product.price, count]
+            self.__total += product.price * count
+        else:
+            self.goods[product.name][1] += count
+            self.__total += product.price * count
+
 
     def remove(self, product: Product, count=1):
-        if self.goods[product.name][1] < count:
-            count = self.goods[product.name][1]
-        self.__total -= self.goods[product.name][0] * count
-        self.goods[product.name][1] -= count
+        if self.goods[product.name][1] - count <= 0:
+            self.__total -= self.goods[product.name][1] * self.goods[product.name][0]
+            del self.goods[product.name]
+        else:
+            self.goods[product.name][1] -= count
+            self.__total -= self.goods[product.name][1] * self.goods[product.name][0]
 
     @property
     def total(self):
@@ -56,11 +63,8 @@ class Cart:
         else:
             print('Проблема с оплатой')
 
-
     def print_check(self):
         print('---Your check---')
-        # for k, v in self.goods.items():
-        #     print(f"{k} {v[0]} {v[1]}")
         [print(f"{k} {v[0]} {v[1]} {v[0] * v[1]}") for k, v in sorted(self.goods.items())]
         print(f'---Total: {self.total}---')
 
@@ -82,6 +86,9 @@ cart_billy.print_check()
 carrot 30 1 30
 lemon 20 2 40
 ---Total: 70---'''
+print()
+print(1, '------------------------------------')
+print()
 cart_billy.add(lemon, 3)
 cart_billy.print_check()
 ''' Печатает текст ниже
@@ -89,12 +96,18 @@ cart_billy.print_check()
 carrot 30 1 30
 lemon 20 5 100
 ---Total: 130---'''
+print()
+print(2, '------------------------------------')
+print()
 cart_billy.remove(lemon, 6)
 cart_billy.print_check()
 ''' Печатает текст ниже
 ---Your check---
 carrot 30 1 30
 ---Total: 30---'''
+print()
+print(3, '------------------------------------')
+print()
 print(cart_billy.total) # 30
 cart_billy.add(lemon, 5)
 cart_billy.print_check()
@@ -103,6 +116,9 @@ cart_billy.print_check()
 carrot 30 1 30
 lemon 20 5 100
 ---Total: 130---'''
+print()
+print(4, '------------------------------------')
+print()
 cart_billy.order()
 ''' Печатает текст ниже
 Не хватает средств на балансе. Пополните счет
