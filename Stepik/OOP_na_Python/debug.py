@@ -10,8 +10,7 @@ class Vector:
             return Vector(*[i + other for i in self.values])
         elif isinstance(other, Vector):
             if len(self.values) == len(other.values):
-                # return Vector(*[i + j for i, j in zip(self.values, other.values)])
-                return Vector(*[self.values[i] + other.values[i] for i in range(len(other.values))])
+                return Vector(*[i + j for i, j in zip(self.values, other.values)])
             else:
                 print("Сложение векторов разной длины недопустимо")
         else:
