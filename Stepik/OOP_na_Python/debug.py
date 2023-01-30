@@ -37,21 +37,16 @@ class Cart:
         self.__total = 0
 
     def add(self, product: Product, count=1):
-        if product.name not in self.goods:
-            self.goods[product.name] = [product.price, count]
-            self.__total += product.price * count
-        else:
-            self.goods[product.name][1] += count
-            self.__total += product.price * count
-
+        self.goods[product] = self.goods.get(product, 0) + count
+        self.__total += product.price * count
 
     def remove(self, product: Product, count=1):
-        if self.goods[product.name][1] - count <= 0:
-            self.__total -= self.goods[product.name][1] * self.goods[product.name][0]
-            del self.goods[product.name]
+        if self.goods[product] - count <= 0:
+            self.__total -= self.goods[product] * product.price
+            del self.goods[product]
         else:
-            self.goods[product.name][1] -= count
-            self.__total -= self.goods[product.name][1] * self.goods[product.name][0]
+            self.goods[product] -= count
+            self.__total -= self.goods[product] * product.price
 
     @property
     def total(self):
@@ -65,7 +60,7 @@ class Cart:
 
     def print_check(self):
         print('---Your check---')
-        [print(f"{k} {v[0]} {v[1]} {v[0] * v[1]}") for k, v in sorted(self.goods.items())]
+        [print(f'{k.name} {k.price} {v} {k.price * v}') for k, v in sorted(self.goods.items(), key=lambda x: x[0].name)]
         print(f'---Total: {self.total}---')
 
 
@@ -88,6 +83,7 @@ lemon 20 2 40
 ---Total: 70---'''
 print()
 print(1, '------------------------------------')
+# print(cart_billy.goods['lemon'], "+++++++++++++++++++++++")
 print()
 cart_billy.add(lemon, 3)
 cart_billy.print_check()
