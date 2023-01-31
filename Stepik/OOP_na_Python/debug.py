@@ -1,8 +1,11 @@
-class Elevator:
-    def __init__(self, amount_flor=5, current_flor=3):
-        self.amount_flor = amount_flor
-        self.current_flor = current_flor
+class Vector:
+    def __init__(self, *args):
+        self.values = [i for i in args if type(i) == int]
 
-    def up(self):
-        if self.current_flor < self.amount_flor:
-            print(f'')
+    def __str__(self):
+        return f"Вектор{tuple(sorted(self.values))}" if self.values else "Пустой вектор"
+
+v1 = Vector(1,2,3)
+print(v1) # печатает "Вектор(1, 2, 3)"
+v2 = Vector()
+print(v2) # печатает "Пустой вектор"
