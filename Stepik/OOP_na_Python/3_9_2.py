@@ -25,3 +25,18 @@ del iron_building[2]
 print(iron_building[2])
 
 print(iron_building.values)
+
+"""
+class Building:
+    def __init__(self, flor):
+        self.flor = [None] * flor
+
+    def __setitem__(self, key, value=None):
+        self.flor[key] = value
+
+    def __getitem__(self, item):
+        return self.flor[item]
+
+    def __delitem__(self, key):
+        self.__setitem__(key)
+"""

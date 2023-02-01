@@ -1,9 +1,25 @@
-class Addition:
-    def __call__(self, *args, **kwargs):
-        print(f'Сумма переданных значений = {sum(i for i in args if type(i) in (int, float))}')
+class Building:
+    def __init__(self, flor):
+        self.flor = [None] * flor
 
-add = Addition()
+    def __setitem__(self, key, value=None):
+        self.flor[key] = value
 
-add(10, 20) # печатает "Сумма переданных значений = 30"
-add(1, 2, 3.4) # печатает "Сумма переданных значений = 6.4"
-add(1, 2, 'hello', [1, 2], 3) # печатает "Сумма переданных значений = 6"
+    def __getitem__(self, item):
+        return self.flor[item]
+
+    def __delitem__(self, key):
+        self.__setitem__(key)
+
+
+iron_building = Building(22)  # Создаем здание с 22 этажами
+iron_building[0] = 'Reception'
+iron_building[1] = 'Oscorp'
+iron_building[2] = 'Stark'
+iron_building[3] = 'SAAAAA'
+print(*iron_building)
+
+print(iron_building[2])
+del iron_building[2]
+print(iron_building[2])
+print(*iron_building)
