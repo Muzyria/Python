@@ -1,25 +1,5 @@
-class Building:
-    def __init__(self, flor):
-        self.flor = [None] * flor
+s = ''.join([bin(int(i))[2:].zfill(8) for i in input().split('.')])
 
-    def __setitem__(self, key, value=None):
-        self.flor[key] = value
+print(all(i in range(256) for i in (n1, n2, n3, n4)) and f'{n1}.{n2}.{n3}.{n4}' not in ('0.0.0.0', '255.255.255.255'))
 
-    def __getitem__(self, item):
-        return self.flor[item]
-
-    def __delitem__(self, key):
-        self.__setitem__(key)
-
-
-iron_building = Building(22)  # Создаем здание с 22 этажами
-iron_building[0] = 'Reception'
-iron_building[1] = 'Oscorp'
-iron_building[2] = 'Stark'
-iron_building[3] = 'SAAAAA'
-print(*iron_building)
-
-print(iron_building[2])
-del iron_building[2]
-print(iron_building[2])
-print(*iron_building)
+print("1" not in s[s.index("0"):])
