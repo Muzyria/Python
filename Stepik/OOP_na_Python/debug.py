@@ -27,13 +27,22 @@ class Car(Transport):
             print(f'Ошибка заправки автомобиля')
 
 
-
 class Boat(Transport):
-    pass
+    def __init__(self, brand, max_speed, owners_name):
+        super().__init__(brand, max_speed, kind="Boat")
+        self.owners_name = owners_name
+
+    def __str__(self):
+        return f"Этой лодкой марки {self.brand} владеет {self.owners_name}"
 
 
 class Plane(Transport):
-    pass
+    def __init__(self, brand, max_speed, capacity):
+        super().__init__(brand, max_speed, kind="Plane")
+        self.capacity = capacity
+
+    def __str__(self):
+        return f"Самолет марки {self.brand} вмещает в себя {self.capacity} людей"
 
 
 transport = Transport('Telega', 10)
