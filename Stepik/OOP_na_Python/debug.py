@@ -12,7 +12,7 @@ class Car(Transport):
     def __init__(self, brand, max_speed, mileage, gasoline_residue):
         super().__init__(brand, max_speed, kind="Car")
         self.mileage = mileage
-        self.gasoline = gasoline_residue
+        self.__gasoline_residue = gasoline_residue
 
     @property
     def gasoline(self):
@@ -20,7 +20,11 @@ class Car(Transport):
 
     @gasoline.setter
     def gasoline(self, value):
-        self.__gasoline_residue = 5
+        if isinstance(value, int):
+            self.__gasoline_residue += value
+            print(f'Объем топлива увеличен на {value} л и составляет {self.__gasoline_residue} л')
+        else:
+            print(f'Ошибка заправки автомобиля')
 
 
 
