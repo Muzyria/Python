@@ -1,2 +1,1 @@
-s = [None] * 10
-print(s)
+print(255 & 128)
