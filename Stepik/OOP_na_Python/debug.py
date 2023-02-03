@@ -1,34 +1,24 @@
-class Initialization:
-    def __init__(self, capacity: int, food: list):
-        if isinstance(capacity, int):
-            self.capacity = capacity
-            self.food = food
-        else:
-            print("Количество людей должно быть целым числом")
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
+    def display_person_info(self):
+        print(f'Person: {self.name}, {self.age}')
 
-class Vegetarian(Initialization):
-    def __init__(self, capacity, food):
-        super().__init__(capacity, food)
+class Company:
+    def __init__(self, company_name, location):
+        self.company_name = company_name
+        self.location = location
 
-    def __str__(self):
-        return f"{self.capacity} людей предпочитают не есть мясо! Они предпочитают {self.food}"
+    def display_company_info(self):
+        print(f'Company: {self.company_name}, {self.location}')
 
+class Employee(Person, Company):
+    def __init__(self, name, age, company_name, location):
+        super().__init__(name, age)
+        Company.__init__(self, company_name, location)
 
-class MeatEater(Initialization):
-    def __init__(self, capacity, food):
-        super().__init__(capacity, food)
-
-    def __str__(self):
-        return f"{self.capacity} мясоедов в Москве! Помимо мяса они едят еще и {self.food}"
-
-
-class SweetTooth(Initialization):
-    def __init__(self, capacity, food):
-        super().__init__(capacity, food)
-
-    def __str__(self):
-        return f"Сладкоежек в Москве {self.capacity}. Их самая любимая еда: {self.food}"
-
-    def __eq__(self, other):
-        pass
+emp = Employee('Jessica', 28, 'Google', 'Atlanta')
+emp.display_person_info()
+emp.display_company_info()
