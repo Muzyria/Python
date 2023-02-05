@@ -1,9 +1,6 @@
 from enum import Enum
 
 
-from enum import Enum
-
-
 class Direction(Enum):
     NORTH = "N"
     SOUTH = "S"
@@ -11,5 +8,5 @@ class Direction(Enum):
     WEST = "W"
 
 
-print(Direction("W"))
+print(Direction.WEST.name)
 print(Direction.SOUTH.value)
