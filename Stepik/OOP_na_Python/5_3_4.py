@@ -4,4 +4,4 @@ try:
 except ValueError:
     print("Введите целое число")
 except ZeroDivisionError:
-    print("Делитель не должен быть равен нулю")      
+    print("Делитель не должен быть равен нулю")
