@@ -3,4 +3,4 @@ try:
     b = int(input())
     print(f"Результат деления a на b: {a/b}")
 except (ValueError, ZeroDivisionError):
-    print("Введите корректные значения")    
+    print("Введите корректные значения")
