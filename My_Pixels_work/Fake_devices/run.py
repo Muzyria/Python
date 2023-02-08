@@ -11,7 +11,7 @@ geofens_for_4_car = {'S10150000211018201': ("32.67029213323701", "-116.958237513
                      'S10150000211018203': ("32.66996700097419", "-116.95840917517349"),
                      'S10150000211018204': ("32.66999861110722", "-116.95814631869003")}
 
-for i in ['S10150000211018' + str(i) for i in range(251, 296)]:
+for i in ['S10150000211018' + str(i) for i in range(251, 252)]:
 
     # Return area
     x = '32.67211882231258'
@@ -49,7 +49,7 @@ count_iter = 3600
 start_time = datetime.now()  # включаем счетчик
 for j in range(count_iter):
     count_time = str(datetime.now() - start_time).split('.')[0]
-    car_id = choice(['S10150000211018' + str(i) for i in range(251, 296)])
+    car_id = choice(['S10150000211018' + str(i) for i in range(251, 252)])
     x = '32.6' + str(randrange(6739266744535, 7320189906043))
     y = '-116.9' + str(randrange(5185681343078, 6095486640930))
     print(car_id, x, y, ' -------------------------> ' + str(count_iter - j), ' прошло времени ' + count_time,
