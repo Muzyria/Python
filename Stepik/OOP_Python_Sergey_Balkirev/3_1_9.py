@@ -40,6 +40,7 @@ class Circle:
     def __getattr__(self, item):
         return False
 
-
-circle = Circle(5, 10, 100)
-circle.x = 10
+circle = Circle(10.5, 7, 22)
+circle.radius = -10 # прежнее значение не должно меняться, т.к. отрицательный радиус недопустим
+x, y = circle.x, circle.y
+res = circle.name # False, т.к. атрибут name не существует
