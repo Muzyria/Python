@@ -22,9 +22,7 @@ class Product:
         self.price = price
 
     def __setattr__(self, key, value):
-        if key in self.attrs and not set(str(type(value))).issubset(set(str(self.attrs[key]))):
-            raise TypeError("Неверный тип присваиваемых данных.")
-        elif  type(value) in (int, float) and value < 0:
+        if key in self.attrs and not set(str(type(value))).issubset(set(str(self.attrs[key]))) or type(value) in (int, float) and value < 0:
             raise TypeError("Неверный тип присваиваемых данных.")
         else:
             object.__setattr__(self, key, value)
