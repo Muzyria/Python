@@ -41,6 +41,3 @@ for j in range(count_iter):
           datetime.now().strftime('%H:%M:%S'))
     os.system(f'adb shell am broadcast -a com.yama.fake.ADBCom --es id "{car_id}" --es lat "{x}" --es lng "{y}"')
     time.sleep(time_value)
-
-# lst_car = ['S101500002110180' + str(i) for i in range(70, 91)]
-# os.system('adb shell am broadcast -a com.yama.fake.ADBCom --es id "S10150000211018049" --es lat "50.08593724592065" --es lng "36.21560508169411"')
