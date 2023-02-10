@@ -10,3 +10,6 @@ class HandlerGET:
 
     def get(self, func, request, *args, **kwargs):
         return f'GET: {func(request)}'
+
+
+
