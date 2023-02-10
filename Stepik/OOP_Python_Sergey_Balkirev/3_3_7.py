@@ -1,7 +1,7 @@
 class Complex:
     def __init__(self, real, img):
-        self.__real = None
-        self.__img = None
+        self.__real = 0
+        self.__img = 0
         self.real = real
         self.img = img
 
@@ -22,9 +22,10 @@ class Complex:
         self.__img = value
 
     def __setattr__(self, key, value):
+        print("set", value)
         if type(value) not in (int, float):
             raise ValueError("Неверный тип данных.")
-
+        super().__setattr__(key, value)
 
     def __abs__(self):
         return (self.real ** 2 + self.img ** 2) ** 0.5
