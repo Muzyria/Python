@@ -67,7 +67,7 @@ class LinkedList:
         if p:
             p.next = n
         if n:
-            p.prev = p
+            n.prev = p
 
         if self.head == obj:
             self.head = n
