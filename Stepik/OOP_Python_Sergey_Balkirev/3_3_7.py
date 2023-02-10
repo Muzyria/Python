@@ -22,7 +22,7 @@ class Complex:
         self.__img = value
 
     def __setattr__(self, key, value):
-        print("set", value)
+        # print("set", value)
         if type(value) not in (int, float):
             raise ValueError("Неверный тип данных.")
         super().__setattr__(key, value)
