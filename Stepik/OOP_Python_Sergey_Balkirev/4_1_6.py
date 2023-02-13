@@ -33,3 +33,4 @@ print(*table.get_data())
 print(*book.get_data())
 
 print(table.__dict__)
+print(book.__dict__)
