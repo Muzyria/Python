@@ -12,13 +12,15 @@ class Thing:
         self.frm = None
 
     def get_data(self):
-        return self.__dict__
+        return tuple(self.__dict__.values())
+
 
 class Table(Thing):
     def __init__(self, name: str, price: float, weight, dims):
         super().__init__(name, price)
         self.weight = weight
         self.dims = dims
+
 
 class ElBook(Thing):
     def __init__(self, name: str, price: float, memory: int, frm):
