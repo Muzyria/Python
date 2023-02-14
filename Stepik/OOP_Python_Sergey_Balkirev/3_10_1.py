@@ -65,7 +65,7 @@ class TicTacToe:
     def __setitem__(self, key, value):
         self.__check_index(key)
         r, c = key
-        self.pole[r][c] = value
+        self.pole[r][c].value = value
         self.__update_win_status()
 
 
