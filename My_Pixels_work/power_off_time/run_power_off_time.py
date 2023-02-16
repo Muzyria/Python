@@ -31,9 +31,8 @@ def get_time_off():
 while True:
     if check_devices_active():
         os.system(f'adb shell settings put system power_off_time {set_time()}')
-        time.sleep(5)
         get_time_off()
-        # print(f'time_off_timer')
-        time.sleep(160)
+        print()
+        time.sleep(165)
     else:
         time.sleep(60)
