@@ -28,7 +28,32 @@ class Lector(Mentor):
     def __init__(self, fio, subject):
         super().__init__(fio, subject)
 
+    def set_mark(self, student, mark):
+        student.add_lect_marks(mark)
+
+    def __str__(self):
+        return f"Лектор {self._fio}: предмет {self._subject}"
+
 
 class Reviewer(Mentor):
     def __init__(self, fio, subject):
         super().__init__(fio, subject)
+
+    def set_mark(self, student, mark):
+        student.add_house_marks(mark)
+
+    def __str__(self):
+        return f"Эксперт {self._fio}: предмет {self._subject}"
+
+
+lector = Lector("Балакирев С.М.", "Информатика")
+reviewer = Reviewer("Гейтс Б.", "Информатика")
+students = [Student("Иванов А.Б.", "ЭВМд-11"), Student("Гаврилов С.А.", "ЭВМд-11")]
+persons = [lector, reviewer]
+lector.set_mark(students[0], 4)
+lector.set_mark(students[1], 2)
+reviewer.set_mark(students[0], 5)
+reviewer.set_mark(students[1], 3)
+for p in persons + students:
+    print(p)
+
