@@ -17,15 +17,16 @@ def check_devices_active():
     # Проверяем, есть ли подключенные устройства в выводе
     if b'device' in output:
         print('Устройство Android подключено и активно.')
+        print()
         return True
 
     else:
-        print('Устройство Android не найдено или неактивно.')
+        print('Устройство Android не найдено или неактивно. ----->')
         return False
 
 while True:
     if check_devices_active():
         os.system(f'adb shell settings put system power_off_time {set_time()}')
-        time.sleep(120)
+        time.sleep(150)
     else:
         time.sleep(60)
