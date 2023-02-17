@@ -18,7 +18,7 @@ class Test_new:
         # print(result_post.text)
 
         assert 200 == result_post.status_code
-        print("Успешно!!! ")
+        print("Успешно!!!")
 
         print(result_post.json())
 
