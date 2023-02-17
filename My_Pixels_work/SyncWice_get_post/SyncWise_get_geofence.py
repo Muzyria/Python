@@ -28,5 +28,10 @@ class Test_new:
         [print(k, v) for k, v in check_post.items()]
 
 
+    def ntest_get_geofence_list(self):
+        base_url = "https://accounts.syncwise360.com/proxy_dna/CourseGeofenceList/?id_company=236&active=1"  # базовая url
+
+
+
 new = Test_new()
 new.ntest_post_authorisaion()
