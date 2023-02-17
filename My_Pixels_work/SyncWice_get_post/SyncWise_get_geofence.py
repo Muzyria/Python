@@ -2,7 +2,7 @@ import requests
 
 
 class Test_new:
-    def ntest_new(self):
+    def ntest_post_authorisaion(self):
 
         base_url = "https://api-dna.igolf.com/rest/action/"  # базовая url
         post_resource = "UserAccountLogin/uUqnXUKU86kghJk/1.0/2.0/HmacSHA256/2Wx7AIBZ4ctGrThUZVTWgvyq-qVGYz2NVDW9SbHQgyQ/221229151003GMT+02:00/JSON"  # Ресурс метода пост
@@ -29,4 +29,4 @@ class Test_new:
 
 
 new = Test_new()
-new.ntest_new()
+new.ntest_post_authorisaion()
