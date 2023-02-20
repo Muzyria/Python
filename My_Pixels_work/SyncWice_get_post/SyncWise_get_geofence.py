@@ -1,32 +1,29 @@
 import requests
 
-class Test_new:
+class TestNew:
     def __init__(self):
         self.id_user = None
-        self.secretKey = None
-        self.ntest_post_authorisaion()
+        self.secret_key = None
+        self.ntest_post_authorization()
 
-    def ntest_post_authorisaion(self):
-        base_url = "https://api-dna.igolf.com/rest/action/"  # базовая url
-        post_resource = "UserAccountLogin/uUqnXUKU86kghJk/1.0/2.0/HmacSHA256/2Wx7AIBZ4ctGrThUZVTWgvyq-qVGYz2NVDW9SbHQgyQ/221229151003GMT+02:00/JSON"  # Ресурс метода пост
-        post_url = base_url + post_resource
-        print(post_url)
+    def ntest_post_authorization(self):
+        base_url = "https://api-dna.igolf.com/rest/action/"
+        resource = "UserAccountLogin/uUqnXUKU86kghJk/1.0/2.0/HmacSHA256/2Wx7AIBZ4ctGrThUZVTWgvyq-qVGYz2NVDW9SbHQgyQ/221229151003GMT+02:00/JSON"
+        post_url = base_url + resource
 
-        json_post = {
-                    "username": "igolfsaltcreek",
-                    "password": "92108340"
-                    }
+        json_data = {
+            "username": "igolfsaltcreek",
+            "password": "92108340"
+        }
 
-        result_post = requests.post(post_url, json=json_post)
+        response = requests.post(post_url, json=json_data)
+        response_data = response.json()
 
-        assert 200 == result_post.status_code
-        print("Успешно!!!")
+        assert response.status_code == 200, f"Expected 200 status code but received {response.status_code}"
 
-        check_post = result_post.json()
-        print(check_post)
-
-        self.id_user = check_post['id_user']
-        self.secretKey = check_post['secretKey']
+        self.id_user = response_data['id_user']
+        self.secret_key = response_data['secretKey']
+        print("Authorization successful")
 
 
     def ntest_get_geofence_list(self):
@@ -36,7 +33,7 @@ class Test_new:
             'Accept': 'application/json, text/javascript, */*; q=0.01',
             'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'Connection': 'keep-alive',
-            'Cookie': f'user_id=305; secretKey={self.secretKey}; apiKey=igolfsaltcreek',
+            'Cookie': f'user_id=305; secretKey={self.secret_key}; apiKey=igolfsaltcreek',
             'Referer': 'https://accounts.syncwise360.com/',
             'Sec-Fetch-Dest': 'empty',
             'Sec-Fetch-Mode': 'cors',
@@ -56,6 +53,6 @@ class Test_new:
         else:
             print(f'Request failed with status code {response.status_code}')
 
-        print(self.secretKey)
-new = Test_new()
-new.ntest_get_geofence_list()
+        print(self.secret_key)
+new = TestNew()
+# new.ntest_get_geofence_list()
