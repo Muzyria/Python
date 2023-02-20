@@ -54,5 +54,7 @@ class TestNew:
             print(f'Request failed with status code {response.status_code}')
 
         print(self.secret_key)
+
 new = TestNew()
+print(new.secret_key)
 # new.ntest_get_geofence_list()
