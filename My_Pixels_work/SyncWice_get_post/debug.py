@@ -1,7 +1,7 @@
 import subprocess
 
 collection_path = 'C:\Git_Muzyria\Python\Python\My_Pixels_work\SyncWice_get_post\SyncWise_postman_collection.json'
-environment_path = 'data.json'
+environment_path = '/path/to/environment.json'
 
 command = f'newman run {collection_path} -e {environment_path}'
 
