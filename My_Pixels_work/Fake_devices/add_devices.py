@@ -9,7 +9,9 @@ s = Service(r'C:\Git_Muzyria\Python\Python\My_Pixels_work\resource\chromedriver.
 driver = webdriver.Chrome(service=s)
 # driver.implicitly_wait(20)
 
-base_url = 'https://control.syncwise360.com/#login'
+# base_url = 'https://control.syncwise360.com/#login' # LIVE
+base_url = 'https://control.syncwise360.com/#login' # DEV
+
 driver.get(base_url)
 driver.maximize_window()
 time.sleep(5)
@@ -46,7 +48,7 @@ time.sleep(3)
 
 # Добавление новых автомобилей
 id_car_start = 'S10150000211018'  #  without two simbol
-for i in range(200, 301):
+for i in range(250, 281):
     new_id = f'{id_car_start}{i}'
     print(new_id + ' will added')
 
