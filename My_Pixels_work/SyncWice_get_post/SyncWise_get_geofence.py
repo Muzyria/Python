@@ -1,5 +1,5 @@
 import requests
-
+import certifi
 
 class Test_new:
     def __init__(self):
@@ -49,7 +49,7 @@ class Test_new:
             'sec-ch-ua-platform': '"Windows"',
         }
 
-        response = requests.get(url, params=params, headers=headers)
+        response = requests.get(url, params=params, headers=headers, verify=certifi.where())
 
         if response.status_code == 200:
             data = response.json()
