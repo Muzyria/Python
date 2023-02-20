@@ -24,6 +24,7 @@ class Test_new:
         print("Успешно!!!")
 
         check_post = result_post.json()
+        print(check_post)
 
         self.id_user = check_post['id_user']
         self.secretKey = check_post['secretKey']
@@ -31,7 +32,7 @@ class Test_new:
 
     def ntest_get_geofence_list(self):
         base_url = "https://accounts.syncwise360.com/proxy_dna/CourseGeofenceList/?id_company=236&active=1"  # базовая url
-        # result_get = requests.get(base_url, )
+        result_get = requests.get(base_url, )
 
 
 new = Test_new()
