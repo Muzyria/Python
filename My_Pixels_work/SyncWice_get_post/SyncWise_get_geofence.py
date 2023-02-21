@@ -1,4 +1,5 @@
 import requests
+import ssl
 
 class TestNew:
     def __init__(self):
