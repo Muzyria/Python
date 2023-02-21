@@ -33,6 +33,6 @@ while True:
         os.system(f'adb shell settings put system power_off_time {set_time()}')
         get_time_off()
         print()
-        time.sleep(165)
+        time.sleep(195)
     else:
         time.sleep(60)
