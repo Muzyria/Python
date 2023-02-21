@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 def set_time():
     now = datetime.now()  # получаем текущее время
-    one_minute_later = now + timedelta(minutes=1)  # добавляем 1 минуту к текущему времени
+    one_minute_later = now + timedelta(minutes=1, seconds=30)  # добавляем 1 минуту к текущему времени
     hour = one_minute_later.time().hour  # получаем часы через 1 минуту
     minute = one_minute_later.time().minute  # получаем минуты через 1 минуту
     print(f'Будет установалено power_off_time={hour:02}:{minute:02}')
