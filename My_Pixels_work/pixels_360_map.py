@@ -61,7 +61,7 @@ class NoTest1:
 
         #  INPUT NAME Geofence
         input_name_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@name="name"]')))
-        input_name_geofence.send_keys(f'DELETE_My_Test_geofence_{ind}')
+        input_name_geofence.send_keys(f'1_DELETE_My_Test_geofence_{ind}')
         print(f'Input NAME GEOFENCE {ind}')
         # time.sleep(1)
 
