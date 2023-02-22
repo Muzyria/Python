@@ -57,22 +57,23 @@ class NoTest1:
         button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="button4 rectangle btn-add"]')))
         button_add_geofence.click()
         print('Click ADD Geofence Button')
-        # time.sleep(5)
+        time.sleep(1)
 
         #  INPUT NAME Geofence
         input_name_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@name="name"]')))
         input_name_geofence.send_keys(f'My_Test_geofence_{ind}')
         print(f'Input NAME GEOFENCE {ind}')
-        time.sleep(2)
+        time.sleep(1)
 
         select_command_list = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//select[@name="id_geofenceActionType"]')))
         select_command_list.click()
         print('Click select_command_list')
+        time.sleep(1)
 
         select_immediate_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="Immediate shutdown"]')))
         select_immediate_command.click()
         print('Click Immediate shutdown')
-        time.sleep(2)
+        time.sleep(1)
 
 
         #  Рисуем геофенс -------------------------------------------------------------------------->
@@ -108,11 +109,11 @@ class NoTest1:
 test = NoTest1()
 test.driwing_map()
 
-# for i in range(1, 6):
-#     _x, _y, radius_val, index = 200, 400, 50, i
-#     test.add_geofence(_x, _y, radius_val, index)
-#     _x += 50
-test.add_geofence(200, 400, 50, 1)
+x, y, radius_val = 1000, 400, 50
+for i in range(1, 10):
+    test.add_geofence(x, y, radius_val, i)
+    x -= 100
+# test.add_geofence(200, 400, 50, 1)
 test.driver.close()
 
 
