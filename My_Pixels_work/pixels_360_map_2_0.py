@@ -123,10 +123,10 @@ class NoTest1:
 
     @staticmethod
     def action_draw():
-        x, y, radius_val = 300, 400, 50
+        x, y, radius_val = 350, 700, 50
         count = 1
         for _ in range(3):
-            x = 300
+            x = 350
             for _ in range(1, 8):
                 test.add_geofence(x, y, radius_val, count)
                 x += 100
