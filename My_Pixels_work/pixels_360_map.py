@@ -110,9 +110,14 @@ test = NoTest1()
 test.driwing_map()
 
 x, y, radius_val = 100, 400, 50
-for i in range(1, 10):
-    test.add_geofence(x, y, radius_val, i)
-    x += 100
+count = 1
+for _ in range(5):
+    x = 100
+    for _ in range(1, 11):
+        test.add_geofence(x, y, radius_val, count)
+        x += 100
+        count += 1
+    y += 100
 # test.add_geofence(200, 400, 50, 1)
 test.driver.close()
 
