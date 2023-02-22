@@ -11,12 +11,14 @@ import pyautogui
 
 
 class NoTest1:
+    def __init__(self):
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
     def driwing_map(self):
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
         base_url = 'https://accounts.syncwise360.com/#login'
-        driver.get(base_url)
-        driver.maximize_window()
+        self.driver.get(base_url)
+        self.driver.maximize_window()
         time.sleep(2)
 
         print('Start test')
@@ -25,63 +27,61 @@ class NoTest1:
         password_all = "10583021"
 
         #  LOGON PAGE
-        user_name = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="login-form-username"]')))
+        user_name = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="login-form-username"]')))
         user_name.send_keys(login_standard_user)
         print('Input Login')
 
-        password = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="login-form-password"]')))
+        password = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="login-form-password"]')))
         password.send_keys(password_all)
         print('Input Password')
 
-        button_login = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="login-form-submit"]')))
+        button_login = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="login-form-submit"]')))
         button_login.click()
         print('Click Login Button')
         # time.sleep(2)
 
-
         #  ASSERT TRACKER
-        button_asset_tracker = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//li[@id="nav-yamaha"]')))
+        button_asset_tracker = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//li[@id="nav-yamaha"]')))
         button_asset_tracker.click()
         print('Click Asset Tracker Button')
 
         #  Geofence Button
-        button_geofence = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="button7 bsize9 vertical-box-center btn-geofence"]')))
+        button_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="button7 bsize9 vertical-box-center btn-geofence"]')))
         button_geofence.click()
         print('Click Geofence Button')
         # time.sleep(5)
 
-
         #  ADD Geofence
-        button_add_geofence = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="button4 rectangle btn-add"]')))
+    def add_geofence(self, center_x, center_y, radius, index):
+
+        button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="button4 rectangle btn-add"]')))
         button_add_geofence.click()
         print('Click ADD Geofence Button')
         # time.sleep(5)
 
         #  INPUT NAME Geofence
-        input_name_geofence = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@name="name"]')))
-        input_name_geofence.send_keys('My_Test_geofence')
-        print('Input NAME GEOFENCE')
+        input_name_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@name="name"]')))
+        input_name_geofence.send_keys(f'My_Test_geofence_{index}')
+        print(f'Input NAME GEOFENCE {index}')
         time.sleep(2)
 
+        select_command_list = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//select[@name="id_geofenceActionType"]')))
+        select_command_list.click()
+        print('Click select_command_list')
 
-        #  Рисуем геофенс -------------------->
+        select_immediate_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="Immediate shutdown"]')))
+        select_immediate_command.click()
+        print('Click Immediate shutdown')
 
-        # actions = ActionChains(driver)
-        # time.sleep(5)
-        #
-        # actions.move_by_offset(200, 200).click().perform()
-        # actions.move_by_offset(70, 0).click().perform()
-        # actions.move_by_offset(0, 70).click().perform()
-        # actions.move_by_offset(-70, 0).click().perform()
-
+        #  Рисуем геофенс -------------------------------------------------------------------------->
         # Устанавливаем центр окружности
-        center_x, center_y = 500, 500
+        center_x, center_y = center_x, center_y
         # Устанавливаем радиус окружности
-        radius = 150
+        radius = radius
         # Вычисляем количество шагов для обхода окружности
-        num_steps = int(360 / 60)
+        num_steps = int(360 / 20)
         # Вычисляем шаг угла для каждого шага
-        step_angle = 60 * math.pi / 180
+        step_angle = 20 * math.pi / 180
         # Устанавливаем задержку между шагами
         pyautogui.PAUSE = 0.01
         # Движение курсора по окружности
@@ -93,12 +93,23 @@ class NoTest1:
             pyautogui.moveTo(x, y)
             pyautogui.click(button='left')
 
+        pyautogui.press('enter')
 
+        button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="button save stretched-box"]')))
+        button_add_geofence.click()
+        print('Click SAVE Button')
 
         time.sleep(5)
-        time.sleep(4)
+
 
 
 test = NoTest1()
 test.driwing_map()
+
+for i in range(5):
+    test.add_geofence()
+
+
+test.driver.close()
+
 
