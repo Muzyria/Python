@@ -1,5 +1,4 @@
 import requests
-import ssl
 
 class TestNew:
     def __init__(self):
@@ -58,4 +57,4 @@ class TestNew:
 
 new = TestNew()
 print(new.secret_key)
-# new.ntest_get_geofence_list()
+new.ntest_get_geofence_list()
