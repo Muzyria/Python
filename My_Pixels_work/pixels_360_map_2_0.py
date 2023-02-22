@@ -51,7 +51,6 @@ class NoTest1:
         print('Click Geofence Button')
         # time.sleep(5)
 
-
     def add_geofence(self, center_x, center_y, radius, ind):
         #  ADD Geofence
         button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//div[@class="button4 rectangle btn-add"]')))
@@ -74,7 +73,6 @@ class NoTest1:
         select_immediate_command.click()
         print('Click Immediate shutdown')
         # time.sleep(1)
-
 
         #  Рисуем геофенс -------------------------------------------------------------------------->
         # Устанавливаем центр окружности
@@ -104,21 +102,24 @@ class NoTest1:
 
         time.sleep(2)
 
+    @staticmethod
+    def action_draw():
+        x, y, radius_val = 100, 400, 50
+        count = 1
+        for _ in range(5):
+            x = 100
+            for _ in range(1, 11):
+                test.add_geofence(x, y, radius_val, count)
+                x += 100
+                count += 1
+            y += 100
 
 
 test = NoTest1()
 test.driwing_map()
 
-x, y, radius_val = 100, 400, 50
-count = 1
-for _ in range(5):
-    x = 100
-    for _ in range(1, 11):
-        test.add_geofence(x, y, radius_val, count)
-        x += 100
-        count += 1
-    y += 100
-# test.add_geofence(200, 400, 50, 1)
+
+test.add_geofence(200, 400, 50, 1)
 test.driver.close()
 
 
