@@ -1,3 +1,4 @@
+import math
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -6,6 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.action_chains import ActionChains
+import pyautogui
 
 
 class NoTest1:
@@ -64,13 +66,32 @@ class NoTest1:
 
         #  Рисуем геофенс -------------------->
 
-        actions = ActionChains(driver)
-        time.sleep(5)
+        # actions = ActionChains(driver)
+        # time.sleep(5)
+        #
+        # actions.move_by_offset(200, 200).click().perform()
+        # actions.move_by_offset(70, 0).click().perform()
+        # actions.move_by_offset(0, 70).click().perform()
+        # actions.move_by_offset(-70, 0).click().perform()
 
-        actions.move_by_offset(200, 200).click().perform()
-        actions.move_by_offset(70, 0).click().perform()
-        actions.move_by_offset(0, 70).click().perform()
-        actions.move_by_offset(-70, 0).click().perform()
+        # Устанавливаем центр окружности
+        center_x, center_y = 500, 500
+        # Устанавливаем радиус окружности
+        radius = 150
+        # Вычисляем количество шагов для обхода окружности
+        num_steps = int(360 / 10)
+        # Вычисляем шаг угла для каждого шага
+        step_angle = 10 * math.pi / 180
+        # Устанавливаем задержку между шагами
+        pyautogui.PAUSE = 0.01
+        # Движение курсора по окружности
+        for i in range(num_steps):
+            # Вычисляем координаты точки на окружности
+            x = center_x + radius * math.cos(i * step_angle)
+            y = center_y + radius * math.sin(i * step_angle)
+            # Перемещаем курсор на новые координаты
+            pyautogui.moveTo(x, y)
+            pyautogui.click(button='left')
 
 
 
