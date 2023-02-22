@@ -69,17 +69,28 @@ class NoTest1:
         select_command_list = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//select[@class="ng-untouched ng-pristine ng-invalid"]')))
         select_command_list.click()
         print('Click select_command_list')
-        time.sleep(1)
+        time.sleep(2)
         # Select command
-        select_immediate_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="2 mph with beeping "]')))
-        select_immediate_command.click()
-        print('Click 2 mph with beeping ')
+        select_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="9 mph with beeping "]')))
+        select_command.click()
+        print('Click 9 mph with beeping ')
+        x = 1485
+        y = 693
+        pyautogui.moveTo(x, y)
+        pyautogui.click(button='left')
         time.sleep(1)
 
-        # # Input Custom Message
-        # user_name = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//textarea[@class="ng-untouched ng-pristine ng-invalid error-valid"]')))
-        # user_name.send_keys("This geofence was created automatically")
-        # print('Input Custom Message')
+
+
+        # Input Custom Message
+        pyautogui.scroll(-300)
+        time.sleep(1)
+
+        select_message = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="helo"]/app-pages/div/div/div[2]/app-coursemap/div/div[1]/app-geofence/div[2]/div/div/form/ng-scrollbar/div/div/div/div/div/div[6]/textarea')))
+        # select_message.click()
+        select_message.send_keys("This geofence was created automatically")
+
+        print('Click Clik Message')
 
 
         #  Рисуем геофенс -------------------------------------------------------------------------->
@@ -88,11 +99,11 @@ class NoTest1:
         # Устанавливаем радиус окружности
         radius = radius
         # Вычисляем количество шагов для обхода окружности
-        num_steps = int(360 / 60)
+        num_steps = int(420 / 60)
         # Вычисляем шаг угла для каждого шага
         step_angle = 60 * math.pi / 180
         # Устанавливаем задержку между шагами
-        pyautogui.PAUSE = 0.01
+        pyautogui.PAUSE = 0.1
         # Движение курсора по окружности
         for i in range(num_steps):
             # Вычисляем координаты точки на окружности
@@ -108,15 +119,15 @@ class NoTest1:
         button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="btn"]')))
         button_add_geofence.click()
         print('Click SAVE Button')
-        time.sleep(5)
+        time.sleep(7)
 
     @staticmethod
     def action_draw():
-        x, y, radius_val = 100, 400, 50
+        x, y, radius_val = 300, 400, 50
         count = 1
-        for _ in range(5):
-            x = 100
-            for _ in range(1, 11):
+        for _ in range(3):
+            x = 300
+            for _ in range(1, 8):
                 test.add_geofence(x, y, radius_val, count)
                 x += 100
                 count += 1
@@ -126,8 +137,8 @@ class NoTest1:
 test = NoTest1()
 test.driwing_map()
 
-
-test.add_geofence(300, 450, 50, 1)
+test.action_draw()
+# test.add_geofence(300, 450, 50, 1)
 
 
 test.driver.close()
