@@ -61,19 +61,19 @@ class NoTest1:
 
         #  INPUT NAME Geofence
         input_name_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@name="name"]')))
-        input_name_geofence.send_keys(f'My_Test_geofence_{ind}')
+        input_name_geofence.send_keys(f'DELETE_My_Test_geofence_{ind}')
         print(f'Input NAME GEOFENCE {ind}')
-        time.sleep(1)
+        # time.sleep(1)
 
         select_command_list = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//select[@name="id_geofenceActionType"]')))
         select_command_list.click()
         print('Click select_command_list')
-        time.sleep(1)
+        # time.sleep(1)
 
         select_immediate_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="Immediate shutdown"]')))
         select_immediate_command.click()
         print('Click Immediate shutdown')
-        time.sleep(1)
+        # time.sleep(1)
 
 
         #  Рисуем геофенс -------------------------------------------------------------------------->
@@ -82,9 +82,9 @@ class NoTest1:
         # Устанавливаем радиус окружности
         radius = radius
         # Вычисляем количество шагов для обхода окружности
-        num_steps = int(360 / 20)
+        num_steps = int(360 / 60)
         # Вычисляем шаг угла для каждого шага
-        step_angle = 20 * math.pi / 180
+        step_angle = 60 * math.pi / 180
         # Устанавливаем задержку между шагами
         pyautogui.PAUSE = 0.01
         # Движение курсора по окружности
@@ -102,17 +102,17 @@ class NoTest1:
         button_add_geofence.click()
         print('Click SAVE Button')
 
-        time.sleep(5)
+        time.sleep(2)
 
 
 
 test = NoTest1()
 test.driwing_map()
 
-x, y, radius_val = 1000, 400, 50
+x, y, radius_val = 100, 400, 50
 for i in range(1, 10):
     test.add_geofence(x, y, radius_val, i)
-    x -= 100
+    x += 100
 # test.add_geofence(200, 400, 50, 1)
 test.driver.close()
 
