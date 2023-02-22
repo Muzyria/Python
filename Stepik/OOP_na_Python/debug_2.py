@@ -1,7 +1,10 @@
-s = (1, 2, 3)
-print(s)
+import time
 
-z, x, c = map(int, s)
-print(z)
-print(x)
-print(c)
+import pyautogui
+
+
+while True:
+    x, y = pyautogui.position()
+    print(f"Текущие координаты курсора: x={x}, y={y}")
+    time.sleep(0.5)
+
