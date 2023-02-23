@@ -41,7 +41,7 @@ headers = {
 
 variable = requests.Session()
 
-variable.get("https://httpbin.org/form/post")
+aaa= variable.get("https://httpbin.org/form/post")
 
 response = requests.post("https://httpbin.org/post", headers=headers, data=data)
 
