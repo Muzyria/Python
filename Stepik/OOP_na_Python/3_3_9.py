@@ -4,12 +4,18 @@ class Order:
         self.customer = customer
 
     def __add__(self, other):
-        return Order(self.cart.append(other), self.customer)
+        return Order((self.cart + [other]), self.customer)
 
     def __radd__(self, other):
-        pass
+        return Order(([other] + self.cart), self.customer)
 
+    def __sub__(self, other):
+        if other in self.cart:
+            self.cart.remove(other)
+        return Order(self.cart, self.customer)
 
+    def __rsub__(self, other):
+        return self.__sub__(other)
 
 # Напишите определение класса Order
 
@@ -17,24 +23,21 @@ class Order:
 # Ниже код для проверки методов класса Order
 
 order = Order(['banana', 'apple'], 'Гена Букин')
-print(order.cart)
 order_2 = order + 'orange'
-print(order.cart)
-print(order_2.cart)
-# assert order.cart == ['banana', 'apple']
-# assert order.customer == 'Гена Букин'
-# assert order_2.cart == ['banana', 'apple', 'orange']
+assert order.cart == ['banana', 'apple']
+assert order.customer == 'Гена Букин'
+assert order_2.cart == ['banana', 'apple', 'orange']
 
-# order = 'mango' + order
-# assert order.cart == ['mango', 'banana', 'apple']
-# order = 'ice cream' + order
-# assert order.cart == ['ice cream', 'mango', 'banana', 'apple']
-#
-# order = order - 'banana'
-# assert order.cart == ['ice cream', 'mango', 'apple']
-#
-# order = order - 'mango'
-# assert order.cart == ['ice cream', 'apple']
-# order = 'lime' - order
-# assert order.cart == ['ice cream', 'apple']
-# print('Good')
+order = 'mango' + order
+assert order.cart == ['mango', 'banana', 'apple']
+order = 'ice cream' + order
+assert order.cart == ['ice cream', 'mango', 'banana', 'apple']
+
+order = order - 'banana'
+assert order.cart == ['ice cream', 'mango', 'apple']
+
+order = order - 'mango'
+assert order.cart == ['ice cream', 'apple']
+order = 'lime' - order
+assert order.cart == ['ice cream', 'apple']
+print('Good')
