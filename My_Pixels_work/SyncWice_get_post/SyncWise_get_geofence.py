@@ -16,6 +16,8 @@ class TestNew:
             "password": "92108340"
         }
 
+        # self.my_sesion = requests.Session
+
         response = requests.post(post_url, json=json_data)
         response_data = response.json()
 
@@ -57,4 +59,5 @@ class TestNew:
 
 new = TestNew()
 print(new.secret_key)
-new.ntest_get_geofence_list()
+# print(new.my_sesion.__dict__)
+# new.ntest_get_geofence_list()
