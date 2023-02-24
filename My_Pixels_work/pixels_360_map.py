@@ -70,9 +70,9 @@ class NoTest1:
         print('Click select_command_list')
         # time.sleep(1)
 
-        select_immediate_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="Immediate shutdown"]')))
+        select_immediate_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="2 mph with beeping"]')))
         select_immediate_command.click()
-        print('Click Immediate shutdown')
+        print('Click 2 mph with beeping')
         # time.sleep(1)
 
 
@@ -82,9 +82,9 @@ class NoTest1:
         # Устанавливаем радиус окружности
         radius = radius
         # Вычисляем количество шагов для обхода окружности
-        num_steps = int(360 / 60)
+        num_steps = int(360 / 20)
         # Вычисляем шаг угла для каждого шага
-        step_angle = 60 * math.pi / 180
+        step_angle = 20 * math.pi / 180
         # Устанавливаем задержку между шагами
         pyautogui.PAUSE = 0.01
         # Движение курсора по окружности
@@ -109,7 +109,7 @@ class NoTest1:
 test = NoTest1()
 test.driwing_map()
 
-x, y, radius_val = 100, 400, 50
+x, y, radius_val = 150, 450, 50
 count = 1
 for _ in range(5):
     x = 100
