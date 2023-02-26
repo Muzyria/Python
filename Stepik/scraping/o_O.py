@@ -29,3 +29,12 @@ for count in range(1, 8):
         # print(name, price, url_img, sep="\n")
         card_url = "https://scrapingclub.com" + i.find("a").get("href")
         list_card_url.append(card_url)
+
+
+for card_url in list_card_url:
+    response = requests.get(card_url, headers=headers)
+
+    soup = BeautifulSoup(response.text, "lxml")  # html.parser
+
+    data = soup.find("div", class_="card mt-4 my-4")
+    print(data)
