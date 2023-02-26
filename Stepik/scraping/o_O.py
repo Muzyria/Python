@@ -6,6 +6,13 @@ headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
                          "Chrome/110.0.0.0 Safari/537.36"}
 
 
+def download(url):
+    resp = requests.get(url, stream=True)
+    with open(rf"C:\Git_Muzyria\Stepik\scraping\image\{url.split('/')[-1]}", "wb") as file:
+        for value in resp.iter_content(1024*1024):
+            file.write(value)
+
+
 def get_url():
     for count in range(1, 8):
         url = f"https://scrapingclub.com/exercise/list_basic/?page={count}"
@@ -28,4 +35,5 @@ for card_url in get_url():
     price = data.find("h4").text
     text = data.find("p", class_="card-text").text
     url_img = "https://scrapingclub.com" + data.find("img", class_="card-img-top img-fluid").get("src")
+    download(url_img)
     print(name, price, text, url_img, sep="\n")
