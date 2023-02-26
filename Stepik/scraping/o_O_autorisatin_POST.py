@@ -18,3 +18,6 @@ print(token)
 
 data = {"csrf_token": token, "username": "noname", "password": "password"}
 
+result = work.post("https://quotes.toscrape.com/login", headers=headers, data=data, allow_redirects=True)
+
+print(result.text)
