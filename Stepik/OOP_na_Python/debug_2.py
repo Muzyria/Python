@@ -42,60 +42,111 @@
 # print(signature)
 
 
-import hmac
+# import hmac
+# import hashlib
+# import base64
+# from urllib.parse import quote
+#
+# def calculate_signature(to_sign, secret_key, sign_method):
+#     # Concatenate Keys
+#     composite_key = secret_key
+#
+#     # Configure the HMAC Encryption Algorithm
+#     hmac_algorithm = hmac.new(bytes(composite_key, 'utf-8'), msg=bytes(to_sign, 'utf-8'), digestmod=hashlib.sha256)
+#
+#     # Create Hash
+#     hmac_digest = hmac_algorithm.digest()
+#
+#     # Convert Hash
+#     base64_encoded_hash = base64.urlsafe_b64encode(hmac_digest).decode()
+#
+#     return quote(base64_encoded_hash)
+#
+# def create_string_to_sign(params, private_action):
+#     # Create StringToSign
+#     if private_action:
+#         string_to_sign = f"{params['ActionID']}/{params['AppAPIKey']}/{params['APIKey']}/{params['APIVersion']}/{params['SignatureVersion']}/{params['SignatureMethod']}/{params['Timestamp']}/{params['ResponseFormat']}"
+#     else:
+#         string_to_sign = f"{params['ActionID']}/{params['AppAPIKey']}/{params['APIVersion']}/{params['SignatureVersion']}/{params['SignatureMethod']}/{params['Timestamp']}/{params['ResponseFormat']}"
+#
+#     return string_to_sign
+#
+# # Example usage
+# params = {
+#     'ActionID': 'UserLogin',
+#     'AppAPIKey': 'uUqnXUKU86kghJk',
+#     'APIKey': 'testigolf@igolf.com',
+#     'APIVersion': '1.0',
+#     'SignatureVersion': '2.0',
+#     'SignatureMethod': 'HmacSHA256',
+#     'Timestamp': '121224235920+0200',
+#     'ResponseFormat': 'JSON'
+# }
+#
+# private_action = True
+# secret_key = '30_character_application_secret_key'
+# user_key = '40_character_user_key'
+#
+# if private_action:
+#     composite_key = secret_key + user_key
+# else:
+#     composite_key = secret_key
+#
+# to_sign = create_string_to_sign(params, private_action)
+# signature = calculate_signature(to_sign, composite_key, params['SignatureMethod'])
+#
+# # Add to Common Parameters
+# params['Signature'] = signature
+#
+# # Use the params dictionary in the request sent to the server
+
+
 import hashlib
+import hmac
 import base64
-from urllib.parse import quote
+import time
 
-def calculate_signature(to_sign, secret_key, sign_method):
-    # Concatenate Keys
-    composite_key = secret_key
-
-    # Configure the HMAC Encryption Algorithm
-    hmac_algorithm = hmac.new(bytes(composite_key, 'utf-8'), msg=bytes(to_sign, 'utf-8'), digestmod=hashlib.sha256)
-
-    # Create Hash
-    hmac_digest = hmac_algorithm.digest()
-
-    # Convert Hash
-    base64_encoded_hash = base64.urlsafe_b64encode(hmac_digest).decode()
-
-    return quote(base64_encoded_hash)
-
-def create_string_to_sign(params, private_action):
-    # Create StringToSign
-    if private_action:
-        string_to_sign = f"{params['ActionID']}/{params['AppAPIKey']}/{params['APIKey']}/{params['APIVersion']}/{params['SignatureVersion']}/{params['SignatureMethod']}/{params['Timestamp']}/{params['ResponseFormat']}"
+def create_signature(private_action, secret_key, user_key=None):
+    # Create the string to sign
+    if user_key is None:
+        string_to_sign = f"{private_action}/{app_api_key}/{api_version}/{sig_version}/{sig_method}/{timestamp}/{response_format}"
     else:
-        string_to_sign = f"{params['ActionID']}/{params['AppAPIKey']}/{params['APIVersion']}/{params['SignatureVersion']}/{params['SignatureMethod']}/{params['Timestamp']}/{params['ResponseFormat']}"
+        string_to_sign = f"{private_action}/{app_api_key}/{user_key}/{api_version}/{sig_version}/{sig_method}/{timestamp}/{response_format}"
 
-    return string_to_sign
+    # Concatenate the keys
+    composite_key = secret_key + (user_key if user_key is not None else "")
 
-# Example usage
-params = {
-    'ActionID': 'UserLogin',
-    'AppAPIKey': 'uUqnXUKU86kghJk',
-    'APIKey': 'testigolf@igolf.com',
-    'APIVersion': '1.0',
-    'SignatureVersion': '2.0',
-    'SignatureMethod': 'HmacSHA256',
-    'Timestamp': '121224235920+0200',
-    'ResponseFormat': 'JSON'
-}
+    # Configure the HMAC encryption algorithm
+    message = string_to_sign.encode('utf-8')
+    key = composite_key.encode('utf-8')
+    digester = hmac.new(key=key, msg=message, digestmod=hashlib.sha256)
 
-private_action = True
-secret_key = '30_character_application_secret_key'
-user_key = '40_character_user_key'
+    # Create the hash and convert it
+    signature = base64.urlsafe_b64encode(digester.digest()).decode('utf-8')
 
-if private_action:
-    composite_key = secret_key + user_key
-else:
-    composite_key = secret_key
+    return signature
 
-to_sign = create_string_to_sign(params, private_action)
-signature = calculate_signature(to_sign, composite_key, params['SignatureMethod'])
+# Set the required parameters
+app_api_key = "your_app_api_key"
+api_version = "1.0"
+sig_version = "2.0"
+sig_method = "HmacSHA256"
+response_format = "JSON"
 
-# Add to Common Parameters
-params['Signature'] = signature
+# Set the private action and the secret key
+private_action = "UserLogin"
+secret_key = "your_secret_key"
 
-# Use the params dictionary in the request sent to the server
+# Optional: set the user key
+user_key = "your_user_key"
+
+# Get the current timestamp
+timestamp = str(int(time.time()))
+
+# Create the signature
+signature = create_signature(private_action, secret_key, user_key)
+
+# Print the signature
+print(signature)
+
+
