@@ -29,7 +29,7 @@
 import requests
 import json
 
-url = "https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/kxt8gN0sxeqsZj4yuP_iNNaS_RVnRV5aZ5gr6rl4UXY/230227153300+0200/JSON"
+url = "https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/FkQwpEbgheK1FUC1q_RaBRz8JrzC8gxa91Z72vEJ_Fc/230227173728+0200/JSON"
 
 payload = json.dumps({
   "id_course": "xqrRgFzOAmmP",
@@ -43,7 +43,7 @@ headers = {
   'Content-Type': 'application/json',
   'Accept': '*/*',
   'Referer': 'https://sandbox.syncwise360.com/',
-  'x-access-token': 'Hks4KaNMc9IYyJTG2v7OQwjUwfRx3SrZFZrCg4v08mrKZb-lgXeN3hg8Osxe',
+  'x-access-token': 'EIE4DHe07r45mbZHl3pRMM8KPB-YbJr3UuTPgxFJ0i11EtXyoshWaRQvr9Mo',
   'sec-ch-ua-platform': '"Windows"'
 }
 

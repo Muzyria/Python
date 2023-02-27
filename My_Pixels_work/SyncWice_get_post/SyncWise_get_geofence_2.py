@@ -23,7 +23,8 @@ class TestNew:
 
 
     def ntest_get_geofence_list(self):
-        url = 'https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/BLl8AwjlGBeiSVqn-tWSanB0xp_u9k39uZON21lf41c/230227121247+0200/JSON'
+        url = 'https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/' \
+              'HmacSHA256/sDuRC0E2spuhh5XhIT6YXnW1Rjs8GCFMIE_CGp5j0Ts/230227121247+0200/JSON'
         params = {"id_course":"xqrRgFzOAmmP","id_company":2973,"active":1}
         headers = {
             'Accept': 'application/json, text/javascript, */*; q=0.01',
