@@ -20,15 +20,50 @@ class TestNew:
         # print(response.content)
         self.secret_key = response.json()["secretKey"]
         print("Authorization successful")
+        print(f"Secret_key {self.secret_key}")
 
 
 
     def ntest_get_geofence_list(self):
         import requests
         import json
+        import hashlib
+        import hmac
+        import base64
+        import time
 
-        url = "https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0" \
-              "/HmacSHA256/yU-yL4fB2KmfbeOtu6bJ_AE7V6tmOJ9sNl4rQ4tM-DE/230228125424+0200/JSON"
+        def calculate_signature(to_sign_str, sign_method, secret_key):
+            key_bytes = bytes(secret_key, 'utf-8')
+            message_bytes = bytes(to_sign_str, 'utf-8')
+            if sign_method == 'HmacSHA256':
+                digestmod = hashlib.sha256
+            else:
+                raise ValueError('Unsupported signature method')
+            signature = hmac.new(key_bytes, message_bytes, digestmod=digestmod).digest()
+            return base64.urlsafe_b64encode(signature).decode('utf-8')
+
+        def to_sign(action_code, app_api_key, api_version, sig_version, sig_method, timestamp_str, response_format):
+            params = [action_code, app_api_key, api_version, sig_version, sig_method, timestamp_str, response_format]
+            return '/'.join(params)
+
+        action_code = 'CourseGeofenceLis'
+        app_api_key = 'FVyzsVqr-BmP280'
+        api_version = '1.0'
+        sig_version = '2.0'
+        sig_method = 'HmacSHA256'
+        response_format = 'JSON'
+        secret_key = self.secret_key
+        timestamp_str = time.strftime('%y%m%d%H%M%S%z')
+        to_sign_str = to_sign(action_code, app_api_key, api_version, sig_version, sig_method, timestamp_str,
+                              response_format)
+        signature = calculate_signature(to_sign_str, sig_method, secret_key)
+
+        # Use the resulting value as the value of the Signature request parameter
+        signature_and_timestamp = f'{signature.strip("=")}/{timestamp_str}'
+        print(f"signature_and_timestamp {signature_and_timestamp}")
+
+
+        url = f"https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/{signature_and_timestamp}/JSON"
 
         payload = json.dumps({
             "id_course": "xqrRgFzOAmmP",
@@ -49,7 +84,7 @@ class TestNew:
             'sec-fetch-mode': 'cors',
             'sec-fetch-site': 'same-site',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
-            'x-access-token': '5tYD1C8LmsKE0qahys-q5YvHQF92iH0-ENzteFMtSSlLxZdUZ2-7Eicg3Scf'
+            'x-access-token': 'wKbhvngJncQs9lziCGjQz1yjAihaBTZ9buFPDOwZCBfATC9D70c_Ux86GkM6'
         }
 
         response = requests.request("POST", url, headers=headers, data=payload)
@@ -57,7 +92,7 @@ class TestNew:
         print(response.text)
 
 new = TestNew()
-print(new.secret_key)
+# print(new.secret_key)
 
 
 new.ntest_get_geofence_list()
