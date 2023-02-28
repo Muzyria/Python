@@ -28,7 +28,7 @@ class TestNew:
         import json
 
         url = "https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0" \
-              "/HmacSHA256/yR-E9fYaGkdvWuQSn90nXxt-iWd7l8ZUgA9Ao03GnDo/230228114757+0200/JSON"
+              "/HmacSHA256/voFR1L2iXeKeiWBoj1nn1g7ibcIFQrJfo4Ue5K7VDjA/230228121953+0200/JSON"
 
         payload = json.dumps({
             "id_course": "xqrRgFzOAmmP",
