@@ -55,7 +55,7 @@ class TestNew:
             self.timestamp = timestamp_str
             return params_str
 
-        # Пример использования
+        #
         action_id = 'CourseGeofenceList'
         app_api_key = 'FVyzsVqr-BmP280'
         api_key = 'igorperetssuperior'
@@ -68,7 +68,7 @@ class TestNew:
         to_sign_str = to_sign(action_id, app_api_key, api_key, api_version, sig_version, sig_method, response_format)
         signature_ = calculate_signature(to_sign_str, sig_method, secret_key)
         signature_and_timestamp = f'{signature_}/{self.timestamp}'
-        # Добавьте полученную подпись в параметры запроса
+
 
 
         url = f"https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/{signature_and_timestamp}/JSON"
