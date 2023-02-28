@@ -26,27 +26,3 @@
 #   Функция point_in_polygon возвращает True,
 #  если точка находится внутри многоугольника, и False в противном случае.
 # """
-import requests
-import json
-
-url = "https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/FkQwpEbgheK1FUC1q_RaBRz8JrzC8gxa91Z72vEJ_Fc/230227173728+0200/JSON"
-
-payload = json.dumps({
-  "id_course": "xqrRgFzOAmmP",
-  "id_company": 2973,
-  "active": 1
-})
-headers = {
-  'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
-  'sec-ch-ua-mobile': '?0',
-  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
-  'Content-Type': 'application/json',
-  'Accept': '*/*',
-  'Referer': 'https://sandbox.syncwise360.com/',
-  'x-access-token': 'EIE4DHe07r45mbZHl3pRMM8KPB-YbJr3UuTPgxFJ0i11EtXyoshWaRQvr9Mo',
-  'sec-ch-ua-platform': '"Windows"'
-}
-
-response = requests.request("POST", url, headers=headers, data=payload)
-
-print(response.text)
