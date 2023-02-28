@@ -22,39 +22,42 @@ class TestNew:
         print("Authorization successful")
 
 
+
     def ntest_get_geofence_list(self):
-        url = 'https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/' \
-              'HmacSHA256/sDuRC0E2spuhh5XhIT6YXnW1Rjs8GCFMIE_CGp5j0Ts/230227121247+0200/JSON'
-        params = {"id_course":"xqrRgFzOAmmP","id_company":2973,"active":1}
+        import requests
+        import json
+
+        url = "https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0" \
+              "/HmacSHA256/yR-E9fYaGkdvWuQSn90nXxt-iWd7l8ZUgA9Ao03GnDo/230228114757+0200/JSON"
+
+        payload = json.dumps({
+            "id_course": "xqrRgFzOAmmP",
+            "id_company": 2973,
+            "active": 1
+        })
         headers = {
-            'Accept': 'application/json, text/javascript, */*; q=0.01',
-            'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
-            'Connection': 'keep-alive',
-            'Cookie': f'user_id=305; secretKey={self.secret_key}; apiKey=igolfsaltcreek',
-            'Referer': 'https://accounts.syncwise360.com/',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-origin',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
-            'X-Requested-With': 'XMLHttpRequest',
-            'sec-ch-ua': '"Not_A Brand";v="99", "Google Chrome";v="109", "Chromium";v="109"',
+            'authority': 'dev-api.syncwise360.com',
+            'accept': '*/*',
+            'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
+            'content-type': 'application/json',
+            'origin': 'https://sandbox.syncwise360.com',
+            'referer': 'https://sandbox.syncwise360.com/',
+            'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+            'x-access-token': '5tYD1C8LmsKE0qahys-q5YvHQF92iH0-ENzteFMtSSlLxZdUZ2-7Eicg3Scf'
         }
 
-        response = requests.post(url, params=params, headers=headers, verify=False)
+        response = requests.request("POST", url, headers=headers, data=payload)
 
-        if response.status_code == 200:
-            data = response.json()
-            # обрабатываем полученные данные
-        else:
-            print(f'Request failed with status code {response.status_code}')
-
-        print(self.secret_key)
+        print(response.text)
 
 new = TestNew()
 print(new.secret_key)
 
 
-# print(new.my_sesion.__dict__)
-# new.ntest_get_geofence_list()
+new.ntest_get_geofence_list()
