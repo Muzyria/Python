@@ -31,7 +31,7 @@ api_version = '1.0'
 sig_version = '2.0'
 sig_method = 'HmacSHA256'
 response_format = 'JSON'
-secret_key = 'F6ozDPUhzZCu4VFQk_hyPcfDxLdrdslOX232r9GmjY1tB-rutihBlol6kT8J' # 'your_application_secret_key'
+secret_key = 'xW3C5kCF7bFZJhutad5YVFV4a7VZ5esLShJplAb0P0eRlI1ajKdxQeGGvVuV' # 'your_application_secret_key'
 
 to_sign_str = to_sign(action_id, app_api_key, api_key, api_version, sig_version, sig_method, response_format)
 signature = calculate_signature(to_sign_str, sig_method, secret_key)
