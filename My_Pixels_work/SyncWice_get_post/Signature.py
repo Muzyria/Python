@@ -23,7 +23,7 @@ def to_sign(action_id, app_api_key, api_key, api_version, sig_version, sig_metho
     print(timestamp_str)
     return params_str
 
-# Пример использования
+# использования
 action_id = 'CourseGeofenceList'
 app_api_key = 'FVyzsVqr-BmP280'
 api_key = 'igorperetssuperior'
@@ -31,12 +31,12 @@ api_version = '1.0'
 sig_version = '2.0'
 sig_method = 'HmacSHA256'
 response_format = 'JSON'
-secret_key = 'umKfxR_vdu9ZHfuMvmq64eX_Cl8R24m9GVa545RJ_rsiJ_m_xPVYpusMFBcz' # 'your_application_secret_key'
+secret_key = 'uVKHALCPgVlc0oqiem1H1sM_DQxA8GKl5qvH-C7n1ZBLPPpzhnqQMD_85FNQ' # 'your_application_secret_key'
 
 to_sign_str = to_sign(action_id, app_api_key, api_key, api_version, sig_version, sig_method, response_format)
 signature_ = calculate_signature(to_sign_str, sig_method, secret_key)
 
-# Добавьте полученную подпись в параметры запроса
+
 
 # print(to_sign_str)
-print(signature_)
+print(signature_.strip())
