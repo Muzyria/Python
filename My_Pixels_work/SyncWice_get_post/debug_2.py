@@ -1,3 +1,21 @@
-import random
+import pyautogui
 
-print(random.randrange(300, 600))
+# Определение точек для рисования Микки Мауса
+points = [
+    (100, 100),
+    (200, 200),
+    (300, 100),
+    (200, 200),
+    (300, 300),
+    (200, 200),
+    (100, 300),
+    (200, 200),
+    (100, 100)
+]
+
+# Перемещение курсора мыши в первую точку
+pyautogui.moveTo(points[0])
+
+# Рисование изображения Микки Мауса
+for point in points[1:]:
+    pyautogui.dragTo(point, duration=0.25)
