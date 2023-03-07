@@ -1,1 +1,2 @@
-print(f'{(n := int(input()))} * {n} = {n * n}')
+regex = r'\b[a-z]+[A-Z][a-z]+\b'
+
