@@ -11,3 +11,4 @@ print(match.endpos)
 print(match.re)
 print(match.string)
 
+[print(eval(f'match.{arg}')) for arg in ('group()', 'start()', 'end()', 'pos', 'endpos', 're', 'string')]
