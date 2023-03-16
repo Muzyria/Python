@@ -1,351 +1,223 @@
-*Date: 03.14.23   
-OS Build: 2.11.12_E   
-APK Build: 2.1.84  
-Environment: Live   
-Cable FW Build: YDTCC2.2_1.1.02VI 
-Device(s): YTR 
-Device ID: S10150000211018050 
-Test Location: Office   
-UUA : 1.4.0 
-MB: 1.5*   
-  
-  
-*%{background:yellow}All test cases passed with expected behavior%* 
-  
-*Preconditions* 
-* Within 360 create/update a cart-barn geofence and hole for test setup *Confirmed* 
-* Allow time for geofences to sync and save on tablet *Confirmed* 
-* Assign tablet to course (make sure 360 matches APK environment: dev v. live) *Confirmed* 
-* Confirm device setting option appears in 360 > YamaTrack Module > Course Set Up *Confirmed* 
-  
-Complete each test case on AC/DC/EFI and Power Supply or Step Down cable. 
-  
-*%{background:yellow}DC Full Controller%* 
-  
-*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*    
-*CASE A:*    
-- Complete Case A over Cell *Cell only*    
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*    
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 13:00*     
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported    
-3. Confirm if device wakes up from all types of sleep via MOTION     
-   - Standby *Confirmed 13:17*    
-   - Cart-barn *Confirmed 13:06*    
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*    
-     
-*CASE B:*    
-- Complete Case B over WIFI *WiFi only*    
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed 13:21*    
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 13:31*    
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*     
-4. Confirm device ONLY wakes up from sleep mode via TOUCH     
-   - Standby *Confirmed 13:45*    
-   - Cart-barn *Confirmed 13:38*    
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 14:05*    
-6. Place tablet into Cart Barn sleep *CBS 14:09*    
-- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported    
-7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*    
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*    
-     
-*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*    
-*CASE A:*    
-- Complete Case A over Cell *Cell only*    
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*    
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 14:23*    
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported    
-3. Confirm if device wakes up from all types of sleep via MOTION     
-   - Standby *Confirmed 14:36*    
-   - Cart-barn *Confirmed 14:29*    
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*    
-     
-*CASE B:*    
-- Complete Case B over WIFI *WiFi only*    
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed  14:48*    
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 14:53*    
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported     
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*    
-4. Confirm device ONLY wakes up from sleep mode via TOUCH     
-   - Standby *Confirmed 15:28*    
-   - Cart-barn *Confirmed 15:07*    
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 15:30*    
-6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 15:35*    
-- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*    
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*    
-8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*    
-     
-*CASE C:*    
-- Complete once over cell, then once over WIFI *WiFi only*    
-1. Place device into cart barn sleep *CBS 15:41*    
-2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*    
-3. Wait 5+ min. *Confirmed*    
-4. Confirm device will still wake by Motion/Touch *Confirmed 15:48*    
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*    
-5. Repeat step 1-3 *Confirmed*    
-6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 16:02*    
-7. Confirm tablet wakes up automatically *Confirmed*    
-- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed* 
- 
-*Date: 03.15.23   
-OS Build: 2.11.12_E   
-APK Build: 2.1.84  
-Environment: Live   
-Cable FW Build: AC_TCC_V1.2_1.0.9 
-Device(s): YTR 
-Device ID: S10150000211018050 
-Test Location: Office   
-UUA : 1.4.0 
-MB: 1.7*   
- 
-   
- 
- 
-*%{background:yellow}All test cases passed with expected behavior%* 
-  
-*Preconditions* 
-* Within 360 create/update a cart-barn geofence and hole for test setup *Confirmed* 
-* Allow time for geofences to sync and save on tablet *Confirmed* 
-* Assign tablet to course (make sure 360 matches APK environment: dev v. live) *Confirmed* 
-* Confirm device setting option appears in 360 > YamaTrack Module > Course Set Up *Confirmed* 
-  
-Complete each test case on AC/DC/EFI and Power Supply or Step Down cable. 
-  
-*%{background:yellow}AC Full Controller%* 
-  
-*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*   
-*CASE A:*   
-- Complete Case A over Cell *Cell only*   
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*   
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 10:00*    
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported   
-3. Confirm if device wakes up from all types of sleep via MOTION    
-   - Standby *Confirmed 10:18*   
-   - Cart-barn *Confirmed 10:06*   
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*   
-    
-*CASE B:*   
-- Complete Case B over WIFI *WiFi only*   
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed 10:22*   
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 10:31*   
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*    
-4. Confirm device ONLY wakes up from sleep mode via TOUCH    
-   - Standby *Confirmed 10:45*   
-   - Cart-barn *Confirmed 10:37*   
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 11:04*   
-6. Place tablet into Cart Barn sleep *CBS 11:09*   
-- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported   
-7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*   
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*   
-    
-*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*   
-*CASE A:*   
-- Complete Case A over Cell *Cell only*   
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*   
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 11:23*   
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported   
-3. Confirm if device wakes up from all types of sleep via MOTION    
-   - Standby *Confirmed 11:35*   
-   - Cart-barn *Confirmed 11:28*   
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*   
-    
-*CASE B:*   
-- Complete Case B over WIFI *WiFi only*   
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed  11:49*   
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 11:54*   
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported    
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*   
-4. Confirm device ONLY wakes up from sleep mode via TOUCH    
-   - Standby *Confirmed 12:29*   
-   - Cart-barn *Confirmed 12:07*   
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 12:30*   
-6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 12:35*   
-- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*   
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*   
-8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*   
-    
-*CASE C:*   
-- Complete once over cell, then once over WIFI *WiFi only*   
-1. Place device into cart barn sleep *CBS 12:40*   
-2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*   
-3. Wait 5+ min. *Confirmed*   
-4. Confirm device will still wake by Motion/Touch *Confirmed 12:47*   
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*   
-5. Repeat step 1-3 *Confirmed*   
-6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 13:00*   
-7. Confirm tablet wakes up automatically *Confirmed*   
-- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed* 
- 
- 
-*Date: 03.09.23   
-OS Build: 2.11.12_E   
-APK Build: 2.1.84  
-Environment: Live   
-Cable FW Build: YEVCC_1.1_1.0.04 
-Device(s): YTR 
-Device ID: S1011500221118000A 
-Test Location: Office   
-UUA : 1.4.1 
-MB: 1.7*   
- 
-  
-*%{background:yellow}All test cases passed with expected behavior%* 
-  
-*Preconditions* 
-* Within 360 create/update a cart-barn geofence and hole for test setup *Confirmed* 
-* Allow time for geofences to sync and save on tablet *Confirmed* 
-* Assign tablet to course (make sure 360 matches APK environment: dev v. live) *Confirmed* 
-* Confirm device setting option appears in 360 > YamaTrack Module > Course Set Up *Confirmed* 
-  
-Complete each test case on AC/DC/EFI and Power Supply or Step Down cable. 
-  
-*%{background:yellow}EFI Full Controller%* 
-  
-*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*  
-*CASE A:*  
-- Complete Case A over Cell *Cell only*  
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*  
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 13:05*   
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported  
-3. Confirm if device wakes up from all types of sleep via MOTION   
-   - Standby *Confirmed 13:18 *  
-   - Cart-barn *Confirmed 13:11*  
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*  
-   
-*CASE B:*  
-- Complete Case B over WIFI *WiFi only*  
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed 13:27*  
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 13:29*  
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*   
-4. Confirm device ONLY wakes up from sleep mode via TOUCH   
-   - Standby *Confirmed 13:43*  
-   - Cart-barn *Confirmed 13:36*  
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 13:44*  
-6. Place tablet into Cart Barn sleep *CBS 13:49*  
-- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported  
-7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*  
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*  
-   
-*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*  
-*CASE A:*  
-- Complete Case A over Cell *Cell only*  
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*  
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 13:53*  
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported  
-3. Confirm if device wakes up from all types of sleep via MOTION   
-   - Standby *Confirmed 14:05*  
-   - Cart-barn *Confirmed 13:58*  
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*  
-   
-*CASE B:*  
-- Complete Case B over WIFI *WiFi only*  
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed  14:07*  
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 14:08*  
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported   
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*  
-4. Confirm device ONLY wakes up from sleep mode via TOUCH   
-   - Standby *Confirmed 14:30*  
-   - Cart-barn *Confirmed 14:19*  
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 14:32*  
-6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 14:37*  
-- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*  
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*  
-8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*  
-   
-*CASE C:*  
-- Complete once over cell, then once over WIFI *WiFi only*  
-1. Place device into cart barn sleep *CBS 14:50*  
-2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*  
-3. Wait 5+ min. *Confirmed*  
-4. Confirm device will still wake by Motion/Touch *Confirmed 15:05*  
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*  
-5. Repeat step 1-3 *Confirmed*  
-6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 15:12*  
-7. Confirm tablet wakes up automatically *Confirmed*  
-- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed* 
- 
- 
-*Date: 03.09.23   
-OS Build: 2.11.12_E   
-APK Build: 2.1.84  
-Environment: Live   
-Cable FW Build:  
-Device(s): YTR 
-Device ID: S1011500221118000A 
-Test Location: Office   
-UUA : 1.4.1 
-MB: 1.7*   
- 
-  
-*%{background:yellow}All test cases passed with expected behavior%* 
-  
-*Preconditions* 
-* Within 360 create/update a cart-barn geofence and hole for test setup *Confirmed* 
-* Allow time for geofences to sync and save on tablet *Confirmed* 
-* Assign tablet to course (make sure 360 matches APK environment: dev v. live) *Confirmed* 
-* Confirm device setting option appears in 360 > YamaTrack Module > Course Set Up *Confirmed* 
-  
-Complete each test case on AC/DC/EFI and Power Supply or Step Down cable. 
-  
-*%{background:yellow}Power Supply%* 
- 
-*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*  
-*CASE A:*  
-- Complete Case A over Cell *Cell only*  
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*  
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 15:15*   
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported  
-3. Confirm if device wakes up from all types of sleep via MOTION   
-   - Standby *Confirmed 15:27*  
-   - Cart-barn *Confirmed 15:20*  
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*  
-   
-*CASE B:*  
-- Complete Case B over WIFI *WiFi only*  
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed 15:30*  
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 15:39*  
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*   
-4. Confirm device ONLY wakes up from sleep mode via TOUCH   
-   - Standby *Confirmed 15:55*  
-   - Cart-barn *Confirmed 15:44*  
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 15:57*  
-6. Place tablet into Cart Barn sleep *CBS 16:04*  
-- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported  
-7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*  
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*  
-   
-*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*  
-*CASE A:*  
-- Complete Case A over Cell *Cell only*  
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*  
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 16:10*  
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported  
-3. Confirm if device wakes up from all types of sleep via MOTION   
-   - Standby *Confirmed 16:26*  
-   - Cart-barn *Confirmed 16:15*  
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*  
-   
-*CASE B:*  
-- Complete Case B over WIFI *WiFi only*  
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed  16:27*  
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 16:32*  
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported   
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*  
-4. Confirm device ONLY wakes up from sleep mode via TOUCH   
-   - Standby *Confirmed 16:52*  
-   - Cart-barn *Confirmed 16:42*  
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 16:55*  
-6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 17:00*  
-- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*  
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*  
-8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*  
-   
-*CASE C:*  
-- Complete once over cell, then once over WIFI *WiFi only*  
-1. Place device into cart barn sleep *CBS 17:07*  
-2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*  
-3. Wait 5+ min. *Confirmed*   
-4. Confirm device will   wake by Motion/Touch *Confirmed 17:08*  
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*  
-5. Repeat step 1-3 *Confirmed*  
-6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 17:21*  
-7. Confirm tablet wakes up automatically *Confirmed*  
-- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed* 
+*APK*
+
+*CASE A: Cart Barn Sleep*
+
+1. With device awake, que an update within Control - *Confirmed at 16:25*
+
+2. Confirm device recognizes an update available (via logs within Android studio) when falling into cart barn sleep - *Confirmed*
+
+3. Wake up device, and confirm the Play Golf screen loads - *Confirmed at 16:34*
+
+4. Confirm download status bar is updating during download - *Confirmed*
+
+- Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
+
+5. Confirm when download is complete, icon indicates download was successful - *%{Background:yellow} After waking up, device downloaded and install software version (this is the expected result)%*
+
+6. Confirm device installs upon waking up from Cart Barn Sleep
+
+- Confirm updated software version is displayed in APK Asset Details, 360, and Control  *Confirmed*
+
+9. Put the device into Cart Barn sleep and que another update
+
+10. Wake up device, and confirm it downloaded the update (check the download icon status on PlayGolf screen) *Confirmed*
+
+
+
+*OS*
+
+*CASE A: Cart Barn Sleep*
+
+1. With device awake, que an update within Control - *Confirmed at 16:50*
+
+2. Confirm device recognizes an update available (via logs within Android studio) when falling into cart barn sleep - *Confirmed*
+
+3. Wake up device, and confirm the Play Golf screen loads - *Confirmed at 16:59 *
+
+4. Confirm download status bar is updating during download - *Confirmed*
+
+- Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
+
+5. Confirm when download is complete, icon indicates download was successful - *%{Background:yellow} After waking up, device downloaded and install software version (this is the expected result)%*
+
+6. Confirm device installs upon waking up from Cart Barn Sleep - *Confirmed*
+
+- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed*
+
+9. Put the device into Cart Barn sleep and que another update - *Confirmed*
+
+10. Wake up device, and confirm it downloaded the update (check the download icon status on PlayGolf screen) - *Confirmed*
+
+11. Exit YamaTrack app and check the UUA app (Applies only for OS) - *Confirmed*
+
+- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update
+
+- Confirm within APK Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
+
+- Confirm after installing the update, exiting UUA and then returning to UUA, no updates are available - *Confirmed at 17:36*
+
+
+
+*APK*
+
+*CASE B: Off Hole Sleep*
+
+1. With device awake, que an update within Control - *Confirmed at 18:00*
+
+2. Confirm device recognizes an update available (via logs within Android studio) when falling into Off Hole sleep - *Confirmed*
+
+3. Wake up device, and confirm the Play Golf screen brightens again - *Confirmed*
+
+4. Confirm download status bar is updating during download - *Confirmed*
+
+- Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
+
+- Confirm download status bar is updating during download - *Confirmed*
+
+- Confirm when download is complete, icon indicates download was successful - *Confirmed at 18:08*
+
+Note: Device will never install an update when waking up from/going into Off Hole sleep (it may when going to sleep, but only if sleep period is very short)
+
+
+
+*OS*
+
+*CASE B: Off Hole Sleep*
+
+1. With device awake, que an update within Control - *Confirmed at 18:17*
+
+2. Confirm device recognizes an update available (via logs within Android studio) when falling into Off Hole sleep - *Confirmed*
+
+3. Wake up device, and confirm the Play Golf screen brightens again - *Confirmed*
+
+4. Confirm download status bar is updating during download - *Confirmed*
+
+- Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
+
+- Confirm download status bar is updating during download - *Confirmed*
+
+- Confirm when download is complete, icon indicates download was successful - *Confirmed at 18:18*
+
+Note: Device will never install an update when waking up from/going into Off Hole sleep (it may when going to sleep, but only if sleep period is very short)
+
+5. Exit YamaTrack app and check the UUA app (Applies only for OS) - *Confirmed*
+
+- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update
+
+- Confirm within APK Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
+
+- Confirm after installing the update, exiting UUA and then returning to UUA, no updates are available - *Confirmed*
+
+
+
+*APK*
+
+*CASE C: Upon Boot Up*
+
+1. With device in ship mode/powered off, que an update - *Confirmed at 18:38*
+
+2. Confirm device recognizes an update available (via logs, or by tapping the flag to display the download icon status) when powering on - *Confirmed*
+
+3. Confirm there is no visible interference with the Play Golf/APK while download is taking place - *Confirmed*
+
+4. Confirm download status bar is updating during download - Note: ER=Unknown for this specific step, I don't believe this will apply - *Confirmed*
+
+5. Confirm when download is complete, icon indicates download was successful - *Confirmed*
+
+6. Confirm device installs download upon falling/waking up from sleep - *Confirmed*
+
+- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed at 18:42*
+
+
+
+*OS*
+
+*CASE C: Upon Boot Up*
+
+1. With device in ship mode/powered off, que an update - *Confirmed at 18:17*
+
+2. Confirm device recognizes an update available (via logs, or by tapping the flag to display the download icon status) when powering on - *Confirmed*
+
+3. Confirm there is no visible interference with the Play Golf/APK while download is taking place - *Confirmed*
+
+4. Confirm download status bar is updating during download - Note: ER=Unknown for this specific step, I don't believe this will apply - *Confirmed*
+
+5. Confirm when download is complete, icon indicates download was successful - *Confirmed*
+
+6. Confirm device installs download upon falling/waking up from sleep - *Confirmed*
+
+- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed at 18:25*
+
+
+
+*APK*
+
+*CASE D: Full App Reset*
+
+1. With device awake, que an update in Control - *Confirmed*
+
+2. Select Full App Reset within the APK, Menu options. - *Confirmed at 18:45*
+
+3. Confirm the app resets, and checks/loads any updates. Note this process may be a little longer than normal as it is downloading and installing the updated SW version. - *Confirmed*
+
+4. Confirm app loads completely on Play Golf screen, and does not again reattempt to install software update at a later time. - *Confirmed*
+
+5. Confirm the device installed the updated software version - *Confirmed*
+
+- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed*
+
+
+
+*OS*
+
+*CASE D: Full App Reset*
+
+1. With device awake, que an update in Control - *Confirmed*
+
+2. Select Full App Reset within the APK, Menu options. - *Confirmed at 19:01*
+
+3. Confirm the app resets, and checks/loads any updates. Note this process may be a little longer than normal as it is downloading and installing the updated SW version. - *Confirmed*
+
+4. Confirm app loads completely on Play Golf screen, and does not again reattempt to install software update at a later time. - *Confirmed*
+
+5. Confirm the device installed the updated software version - *Confirmed*
+
+- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed*
+
+
+
+*APK+OS*
+
+*CASE E: Simultaneous OS/APK Updates*
+
+1. With device awake, que BOTH an OS/APK update within Control
+
+2. Confirm device recognizes OS and APK updates upon
+
+- Falling into Cart Barn Sleep - *Confirmed at 20:15*
+
+- Falling into Off Hole Sleep - *Confirmed*
+
+- Waking up from Cart Barn Sleep - *%{Background:yellow} After waking up, device downloaded and install software version (this is the expected result)%*
+
+- Waking up from Off Hole Sleep - *Confirmed at 20:17 First downloaded OS then APK
+
+- Boot up - *Confirmed at 20:35 First downloaded OS then APK*
+
+3. Verify what update takes precedence (OS v. APK) ER = Typically APK because it is faster
+
+4. Confirm Update icon status updates accordingly  - *Confirmed*
+
+5. Confirm the downloaded update installs upon - *Confirmed*
+
+- Falling into Cart Barn Sleep - *Confirmed at 20:23
+
+- Falling into Off Hole Sleep - *Confirmed*
+
+- Waking up from Cart Barn Sleep
+
+- Waking up from Off Hole Sleep - *Confirmed at 21:42  not installed OS and APK*
+
+- Boot up - *Confirmed at 20:46 First installed OS then APK*
+
+6. Note if there is any difference in precedence in what installs first (OS v. APK)
