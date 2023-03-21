@@ -6,7 +6,7 @@ from random import randrange
 def change_time(value):
     time_str = value
     time_obj = datetime.strptime(time_str, '%H:%M')
-    new_time_obj = time_obj + timedelta(hours=2.3, minutes=randrange(3, 6))
+    new_time_obj = time_obj + timedelta(hours=-3.05, minutes=randrange(3, 6))
     new_time_str = new_time_obj.strftime('%H:%M')
     # print(f'{value} -> {new_time_str}')
     return new_time_str

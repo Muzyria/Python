@@ -1,30 +1,102 @@
-*%{background:yellow}WIFI%*
+*Date: 03.13.23
+OS Build: 2.11.12_E
+APK Build: 2.1.84
+Environment: Live
+Cable FW Build: YDTCC2.2_1.1.02VI
+Device(s): YTR
+Device ID: S1011500221118000A
+Test Location: Office
+UUA : 1.4.1
+MB: 1.7*
+
+*%{Background:yellow}All  cases passed with expected behavior%*
+
+h2. Test Plan
+
+*Preconditions:*
+* Assign tablet to the *YURASSIC PARK* test account
+
+h3. I. 1.5x FIXES
+
+*CASE A: Map Loading After Exiting Food/Drink Menu* - Issue #11132 *Confirmed at 14:47*
+* See Issue #11132 for test plan
+
+*CASE B: New Hole Prompt + Advertising* - Issue #11124 *Confirmed at 15:06*
+Confirm bug cannot be reproduced by following workflow in Issue #11124
+
+*CASE C: Advertisement Optimization* - Issue #11111 *Confirmed 15:34*
+* Test with LIVE GPS
+* See Issue #10994-3 for additional test plan
+** (Covers: Advertisement Failing to Download - Issue #10994 / Network Timeout Handling Issue #10774)
 
 
-*C) APK Updates: Regular*
-# Confirm current APK version on device. Power on device, and confirm it is checking in. *Confirmed 2.1.84 13:35*
-# Que new APK version 2.1.71 in Control and hit save. *Confirmed 13:36*
-# Go to YamaTrack Updates to update APK *Confirmed*
-# Click Update, to install new APK version *Confirmed*
-# Confirm update is taking place *Confirmed*
-# Confirm update completes successfully *Confirmed 13:42*
-# Confirm device checks into 360/Control with updated APK build *Confirmed 13:44*
+*CASE D: TCP Library Crash Bug* - Issue #11007 *Confirmed*
+* Please see Issue #10067-22 for test plan.
+* Execute only test plans B and C with follow-up optional suggestion with Wifi Hotspot
+* Make sure device knows SyncWise Wifie network and for hotspot create a network using YamaTrack1 or YamaTrack2 "network names/passwords":https://redmine.syncwise.com/documents/768
 
-*D) APK Update: No Signal*
-# Confirm device checks in and displays current APK version within CONTROL *Confirmed 13:54*
-# Place device in a no signal area (Faraday Cage) and attempt to update APK FW without any signal *Confirmed*
-# Confirm an error message is displayed with a retry option
-# Confirm download is only allowed once it regains some kind of signal *Confirmed*
+*CASE E: Automatic Brightness Update* - #10827 / #10895 *Confirmed*
+* See #10827-4 update 4 for test plan
+* Make sure bug in 10895 is resolved
 
-*E) APK Updates: Initiate Download with initial signal > Loss of Signal*
-# Initiate update, and BEFORE the download can finish, place the device in a no signal area. *Confirmed*
-# Confirm an error message is displayed with a retry option. *Confirmed*
+*CASE F: Beeping to Non Beeping Geofences* - #10853 *Confirmed*
+* Requires testing outdoor with GPS Module
+* Review bug in #10853 and confirm bug is no longer occurring
+** Make sure tablet is configured as an AC cart and do beeping only geofence VS message only geofence
 
-*F) APK Updates: Initiate Download > Loss of Signal > Regain Signal*
-# Initiate update, and BEFORE the download can finish, place the device in a no signal area for a short period of time to delay the download, then take it back out of the signal area to confirm the download can resume and recover. *Unable to to resume download, must restart download all over again*
+*CASE G: Default Distance Unit Settings Handling* - Issue #10850 --- KEY FEATURE *Confirmed*
+* See #10850-3 update 3 for test plan
 
-*G) Download Logs*
-# Confirm ability to download ALL logs
-- verify device receives custom message, logs upload to control, and logs match what was requested *Confirmed 13:57*
-# Confirm ability to download logs BY DAY
-- verify device receives custom message, logs upload to control, and logs match what was requested *Confirmed 14:07*
+*CASE H: App Does Not Crash in Demo Mode* - Issue #10684 (1.5.3) *Confirmed*
+* Review issue and confirm bug cannot be replicated
+
+*CASE I: Update Menu - No Server Info* (1.5.2) - #10610 *Confirmed*
+* Confirm correct error message when requesting updates but with no cellular signal
+* Confirm dynamic updating of screen when returning to good coverage area
+
+
+h3. II. Deep Regression Tests
+
+*CASE A: Asset Lock Down* #13008
+
+*CASE B: Updates via Tablet Sync*: Pin-Locations, Advertisements, Food & Beverage *Confirmed*
+1. With Cell/Wifi Connection
+* Place tablet into cart-barn sleep
+* Within 360 update pin-locations/advertisements/food & beverage
+** For Pin Locations complete:  A) Move the pin location  B) Change the rotation date, from a different date, to the current test date (for example have it set to rotate on Thursday, but update it to Tuesday if testing on a Tuesday)
+* Confirm when waking up if tablet receives updates *Confirmed*
+* With tablet awake - update pin-locations/advertisements/food & beverage items
+* On YTX/YTR go to Menu > Settings > Updates and check to see if an update is recognized for each item, when an update was made
+* If update is recognized, select UPDATE, and confirm update applies *Confirmed*
+
+2. Without Cell/Wifi Connection *Confirmed*
+* Place tablet in cartbarn geofence, and disable cell/wifi.
+* Allow device to go to sleep then update pin locations/advertisements/food & bev within 360
+* Wake up tablet - allow YamaTrack app to fully load on Play Golf Screen
+* Enter scores within scorecard for several holes
+* Enable cell/wifi and confirm if tablet will automatically perform tablet sync (splash screen appears with "Loading Updates" message *Confirmed*
+* Confirm all previous changes updated successfully
+* Confirm scores within scorecard were not cleared *Confirmed*
+
+*CASE C: Dynamic Updates*: Geofences, Pin-Locations *Confirmed*
+* Have tablet on/active
+* Update a geofence settings, turn/on off within 360
+* Wait 2 min. and confirm if updated settings apply
+* Re-draw geofence lines for a specific geofence within 360
+* Wait 2 min. and confirm if updated settings apply  *Confirmed*
+* Update Pin-location for a hole within 360
+* Wait 2 min. and on the YTX select the hole that was updated
+* Confirm the pin-location on the screen updated *Confirmed*
+
+*CASE D: Cart Path Only Functionality* *Confirmed*
+* Confirm new CPO methodology works
+# On Test Course account create multiple CPO geofences associated with different holes
+#  From "Course Map" Screen in Accounts 360, activate "Cart Path Only" for some of the holes, but leave other holes disabled (for example if you created CPO geofences for hole 1, 2, 3, only activate 1 and 3) with SPEED control
+# Confirm that speed control and CPO messages only show up for holes that are active and does not activate in holes that are not active *Confirmed*
+# Change "Cart Path Only" control to "Immediate Shutdown" and repeat step 2
+# When stuck in a shutdown geofence, restore movement through the "Asset Details" >> "Asset Shutdown" screen and press Restore Cart
+# Confirm cart drive-ability is restored *Confirmed*
+
+*CASE E: Screen freezes after tapping Home (Power button) button while going to standby mode*  (1.5.1) - #10758 *Confirmed at 17:25*
+* Review Redmine Issue for nature of the bug and confirm it cannot be replicated
+* Between taps, confirm that no "Android Not Responding" messages arise. *Confirmed*
