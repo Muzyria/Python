@@ -8,7 +8,6 @@ def first_repeated_word(val: str) -> str:
             my_li.append(word)
 
 
-
 print(first_repeated_word("ab ca bc ab"))
 print(first_repeated_word("ab ca bc Ab cA aB bc"))
 print(first_repeated_word("ab ca bc ca ab bc"))
