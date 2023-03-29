@@ -9,14 +9,14 @@ time_list = []
 def change_time(value):
     time_str = value
     time_obj = datetime.strptime(time_str, '%H:%M')
-    new_time_obj = time_obj + timedelta(hours=0.2, minutes=randrange(3, 6))
+    new_time_obj = time_obj + timedelta(hours=1, minutes=randrange(3, 6))
     new_time_str = new_time_obj.strftime('%H:%M')
     # print(f'{value} -> {new_time_str}')
     time_list.append(new_time_str)
     return new_time_str
 
 
-with open('text.txt', 'r',encoding='utf-8') as file:
+with open('text.txt', 'r', encoding='utf-8') as file:
     with open('new_text.txt', 'w', encoding='utf8') as file_write:
         for i in file:
             res = re.findall(r'\d\d:\d\d', i)
