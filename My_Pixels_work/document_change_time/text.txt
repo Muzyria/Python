@@ -81,6 +81,6 @@ Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
 4. Confirm device will   wake by Motion/Touch *Confirmed 17:18*
 - Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 5. Repeat step 1-3 *Confirmed*
-6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 17:31*
+6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 17:28*
 7. Confirm tablet wakes up automatically *Confirmed*
 - Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*
