@@ -46,7 +46,7 @@ while datetime.now() < finish:
     press_button_send_mail()
     press_select_message()
     press_yes_button()
-    print('WAIT FOR 30 SECONDS')
-    time.sleep(30)
+    print('WAIT FOR some SECONDS')
+    time.sleep(15)
     print(f'{start} -> {datetime.now()} -> {finish}')
 
