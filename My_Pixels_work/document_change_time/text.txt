@@ -1,102 +1,96 @@
-*Date: 03.13.23
+*Date: 04.13.23
 OS Build: 2.11.12_E
-APK Build: 2.1.84
+APK Build: 2.1.93
 Environment: Live
-Cable FW Build: YDTCC2.2_1.1.02VI
+Cable FW Build:
 Device(s): YTR
-Device ID: S1011500221118000A
-Test Location: Office
-UUA : 1.4.1
-MB: 1.7*
+Device ID: S10150000211018050
+Test Location:
+UUA : 1.4.0*
 
-*%{Background:yellow}All  cases passed with expected behavior%*
+*%{Background:yellow}Confirmed all cases passed with expected behavior%*
 
-h2. Test Plan
+h2. Each test should be verified with WiFi and Cell connection
 
-*Preconditions:*
-* Assign tablet to the *YURASSIC PARK* test account
+*General Check:* UI in Syncwise 360
 
-h3. I. 1.5x FIXES
+* Go to YamaTrack > Course Setup->“Automatic Flyovers” and confirm there are two available options ON and OFF and each option can be selected *Confirmed*
+* %{background:yellow} Confirm Automatic Flyovers is ON by default%
+* Confirm this setting saves after logging out and log in back to 360
+* Go to YamaTrack > Course Setup->“Map Optimization” and confirm there are two available options ON and OFF and each option can be selected *Confirmed*
+* %{background:yellow} Confirm this setting is OFF by default%
+* Confirm this setting saves after logging out and log in back to 360*Confirmed*
 
-*CASE A: Map Loading After Exiting Food/Drink Menu* - Issue #11132 *Confirmed at 14:47*
-* See Issue #11132 for test plan
+h2. WI FI
 
-*CASE B: New Hole Prompt + Advertising* - Issue #11124 *Confirmed at 15:06*
-Confirm bug cannot be reproduced by following workflow in Issue #11124
+*Case A:* Check Automatic Flyovers in 360
 
-*CASE C: Advertisement Optimization* - Issue #11111 *Confirmed 15:34*
-* Test with LIVE GPS
-* See Issue #10994-3 for additional test plan
-** (Covers: Advertisement Failing to Download - Issue #10994 / Network Timeout Handling Issue #10774)
-
-
-*CASE D: TCP Library Crash Bug* - Issue #11007 *Confirmed*
-* Please see Issue #10067-22 for test plan.
-* Execute only test plans B and C with follow-up optional suggestion with Wifi Hotspot
-* Make sure device knows SyncWise Wifie network and for hotspot create a network using YamaTrack1 or YamaTrack2 "network names/passwords":https://redmine.syncwise.com/documents/768
-
-*CASE E: Automatic Brightness Update* - #10827 / #10895 *Confirmed*
-* See #10827-4 update 4 for test plan
-* Make sure bug in 10895 is resolved
-
-*CASE F: Beeping to Non Beeping Geofences* - #10853 *Confirmed*
-* Requires testing outdoor with GPS Module
-* Review bug in #10853 and confirm bug is no longer occurring
-** Make sure tablet is configured as an AC cart and do beeping only geofence VS message only geofence
-
-*CASE G: Default Distance Unit Settings Handling* - Issue #10850 --- KEY FEATURE *Confirmed*
-* See #10850-3 update 3 for test plan
-
-*CASE H: App Does Not Crash in Demo Mode* - Issue #10684 (1.5.3) *Confirmed*
-* Review issue and confirm bug cannot be replicated
-
-*CASE I: Update Menu - No Server Info* (1.5.2) - #10610 *Confirmed*
-* Confirm correct error message when requesting updates but with no cellular signal
-* Confirm dynamic updating of screen when returning to good coverage area
+# Confirm that Automatic Flyovers is ON by default (both on a tablet during Hole Advance and in 360) *Confirmed*
+# Change from ON to OFF in 360 when the device is active  *Confirmed*
+# Perform Tablet Sync on the tablet *Confirmed*
+# On tablet perform Hole Advance and confirm that Automatic Flyover doesn't trigger *Confirmed*
 
 
-h3. II. Deep Regression Tests
+Please repeat these steps with each following Tablet Sync case (to confirm that setting is received by APK):
+* Cart Barn Sleep *Confirmed at 14:00*
+* Ship Mode / Launch  *Confirmed at 14:07*
+* Off Hole sleep  *Confirmed 14:14*
+* FUll app reset  *Confirmed 14:17*
+* Restart  *Confirmed*
+* Wake up after ACCELWAKETIMEOUT  *Confirmed 14:19*
+* Update All Settings *Confirmed 14:19*
 
-*CASE A: Asset Lock Down* #13008
 
-*CASE B: Updates via Tablet Sync*: Pin-Locations, Advertisements, Food & Beverage *Confirmed*
-1. With Cell/Wifi Connection
-* Place tablet into cart-barn sleep
-* Within 360 update pin-locations/advertisements/food & beverage
-** For Pin Locations complete:  A) Move the pin location  B) Change the rotation date, from a different date, to the current test date (for example have it set to rotate on Thursday, but update it to Tuesday if testing on a Tuesday)
-* Confirm when waking up if tablet receives updates *Confirmed*
-* With tablet awake - update pin-locations/advertisements/food & beverage items
-* On YTX/YTR go to Menu > Settings > Updates and check to see if an update is recognized for each item, when an update was made
-* If update is recognized, select UPDATE, and confirm update applies *Confirmed*
+*Case B:* Check Map Optimization on 360*
 
-2. Without Cell/Wifi Connection *Confirmed*
-* Place tablet in cartbarn geofence, and disable cell/wifi.
-* Allow device to go to sleep then update pin locations/advertisements/food & bev within 360
-* Wake up tablet - allow YamaTrack app to fully load on Play Golf Screen
-* Enter scores within scorecard for several holes
-* Enable cell/wifi and confirm if tablet will automatically perform tablet sync (splash screen appears with "Loading Updates" message *Confirmed*
-* Confirm all previous changes updated successfully
-* Confirm scores within scorecard were not cleared *Confirmed*
+# Confirm that Map Optimization is OFF by default in 360 *Confirmed*
+# On the tablet confirm The Crosby Golf Club has many trees rendered on the Play Golf screen *Confirmed*
+# On the tablet initiate Flyover and confirm map is *not*  rendering in the far distance- please clarify *Confirmed*
+# Change OFF to ON in 360 when the device is active *Confirmed*
+# Perform Tablet Sync on the tablet *Confirmed*
+# On the tablet confirm that The Crosby Golf Club has less trees rendered on the Play Golf screen than it was before *Confirmed*
+# On the tablet initiate Flyover and confirm map is rendering in the far distance as far as camera goes *Confirmed*
 
-*CASE C: Dynamic Updates*: Geofences, Pin-Locations *Confirmed*
-* Have tablet on/active
-* Update a geofence settings, turn/on off within 360
-* Wait 2 min. and confirm if updated settings apply
-* Re-draw geofence lines for a specific geofence within 360
-* Wait 2 min. and confirm if updated settings apply  *Confirmed*
-* Update Pin-location for a hole within 360
-* Wait 2 min. and on the YTX select the hole that was updated
-* Confirm the pin-location on the screen updated *Confirmed*
 
-*CASE D: Cart Path Only Functionality* *Confirmed*
-* Confirm new CPO methodology works
-# On Test Course account create multiple CPO geofences associated with different holes
-#  From "Course Map" Screen in Accounts 360, activate "Cart Path Only" for some of the holes, but leave other holes disabled (for example if you created CPO geofences for hole 1, 2, 3, only activate 1 and 3) with SPEED control
-# Confirm that speed control and CPO messages only show up for holes that are active and does not activate in holes that are not active *Confirmed*
-# Change "Cart Path Only" control to "Immediate Shutdown" and repeat step 2
-# When stuck in a shutdown geofence, restore movement through the "Asset Details" >> "Asset Shutdown" screen and press Restore Cart
-# Confirm cart drive-ability is restored *Confirmed*
+Please repeat these steps with each of the following Tablet Sync case (to confirm that setting is received by APK):
+* Cart Barn Sleep *Confirmed 14:36*
+* Ship Mode / Launch  *Confirmed*
+* Off Hole sleep  *Confirmed 14:41*
+* Full app reset  *Confirmed 14:43*
+* Restart  *Confirmed*
+* Wake up after ACCELWAKETIMEOUT  *Confirmed at 14:57*
+* Update All Settings *Confirmed at 14:59*
 
-*CASE E: Screen freezes after tapping Home (Power button) button while going to standby mode*  (1.5.1) - #10758 *Confirmed at 17:25*
-* Review Redmine Issue for nature of the bug and confirm it cannot be replicated
-* Between taps, confirm that no "Android Not Responding" messages arise. *Confirmed*
+
+h3. +Additional checks+
+
+*Case C:* Automatic Flyovers = ON and Map Optimization = OFF
+
+# Set on 360 Automatic Flyovers = ON and Map Optimization = OFF *Confirmed at 15:14*
+# Move device between holes (Hole Advance) and confirm - Automatic Flyovers works, Course Salt Creek Golf Club has a lot of trees and map is not rendering in the far distance
+
+
+*Case D:*  When Automatic Flyovers = OFF and Map Optimization = OFF
+
+# Set on 360 Automatic Flyovers = OFF and Map Optimization = OFF
+# Move device between holes and confirm - Automatic Flyovers doesn’t works and Course Salt Creek Golf Club has a lot of trees and map is not rendering in the far distance *Confirmed at 15:21*
+
+
+*Case E:* When Automatic Flyovers = ON and Map Optimization = ON
+
+# Set on 360 Automatic Flyovers = ON and Map Optimization = ON
+# Move device between holes and confirm - Automatic Flyovers works and Course Salt Creek Golf Club has few trees and confirm map is rendering in the far distance as far as the camera goes *Confirmed at 15:27*
+
+
+*Case F:* When Automatic Flyovers = OFF and Map Optimization = ON
+
+# Set on 360 Automatic Flyovers = OFF and Map Optimization = ON
+# Move device between holes and confirm - Automatic Flyovers doesn’t works and Course Salt Creek Golf Club has few trees and confirm map is rendering in the far distance as far as the camera goes *Confirmed at 15:32*
+
+*Case G:* Check if Automatic Flyovers and Map Optimization applied after reconnection Network WiFi / Cell
+
+# Update settings in 360,  set automatic Flyovers = OFF and Map Optimization = ON
+# Place device in airplane mode/faraday cage *Confirmed*
+# Allow device to go to Cart Barn Sleep *Confirmed*
+# Wake up device, and confirm settings *DID NOT* change *Confirmed*
+# Enable/Allow data connection, and confirm  Automatic Flyovers doesn’t work and Course Salt Creek Golf Club has few trees map is rendering in the far distance as far as the camera goes *Confirmed*
