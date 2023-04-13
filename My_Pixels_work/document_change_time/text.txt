@@ -32,13 +32,13 @@ h2. WI FI
 
 
 Please repeat these steps with each following Tablet Sync case (to confirm that setting is received by APK):
-* Cart Barn Sleep *Confirmed at 14:00*
-* Ship Mode / Launch  *Confirmed at 14:07*
-* Off Hole sleep  *Confirmed 14:14*
-* FUll app reset  *Confirmed 14:17*
+* Cart Barn Sleep *Confirmed at 10:51*
+* Ship Mode / Launch  *Confirmed at 10:59*
+* Off Hole sleep  *Confirmed 11:07*
+* FUll app reset  *Confirmed 11:11*
 * Restart  *Confirmed*
-* Wake up after ACCELWAKETIMEOUT  *Confirmed 14:19*
-* Update All Settings *Confirmed 14:19*
+* Wake up after ACCELWAKETIMEOUT  *Confirmed 11:21*
+* Update All Settings *Confirmed 11:30*
 
 
 *Case B:* Check Map Optimization on 360*
@@ -53,39 +53,39 @@ Please repeat these steps with each following Tablet Sync case (to confirm that 
 
 
 Please repeat these steps with each of the following Tablet Sync case (to confirm that setting is received by APK):
-* Cart Barn Sleep *Confirmed 14:36*
+* Cart Barn Sleep *Confirmed 11:49*
 * Ship Mode / Launch  *Confirmed*
-* Off Hole sleep  *Confirmed 14:41*
-* Full app reset  *Confirmed 14:43*
+* Off Hole sleep  *Confirmed 12:02*
+* Full app reset  *Confirmed 12:12*
 * Restart  *Confirmed*
-* Wake up after ACCELWAKETIMEOUT  *Confirmed at 14:57*
-* Update All Settings *Confirmed at 14:59*
+* Wake up after ACCELWAKETIMEOUT  *Confirmed at 12:40*
+* Update All Settings *Confirmed at 12:50*
 
 
 h3. +Additional checks+
 
 *Case C:* Automatic Flyovers = ON and Map Optimization = OFF
 
-# Set on 360 Automatic Flyovers = ON and Map Optimization = OFF *Confirmed at 15:14*
+# Set on 360 Automatic Flyovers = ON and Map Optimization = OFF *Confirmed at 13:05*
 # Move device between holes (Hole Advance) and confirm - Automatic Flyovers works, Course Salt Creek Golf Club has a lot of trees and map is not rendering in the far distance
 
 
 *Case D:*  When Automatic Flyovers = OFF and Map Optimization = OFF
 
 # Set on 360 Automatic Flyovers = OFF and Map Optimization = OFF
-# Move device between holes and confirm - Automatic Flyovers doesn’t works and Course Salt Creek Golf Club has a lot of trees and map is not rendering in the far distance *Confirmed at 15:21*
+# Move device between holes and confirm - Automatic Flyovers doesn’t works and Course Salt Creek Golf Club has a lot of trees and map is not rendering in the far distance *Confirmed at 13:12*
 
 
 *Case E:* When Automatic Flyovers = ON and Map Optimization = ON
 
 # Set on 360 Automatic Flyovers = ON and Map Optimization = ON
-# Move device between holes and confirm - Automatic Flyovers works and Course Salt Creek Golf Club has few trees and confirm map is rendering in the far distance as far as the camera goes *Confirmed at 15:27*
+# Move device between holes and confirm - Automatic Flyovers works and Course Salt Creek Golf Club has few trees and confirm map is rendering in the far distance as far as the camera goes *Confirmed at 13:18*
 
 
 *Case F:* When Automatic Flyovers = OFF and Map Optimization = ON
 
 # Set on 360 Automatic Flyovers = OFF and Map Optimization = ON
-# Move device between holes and confirm - Automatic Flyovers doesn’t works and Course Salt Creek Golf Club has few trees and confirm map is rendering in the far distance as far as the camera goes *Confirmed at 15:32*
+# Move device between holes and confirm - Automatic Flyovers doesn’t works and Course Salt Creek Golf Club has few trees and confirm map is rendering in the far distance as far as the camera goes *Confirmed at 13:23*
 
 *Case G:* Check if Automatic Flyovers and Map Optimization applied after reconnection Network WiFi / Cell
 
