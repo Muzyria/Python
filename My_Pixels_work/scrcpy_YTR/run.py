@@ -18,10 +18,10 @@ import time
 
 
 # Получаем текущие координаты курсора
-# while True:
-#     x, y = pyautogui.position()
-#     time.sleep(0.5)
-#     print(f"Текущие координаты курсора: x={x}, y={y}")
+while True:
+    x, y = pyautogui.position()
+    time.sleep(0.5)
+    print(f"Текущие координаты курсора: x={x}, y={y}")
 
 # # Нажимаем клавишу Win (кнопка с логотипом Windows на клавиатуре)
 # pyautogui.press('win')
@@ -45,18 +45,21 @@ import time
 #
 # time.sleep(2)
 
+
+
+
 # открываем командную строку
-pyautogui.hotkey('win', 'r')
-pyautogui.typewrite('cmd')
-pyautogui.press('enter')
-time.sleep(1)
-
-
-# печатаем команду
-pyautogui.typewrite(r'cd C:\scrcpy-win64-v2.0\scrcpy-win64-v2.0')
-pyautogui.press('enter')
-
-pyautogui.typewrite(r'scrcpy --tcpip=192.168.2.30:5555')
-pyautogui.press('enter')
+# pyautogui.hotkey('win', 'r')
+# pyautogui.typewrite('cmd')
+# pyautogui.press('enter')
+# time.sleep(1)
+#
+#
+# # печатаем команду
+# pyautogui.typewrite(r'cd C:\scrcpy-win64-v2.0\scrcpy-win64-v2.0')
+# pyautogui.press('enter')
+#
+# pyautogui.typewrite(r'scrcpy --tcpip=192.168.2.30:5555')
+# pyautogui.press('enter')
 
 
