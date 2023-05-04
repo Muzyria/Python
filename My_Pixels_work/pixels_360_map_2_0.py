@@ -140,8 +140,8 @@ class NoTest1:
 test = NoTest1()
 test.driwing_map()
 
-test.action_draw()
-# test.add_geofence(300, 450, 50, 1)
+# test.action_draw()
+test.add_geofence(300, 450, 50, 1)
 # test.add_randome_geofence()
 
 test.driver.close()
