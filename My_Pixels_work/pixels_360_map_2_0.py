@@ -39,7 +39,7 @@ class NoTest1:
         button_login = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="helo"]/app-auth/app-login/form/div/div/div[2]/div/div[2]/div[3]/button')))
         button_login.click()
         print('Click Login Button')
-        time.sleep(20)
+        time.sleep(10)
 
         #  ASSERT TRACKER
         button_close_slidebar = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="closeSidebarbtn"]')))

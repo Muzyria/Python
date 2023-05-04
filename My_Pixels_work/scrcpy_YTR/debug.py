@@ -107,8 +107,8 @@
 #         # Перемещаем курсор на новые координаты
 #         pyautogui.moveTo(x, y)
 
-import subprocess
-
-# Запускаем Telegram Desktop
-subprocess.Popen(r"C:\Users\Fila\AppData\Roaming\Telegram Desktop\Telegram.exe")
+# import subprocess
+#
+# # Запускаем Telegram Desktop
+# subprocess.Popen(r"C:\Users\Fila\AppData\Roaming\Telegram Desktop\Telegram.exe")
 
