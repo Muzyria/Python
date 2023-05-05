@@ -15,8 +15,8 @@ class NoTest1:
     def __init__(self):
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
-    def driwing_map(self):
-
+    def login_site(self):
+        """login site and enter"""
         base_url = 'https://sandbox.syncwise360.com/login'
         self.driver.get(base_url)
         self.driver.maximize_window()
@@ -27,45 +27,52 @@ class NoTest1:
         login_standard_user = "igorperetssuperior"
         password_all = "1234"
 
-        #  LOGIN PAGE
+        # LOGIN PAGE
+        # INPUT LOGIN
         user_name = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="username"]')))
         user_name.send_keys(login_standard_user)
         print('Input Login')
 
+        # INPUT PASSWORD
         password = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@id="password"]')))
         password.send_keys(password_all)
         print('Input Password')
 
+        # CLICK LOGIN BUTTON
         button_login = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="helo"]/app-auth/app-login/form/div/div/div[2]/div/div[2]/div[3]/button')))
         button_login.click()
         print('Click Login Button')
-        time.sleep(10)
+        time.sleep(5)
 
-        #  ASSERT TRACKER
+    def assert_tracker_close_slide(self):
+        """ASSERT TRACKER"""
         button_close_slidebar = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="closeSidebarbtn"]')))
         button_close_slidebar.click()
         print('Click Close SlideBar Button')
         time.sleep(3)
 
-        #  Geofence Button
+    def geofence_button_click(self):
+        """Geofence Button"""
         button_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="geofenceZones"]')))
         button_geofence.click()
         print('Click Geofence Button')
         time.sleep(3)
 
-    def add_geofence(self, center_x, center_y, radius, ind):
-        #  ADD Geofence
-        button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="closeModal p-0 ng-star-inserted"]')))
+    def add_geofence_button_click(self):
+        """ADD Geofence button click"""
+        button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[class="closeModal p-0 ng-star-inserted"]')))
         button_add_geofence.click()
         print('Click ADD Geofence Button')
         time.sleep(1)
 
+    def input_name_geofence(self, id_number):
         #  INPUT NAME Geofence
         input_name_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@class="ng-untouched ng-pristine ng-invalid"]')))
-        input_name_geofence.send_keys(f'Please_DELETE_My_Test_geofence_{ind}')
-        print(f'Input NAME GEOFENCE {ind}')
+        input_name_geofence.send_keys(f'Please_DELETE_My_Test_geofence_{id_number}')
+        print(f'Input NAME GEOFENCE {id_number}')
         time.sleep(1)
 
+    def choice_command_geofence(self):
         # SELECT ListCommand Geofence
         select_command_list = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//select[@class="ng-untouched ng-pristine ng-invalid"]')))
         select_command_list.click()
@@ -81,69 +88,159 @@ class NoTest1:
         pyautogui.click(button='left')
         time.sleep(1)
 
-
-
+    def input_custom_message(self):
         # Input Custom Message
         pyautogui.scroll(-300)
         time.sleep(1)
-
         select_message = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="helo"]/app-pages/div/div/div[2]/app-coursemap/div/div[1]/app-geofence/div[2]/div/div/form/ng-scrollbar/div/div/div/div/div/div[6]/textarea')))
         # select_message.click()
         select_message.send_keys("This geofence was created automatically")
-
         print('Click Clik Message')
 
+    # def draw_geofens(self):
+    #     #  Рисуем геофенс -------------------------------------------------------------------------->
+    #     # Устанавливаем центр окружности
+    #     center_x, center_y = center_x, center_y
+    #     # Устанавливаем радиус окружности
+    #     radius = radius
+    #     # Вычисляем количество шагов для обхода окружности
+    #     num_steps = int(420 / 60)
+    #     # Вычисляем шаг угла для каждого шага
+    #     step_angle = 60 * math.pi / 180
+    #     # Устанавливаем задержку между шагами
+    #     pyautogui.PAUSE = 0.1
+    #     # Движение курсора по окружности
+    #     for i in range(num_steps):
+    #         # Вычисляем координаты точки на окружности
+    #         x = center_x + radius * math.cos(i * step_angle)
+    #         y = center_y + radius * math.sin(i * step_angle)
+    #         # Перемещаем курсор на новые координаты
+    #         pyautogui.moveTo(x, y)
+    #         pyautogui.click(button='left')
+    #
+    #     # pyautogui.click(button='left')
 
-        #  Рисуем геофенс -------------------------------------------------------------------------->
-        # Устанавливаем центр окружности
-        center_x, center_y = center_x, center_y
-        # Устанавливаем радиус окружности
-        radius = radius
-        # Вычисляем количество шагов для обхода окружности
-        num_steps = int(420 / 60)
-        # Вычисляем шаг угла для каждого шага
-        step_angle = 60 * math.pi / 180
-        # Устанавливаем задержку между шагами
-        pyautogui.PAUSE = 0.1
-        # Движение курсора по окружности
-        for i in range(num_steps):
-            # Вычисляем координаты точки на окружности
-            x = center_x + radius * math.cos(i * step_angle)
-            y = center_y + radius * math.sin(i * step_angle)
-            # Перемещаем курсор на новые координаты
-            pyautogui.moveTo(x, y)
-            pyautogui.click(button='left')
+    def canvas(self):
+        """CANVAS"""
+        obj_canvas = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'canvas[class="leaflet-zoom-animated"]')))
+        location = obj_canvas.location
+        size = obj_canvas.size
+        x = location['x']
+        y = location['y']
+        width = size['width']
+        height = size['height']
 
-        # pyautogui.click(button='left')
+        print("Границы элеиента: x={}, y={}, width={}, height={}".format(x, y, width, height))
 
+        # Определяем центр и радиус круга
+        center_x = 0  # X-координата центра круга
+        center_y = 0  # Y-координата центра круга
+        radius = 70  # Радиус круга
+
+        # Определяем траекторию движения курсора
+        num_points = 36  # Количество точек на траектории
+        angle_increment = 2 * math.pi / num_points  # Шаг изменения угла
+        speed = 0.01  # Скорость движения курсора
+
+        # Создаем экземпляр ActionChains
+        actions = ActionChains(self.driver)
+
+        # Перемещаем курсор по траектории круга
+        for i in range(num_points + 1):
+            angle = i * angle_increment
+            x = center_x + radius * math.cos(angle)
+            y = center_y + radius * math.sin(angle)
+            actions.move_to_element_with_offset(obj_canvas, x, y).click().perform()
+            time.sleep(speed)
+
+    def canvas_2(self):
+        """CANVAS 2 """
+        obj_canvas = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'canvas[class="leaflet-zoom-animated"]')))
+        self.driver.execute_script("""
+            var ctx = arguments[0].getContext("2d");
+            var centerX = 750;
+            var centerY = 300;
+            var radius = 100;
+            var numPoints = 5;
+            var angleIncrement = (2 * Math.PI) / numPoints;
+
+            ctx.beginPath();
+            for (var i = 0; i < numPoints * 2; i++) {
+                var angle = i * angleIncrement;
+                var x, y;
+                if (i % 2 === 0) {
+                    x = centerX + radius * Math.cos(angle);
+                    y = centerY + radius * Math.sin(angle);
+                } else {
+                    x = centerX + radius / 2 * Math.cos(angle);
+                    y = centerY + radius / 2 * Math.sin(angle);
+                }
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.closePath();
+            ctx.fillStyle = "yellow";
+            ctx.fill();
+        """, obj_canvas)
+
+    def canvas_3(self):
+        """CANVAS 3 """
+        canvas = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'canvas[class="leaflet-zoom-animated"]')))
+        # Создаем экземпляр ActionChains
+        actions = ActionChains(self.driver)
+        center_x = 0
+        center_y = 0
+        outer_radius = 100
+        inner_radius = outer_radius / 2
+        num_points = 5  # Количество вершин звезды
+        angle_increment = 2 * math.pi / num_points
+
+        for i in range(num_points + 1):
+            outer_angle = i * angle_increment
+            inner_angle = outer_angle + angle_increment / 2
+
+            outer_x = center_x + outer_radius * math.cos(outer_angle)
+            outer_y = center_y + outer_radius * math.sin(outer_angle)
+            inner_x = center_x + inner_radius * math.cos(inner_angle)
+            inner_y = center_y + inner_radius * math.sin(inner_angle)
+
+            actions.move_to_element_with_offset(canvas, outer_x, outer_y).click().perform()
+            actions.move_to_element_with_offset(canvas, inner_x, inner_y).click().perform()
+
+            time.sleep(0.01)  # Пауза для наглядности
+
+    def button_save_click(self):
         # Press Button SAVE
         button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="btn"]')))
         button_add_geofence.click()
         print('Click SAVE Button')
         time.sleep(7)
 
-    @staticmethod
-    def action_draw():
-        x, y, radius_val = 350, 700, 100
-        count = 1
-        for _ in range(3):
-            x = 350
-            for _ in range(1, 8):
-                test.add_geofence(x, y, radius_val, count)
-                x += 100
-                count += 1
-            y += 100
-
-
+    # @staticmethod
+    # def action_draw():
+    #     x, y, radius_val = 350, 700, 100
+    #     count = 1
+    #     for _ in range(3):
+    #         x = 350
+    #         for _ in range(1, 8):
+    #             test.add_geofence(x, y, radius_val, count)
+    #             x += 100
+    #             count += 1
+    #         y += 100
 
 
 test = NoTest1()
-test.driwing_map()
+test.login_site()
+test.assert_tracker_close_slide()
+test.geofence_button_click()
+test.add_geofence_button_click()
+# test.canvas()
+test.canvas_3()
 
-# test.action_draw()
-test.add_geofence(300, 450, 50, 1)
-# test.add_randome_geofence()
-
+time.sleep(100)
 test.driver.close()
 
 
