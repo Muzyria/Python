@@ -39,7 +39,7 @@ class NoTest1:
         button_login = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="helo"]/app-auth/app-login/form/div/div/div[2]/div/div[2]/div[3]/button')))
         button_login.click()
         print('Click Login Button')
-        time.sleep(20)
+        time.sleep(10)
 
         #  ASSERT TRACKER
         button_close_slidebar = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="closeSidebarbtn"]')))
@@ -75,8 +75,8 @@ class NoTest1:
         select_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="9 mph with beeping "]')))
         select_command.click()
         print('Click 9 mph with beeping ')
-        x = 1485
-        y = 693
+        x = 1755
+        y = 653
         pyautogui.moveTo(x, y)
         pyautogui.click(button='left')
         time.sleep(1)
@@ -124,7 +124,7 @@ class NoTest1:
 
     @staticmethod
     def action_draw():
-        x, y, radius_val = 350, 700, 50
+        x, y, radius_val = 350, 700, 100
         count = 1
         for _ in range(3):
             x = 350
@@ -135,75 +135,14 @@ class NoTest1:
             y += 100
 
 
-    def add_randome_geofence(self):
-        #  ADD Geofence
-        button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="closeModal p-0 ng-star-inserted"]')))
-        button_add_geofence.click()
-        print('Click ADD Geofence Button')
-        time.sleep(1)
 
-        #  INPUT NAME Geofence
-        input_name_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@class="ng-untouched ng-pristine ng-invalid"]')))
-        input_name_geofence.send_keys(f'Please_DELETE_My_Test_geofence_R')
-        print(f'Input NAME GEOFENCE R')
-        time.sleep(1)
-
-        # SELECT ListCommand Geofence
-        select_command_list = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//select[@class="ng-untouched ng-pristine ng-invalid"]')))
-        select_command_list.click()
-        print('Click select_command_list')
-        time.sleep(2)
-        # Select command
-        select_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="9 mph with beeping "]')))
-        select_command.click()
-        print('Click 9 mph with beeping ')
-        x = 1485
-        y = 693
-        pyautogui.moveTo(x, y)
-        pyautogui.click(button='left')
-        time.sleep(1)
-
-
-
-        # Input Custom Message
-        pyautogui.scroll(-300)
-        time.sleep(1)
-
-        select_message = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="helo"]/app-pages/div/div/div[2]/app-coursemap/div/div[1]/app-geofence/div[2]/div/div/form/ng-scrollbar/div/div/div/div/div/div[6]/textarea')))
-        # select_message.click()
-        select_message.send_keys("This geofence was created automatically")
-
-        print('Click Clik Message')
-
-
-        #  Рисуем геофенс -------------------------------------------------------------------------->
-        start_x, start_y = 300, 450
-        pyautogui.moveTo(start_x, start_y)
-        pyautogui.click(button='left')
-        pyautogui.PAUSE = 0.15
-
-        for i in range(500):
-            pyautogui.moveTo(random.randrange(300, 900), random.randrange(450, 850))
-            pyautogui.click(button='left')
-            # Устанавливаем задержку между шагами
-            pyautogui.PAUSE = 0.15
-
-        pyautogui.moveTo(start_x, start_y)
-        pyautogui.click(button='left')
-        pyautogui.PAUSE = 0.15
-
-        # Press Button SAVE
-        button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="btn"]')))
-        button_add_geofence.click()
-        print('Click SAVE Button')
-        time.sleep(7)
 
 test = NoTest1()
 test.driwing_map()
 
 # test.action_draw()
-# test.add_geofence(300, 450, 50, 1)
-test.add_randome_geofence()
+test.add_geofence(300, 450, 50, 1)
+# test.add_randome_geofence()
 
 test.driver.close()
 
