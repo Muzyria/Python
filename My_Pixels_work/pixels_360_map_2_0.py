@@ -58,6 +58,13 @@ class NoTest1:
         print('Click Geofence Button')
         time.sleep(3)
 
+    def choice_type_geofence(self):
+        """click on drop-down list and select type of geofence"""
+        drop_list_type_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[class="mat-select-trigger ng-tns-c67-0"]')))
+        drop_list_type_geofence.click()
+        print('click on drop-down list')
+        time.sleep(1)
+
     def add_geofence_button_click(self):
         """ADD Geofence button click"""
         button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[class="closeModal p-0 ng-star-inserted"]')))
@@ -82,11 +89,11 @@ class NoTest1:
         select_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="9 mph with beeping "]')))
         select_command.click()
         print('Click 9 mph with beeping ')
-        x = 1755
-        y = 653
-        pyautogui.moveTo(x, y)
-        pyautogui.click(button='left')
-        time.sleep(1)
+        # x = 1755
+        # y = 653
+        # pyautogui.moveTo(x, y)
+        # pyautogui.click(button='left')
+        # time.sleep(1)
 
     def input_custom_message(self):
         # Input Custom Message
@@ -253,10 +260,12 @@ test = NoTest1()
 test.login_site()
 test.assert_tracker_close_slide()
 test.geofence_button_click()
-test.add_geofence_button_click()
-test.input_name_geofence('100')
+test.choice_type_geofence()
 
-test.canvas_4()
+# test.add_geofence_button_click()
+# test.input_name_geofence('100')
+
+# test.canvas_4()
 
 
 time.sleep(60)
