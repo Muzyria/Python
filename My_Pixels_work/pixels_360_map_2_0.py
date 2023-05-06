@@ -208,14 +208,24 @@ class NoTest1:
         width = size['width']
         height = size['height']
 
-        print("Границы элеиента: x={}, y={}, width={}, height={}".format(x, y, width, height))
+        print("Границы элемента: x={}, y={}, width={}, height={}".format(x, y, width, height))
+
+        obj_pop_div_menu = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[class="commonPopup"]')))
+        location_div_menu = obj_pop_div_menu.location
+        size_div_menu = obj_pop_div_menu.size
+        x_div = location_div_menu['x']
+        y_div = location_div_menu['y']
+        width_div = size_div_menu['width']
+        height_div = size_div_menu['height']
+
+        print("Границы элемента div_menu: x={}, y={}, width={}, height={}".format(x_div, y_div, width_div, height_div))
 
         # Определяем
 
         center_x = 0  # X-координата центра (центр экрана = 0)
         center_y = 0  # Y-координата центра (центр экрана = 0)
         coordinate_x_start = (width // 2 - 100) * -1
-        coordinate_x_finish = 350
+        coordinate_x_finish = width // 2 - width_div - 100
         coordinate_y_start = (height // 2 - 100) * -1
         coordinate_y_finish = height // 2 - 100
 
@@ -260,12 +270,12 @@ test = NoTest1()
 test.login_site()
 test.assert_tracker_close_slide()
 test.geofence_button_click()
-test.choice_type_geofence()
+# test.choice_type_geofence()
 
-# test.add_geofence_button_click()
-# test.input_name_geofence('100')
+test.add_geofence_button_click()
+test.input_name_geofence('100')
 
-# test.canvas_4()
+test.canvas_4()
 
 
 time.sleep(60)
