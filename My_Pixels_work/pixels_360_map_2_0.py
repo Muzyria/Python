@@ -39,7 +39,7 @@ class NoTest1:
         print('Input Password')
 
         # CLICK LOGIN BUTTON
-        button_login = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="helo"]/app-auth/app-login/form/div/div/div[2]/div/div[2]/div[3]/button')))
+        button_login = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[aria-label="submit"]')))
         button_login.click()
         print('Click Login Button')
         time.sleep(5)
@@ -52,7 +52,7 @@ class NoTest1:
         time.sleep(3)
 
     def geofence_button_click(self):
-        """Geofence Button"""
+        """Geofence Button click on right side screen"""
         button_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@id="geofenceZones"]')))
         button_geofence.click()
         print('Click Geofence Button')
@@ -66,9 +66,9 @@ class NoTest1:
         time.sleep(1)
 
     def input_name_geofence(self, id_number):
-        #  INPUT NAME Geofence
+        """INPUT NAME Geofence"""
         input_name_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//input[@class="ng-untouched ng-pristine ng-invalid"]')))
-        input_name_geofence.send_keys(f'Please_DELETE_My_Test_geofence_{id_number}')
+        input_name_geofence.send_keys(f'My_Test_geofence_{id_number}')
         print(f'Input NAME GEOFENCE {id_number}')
         time.sleep(1)
 
@@ -97,29 +97,6 @@ class NoTest1:
         select_message.send_keys("This geofence was created automatically")
         print('Click Clik Message')
 
-    # def draw_geofens(self):
-    #     #  Рисуем геофенс -------------------------------------------------------------------------->
-    #     # Устанавливаем центр окружности
-    #     center_x, center_y = center_x, center_y
-    #     # Устанавливаем радиус окружности
-    #     radius = radius
-    #     # Вычисляем количество шагов для обхода окружности
-    #     num_steps = int(420 / 60)
-    #     # Вычисляем шаг угла для каждого шага
-    #     step_angle = 60 * math.pi / 180
-    #     # Устанавливаем задержку между шагами
-    #     pyautogui.PAUSE = 0.1
-    #     # Движение курсора по окружности
-    #     for i in range(num_steps):
-    #         # Вычисляем координаты точки на окружности
-    #         x = center_x + radius * math.cos(i * step_angle)
-    #         y = center_y + radius * math.sin(i * step_angle)
-    #         # Перемещаем курсор на новые координаты
-    #         pyautogui.moveTo(x, y)
-    #         pyautogui.click(button='left')
-    #
-    #     # pyautogui.click(button='left')
-
     def canvas(self):
         """CANVAS"""
         obj_canvas = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'canvas[class="leaflet-zoom-animated"]')))
@@ -133,12 +110,14 @@ class NoTest1:
         print("Границы элеиента: x={}, y={}, width={}, height={}".format(x, y, width, height))
 
         # Определяем центр и радиус круга
-        center_x = 0  # X-координата центра круга
-        center_y = 0  # Y-координата центра круга
-        radius = 70  # Радиус круга
+        random_coordinate_x = random.randint(-600, 200)
+        random_coordinate_y = random.randint(-300, 300)
+        center_x = random_coordinate_x  # X-координата центра круга (центр экрана = 0)
+        center_y = random_coordinate_y  # Y-координата центра круга (центр экрана = 0)
+        radius = 30  # Радиус круга
 
         # Определяем траекторию движения курсора
-        num_points = 36  # Количество точек на траектории
+        num_points = 12  # Количество точек на траектории
         angle_increment = 2 * math.pi / num_points  # Шаг изменения угла
         speed = 0.01  # Скорость движения курсора
 
@@ -191,11 +170,11 @@ class NoTest1:
         canvas = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'canvas[class="leaflet-zoom-animated"]')))
         # Создаем экземпляр ActionChains
         actions = ActionChains(self.driver)
-        center_x = 0
-        center_y = 0
-        outer_radius = 100
-        inner_radius = outer_radius / 2
-        num_points = 5  # Количество вершин звезды
+        center_x = -600
+        center_y = -100
+        outer_radius = 40
+        inner_radius = outer_radius / 4
+        num_points = 4  # Количество вершин звезды
         angle_increment = 2 * math.pi / num_points
 
         for i in range(num_points + 1):
@@ -211,6 +190,44 @@ class NoTest1:
             actions.move_to_element_with_offset(canvas, inner_x, inner_y).click().perform()
 
             time.sleep(0.01)  # Пауза для наглядности
+
+    def canvas_4(self):
+        """CANVAS 4"""
+        obj_canvas = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'canvas[class="leaflet-zoom-animated"]')))
+        location = obj_canvas.location
+        size = obj_canvas.size
+        x = location['x']
+        y = location['y']
+        width = size['width']
+        height = size['height']
+
+        print("Границы элеиента: x={}, y={}, width={}, height={}".format(x, y, width, height))
+
+        # Определяем
+
+        center_x = 0  # X-координата центра (центр экрана = 0)
+        center_y = 0  # Y-координата центра (центр экрана = 0)
+        coordinate_x_start = (width // 2 - 100) * -1
+        coordinate_x_finish = 350
+        coordinate_y_start = (height // 2 - 100) * -1
+        coordinate_y_finish = height // 2 - 100
+
+        # Создаем экземпляр ActionChains
+        actions = ActionChains(self.driver)
+
+        # Перемещаем курсор по траектории
+        print(coordinate_x_start, coordinate_y_start, coordinate_x_finish, coordinate_y_finish)
+
+        actions.move_to_element_with_offset(obj_canvas, coordinate_x_start, coordinate_y_start).click().perform()  # -x -y
+        print(coordinate_x_start, coordinate_y_start)
+        actions.move_to_element_with_offset(obj_canvas, coordinate_x_finish, coordinate_y_start).click().perform()  # +x -y
+        print(coordinate_x_finish, coordinate_y_start)
+        actions.move_to_element_with_offset(obj_canvas, coordinate_x_finish, coordinate_y_finish).click().perform()  # +x +y
+        print(coordinate_x_finish, coordinate_y_finish)
+        actions.move_to_element_with_offset(obj_canvas, coordinate_x_start, coordinate_y_finish).click().perform()  # -x +y
+        print(coordinate_x_start, coordinate_y_finish)
+        actions.move_to_element_with_offset(obj_canvas, coordinate_x_start, coordinate_y_start).click().perform()  # -x -y
+
 
     def button_save_click(self):
         # Press Button SAVE
@@ -237,10 +254,12 @@ test.login_site()
 test.assert_tracker_close_slide()
 test.geofence_button_click()
 test.add_geofence_button_click()
-# test.canvas()
-test.canvas_3()
+test.input_name_geofence('100')
 
-time.sleep(100)
+test.canvas_4()
+
+
+time.sleep(60)
 test.driver.close()
 
 
