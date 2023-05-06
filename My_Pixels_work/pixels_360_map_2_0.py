@@ -65,9 +65,10 @@ class NoTest1:
         print('click on drop-down list')
         time.sleep(1)
 
-        list_box_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[role="listbox"]')))
-        print(list_box_geofence.text)
-
+        list_box_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((
+            By.CSS_SELECTOR, f'div[role="listbox"] mat-option:nth-of-type({random.randint(1, 4)}) span'))) # надо реализовать выбор по номеру
+        list_box_geofence.click()
+        print(f'Выбран пункт меню {list_box_geofence.text}')
 
     def add_geofence_button_click(self):
         """ADD Geofence button click"""
@@ -85,19 +86,18 @@ class NoTest1:
 
     def choice_command_geofence(self):
         # SELECT ListCommand Geofence
-        select_command_list = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//select[@class="ng-untouched ng-pristine ng-invalid"]')))
+        select_command_list = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((
+            By.XPATH, '//select[@formcontrolname="controlLevel"]')))
         select_command_list.click()
         print('Click select_command_list')
-        time.sleep(2)
+        print(select_command_list.text)
+        time.sleep(1)
+
         # Select command
         select_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="9 mph with beeping "]')))
-        select_command.click()
-        print('Click 9 mph with beeping ')
-        # x = 1755
-        # y = 653
-        # pyautogui.moveTo(x, y)
-        # pyautogui.click(button='left')
-        # time.sleep(1)
+
+        print('Click ')
+
 
     def input_custom_message(self):
         # Input Custom Message
@@ -290,12 +290,10 @@ test = NoTest1()
 test.login_site()
 test.assert_tracker_close_slide()
 test.geofence_button_click()
-test.choice_type_geofence()
-
-
-# test.add_geofence_button_click()
-# test.input_name_geofence('100')
-
+# test.choice_type_geofence()
+test.add_geofence_button_click()
+test.input_name_geofence('100')
+test.choice_command_geofence()
 
 
 
