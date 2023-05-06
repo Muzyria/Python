@@ -65,6 +65,10 @@ class NoTest1:
         print('click on drop-down list')
         time.sleep(1)
 
+        list_box_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div[role="listbox"]')))
+        print(list_box_geofence.text)
+
+
     def add_geofence_button_click(self):
         """ADD Geofence button click"""
         button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[class="closeModal p-0 ng-star-inserted"]')))
@@ -286,15 +290,16 @@ test = NoTest1()
 test.login_site()
 test.assert_tracker_close_slide()
 test.geofence_button_click()
-# test.choice_type_geofence()
-
-test.add_geofence_button_click()
-test.input_name_geofence('100')
-
-test.canvas_4()
+test.choice_type_geofence()
 
 
-time.sleep(60)
+# test.add_geofence_button_click()
+# test.input_name_geofence('100')
+
+
+
+
+time.sleep(5)
 test.driver.close()
 
 
