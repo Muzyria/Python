@@ -220,12 +220,28 @@ class NoTest1:
 
         print("Границы элемента div_menu: x={}, y={}, width={}, height={}".format(x_div, y_div, width_div, height_div))
 
+        obj_right_panel_button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.rightPanelButton')))
+        location_right_panel_button = obj_right_panel_button.location
+        size_right_panel_button = obj_right_panel_button.size
+        x_right_panel_button = location_right_panel_button['x']
+        y_right_panel_button = location_right_panel_button['y']
+        width_right_panel_button = size_right_panel_button['width']
+        height_right_panel_button = size_right_panel_button['height']
+
+        print(obj_right_panel_button.location)
+        print(obj_right_panel_button.size)
+        print("Границы элемента right_panel_button: x={}, y={}, width={}, height={}".format(x_right_panel_button,
+                                                                                  y_right_panel_button,
+                                                                                  width_right_panel_button,
+                                                                                  height_right_panel_button))
+
+
         # Определяем
 
         center_x = 0  # X-координата центра (центр экрана = 0)
         center_y = 0  # Y-координата центра (центр экрана = 0)
         coordinate_x_start = (width // 2 - 100) * -1
-        coordinate_x_finish = width // 2 - width_div - 100
+        coordinate_x_finish = width // 2 - width_div - width_right_panel_button - 80
         coordinate_y_start = (height // 2 - 100) * -1
         coordinate_y_finish = height // 2 - 100
 
