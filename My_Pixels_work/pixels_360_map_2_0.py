@@ -85,28 +85,27 @@ class NoTest1:
         time.sleep(1)
 
     def choice_command_geofence(self):
-        # SELECT ListCommand Geofence
+        """SELECT List Command Geofence"""
         select_command_list = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((
             By.XPATH, '//select[@formcontrolname="controlLevel"]')))
         select_command_list.click()
         print('Click select_command_list')
-        print(select_command_list.text)
+        # print(select_command_list.text)
         time.sleep(1)
 
         # Select command
-        select_command = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//option[text()="9 mph with beeping "]')))
 
-        print('Click ')
-
+        select_command = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located(
+            (By.CSS_SELECTOR, f'select[formcontrolname="controlLevel"] option:nth-child({random.randint(2, 26)})'))) # надо доделать рандом и клик по спимку
+        name_command_geofence = select_command.text
+        select_command.click()
+        print(f'Select and click command {name_command_geofence}')
+        time.sleep(1)
 
     def input_custom_message(self):
-        # Input Custom Message
-        pyautogui.scroll(-300)
-        time.sleep(1)
-        select_message = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="helo"]/app-pages/div/div/div[2]/app-coursemap/div/div[1]/app-geofence/div[2]/div/div/form/ng-scrollbar/div/div/div/div/div/div[6]/textarea')))
-        # select_message.click()
+        select_message = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'textarea[placeholder="Enter instructions"]')))
         select_message.send_keys("This geofence was created automatically")
-        print('Click Clik Message')
+        print('CREATE Custom Message')
 
     def canvas(self):
         """CANVAS"""
@@ -265,7 +264,6 @@ class NoTest1:
         print(coordinate_x_start, coordinate_y_finish)
         actions.move_to_element_with_offset(obj_canvas, coordinate_x_start, coordinate_y_start).click().perform()  # -x -y
 
-
     def button_save_click(self):
         # Press Button SAVE
         button_add_geofence = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//button[@class="btn"]')))
@@ -294,7 +292,8 @@ test.geofence_button_click()
 test.add_geofence_button_click()
 test.input_name_geofence('100')
 test.choice_command_geofence()
-
+test.input_custom_message()
+test.button_save_click()
 
 
 time.sleep(5)
