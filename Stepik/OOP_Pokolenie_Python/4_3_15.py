@@ -1,9 +1,9 @@
 class Wordplay:
     def __init__(self, words=None):
-        if not words:
-            self.words = []
-        else:
-            self.words = words
+        self.words = []
+        if words:
+            for word in words:
+                self.add_word(word)
 
     def add_word(self, word: str):
         if word not in self.words:
