@@ -1,54 +1,47 @@
 class Knight:
-    X = 'abcdefgh'
-    Y = '87654321'
-
-    def __init__(self, horizontal: str, vertical: int, color: str):
-        self.horizontal = Knight.X.index(horizontal)
-        self.vertical = Knight.Y.index(str(vertical))
+    def __init__(self, col, row, color):
+        self.horizontal = col
+        self.vertical = row
         self.color = color
-        self.board = [['.'] * 8 for _ in range(8)]
-        for i in range(8):
-            for j in range(8):
-                if i == self.vertical and j == self.horizontal:
-                    self.board[i][j] = self.get_char()
-                if abs(self.horizontal - j) * abs(self.vertical - i) == 2:
-                    self.board[i][j] = '*'
-
 
     def get_char(self):
         return 'N'
 
-    def can_move(self, *coordinate):
-        # x1, y1, x2, y2 =
+    def can_move(self, col, row):
+        return (ord(self.horizontal) - ord(col)) ** 2 + (self.vertical - row) ** 2 == 5
 
-        # if ((x1 - x2) * (y1 - y2)) == 2 or ((x1 - x2) * (y1 - y2)) == -2:
-        #     print('YES')
-        # else:
-        #     print('NO')
-        pass
-
-    def move_to(self):
-        pass
+    def move_to(self, col, row):
+        if self.can_move(col, row):
+            self.horizontal = col
+            self.vertical = row
 
     def draw_board(self):
-        [print(*row) for row in self.board]
+        for row in range(8, 0, -1):
+            for col in 'abcdefgh':
+                if self.horizontal == col and self.vertical == row:
+                    print(self.get_char(), end='')
+                elif self.can_move(col, row):
+                    print('*', end='')
+                else:
+                    print('.', end='')
+            print()
 
 
-# knight = Knight('c', 3, 'white')
+knight = Knight('c', 3, 'white')
+
+print(knight.color, knight.get_char())
+print(knight.horizontal, knight.vertical)
+# white N
+# c 3
 #
-# print(knight.color, knight.get_char())
-# print(knight.horizontal, knight.vertical)
-# # white N
-# # c 3
+knight = Knight('c', 3, 'white')
+
+print(knight.horizontal, knight.vertical)
+print(knight.can_move('e', 5))
+print(knight.can_move('e', 4))
 #
-# knight = Knight('c', 3, 'white')
-#
-# print(knight.horizontal, knight.vertical)
-# print(knight.can_move('e', 5))
-# print(knight.can_move('e', 4))
-#
-# knight.move_to('e', 4)
-# print(knight.horizontal, knight.vertical)
+knight.move_to('e', 4)
+print(knight.horizontal, knight.vertical)
 # # c 3
 # # False
 # # True
@@ -65,3 +58,26 @@ knight.draw_board()
 # ..N.....
 # *...*...
 # .*.*....
+knight = Knight('e', 5, 'black')
+
+knight.draw_board()
+knight.move_to('d', 3)
+print()
+knight.draw_board()
+# ........
+# ...*.*..
+# ..*...*.
+# ....N...
+# ..*...*.
+# ...*.*..
+# ........
+# ........
+#
+# ........
+# ........
+# ........
+# ..*.*...
+# .*...*..
+# ...N....
+# .*...*..
+# ..*.*...
