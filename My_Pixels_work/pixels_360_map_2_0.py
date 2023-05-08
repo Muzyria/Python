@@ -243,10 +243,10 @@ class NoTest1:
 
         center_x = 0  # X-координата центра (центр экрана = 0)
         center_y = 0  # Y-координата центра (центр экрана = 0)
-        coordinate_x_start = (width // 2 - 100) * -1
-        coordinate_x_finish = width // 2 - width_div - width_right_panel_button - 80
-        coordinate_y_start = (height // 2 - 100) * -1
-        coordinate_y_finish = height // 2 - 100
+        coordinate_x_start = (width // 2 - 150) * -1
+        coordinate_x_finish = width // 2 - width_div - width_right_panel_button - 130
+        coordinate_y_start = (height // 2 - 150) * -1
+        coordinate_y_finish = height // 2 - 150
 
         # Создаем экземпляр ActionChains
         actions = ActionChains(self.driver)
@@ -286,15 +286,17 @@ class NoTest1:
 
 test = NoTest1()
 test.login_site()
+time.sleep(2)
 test.assert_tracker_close_slide()
+
 test.geofence_button_click()
-# test.choice_type_geofence()
+
 test.add_geofence_button_click()
 test.input_name_geofence('100')
-test.choice_command_geofence()
-test.input_custom_message()
-test.button_save_click()
-
+# test.choice_command_geofence()
+# test.input_custom_message()
+# test.button_save_click()
+test.canvas_4()
 
 time.sleep(5)
 test.driver.close()
