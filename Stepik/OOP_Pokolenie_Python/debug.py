@@ -1,12 +1,3 @@
-class ElectricCar:
-    engine_type = 'electric motor'
+s = ''
 
-
-car = ElectricCar()
-
-car.color = 'black'
-
-print('engine_type' in ElectricCar.__dict__)
-print('color' in ElectricCar.__dict__)
-print(car.__dict__)
-print(ElectricCar.__dict__)
+print(all(i.isalpha() for i in s))
