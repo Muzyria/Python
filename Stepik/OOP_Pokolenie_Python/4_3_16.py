@@ -9,8 +9,8 @@ class Knight:
         self.board = [['.'] * 8 for _ in range(8)]
         for i in range(8):
             for j in range(8):
-                if i == self.vertical and j == horizontal:
-                    self.board[i][j] = 'N'
+                if i == self.vertical and j == self.horizontal:
+                    self.board[i][j] = self.get_char()
                 if abs(self.horizontal - j) * abs(self.vertical - i) == 2:
                     self.board[i][j] = '*'
 
@@ -19,12 +19,13 @@ class Knight:
         return 'N'
 
     def can_move(self, *coordinate):
-        x1, y1, x2, y2 =
+        # x1, y1, x2, y2 =
 
-        if ((x1 - x2) * (y1 - y2)) == 2 or ((x1 - x2) * (y1 - y2)) == -2:
-            print('YES')
-        else:
-            print('NO')
+        # if ((x1 - x2) * (y1 - y2)) == 2 or ((x1 - x2) * (y1 - y2)) == -2:
+        #     print('YES')
+        # else:
+        #     print('NO')
+        pass
 
     def move_to(self):
         pass
