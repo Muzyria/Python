@@ -1,8 +1,5 @@
 class Color:
     def __init__(self, hexcode):
-        self.r = None
-        self.g = None
-        self.b = None
         self.hexcode = hexcode
 
     @property
