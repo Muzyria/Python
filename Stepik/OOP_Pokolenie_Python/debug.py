@@ -1,15 +1,12 @@
 class ElectricCar:
-    status = True
+    def __new__(cls, *args, **kwargs):
+        print('Вызов метода __new__()')
+        return object.__new__(cls)
 
-    def disable(self):
-        self.__class__.status = False
+    def __init__(self, color):
+        print('Вызов метода __init__()')
+        self.color = color
 
 
-car1 = ElectricCar()
-car2 = ElectricCar()
-
-print(car1.status, car2.status)
-
-car1.disable()
-
-print(car1.status, car2.status)
+car = ElectricCar('yellow')
+print(car.color)
