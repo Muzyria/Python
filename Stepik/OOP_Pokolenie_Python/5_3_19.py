@@ -7,11 +7,11 @@ class Month:
         self.year = year
         self.month = month
 
-    def __str__(self):
-        return f'{self.year}-{self.month}'
-
     def __repr__(self):
-        return f"Month({self.year}, {self.month})"
+        return f"{self.__class__.__name__}({self.year}, {self.month})"
+
+    def __str__(self):
+        return f"{self.year}-{self.month}"
 
     def __eq__(self, other):
         if isinstance(other, Month):
@@ -33,3 +33,10 @@ print(Month(1999, 12) < Month(2000, 1))
 print(Month(1999, 12) > Month(2000, 1))
 print(Month(1999, 12) <= Month(1999, 12))
 print(Month(1999, 12) >= Month(2000, 1))
+
+months = [Month(1998, 12), Month(2000, 1), Month(1999, 12)]
+print(sorted(months))
+
+months = [Month(1998, 12), Month(2000, 1), Month(1999, 12)]
+print(min(months))
+print(max(months))
