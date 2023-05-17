@@ -35,11 +35,6 @@ class Matrix:
             return Matrix(self.rows, self.cols, round(self.value))
         return Matrix(self.rows, self.cols, round(self.value, n))
 
-
-
-
-
-
     # def __pos__(self):
     #     result = Matrix(len(self.matrix), len(self.matrix[0]))
     #     for i in range(self.rows):
