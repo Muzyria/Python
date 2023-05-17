@@ -24,10 +24,11 @@ class Matrix:
         return Matrix(self.rows, self.cols, -self.value)
 
     def __invert__(self):
-        transposed_data = list(map(list, zip(*self.matrix)))
-        transposed_matrix = Matrix(self.cols, self.rows)
-        transposed_matrix.data = transposed_data
-        return transposed_matrix
+        res = Matrix(self.cols, self.rows)
+        for i in range(self.cols):
+            for j in range(self.rows):
+                res.set_value(i, j, self.matrix[j][i])
+        return res
 
     def __round__(self, n=None):
         if n is None:
