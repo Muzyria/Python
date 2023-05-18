@@ -21,7 +21,11 @@ class Matrix:
         return Matrix(self.rows, self.cols, self.value)
 
     def __neg__(self):
-        return Matrix(self.rows, self.cols, -self.value)
+        res = Matrix(self.rows, self.cols)
+        for i in range(self.rows):
+            for j in range(self.cols):
+                res.set_value(i, j, -self.matrix[i][j])
+        return res
 
     def __invert__(self):
         res = Matrix(self.cols, self.rows)
@@ -31,46 +35,17 @@ class Matrix:
         return res
 
     def __round__(self, n=None):
-        if n is None:
-            return Matrix(self.rows, self.cols, round(self.value))
-        return Matrix(self.rows, self.cols, round(self.value, n))
+        res = Matrix(self.rows, self.cols)
+        for i in range(self.rows):
+            for j in range(self.cols):
+                res.set_value(i, j, round(self.matrix[i][j], n))
+        return res
 
-    # def __pos__(self):
-    #     result = Matrix(len(self.matrix), len(self.matrix[0]))
-    #     for i in range(self.rows):
-    #         for j in range(self.cols):
-    #             result.set_value(i, j, self.matrix[i][j])
-    #     return result
-    #
-    # def __neg__(self):
-    #     result = Matrix(len(self.matrix), len(self.matrix[0]))
-    #     for i in range(self.rows):
-    #         for j in range(self.cols):
-    #             result.set_value(i, j, -self.matrix[i][j])
-    #     return result
-    #
-    # def __invert__(self):
-    #     result = Matrix(len(self.matrix[0]), len(self.matrix))
-    #     for i in range(self.cols):
-    #         for j in range(self.rows):
-    #             result.set_value(i, j, self.matrix[j][i])
-    #     return result
-    #
-    # def __round__(self, n=None):
-    #     result = Matrix(len(self.matrix), len(self.matrix[0]))
-    #     for i in range(self.rows):
-    #         for j in range(self.cols):
-    #             result.set_value(i, j, round(self.matrix[i][j], n))
-    #     return result
 
-matrix = Matrix(4, 2)
+matrix = Matrix(2, 3, 1)
 
-counter = 1
-for row in range(4):
-    for col in range(2):
-        matrix.set_value(row, col, counter)
-        counter += 1
-
-print(matrix)
+print(+matrix)
+print()
+print(-matrix)
 print()
 print(~matrix)
