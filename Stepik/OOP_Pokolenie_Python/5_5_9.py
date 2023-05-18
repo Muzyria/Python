@@ -2,6 +2,9 @@
 class FoodInfo:
     def __init__(self, *args):
         self.item = args
+        self.proteins = args[0]
+        self.fats = args[1]
+        self.carbohydrates = args[2]
 
     def __repr__(self):
         return f"{self.__class__.__name__}{self.item}"
