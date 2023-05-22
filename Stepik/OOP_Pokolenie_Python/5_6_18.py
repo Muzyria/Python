@@ -1,7 +1,7 @@
 class SortKey:
     def __init__(self, *args):
         self.attributes = args
-        print(self.attributes)
+        print(f'init{self.attributes}')
 
     def __call__(self, obj):
         key = tuple(getattr(obj, attr) for attr in self.attributes)
@@ -16,6 +16,7 @@ class User:
 
     def __repr__(self):
         return f'User({self.name}, {self.age})'
+
 
 users = [User('Gvido', 67), User('Timur', 30), User('Arthur', 20), User('Timur', 45), User('Gvido', 60)]
 
