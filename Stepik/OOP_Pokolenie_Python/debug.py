@@ -1,10 +1,4 @@
-from collections import defaultdict
-from string import printable
 
-hashes = defaultdict(int)
-
-for char in printable:
-    hashes[hash(char) % 20] += 1
-
-for hash_value, hash_count in sorted(hashes.items()):
-    print(hash_value, '■' * hash_count)
+my_list = [1, 2, 3, 4, 5]
+new_list = [(lambda x: x * ()-1 if x % 2 else x * 1 )(num) for num in my_list]
+print(new_list)
