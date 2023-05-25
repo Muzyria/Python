@@ -1,6 +1,6 @@
 def hash_function(obj):
-
-    return
+    obj_str = str(obj)
+    length = len(obj_str)
 
 
 
