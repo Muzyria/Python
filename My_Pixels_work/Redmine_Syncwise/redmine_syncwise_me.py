@@ -22,7 +22,7 @@ if response.status_code == 200:
         updated = entry.find('updated').text
         updated_date = datetime.strptime(updated, "%Y-%m-%dT%H:%M:%SZ").date()
         if updated_date == today:
-            title = __import__('re').search(r'#(\d+)', entry.find('title').text)[0]
+            title = __import__('re').search(r'(\d{5})', entry.find('title').text)[0]
             author = entry.find('author').text
             print(title)
             # print('Updated:', updated)
