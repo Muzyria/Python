@@ -1,19 +1,22 @@
-class Point:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    # def __eq__(self, other):
-    #     if isinstance(other, Point):
-    #         return self.x == other.x and self.y == other.y
-    #     return NotImplemented
-
-    def __hash__(self):
-        return hash((self.x, self.y))
+from time import perf_counter
 
 
-p1 = Point(1, 2)
-p2 = Point(1, 2)
+def search_time_test(collection, numbers):
+    start = perf_counter()
 
-# print(p1 == p2)
-print(hash(p1) == hash(p2))
+    for num in numbers:
+        num in collection
+
+    end = perf_counter()
+    return end - start
+
+
+numbers = range(100000)
+
+d = dict(zip(numbers, numbers))
+s = set(numbers)
+l = list(numbers)
+
+print(search_time_test(d, numbers))
+print(search_time_test(s, numbers))
+print(search_time_test(l, numbers))
