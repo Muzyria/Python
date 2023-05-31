@@ -8,7 +8,7 @@ class Point:
         return f'{self.__class__.__name__}({self.x}, {self.y}. {self.z})'
 
     def __iter__(self):
-        return self
+        return (elem for elem in self.__dict__.values())
 
 
 point = Point(1, 2, 3)
