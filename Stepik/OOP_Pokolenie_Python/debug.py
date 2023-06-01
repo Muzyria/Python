@@ -1,22 +1,14 @@
-from time import perf_counter
+class SkipIterator:
+    def __init__(self, iterable, n):
+        lst = list(iterable)
+        self.iterable = (lst[i] for i in range(0, len(lst), n + 1))
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return next(self.iterable)
 
 
-def search_time_test(collection, numbers):
-    start = perf_counter()
-
-    for num in numbers:
-        num in collection
-
-    end = perf_counter()
-    return end - start
-
-
-numbers = range(100000)
-
-d = dict(zip(numbers, numbers))
-s = set(numbers)
-l = list(numbers)
-
-print(search_time_test(d, numbers))
-print(search_time_test(s, numbers))
-print(search_time_test(l, numbers))
+skipiterator = SkipIterator([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 1)
+print(*skipiterator)  # 1 3 5 7 9
