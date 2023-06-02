@@ -29,7 +29,7 @@ data = response.json()
 print(data)
 
 
-url = "https://api2.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/XFWFqct69oRc_iBZpIVuu5T98XOTpaGJyAEmTmAVxmQ/230602155450+0300/JSON"
+url = "https://api2.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/230602163047+0300/JSON"
 
 payload = json.dumps({
   "id_company": 4442,
