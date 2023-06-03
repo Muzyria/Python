@@ -15,7 +15,7 @@ def create_signature(data, secret_key):
 def send_request(action, payload):
     host = "https://sandbox.syncwise360.com"
     app_api_key = "FVyzsVqr-BmP280"
-    api_key = ""
+    api_key = "FVyzsVqr-BmP280"
     api_version = "1.0"
     signature_version = "2.0"
     signature_method = "HmacSHA256"
@@ -33,7 +33,7 @@ def send_request(action, payload):
         "Response Format": response_format
     }
 
-    signature = create_signature(data, "")
+    signature = create_signature(data, "L4ccbyhS9xlDjd3vgnw_LZTqsrCvLO")
     url = f"{host}/rest/action/{action}/{app_api_key}/{api_key}/{api_version}/{signature_version}/{signature_method}/{signature}/{timestamp}+0300/{response_format}"
 
     response = requests.post(url, json=payload)
