@@ -1,7 +1,9 @@
 import requests
 import json
 
-url = "https://api2.syncwise360.com/rest/action/UserAccountLogin/FVyzsVqr-BmP280/1.0/2.0/HmacSHA256/mCreNCp6bbEJaTxJbwMMzakT8xF_xJETeugBilE-rb4/230602154652+0300/JSON"
+
+url = "https://api2.syncwise360.com/rest/action/UserAccountLogin/FVyzsVqr-BmP280/1.0/2.0/HmacSHA256/" \
+      "-AVBSK4qziKvqXBIUPJAxBVkF7uGm9RvHXKTeR7PxQk%3D/230603224319+0300/JSON"
 
 payload = json.dumps({
   "username": "igorperetssuperior",
@@ -29,7 +31,8 @@ data = response.json()
 print(data)
 
 
-# url = "https://api2.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/qFWFqct69oRc_iBZpIVuu5T98XOTpaGJyAEmTmAVxmQ/230602155450+0300/JSON"
+# url = "https://api2.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/" \
+#       "xHducL9xiwtlcdLLZzReFg-4TVuZNUSRb4mlgHaiiOI/230603221822+0300/JSON"
 #
 # payload = json.dumps({
 #   "id_company": 4442,
