@@ -3,7 +3,7 @@ import json
 
 
 url = "https://api2.syncwise360.com/rest/action/UserAccountLogin/FVyzsVqr-BmP280/1.0/2.0/HmacSHA256/" \
-      "-AVBSK4qziKvqXBIUPJAxBVkF7uGm9RvHXKTeR7PxQk%3D/230603224319+0300/JSON"
+      "oE7o8mIRXBtbAGMbJ1o9Zmjl-ZCiQngXPpogbgO7NsU/230603235951+0300/JSON"
 
 payload = json.dumps({
   "username": "igorperetssuperior",
