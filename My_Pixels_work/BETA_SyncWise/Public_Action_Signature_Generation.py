@@ -22,3 +22,4 @@ timestamp = "121224230903+0200"
 response_format = "JSON"
 
 signature = generate_signature_public(action_code, app_api_key, api_version, signature_version, signature_method, timestamp, response_format)
+print(signature)
