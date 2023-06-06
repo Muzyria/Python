@@ -45,4 +45,7 @@ headers = {
 
 response = requests.request("POST", url, headers=headers, data=payload)
 data = response.json()
-print(data)
+
+for i in data['resultList']:
+    for k, v in i.items():
+        print(k, v)
