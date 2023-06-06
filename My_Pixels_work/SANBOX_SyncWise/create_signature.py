@@ -11,15 +11,17 @@ SignatureMethod = "HmacSHA256"
 ResponseFormat = "JSON"
 
 
-def create_url_test_with_private():
+def create_url_test_with_private(user_secret_key):
     application_api_key = "FVyzsVqr-BmP280"
     application_secret_key = "L4ccbyhS9xlDjd3vgnw_LZTqsrCvLO"
 
-    user_secret_key = "4AHtsKkyBhBtdRjU40O6pC3FnJo-dr5FSi_QwjQcoU2LklM1ZLFrp8IJaRMu"
+    user_secret_key = user_secret_key
     username = "igorperetssuperior"
 
-    print(get_url_for_action("CourseGeofenceList", True, user_secret_key, username,
-                             application_api_key, application_secret_key))
+    url = get_url_for_action("CourseGeofenceList", True, user_secret_key, username,
+                             application_api_key, application_secret_key)
+    print(f'PRIVATE {url}')
+    return url
 
 
 def create_url_test_with_public():
@@ -29,8 +31,10 @@ def create_url_test_with_public():
     user_secret_key = ""
     username = ""
 
-    print(get_url_for_action("CourseGeofenceList", False, user_secret_key, username,
-                             application_api_key, application_secret_key))
+    url = get_url_for_action("UserAccountLogin", False, user_secret_key, username,
+                             application_api_key, application_secret_key)
+    print(f'PUBLIC {url}')
+    return url
 
 
 def get_url_for_action(action, is_private, secret_key, username, application_api_key, application_secret_key):
