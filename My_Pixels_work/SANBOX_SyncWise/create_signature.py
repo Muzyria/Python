@@ -3,6 +3,7 @@ import hmac
 import base64
 import time
 
+host = "https://dev-api.syncwise360.com"
 SLASH = "/"
 APIVersion = "1.0"
 SignatureVersion = "2.0"
@@ -10,26 +11,10 @@ SignatureMethod = "HmacSHA256"
 ResponseFormat = "JSON"
 
 
-def create_url_test_with_custom_client():
-    application_api_key = "FVyzsVqr-BmP280"
-    application_secret_key = ""
-
-    user_secret_key = ""
-    username = ""
-
-    print(get_url_for_action("UserAccountLogin", True, user_secret_key, username,
-                             application_api_key, application_secret_key))
 
 
-def create_url_test():
-    application_api_key = ""
-    application_secret_key = ""
 
-    user_secret_key = ""
-    username = ""
 
-    print(get_url_for_action("AdminCartDevicesList", False, user_secret_key, username,
-                             application_api_key, application_secret_key))
 
 
 def create_url_test_with_custom_user():
