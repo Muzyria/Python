@@ -1,6 +1,14 @@
-nums = [1, 2, 3, 4, 5]
+class ForgivingIndexer:
+    def __init__(self, sequence):
+        self.sequence = sequence
 
-print(nums[1:])
-print(nums[:3])
-print(nums[:3])
-print(nums[::2])
+    def __getitem__(self, index):
+        return self.sequence[int(index)]
+
+    def __len__(self):
+        return len(self.sequence)
+
+
+words = ForgivingIndexer(['beegeek', 'pygen', 'stepik', 'python'])
+
+print(len(words[1.9]))
