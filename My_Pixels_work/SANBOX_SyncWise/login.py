@@ -2,7 +2,7 @@ import requests
 import json
 import create_signature
 
-# url = "https://dev-api.syncwise360.com/rest/action/UserAccountLogin/FVyzsVqr-BmP280/1.0/2.0/HmacSHA256/xwxEZ4snf_lUQGR78XD2pdWtcMrtfxes5yrRUp1ytz4/230606153400+0300/JSON"
+
 url = f"https://dev-api.syncwise360.com/rest/action/{create_signature.create_url_test_with_public()}"
 
 payload = json.dumps({
@@ -25,7 +25,6 @@ print(response.text)
 # print(response_data['secretKey'])
 
 
-# url = "https://dev-api.syncwise360.com/rest/action/CourseGeofenceList/FVyzsVqr-BmP280/igorperetssuperior/1.0/2.0/HmacSHA256/vCNmiADftYxjljFrww13rt0UOp_UJ8namKi5Gbj2RvE/230606153613+0300/JSON"
 url = f"https://dev-api.syncwise360.com/rest/action/{create_signature.create_url_test_with_private(response_data['secretKey'])}"
 
 payload = json.dumps({
@@ -47,5 +46,6 @@ response = requests.request("POST", url, headers=headers, data=payload)
 data = response.json()
 
 for i in data['resultList']:
-    for k, v in i.items():
-        print(k, v)
+    # for k, v in i.items():
+    #     print(k)
+    print( i['points'])
