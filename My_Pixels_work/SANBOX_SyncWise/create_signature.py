@@ -11,31 +11,25 @@ SignatureMethod = "HmacSHA256"
 ResponseFormat = "JSON"
 
 
-
-
-
-
-
-
-def create_url_test_with_custom_user():
-    application_api_key = ""
-    application_secret_key = ""
+def create_url_test_with_private():
+    application_api_key = "FVyzsVqr-BmP280"
+    application_secret_key = "L4ccbyhS9xlDjd3vgnw_LZTqsrCvLO"
 
     user_secret_key = "4AHtsKkyBhBtdRjU40O6pC3FnJo-dr5FSi_QwjQcoU2LklM1ZLFrp8IJaRMu"
-    username = "dmytro.romanov"
+    username = "igorperetssuperior"
 
     print(get_url_for_action("CourseGeofenceList", True, user_secret_key, username,
                              application_api_key, application_secret_key))
 
 
-def create_url_test_with_custom_client_and_user():
+def create_url_test_with_public():
     application_api_key = "FVyzsVqr-BmP280"
     application_secret_key = "L4ccbyhS9xlDjd3vgnw_LZTqsrCvLO"
 
-    user_secret_key = "GUyelEn7FJyHQDZm-fIEdS78Z7EzxZgKimNereOOZNN3BMl-yka4hs54e9nl"
-    username = "igorperetssuperior"
+    user_secret_key = ""
+    username = ""
 
-    print(get_url_for_action("CourseGeofenceList", True, user_secret_key, username,
+    print(get_url_for_action("CourseGeofenceList", False, user_secret_key, username,
                              application_api_key, application_secret_key))
 
 
@@ -95,5 +89,3 @@ def make_signature(src, secret):
 
 
 # использования
-create_url_test_with_custom_client_and_user()
-
