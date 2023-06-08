@@ -38,3 +38,4 @@ pyautogui.press('enter')
 pyautogui.typewrite(r'scrcpy --tcpip=192.168.2.30:5555')
 pyautogui.press('enter')
 
+
