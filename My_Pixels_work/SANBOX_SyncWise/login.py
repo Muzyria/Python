@@ -1,9 +1,13 @@
 import requests
 import json
 import create_signature
+from create_signature_class import SyncwiseAPI
+
+api = SyncwiseAPI("https://dev-api.syncwise360.com")
 
 
-url = f"https://dev-api.syncwise360.com/rest/action/{create_signature.create_url_test_with_public()}"
+# url = f"https://dev-api.syncwise360.com/rest/action/{create_signature.create_url_test_with_public()}"
+url = f"https://dev-api.syncwise360.com/rest/action/{api.create_url_test_with_public()}"
 
 payload = json.dumps({
   "username": "igorperetssuperior",
@@ -24,8 +28,8 @@ response_data = response.json()
 print(response.text)
 # print(response_data['secretKey'])
 
-
-url = f"https://dev-api.syncwise360.com/rest/action/{create_signature.create_url_test_with_private(response_data['secretKey'])}"
+# url = f"https://dev-api.syncwise360.com/rest/action/{create_signature.create_url_test_with_private(response_data['secretKey'])}"
+url = f"https://dev-api.syncwise360.com/rest/action/{api.create_url_test_with_private(response_data['secretKey'])}"
 
 payload = json.dumps({
   "id_company": 2973,
