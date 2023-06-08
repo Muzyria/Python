@@ -47,6 +47,6 @@ while datetime.now() < finish:
     press_select_message()
     press_yes_button()
     print('WAIT FOR some SECONDS')
-    time.sleep(15)
+    time.sleep(5)
     print(f'{start} -> {datetime.now()} -> {finish}')
 
