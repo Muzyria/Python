@@ -12,16 +12,6 @@ class SyncwiseAPI:
         self.SignatureMethod = "HmacSHA256"
         self.ResponseFormat = "JSON"
 
-    def create_url_test_with_private(self, user_secret_key):
-        application_api_key = "FVyzsVqr-BmP280"
-        application_secret_key = "L4ccbyhS9xlDjd3vgnw_LZTqsrCvLO"
-        username = "igorperetssuperior"
-
-        url = self.get_url_for_action("CourseGeofenceList", True, user_secret_key, username,
-                                      application_api_key, application_secret_key)
-        print(f'PRIVATE {url}')
-        return url
-
     def create_url_test_with_public(self):
         application_api_key = "FVyzsVqr-BmP280"
         application_secret_key = "L4ccbyhS9xlDjd3vgnw_LZTqsrCvLO"
@@ -31,6 +21,16 @@ class SyncwiseAPI:
         url = self.get_url_for_action("UserAccountLogin", False, user_secret_key, username,
                                       application_api_key, application_secret_key)
         print(f'PUBLIC {url}')
+        return url
+
+    def create_url_test_with_private(self, user_secret_key):
+        application_api_key = "FVyzsVqr-BmP280"
+        application_secret_key = "L4ccbyhS9xlDjd3vgnw_LZTqsrCvLO"
+        username = "igorperetssuperior"
+
+        url = self.get_url_for_action("CourseGeofenceList", True, user_secret_key, username,
+                                      application_api_key, application_secret_key)
+        print(f'PRIVATE {url}')
         return url
 
     def get_url_for_action(self, action, is_private, secret_key, username, application_api_key, application_secret_key):
