@@ -58,3 +58,7 @@ for i in data['resultList']:
     poligone_list.append(i['points'])
 
 print(poligone_list)
+
+
+# CREATE GEOFENCE
+
