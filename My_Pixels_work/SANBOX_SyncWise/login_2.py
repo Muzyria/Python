@@ -12,7 +12,7 @@ class SyncwiseClient(SyncwiseAPI):
     COURSE_GEOFENCE_LIST = None
     COURSE_VECTOR_DETAILS = None
 
-# PUBLIC
+    # PUBLIC
     def user_account_login(self):
         """
         Login user and get secret key
@@ -38,7 +38,7 @@ class SyncwiseClient(SyncwiseAPI):
         print(response.text)
         self.SECRET_KEY = response_data['secretKey']
 
-# PRIVATE
+    # PRIVATE
     def course_geofence_list(self):
         """
         Get course geofence list
@@ -46,18 +46,18 @@ class SyncwiseClient(SyncwiseAPI):
         action = "CourseGeofenceList"
         url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
         payload = json.dumps({
-          "id_company": 2973,
-          "active": 1
+            "id_company": 2973,
+            "active": 1
         })
         headers = {
-          'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
-          'sec-ch-ua-mobile': '?0',
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
-          'Content-Type': 'application/json',
-          'Accept': '*/*',
-          'Referer': 'https://sandbox.syncwise360.com/',
-          'x-access-token': '72Y8ItBOOQT2S2u41cosMWw_hSjrpOreSND8N9iRaoO1B3k3wmUPA7dxt3yb',
-          'sec-ch-ua-platform': '"Windows"'
+            'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
+            'sec-ch-ua-mobile': '?0',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+            'Referer': 'https://sandbox.syncwise360.com/',
+            'x-access-token': '72Y8ItBOOQT2S2u41cosMWw_hSjrpOreSND8N9iRaoO1B3k3wmUPA7dxt3yb',
+            'sec-ch-ua-platform': '"Windows"'
         }
 
         response = requests.request("POST", url, headers=headers, data=payload)
@@ -121,20 +121,26 @@ class SyncwiseClient(SyncwiseAPI):
             "customRestoreTimeout": None,
             "geo_fence_type": "cart_control",
             "id_geofenceActionType": 60,
-            "points": [
-                {
-                    "lat": 50.0892544142621,
-                    "lng": 36.23102188110352
-                },
-                {
-                    "lat": 50.091457100110425,
-                    "lng": 36.23235225677491
-                },
-                {
-                    "lat": 50.08972249347597,
-                    "lng": 36.23415470123292
-                }
-            ],
+            "points": [{"lat": 50.089809146357, "lng": 36.23908154605},
+                       {"lat": 50.086182711312, "lng": 36.234252228719},
+                       {"lat": 50.086132802355, "lng": 36.23445205329},
+                       {"lat": 50.08819408508, "lng": 36.236780210715},
+                       {"lat": 50.089814739176, "lng": 36.239128484708}]
+            ,
+            # "points": [
+            #     {
+            #         "lat": 50.0892544142621,
+            #         "lng": 36.23102188110352
+            #     },
+            #     {
+            #         "lat": 50.091457100110425,
+            #         "lng": 36.23235225677491
+            #     },
+            #     {
+            #         "lat": 50.08972249347597,
+            #         "lng": 36.23415470123292
+            #     }
+            # ],
             "defaultMessage": 1
         })
         headers = {
