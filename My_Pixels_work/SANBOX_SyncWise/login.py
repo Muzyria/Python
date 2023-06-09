@@ -28,6 +28,8 @@ response_data = response.json()
 print(response.text)
 # print(response_data['secretKey'])
 
+
+# PRIVATE
 # url = f"https://dev-api.syncwise360.com/rest/action/{create_signature.create_url_test_with_private(response_data['secretKey'])}"
 url = f"https://dev-api.syncwise360.com/rest/action/{api.create_url_test_with_private(response_data['secretKey'])}"
 
