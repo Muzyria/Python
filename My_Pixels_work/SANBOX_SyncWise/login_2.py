@@ -1,3 +1,5 @@
+import time
+
 import requests
 import json
 import create_signature
@@ -108,10 +110,10 @@ class SyncwiseClient(SyncwiseAPI):
         self.COURSE_VECTOR_DETAILS_HOLES = data['geometry']['Holes']['Hole']
         for item in range(self.COURSE_VECTOR_DETAILS_HOLECOUNT):
             point_str = self.COURSE_VECTOR_DETAILS_HOLES[item]['Perimeter']['Shapes']['Shape'][0]['Points']
-            self.COURSE_VECTOR_DETAILS_HOLES_PERIMETR[item + 1] = \
-                json.dumps([{"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")])
+            self.COURSE_VECTOR_DETAILS_HOLES_PERIMETR[item + 1] = [
+                {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
 
-    def course_geofence_create(self):
+    def course_geofence_create(self, name, coordinates):
         """
         Create course geofence
         """
@@ -123,7 +125,7 @@ class SyncwiseClient(SyncwiseAPI):
             "visible": 1,
             "id_company": 2973,
             "id_geofenceType": 10,
-            "name": "222",
+            "name": name,
             "marshallBypass": 1,
             "disabilityBypass": 1,
             "controlLevel": 22,
@@ -131,20 +133,7 @@ class SyncwiseClient(SyncwiseAPI):
             "customRestoreTimeout": None,
             "geo_fence_type": "cart_control",
             "id_geofenceActionType": 60,
-            "points": [
-                {
-                    "lat": 50.0892544142621,
-                    "lng": 36.23102188110352
-                },
-                {
-                    "lat": 50.091457100110425,
-                    "lng": 36.23235225677491
-                },
-                {
-                    "lat": 50.08972249347597,
-                    "lng": 36.23415470123292
-                }
-            ],
+            "points": coordinates,
             "defaultMessage": 1
         })
         headers = {
@@ -177,7 +166,10 @@ test_1.user_account_login()
 
 test_1.course_vector_details()
 # print(test_1.COURSE_VECTOR_DETAILS)
-print(test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR)
+# print(test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR)
+for k, v in test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR.items():
+    test_1.course_geofence_create(f"a_shape_{k}", test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR[k])
+    print(f"CREATE GEOFENCE - {k}")
+    time.sleep(10)
 
 
-# test_1.course_geofence_create()
