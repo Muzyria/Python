@@ -171,5 +171,3 @@ for k, v in test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR.items():
     test_1.course_geofence_create(f"a_shape_{k}", test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR[k])
     print(f"CREATE GEOFENCE - {k}")
     time.sleep(10)
-
-
