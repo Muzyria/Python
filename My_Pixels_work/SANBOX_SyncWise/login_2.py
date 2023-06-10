@@ -16,7 +16,12 @@ class SyncwiseClient(SyncwiseAPI):
     COURSE_VECTOR_DETAILS = None
     COURSE_VECTOR_DETAILS_HOLECOUNT = None
     COURSE_VECTOR_DETAILS_HOLES = None
-    COURSE_VECTOR_DETAILS_HOLES_PERIMETR = {}  # Special format for CREATE GEOFENCE
+    COURSE_VECTOR_DETAILS_HOLES_PERIMETR = {}  # Special format for CREATE GEOFENCE - perimetr
+    COURSE_VECTOR_DETAILS_HOLES_GREEN = {}  # Special format for CREATE GEOFENCE - green
+    COURSE_VECTOR_DETAILS_HOLES_GREENCENTER = {}  # Special format for CREATE GEOFENCE - greencenter
+
+    COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH = {}  # Special format for DEVICE GET or SENS COORDINATES - centralpatch
+
 
     # PUBLIC
     def user_account_login(self):
@@ -108,9 +113,29 @@ class SyncwiseClient(SyncwiseAPI):
         self.COURSE_VECTOR_DETAILS = data
         self.COURSE_VECTOR_DETAILS_HOLECOUNT = data['geometry']['HoleCount']
         self.COURSE_VECTOR_DETAILS_HOLES = data['geometry']['Holes']['Hole']
+
+        # Write data for hole shape perimeter
         for item in range(self.COURSE_VECTOR_DETAILS_HOLECOUNT):
             point_str = self.COURSE_VECTOR_DETAILS_HOLES[item]['Perimeter']['Shapes']['Shape'][0]['Points']
             self.COURSE_VECTOR_DETAILS_HOLES_PERIMETR[item + 1] = [
+                {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
+
+        # Write data for hole shape green
+        for item in range(self.COURSE_VECTOR_DETAILS_HOLECOUNT):
+            point_str = self.COURSE_VECTOR_DETAILS_HOLES[item]['Green']['Shapes']['Shape'][0]['Points']
+            self.COURSE_VECTOR_DETAILS_HOLES_GREEN[item + 1] = [
+                {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
+
+        # Write data for hole shape green
+        for item in range(self.COURSE_VECTOR_DETAILS_HOLECOUNT):
+            point_str = self.COURSE_VECTOR_DETAILS_HOLES[item]['Greencenter']['Shapes']['Shape'][0]['Points']
+            self.COURSE_VECTOR_DETAILS_HOLES_GREENCENTER[item + 1] = [
+                {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
+
+        # Write data for hole centralPATH
+        for item in range(self.COURSE_VECTOR_DETAILS_HOLECOUNT):
+            point_str = self.COURSE_VECTOR_DETAILS_HOLES[item]['Centralpath']['Shapes']['Shape'][0]['Points']
+            self.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[item + 1] = [
                 {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
 
     def course_geofence_create(self, name, coordinates):
@@ -167,7 +192,11 @@ test_1.user_account_login()
 test_1.course_vector_details()
 # print(test_1.COURSE_VECTOR_DETAILS)
 # print(test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR)
-for k, v in test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR.items():
-    test_1.course_geofence_create(f"a_shape_{k}", test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR[k])
-    print(f"CREATE GEOFENCE - {k}")
-    time.sleep(10)
+
+# for k, v in test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR.items():  # Create shape geofence
+#     test_1.course_geofence_create(f"a_shape_{k}", test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR[k])
+#     print(f"CREATE GEOFENCE - {k}")
+#     time.sleep(10)
+
+for k, v in test_1.COURSE_VECTOR_DETAILS_HOLES_GREENCENTER.items():
+    print(k, v, len(v))
