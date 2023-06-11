@@ -15,11 +15,14 @@ class SyncwiseClient(SyncwiseAPI):
     #
     COURSE_VECTOR_DETAILS = None
     COURSE_VECTOR_DETAILS_HOLECOUNT = None
+    COURSE_VECTOR_DETAILS_CLUBHOUSE = {}
+    COURSE_VECTOR_DETAILS_BACKGROUND = {}
+
     COURSE_VECTOR_DETAILS_HOLES = None
     COURSE_VECTOR_DETAILS_HOLES_PERIMETR = {}  # Special format for CREATE GEOFENCE - perimetr
     COURSE_VECTOR_DETAILS_HOLES_GREEN = {}  # Special format for CREATE GEOFENCE - green
     COURSE_VECTOR_DETAILS_HOLES_GREENCENTER = {}  # Special format for CREATE GEOFENCE - greencenter
-
+    #
     COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH = {}  # Special format for DEVICE GET or SENS COORDINATES - centralpatch
 
 
@@ -114,6 +117,16 @@ class SyncwiseClient(SyncwiseAPI):
         self.COURSE_VECTOR_DETAILS_HOLECOUNT = data['geometry']['HoleCount']
         self.COURSE_VECTOR_DETAILS_HOLES = data['geometry']['Holes']['Hole']
 
+        # Write data for hole shape clubhouse
+        point_str = data['geometry']['Clubhouse']['Shapes']['Shape'][0]['Points']
+        self.COURSE_VECTOR_DETAILS_CLUBHOUSE[1] = [
+            {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
+
+        # Write data for hole shape background
+        point_str = data['geometry']['Background']['Shapes']['Shape'][0]['Points']
+        self.COURSE_VECTOR_DETAILS_BACKGROUND[1] = [
+            {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
+
         # Write data for hole shape perimeter
         for item in range(self.COURSE_VECTOR_DETAILS_HOLECOUNT):
             point_str = self.COURSE_VECTOR_DETAILS_HOLES[item]['Perimeter']['Shapes']['Shape'][0]['Points']
@@ -198,5 +211,9 @@ test_1.course_vector_details()
 #     print(f"CREATE GEOFENCE - {k}")
 #     time.sleep(10)
 
-for k, v in test_1.COURSE_VECTOR_DETAILS_HOLES_GREENCENTER.items():
-    print(k, v, len(v))
+# for k, v in test_1.COURSE_VECTOR_DETAILS_CLUBHOUSE.items():
+#     print(k, v, len(v))
+
+print(test_1.COURSE_VECTOR_DETAILS_BACKGROUND)
+
+test_1.course_geofence_create('Back_ground', test_1.COURSE_VECTOR_DETAILS_BACKGROUND[1])
