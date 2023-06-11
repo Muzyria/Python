@@ -214,6 +214,6 @@ test_1.course_vector_details()
 # for k, v in test_1.COURSE_VECTOR_DETAILS_CLUBHOUSE.items():
 #     print(k, v, len(v))
 
-print(test_1.COURSE_VECTOR_DETAILS_BACKGROUND)
+print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
-test_1.course_geofence_create('Back_ground', test_1.COURSE_VECTOR_DETAILS_BACKGROUND[1])
+# test_1.course_geofence_create('Back_ground', test_1.COURSE_VECTOR_DETAILS_BACKGROUND[1])
