@@ -1,4 +1,6 @@
 import os
+from datetime import datetime
+
 from sincwise_clients_method import SyncwiseClient
 import pyautogui
 import time
@@ -7,11 +9,10 @@ class IntermediateCoordinatesGenerator:
     def __init__(self):
         # self.connect_devise()
         # time.sleep(10)
-        # self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
-        # self.client_data.user_account_login()
-        # self.client_data.course_vector_details()
+        self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
+        self.client_data.user_account_login()
+        self.client_data.course_vector_details()
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
-        pass
 
     def connect_devise(self):
         pyautogui.hotkey('win', 'r')
@@ -54,10 +55,25 @@ class IntermediateCoordinatesGenerator:
 #     {'lat': 50.082184485494, 'lng': 36.231842637062}
 # ]
 
-steps = 2
-
+steps = 1
 generator = IntermediateCoordinatesGenerator()
-start_coordinates = "50.07908030304553, 36.231179942837095"
 
-for _ in range(10):
-    os.system(f'adb shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location "{start_coordinates}"')
+
+# start_coordinates = "50.07807852323376, 36.23065154766116"
+#
+# for _ in range(50):  # start coordinate for begin
+#     time_minute = datetime.now().time().minute
+#     os.system(rf'adb shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{start_coordinates}\"')
+#     if (now := datetime.now().time().minute) != time_minute:
+#         time_minute = now
+#         os.system(rf'adb shell input tap 700 500')
+#         print(f'TOUCH SCREEN in {datetime.now().time().strftime("%H:%M")}')
+
+# print(generator.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
+for i in range(1, generator.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
+    print(f'{generator.get_intermediate_coordinates(generator.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps)}  ------ new coord {i}')
+
+
+
+
+
