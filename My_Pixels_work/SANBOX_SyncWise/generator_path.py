@@ -1,6 +1,30 @@
+import os
+from sincwise_clients_method import SyncwiseClient
+import pyautogui
+import time
+
 class IntermediateCoordinatesGenerator:
     def __init__(self):
+        # self.connect_devise()
+        # time.sleep(10)
+        # self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
+        # self.client_data.user_account_login()
+        # self.client_data.course_vector_details()
+        # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
         pass
+
+    def connect_devise(self):
+        pyautogui.hotkey('win', 'r')
+        pyautogui.typewrite('cmd')
+        pyautogui.press('enter')
+        time.sleep(1)
+
+        # печатаем команду
+        pyautogui.typewrite(r'cd C:\scrcpy-win64-v2.0\scrcpy-win64-v2.0')
+        pyautogui.press('enter')
+
+        pyautogui.typewrite(r'scrcpy --tcpip=192.168.2.30:5555')
+        pyautogui.press('enter')
 
     def get_intermediate_coordinates(self, path, steps):
         if steps <= 1 or len(path) <= 1:
@@ -25,12 +49,15 @@ class IntermediateCoordinatesGenerator:
         return intermediate_coordinates
 
 
-path = [
-    {'lat': 50.079678437647, 'lng': 36.231405436993},
-    {'lat': 50.082184485494, 'lng': 36.231842637062}
-]
+# path = [
+#     {'lat': 50.079678437647, 'lng': 36.231405436993},
+#     {'lat': 50.082184485494, 'lng': 36.231842637062}
+# ]
+
 steps = 2
 
 generator = IntermediateCoordinatesGenerator()
-result = generator.get_intermediate_coordinates(path, steps)
-print(result)
+start_coordinates = "50.07908030304553, 36.231179942837095"
+
+for _ in range(10):
+    os.system(f'adb shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location "{start_coordinates}"')

@@ -2,7 +2,7 @@ import time
 
 import requests
 import json
-import create_signature
+
 from create_signature_class import SyncwiseAPI
 
 
@@ -196,13 +196,17 @@ class SyncwiseClient(SyncwiseAPI):
         print(response.text)
 
 
-test_1 = SyncwiseClient("https://dev-api.syncwise360.com")
-test_1.user_account_login()
+# test_1 = SyncwiseClient("https://dev-api.syncwise360.com")
+# test_1.user_account_login()
+
+
 # print(test_1.SECRET_KEY)
 
 # test_1.course_geofence_list()
 
-test_1.course_vector_details()
+# test_1.course_vector_details()
+
+
 # print(test_1.COURSE_VECTOR_DETAILS)
 # print(test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR)
 
@@ -214,6 +218,6 @@ test_1.course_vector_details()
 # for k, v in test_1.COURSE_VECTOR_DETAILS_CLUBHOUSE.items():
 #     print(k, v, len(v))
 
-print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
+# print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
 # test_1.course_geofence_create('Back_ground', test_1.COURSE_VECTOR_DETAILS_BACKGROUND[1])
