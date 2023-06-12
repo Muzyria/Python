@@ -27,6 +27,17 @@ class IntermediateCoordinatesGenerator:
         pyautogui.typewrite(r'scrcpy --tcpip=192.168.2.30:5555')
         pyautogui.press('enter')
 
+    def get_start_coordinates(self):
+        start_coordinates = "50.07807852323376, 36.23065154766116"
+        for _ in range(5):  # start coordinate for begin
+            time_minute = datetime.now().time().minute
+            os.system(
+                rf'adb shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{start_coordinates}\"')
+            if (now := datetime.now().time().minute) != time_minute:
+                time_minute = now
+                os.system(rf'adb shell input tap 700 500')
+                print(f'TOUCH SCREEN in {datetime.now().time().strftime("%H:%M")}')
+
     def get_intermediate_coordinates(self, path, steps):
         if steps <= 1 or len(path) <= 1:
             return path
@@ -46,47 +57,41 @@ class IntermediateCoordinatesGenerator:
                 intermediate_coordinates.append({'lat': lat, 'lng': lng})
 
         intermediate_coordinates.append(path[-1])  # Добавляем последнюю координату
-
         return intermediate_coordinates
 
+    def run_device(self):
+        for i in range(1, generator.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
+            for step_patch in generator.get_intermediate_coordinates(
+                    generator.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps):
+                lat, lng = step_patch['lat'], step_patch['lng']
+                print(f'step -> {lat}, {lng}')
+                time_minute = datetime.now().time().minute
+                os.system(
+                    rf'adb shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{lat}, {lng}\"')
+                if (now := datetime.now().time().minute) != time_minute:
+                    time_minute = now
+                    os.system(rf'adb shell input tap 700 500')
+                    print(f'TOUCH SCREEN in {datetime.now().time().strftime("%H:%M")}')
 
-# path = [
-#     {'lat': 50.079678437647, 'lng': 36.231405436993},
-#     {'lat': 50.082184485494, 'lng': 36.231842637062}
-# ]
 
 steps = 20
 generator = IntermediateCoordinatesGenerator()
 
+generator.get_start_coordinates()
 
-start_coordinates = "50.07807852323376, 36.23065154766116"
+generator.run_device()
+# for i in range(1, generator.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
+#     for step_patch in generator.get_intermediate_coordinates(generator.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps):
+#         lat, lng = step_patch['lat'], step_patch['lng']
+#         print(f'step -> {lat}, {lng}')
+#         time_minute = datetime.now().time().minute
+#         os.system(rf'adb shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{lat}, {lng}\"')
+#         if (now := datetime.now().time().minute) != time_minute:
+#             time_minute = now
+#             os.system(rf'adb shell input tap 700 500')
+#             print(f'TOUCH SCREEN in {datetime.now().time().strftime("%H:%M")}')
 
-for _ in range(5):  # start coordinate for begin
-    time_minute = datetime.now().time().minute
-    os.system(rf'adb shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{start_coordinates}\"')
-    if (now := datetime.now().time().minute) != time_minute:
-        time_minute = now
-        os.system(rf'adb shell input tap 700 500')
-        print(f'TOUCH SCREEN in {datetime.now().time().strftime("%H:%M")}')
-
-for i in range(1, generator.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
-    for step_patch in generator.get_intermediate_coordinates(generator.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps):
-        lat, lng = step_patch['lat'], step_patch['lng']
-        print(f'step -> {lat}, {lng}')
-        time_minute = datetime.now().time().minute
-        os.system(rf'adb shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{lat}, {lng}\"')
-        if (now := datetime.now().time().minute) != time_minute:
-            time_minute = now
-            os.system(rf'adb shell input tap 700 500')
-            print(f'TOUCH SCREEN in {datetime.now().time().strftime("%H:%M")}')
-
-for _ in range(5):  # start coordinate for begin
-    time_minute = datetime.now().time().minute
-    os.system(rf'adb shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{start_coordinates}\"')
-    if (now := datetime.now().time().minute) != time_minute:
-        time_minute = now
-        os.system(rf'adb shell input tap 700 500')
-        print(f'TOUCH SCREEN in {datetime.now().time().strftime("%H:%M")}')
+generator.get_start_coordinates()
 
 
 
