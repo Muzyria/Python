@@ -5,6 +5,7 @@ from sincwise_clients_method import SyncwiseClient
 import pyautogui
 import time
 
+
 class IntermediateCoordinatesGenerator:
     def __init__(self):
         self.connect_devise()
