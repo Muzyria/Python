@@ -1,24 +1,28 @@
-def get_intermediate_coordinates(path, steps):
-    if steps <= 1 or len(path) <= 1:
-        return path
+class IntermediateCoordinatesGenerator:
+    def __init__(self):
+        pass
 
-    intermediate_coordinates = []
-    num_segments = len(path) - 1
-    segment_length = steps / num_segments
+    def get_intermediate_coordinates(self, path, steps):
+        if steps <= 1 or len(path) <= 1:
+            return path
 
-    for i in range(num_segments):
-        start_coord = path[i]
-        end_coord = path[i + 1]
+        intermediate_coordinates = []
+        num_segments = len(path) - 1
+        segment_length = steps / num_segments
 
-        for j in range(steps):
-            ratio = j / steps
-            lat = start_coord['lat'] + (end_coord['lat'] - start_coord['lat']) * ratio
-            lng = start_coord['lng'] + (end_coord['lng'] - start_coord['lng']) * ratio
-            intermediate_coordinates.append({'lat': lat, 'lng': lng})
+        for i in range(num_segments):
+            start_coord = path[i]
+            end_coord = path[i + 1]
 
-    intermediate_coordinates.append(path[-1])  # Добавляем последнюю координату
+            for j in range(steps):
+                ratio = j / steps
+                lat = start_coord['lat'] + (end_coord['lat'] - start_coord['lat']) * ratio
+                lng = start_coord['lng'] + (end_coord['lng'] - start_coord['lng']) * ratio
+                intermediate_coordinates.append({'lat': lat, 'lng': lng})
 
-    return intermediate_coordinates
+        intermediate_coordinates.append(path[-1])  # Добавляем последнюю координату
+
+        return intermediate_coordinates
 
 
 path = [
@@ -27,5 +31,6 @@ path = [
 ]
 steps = 2
 
-result = get_intermediate_coordinates(path, steps)
+generator = IntermediateCoordinatesGenerator()
+result = generator.get_intermediate_coordinates(path, steps)
 print(result)
