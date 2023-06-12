@@ -60,10 +60,10 @@ class IntermediateCoordinatesGenerator:
         intermediate_coordinates.append(path[-1])  # Добавляем последнюю координату
         return intermediate_coordinates
 
-    def run_device(self):
-        for i in range(1, generator.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
-            for step_patch in generator.get_intermediate_coordinates(
-                    generator.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps):
+    def run_device(self, steps):
+        for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
+            for step_patch in self.get_intermediate_coordinates(
+                    self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps):
                 lat, lng = step_patch['lat'], step_patch['lng']
                 print(f'step -> {lat}, {lng}')
                 time_minute = datetime.now().time().minute
@@ -75,23 +75,10 @@ class IntermediateCoordinatesGenerator:
                     print(f'TOUCH SCREEN in {datetime.now().time().strftime("%H:%M")}')
 
 
-steps = 20
 generator = IntermediateCoordinatesGenerator()
 
 generator.get_start_coordinates()
-
-generator.run_device()
-# for i in range(1, generator.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
-#     for step_patch in generator.get_intermediate_coordinates(generator.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps):
-#         lat, lng = step_patch['lat'], step_patch['lng']
-#         print(f'step -> {lat}, {lng}')
-#         time_minute = datetime.now().time().minute
-#         os.system(rf'adb shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{lat}, {lng}\"')
-#         if (now := datetime.now().time().minute) != time_minute:
-#             time_minute = now
-#             os.system(rf'adb shell input tap 700 500')
-#             print(f'TOUCH SCREEN in {datetime.now().time().strftime("%H:%M")}')
-
+generator.run_device(100)
 generator.get_start_coordinates()
 
 
