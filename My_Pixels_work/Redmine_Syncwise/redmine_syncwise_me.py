@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # URL для запроса
 url = 'https://redmine.syncwise.com/activity.atom?key=6bbaa888a50f02f885083ab2f56d584acfc1d0aa&user_id=359'
@@ -16,7 +16,7 @@ if response.status_code == 200:
     soup = BeautifulSoup(xml_data, 'xml')
 
     # Извлечение информации за сегодня
-    today = datetime.now().date()
+    today = datetime.now().date() - timedelta(days=0)  # what day do you need (set value)
     entries = soup.find_all('entry')
     for entry in entries:
         updated = entry.find('updated').text
