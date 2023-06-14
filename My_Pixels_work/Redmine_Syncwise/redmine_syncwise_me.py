@@ -16,7 +16,7 @@ if response.status_code == 200:
     soup = BeautifulSoup(xml_data, 'xml')
 
     # Извлечение информации за сегодня
-    today = datetime.now().date() - timedelta(days=0)  # what day do you need (set value)
+    today = datetime.now().date() - timedelta(days=0)  # what day do you need (set value 0 you need today)
     entries = soup.find_all('entry')
     for entry in entries:
         updated = entry.find('updated').text
