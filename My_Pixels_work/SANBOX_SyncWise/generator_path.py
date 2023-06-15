@@ -78,7 +78,7 @@ class IntermediateCoordinatesGenerator:
 generator = IntermediateCoordinatesGenerator()
 
 generator.get_start_coordinates()
-generator.run_device(100)
+generator.run_device(12)
 generator.get_start_coordinates()
 
 
