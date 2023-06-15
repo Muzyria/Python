@@ -1,18 +1,18 @@
-from contextlib import contextmanager
-import os
+import contextlib, io, pathlib
 
-@contextmanager
+
+@contextlib.contextmanager
 def safe_write(filename):
+    buffer = io.StringIO()
+    mode = 'r+' if pathlib.Path(filename).is_file() else 'w'
     try:
-        temp_file = open('temp_file', 'w+')
-        yield temp_file
-        temp_file.seek(0)
-    except Exception as err:
-        print(f'Во время записи в файл было возбуждено исключение {type(err).__name__}')
-    else:
-        file = open(filename, 'w')
-        file.writelines(temp_file.readlines())
-        file.close()
-    finally:
-        temp_file.close()
-        os.remove('temp_file')
+        file = open(filename, mode)
+        yield buffer
+        file.write(buffer.getvalue())
+        buffer.close()
+        file.close()      
+    except Exception as error:
+        print(
+            f'Во время записи в файл было возбуждено исключение'
+            f' {error.__class__.__name__}'
+        )
