@@ -11,9 +11,10 @@ class IntermediateCoordinatesGenerator:
     DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
 
     def __init__(self):
-        for ip_device in self.DICT_IP_DEVICES.values():
-            ConnectDevice.connect_devise(ip_device)
-            time.sleep(10)
+        # for ip_device in self.DICT_IP_DEVICES.values():
+        #     ConnectDevice.connect_devise(ip_device)
+        #     time.sleep(10)
+        ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
 
         self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
         self.client_data.user_account_login()

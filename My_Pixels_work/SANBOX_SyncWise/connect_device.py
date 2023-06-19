@@ -1,3 +1,4 @@
+import multiprocessing
 import time
 
 import pyautogui
@@ -19,3 +20,10 @@ class ConnectDevice:
         pyautogui.press('enter')
         print(f'CONNECTED TCP/IP {ip_device}')
 
+    @staticmethod
+    def connect_devices(DICT_IP_DEVICES):
+        pool = multiprocessing.Pool()
+        for ip_device in DICT_IP_DEVICES.values():
+            pool.apply_async(ConnectDevice.connect_device, args=(ip_device,))
+        pool.close()
+        pool.join()
