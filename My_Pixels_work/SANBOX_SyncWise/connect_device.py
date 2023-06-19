@@ -18,3 +18,4 @@ class ConnectDevice:
         pyautogui.typewrite(fr'scrcpy --tcpip={ip_device}:5555')
         pyautogui.press('enter')
         print(f'CONNECTED TCP/IP {ip_device}')
+
