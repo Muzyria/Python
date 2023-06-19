@@ -13,7 +13,7 @@ class IntermediateCoordinatesGenerator:
     def __init__(self):
         for ip_device in self.DICT_IP_DEVICES.values():
             ConnectDevice.connect_devise(ip_device)
-            time.sleep(5)
+            time.sleep(10)
 
         self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
         self.client_data.user_account_login()
