@@ -2,7 +2,8 @@ import os
 from datetime import datetime
 
 from sincwise_clients_method import SyncwiseClient
-import pyautogui
+from connect_device import ConnectDevice
+
 import time
 
 
@@ -11,25 +12,13 @@ class IntermediateCoordinatesGenerator:
 
     def __init__(self):
         for ip_device in self.DICT_IP_DEVICES.values():
-            self.connect_devise(ip_device)
+            ConnectDevice.connect_devise(ip_device)
             time.sleep(5)
+
         self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
         self.client_data.user_account_login()
         self.client_data.course_vector_details()
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
-
-    def connect_devise(self, ip_device):
-        pyautogui.hotkey('win', 'r')
-        pyautogui.typewrite('cmd')
-        pyautogui.press('enter')
-        time.sleep(1)
-
-        # печатаем команду
-        pyautogui.typewrite(r'cd C:\scrcpy-win64-v2.0\scrcpy-win64-v2.0')
-        pyautogui.press('enter')
-
-        pyautogui.typewrite(fr'scrcpy --tcpip={ip_device}:5555')
-        pyautogui.press('enter')
 
     def get_start_coordinates(self):
         start_coordinates = "50.07807852323376, 36.23065154766116"
