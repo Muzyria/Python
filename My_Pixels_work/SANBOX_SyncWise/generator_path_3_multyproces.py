@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-
+import multiprocessing
 from sincwise_clients_method import SyncwiseClient
 from connect_device import ConnectDevice
 
@@ -28,16 +28,28 @@ class IntermediateCoordinatesGenerator:
         os.system(
             rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
+    # def get_start_coordinates(self):
+    #     for _ in range(5):  # start coordinate for begin
+    #         time_minute = datetime.now().time().minute
+    #
+    #         for ip_device in self.DICT_IP_DEVICES.values():
+    #             # os.system(rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{start_coordinates}\"')
+    #             self.send_adb_command(ip_device, self.START_COORDINATES)
+    #             if (now := datetime.now().time().minute) != time_minute:
+    #                 time_minute = now
+    #                 self.touch_screen()
     def get_start_coordinates(self):
+        start_coordinates = "50.07807852323376, 36.23065154766116"
+        pool = multiprocessing.Pool()
         for _ in range(5):  # start coordinate for begin
             time_minute = datetime.now().time().minute
-
             for ip_device in self.DICT_IP_DEVICES.values():
-                # os.system(rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{start_coordinates}\"')
-                self.send_adb_command(ip_device, self.START_COORDINATES)
-                if (now := datetime.now().time().minute) != time_minute:
-                    time_minute = now
-                    self.touch_screen()
+                pool.apply_async(self.send_adb_command, args=(ip_device, start_coordinates))
+            pool.close()
+            pool.join()
+            if (now := datetime.now().time().minute) != time_minute:
+                time_minute = now
+                self.touch_screen()
 
     def touch_screen(self):
         for id_device, ip_device in self.DICT_IP_DEVICES.items():
