@@ -103,24 +103,40 @@ class IntermediateCoordinatesGenerator:
         intermediate_coordinates.append(path[-1])  # Добавляем последнюю координату
         return intermediate_coordinates
 
+    # def run_device(self, steps):
+    #     for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
+    #         for step_patch in self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps):
+    #             lat, lng = step_patch['lat'], step_patch['lng']
+    #             print(f'step -> {lat}, {lng}')
+    #             time_minute = datetime.now().time().minute
+    #
+    #             for ip_device in self.DICT_IP_DEVICES.values():
+    #                 self.send_adb_command(ip_device, f"{lat}, {lng}")
+    #                 if (now := datetime.now().time().minute) != time_minute:
+    #                     time_minute = now
+    #                     self.touch_screen()
+
+    """THREADS"""
     def run_device(self, steps):
+        def send_adb_command_wrapper(ip_device, lat, lng):
+            self.send_adb_command(ip_device, f"{lat}, {lng}")
+            self.touch_screen()
+
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
             for step_patch in self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps):
                 lat, lng = step_patch['lat'], step_patch['lng']
                 print(f'step -> {lat}, {lng}')
-                time_minute = datetime.now().time().minute
 
-                for ip_device in self.DICT_IP_DEVICES.values():
-                    self.send_adb_command(ip_device, f"{lat}, {lng}")
-                    if (now := datetime.now().time().minute) != time_minute:
-                        time_minute = now
-                        self.touch_screen()
+                with ThreadPoolExecutor() as executor:
+                    executor.map(send_adb_command_wrapper, self.DICT_IP_DEVICES.values(), [lat] * len(self.DICT_IP_DEVICES), [lng] * len(self.DICT_IP_DEVICES))
+
+        print("Завершено")
 
 
 generator = IntermediateCoordinatesGenerator()
 
 generator.get_start_coordinates()
-# generator.run_device(2)
+# generator.run_device(3)
 generator.get_start_coordinates()
 
 
