@@ -23,7 +23,7 @@ class ConnectDevice:
     def connect_devices(DICT_IP_DEVICES):
         for ip_device in DICT_IP_DEVICES.values():
             ConnectDevice.connect_device(ip_device)
-            time.sleep(10)
+            time.sleep(5)
 
 
 
