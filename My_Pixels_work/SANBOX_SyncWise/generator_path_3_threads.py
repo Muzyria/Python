@@ -1,11 +1,22 @@
 import os
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
 from sincwise_clients_method import SyncwiseClient
 from connect_device import ConnectDevice
-
+# from time import perf_counter
 import time
+import threading
 
+
+def execution_time_decorator(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.perf_counter()
+        result = func(*args, **kwargs)
+        elapsed_time = time.perf_counter() - start_time
+        print(f"Execution time for {func.__name__}: {elapsed_time:.2f} seconds")
+        return result
+    return wrapper
 
 class IntermediateCoordinatesGenerator:
     DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
@@ -24,20 +35,48 @@ class IntermediateCoordinatesGenerator:
         self.client_data.course_vector_details()
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
+    # @execution_time_decorator
+    # def send_adb_command(self, ip_device, location):
+    #     os.system(rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
+    #
+    #
+    #
+    # @execution_time_decorator
+    # def get_start_coordinates(self):
+    #     for _ in range(5):  # start coordinate for begin
+    #         time_minute = datetime.now().time().minute
+    #
+    #         for ip_device in self.DICT_IP_DEVICES.values():
+    #             self.send_adb_command(ip_device, self.START_COORDINATES)
+    #             print(f'{ip_device}  - > {datetime.now().time()}')
+    #             if (now := datetime.now().time().minute) != time_minute:
+    #                 time_minute = now
+    #                 self.touch_screen()
+
+    """THREADS"""
+    @execution_time_decorator
     def send_adb_command(self, ip_device, location):
         os.system(
             rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
+    @execution_time_decorator
     def get_start_coordinates(self):
-        for _ in range(5):  # start coordinate for begin
-            time_minute = datetime.now().time().minute
-
-            for ip_device in self.DICT_IP_DEVICES.values():
+        def send_adb_command_wrapper(ip_device):
+            for _ in range(5):  # start coordinate for begin
+                time_minute = datetime.now().time().minute
                 self.send_adb_command(ip_device, self.START_COORDINATES)
+                print(f'{ip_device}  - > {datetime.now().time()}')
+
                 if (now := datetime.now().time().minute) != time_minute:
                     time_minute = now
                     self.touch_screen()
 
+        with ThreadPoolExecutor() as executor:
+            executor.map(send_adb_command_wrapper, self.DICT_IP_DEVICES.values())
+
+        print("Завершено")
+
+    @execution_time_decorator
     def touch_screen(self):
         for id_device, ip_device in self.DICT_IP_DEVICES.items():
             os.system(rf'adb -s {ip_device}:5555 shell input tap 700 500')
@@ -72,7 +111,6 @@ class IntermediateCoordinatesGenerator:
                 time_minute = datetime.now().time().minute
 
                 for ip_device in self.DICT_IP_DEVICES.values():
-                    # os.system(rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{lat}, {lng}\"')
                     self.send_adb_command(ip_device, f"{lat}, {lng}")
                     if (now := datetime.now().time().minute) != time_minute:
                         time_minute = now
