@@ -34,5 +34,9 @@ def close_connection():
     print("Closing connection")
 
 
+
+
+
+
 # Пример использования
 open_connection('192.168.2.30')
