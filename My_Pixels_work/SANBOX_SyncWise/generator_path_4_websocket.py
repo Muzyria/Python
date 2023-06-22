@@ -6,9 +6,9 @@ from sincwise_clients_method import SyncwiseClient
 from connect_device import ConnectDevice
 from time import perf_counter
 import asyncio
-from websocket_client import WebSocketClient
+from  may_day_may_day import send_coordinates
 import time
-from websocket_location_provider_2 import main, run_multiple_main_coordinates
+
 
 def execution_time_decorator(func):
     def wrapper(*args, **kwargs):
@@ -31,8 +31,8 @@ class IntermediateCoordinatesGenerator:
 
     async def get_start_coordinates(self):
         for _ in range(10):
-            await main(self.START_COORDINATES[0], self.START_COORDINATES[1], 0)
-            await asyncio.sleep(1)
+            address = "192.168.2.30"
+            asyncio.run(send_coordinates(address, self.START_COORDINATES))
 
 
 
@@ -79,7 +79,7 @@ class IntermediateCoordinatesGenerator:
 
 generator = IntermediateCoordinatesGenerator()
 
-asyncio.run(generator.get_start_coordinates())
+generator.get_start_coordinates()
 
 
 
