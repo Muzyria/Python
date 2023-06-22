@@ -21,7 +21,7 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30'}
-    START_COORDINATES = [(50.07807852323376, 36.23065154766116)]
+    START_COORDINATES = {1: ["50.07807852323376", "36.23065154766116"]}
 
 
     # @execution_time_decorator
@@ -30,8 +30,8 @@ class IntermediateCoordinatesGenerator:
     #         rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
     def get_start_coordinates(self):
-        coordinates = [self.START_COORDINATES[0] for _ in range(10)]
-        push(coordinates)
+        coordinates = [self.START_COORDINATES[1] for _ in range(3)]
+        push('192.168.3.219', coordinates)
 
 
 
@@ -79,6 +79,9 @@ class IntermediateCoordinatesGenerator:
 generator = IntermediateCoordinatesGenerator()
 
 generator.get_start_coordinates()
+
+generator.get_start_coordinates()
+
 
 
 
