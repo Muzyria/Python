@@ -19,29 +19,19 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30'}
-    START_COORDINATES = "50.07807852323376, 36.23065154766116"
+    START_COORDINATES = ["50.07807852323376", "36.23065154766116"]
 
-    def __init__(self):
-        # ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
-        time.sleep(2)
-
-        # for ip_device in self.DICT_IP_DEVICES.values():
-        #     ConnectDevice.connect_device(ip_device)
-        #     time.sleep(10)
-
-        # self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
-        # self.client_data.user_account_login()
-        # self.client_data.course_vector_details()
-        # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
     @execution_time_decorator
     def send_adb_command(self, ip_device, location):
         os.system(
             rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
-    def get_start_coordinates(self):
-        start_coordinates = [self.START_COORDINATES for _ in range(50)]
-        asyncio.run(run_multiple_main_coordinates(start_coordinates))
+    async def get_start_coordinates(self):
+        for _ in range(10):
+            await main(self.START_COORDINATES[0], self.START_COORDINATES[1], 0)
+            await asyncio.sleep(1)
+
 
 
     @execution_time_decorator
@@ -87,9 +77,7 @@ class IntermediateCoordinatesGenerator:
 
 generator = IntermediateCoordinatesGenerator()
 
-generator.get_start_coordinates()
-# generator.run_device(2)
-generator.get_start_coordinates()
+asyncio.run(generator.get_start_coordinates())
 
 
 

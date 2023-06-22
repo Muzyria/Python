@@ -148,21 +148,22 @@ async def main(latitude, longitude, accuracy):
     client = WebSocketClient()
     await client.open_connection("192.168.2.30")
 
+
     await client.push_location_to_websocket(latitude, longitude, accuracy)
     await asyncio.sleep(1)  # Даем время отправке пакета
 
-    await client.close_connection()
-
-# Пример использования
-# latitude = 50.07808654956364
-# longitude = 36.23110681531438
-# accuracy = 0
-#
-# asyncio.run(main(latitude, longitude, accuracy))
+    # await client.close_connection()
 
 async def run_multiple_main_coordinates(coordinates):
-    tasks = []
+    client = WebSocketClient()
+    await client.open_connection("192.168.2.30")
+
     for coord in coordinates:
-        task = asyncio.create_task(main(coord[0], coord[1], 0))
-        tasks.append(task)
-    await asyncio.gather(*tasks)
+        await client.push_location_to_websocket(coord[0], coord[1], 0)
+        await asyncio.sleep(1)  # Даем время отправке пакета
+
+    await client.close_connection()
+
+
+
+
