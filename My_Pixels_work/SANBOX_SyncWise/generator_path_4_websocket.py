@@ -5,6 +5,8 @@ from datetime import datetime
 from sincwise_clients_method import SyncwiseClient
 from connect_device import ConnectDevice
 from time import perf_counter
+import asyncio
+from websocket_client import WebSocketClient
 import time
 from websocket_location_provider_2 import main, run_multiple_main_coordinates
 
