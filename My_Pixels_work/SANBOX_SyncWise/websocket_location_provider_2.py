@@ -1,66 +1,162 @@
-import websocket
 import json
+import time
+
+import websockets
+import asyncio
+
+class Preferences:
+    default_config = {
+        "lastLat": 37.73841,
+        "lastLng": -122.23472,
+        "lastAddress": "192.168.1.88",
+        "lastSpeed": 0,
+        "useSpeed": 1,
+        "lastAcc": 0,
+        "lastAlt": 0,
+        "useAlt": 1
+    }
+
+    def __init__(self):
+        self.json_object = self.load_preferences()
+
+    def load_preferences(self):
+        # Load preferences from storage or use default config
+        prefs = None
+        try:
+            with open("preferences.json") as file:
+                prefs = json.load(file)
+        except FileNotFoundError:
+            pass
+
+        return prefs if prefs else self.default_config
+
+    def save_preferences(self):
+        # Save preferences to storage
+        with open("preferences.json", "w") as file:
+            json.dump(self.json_object, file)
+
+    def last_lat(self, lat=None):
+        if lat is None:
+            return self.json_object["lastLat"]
+
+        self.json_object["lastLat"] = lat
+        return self
+
+    def last_lng(self, lng=None):
+        if lng is None:
+            return self.json_object["lastLng"]
+
+        self.json_object["lastLng"] = lng
+        return self
+
+    def last_address(self, address=None):
+        if address is None:
+            return self.json_object["lastAddress"]
+
+        self.json_object["lastAddress"] = address
+        return self
+
+    def last_speed(self, speed=None):
+        if speed is None:
+            return self.json_object["lastSpeed"]
+
+        self.json_object["lastSpeed"] = speed
+        return self
+
+    def use_speed(self, use=None):
+        if use is None:
+            return self.json_object["useSpeed"]
+
+        self.json_object["useSpeed"] = use
+        return self
+
+    def last_acc(self, acc=None):
+        if acc is None:
+            return self.json_object["lastAcc"]
+
+        self.json_object["lastAcc"] = acc
+        return self
+
+    def last_alt(self, alt=None):
+        if alt is None:
+            return self.json_object["lastAlt"]
+
+        self.json_object["lastAlt"] = alt
+        return self
+
+    def use_alt(self, use=None):
+        if use is None:
+            return self.json_object["useAlt"]
+
+        self.json_object["useAlt"] = use
+        return self
+
 
 class WebSocketClient:
     def __init__(self):
         self.socket = None
+        self.connection_state = "disconnected"
+        self.prefs = Preferences()
 
-    def open_connection(self, address):
-        def on_open(ws):
-            self.set_socket(ws)
+    async def open_connection(self, address):
+        self.connection_state = "connecting"
+
+        try:
+            self.socket = await websockets.connect(f"ws://{address}:5557")
+            self.connection_state = "connected"
             print("WebSocket connected")
-
-        def on_close(ws, close_code, close_reason):
+        except Exception as e:
             self.close_connection()
-            print("WebSocket closed")
+            print(f"Connection error: {e}")
 
-        def on_error(ws, error):
-            self.close_connection()
-            print('Connection error')
-
-        self.socket = websocket.WebSocketApp('ws://' + address + ':5557',
-                                             on_open=on_open,
-                                             on_close=on_close,
-                                             on_error=on_error)
-        self.socket.run_forever()
-
-    def set_socket(self, ws):
-        self.socket = ws
-
-    def push_location_to_websocket(self, lat, lng, acc):
+    async def close_connection(self):
         if self.socket is None:
-            print("WebSocket is not connected")
+            return
+
+        await self.socket.close()
+        self.socket = None
+        self.connection_state = "disconnected"
+        print("WebSocket closed")
+
+    async def push_location_to_websocket(self, latitude, longitude, accuracy):
+        if self.socket is None:
+            return
+
+        if self.connection_state != "connected":
             return
 
         packet = {
             "version": 1,
-            "lat": float(lat),
-            "lng": float(lng),
-            "acc": float(acc)
+            "lat": float(latitude),
+            "lng": float(longitude),
+            "acc": float(accuracy)
         }
 
-        # Преобразование в JSON и отправка пакета
-        self.socket.send(json.dumps(packet))
+        if self.prefs.use_speed() == 1:
+            speed = self.prefs.last_speed()
+            packet["speed"] = float(speed)
 
-    def close_connection(self):
-        if self.socket is not None:
-            self.socket.close()
-        self.socket = None
+        if self.prefs.use_alt() == 1:
+            alt = self.prefs.last_alt()
+            packet["alt"] = float(alt)
 
-# Пример использования из другого файла
-address = '192.168.2.30'
+        print("Sending packet:", packet)
+        await self.socket.send(json.dumps(packet))
 
-# Создание экземпляра клиента WebSocket
-client = WebSocketClient()
 
-# Открытие соединения
-client.open_connection(address)
+async def main(latitude, longitude, accuracy):
+    client = WebSocketClient()
+    await client.open_connection("192.168.2.30")
 
-# Вызываем push_location_to_websocket() с координатами
-latitude = 42.123456
-longitude = -71.987654
-accuracy = 10.5
-client.push_location_to_websocket(latitude, longitude, accuracy)
+    for _ in range(50):
+        await client.push_location_to_websocket(latitude, longitude, accuracy)
+        await asyncio.sleep(1)  # Даем время отправке пакета
 
-# Закрываем соединение
-client.close_connection()
+    await client.close_connection()
+
+# Пример использования
+latitude = 50.07808654956364
+longitude = 36.23110681531438
+accuracy = 0
+
+asyncio.run(main(latitude, longitude, accuracy))
