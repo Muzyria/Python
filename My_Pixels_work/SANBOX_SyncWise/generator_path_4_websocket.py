@@ -6,7 +6,7 @@ from sincwise_clients_method import SyncwiseClient
 from connect_device import ConnectDevice
 from time import perf_counter
 import asyncio
-from  may_day_may_day import send_coordinates
+from may_day_may_day import push
 import time
 
 
@@ -21,18 +21,17 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30'}
-    START_COORDINATES = ["50.07807852323376", "36.23065154766116"]
+    START_COORDINATES = [(50.07807852323376, 36.23065154766116)]
 
 
-    @execution_time_decorator
-    def send_adb_command(self, ip_device, location):
-        os.system(
-            rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
+    # @execution_time_decorator
+    # def send_adb_command(self, ip_device, location):
+    #     os.system(
+    #         rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
-    async def get_start_coordinates(self):
-        for _ in range(10):
-            address = "192.168.2.30"
-            asyncio.run(send_coordinates(address, self.START_COORDINATES))
+    def get_start_coordinates(self):
+        coordinates = [self.START_COORDINATES[0] for _ in range(10)]
+        push(coordinates)
 
 
 
