@@ -24,3 +24,16 @@
 #     window = MyWindow()
 #     window.show()
 #     sys.exit(app.exec_())
+def count_up_to(n):
+    for i in range(n):
+        yield i
+
+# Итерация по значениям, возвращаемым генератором, с помощью цикла "for"
+s = count_up_to(5)
+
+print(next(s))
+print(next(s))
+print(next(s))
+print(next(s))
+print(next(s))
+

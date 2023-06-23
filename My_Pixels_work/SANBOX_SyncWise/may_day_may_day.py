@@ -1,23 +1,6 @@
-# from websocket_client_2 import WebSocketClient
-# import asyncio
-#
-#
-# async def send_coordinates(address, coordinates):
-#     client = WebSocketClient()
-#     await client.open_connection(address)
-#
-#     for coord in coordinates:
-#         await client.push_location_to_websocket(coord[0], coord[1], 0)
-#         await asyncio.sleep(1)  # Даем время отправке пакета
-#
-#     await client.close_connection()
-#
-#
-# def push(ip_device, coordinates_list):
-#     asyncio.run(send_coordinates(ip_device, coordinates_list))
 from websocket_client_2 import WebSocketClient
 import asyncio
-
+from generator_path_4_websocket import IntermediateCoordinatesGenerator
 
 class WebSocketConnectionManager:
     def __init__(self, address):
@@ -46,16 +29,33 @@ class WebSocketConnectionManager:
         await self.send_coordinates(coordinates)
         await self.close_connection()
 
+async def execute_scenario(address):
+    connection_manager = WebSocketConnectionManager(address)
+    await connection_manager.open_connection()
 
-def push(ip_device, coordinates_list):
-    # connection_manager = WebSocketConnectionManager(ip_device)
-    # asyncio.run(connection_manager.send_coordinates_and_close(coordinates_list))
-    connection_manager = WebSocketConnectionManager(ip_device)
-    await connection_manager.open_connection()  # Открыть соединение
+    try:
+        # Вызов методов вычисления маршрута
+        generator = IntermediateCoordinatesGenerator()
+        route1 = generator.get_start_coordinates()
+        await connection_manager.send_coordinates(route1)
+        await asyncio.sleep(1)  # Дополнительная задержка
 
-    # Отправить координаты
-    await connection_manager.send_coordinates(coordinates_list)
+        # Дополнительные методы вычисления маршрута и отправки координат...
+        iterator = generator.run_device(4)
+        for _ in range(generator.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT):
+            route2 = next(iterator)
+            await connection_manager.send_coordinates(route2)
 
-    # Другие операции...
+            await asyncio.sleep(1)  # Дополнительная задержка
+        await asyncio.sleep(1)  # Дополнительная задержка
 
-    await connection_manager.close_connection()  # Разорвать соединение
+        # Вызов методов вычисления маршрута
+        await connection_manager.send_coordinates(route1)
+        await asyncio.sleep(1)  # Дополнительная задержка
+
+    finally:
+        await connection_manager.close_connection()
+
+# Пример использования
+address = "192.168.2.30"
+asyncio.run(execute_scenario(address))
