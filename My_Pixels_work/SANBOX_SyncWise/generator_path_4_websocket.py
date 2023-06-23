@@ -27,6 +27,7 @@ class IntermediateCoordinatesGenerator:
 
     @staticmethod
     def get_start_coordinates():
+        print(f'PATH TO START COORDINATE')
         return [IntermediateCoordinatesGenerator.START_COORDINATES[1] for _ in range(10)]
 
     @staticmethod
@@ -61,15 +62,15 @@ class IntermediateCoordinatesGenerator:
             yield path
 
 
-generator = IntermediateCoordinatesGenerator()
-# print(generator.get_start_coordinates())
-iterator = generator.run_device(4)
-
-print(next(iterator))
-print(next(iterator))
-print(next(iterator))
-print(next(iterator))
-
+# generator = IntermediateCoordinatesGenerator()
+# # print(generator.get_start_coordinates())
+# iterator = generator.run_device(4)
+#
+# print(next(iterator))
+# print(next(iterator))
+# print(next(iterator))
+# print(next(iterator))
+#
 
 
 

@@ -37,13 +37,20 @@ async def execute_scenario(address):
         # Вызов методов вычисления маршрута
         generator = IntermediateCoordinatesGenerator()
         route1 = generator.get_start_coordinates()
+        await connection_manager.send_coordinates([route1[0]])
+        print(route1[0])
+        generator.touch_screen()
         await connection_manager.send_coordinates(route1)
-        await asyncio.sleep(1)  # Дополнительная задержка
+        await asyncio.sleep(2)  # Дополнительная задержка
 
         # Дополнительные методы вычисления маршрута и отправки координат...
         iterator = generator.run_device(4)
         for _ in range(generator.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT):
             route2 = next(iterator)
+            print(route2[0])
+            await connection_manager.send_coordinates([route2[0]])
+            generator.touch_screen()
+            await asyncio.sleep(2)  # Дополнительная задержка
             await connection_manager.send_coordinates(route2)
 
             await asyncio.sleep(1)  # Дополнительная задержка
