@@ -7,12 +7,12 @@ from sincwise_clients_method import SyncwiseClient
 
 
 class IntermediateCoordinatesGenerator:
-    DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'S10115002211': '192.168.3.219'}
+    DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30'}
     START_COORDINATES = {1: ["50.07807852323376", "36.23065154766116"]}
 
     def __init__(self):
         print('MAY_DAY')
-        # ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
+        ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
         time.sleep(2)
 
         self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
