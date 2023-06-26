@@ -19,13 +19,11 @@ class Mother():
         self.mood = 'kind'
 
 class Daughter(Mother, Father):
-    def __init__(self, mood='neutral'):
-        super().__init__(mood)
+    pass
 
 
 class Son(Father, Mother):
-    def __init__(self, mood='neutral'):
-        super().__init__(mood)
+    pass
 
 
 father = Father()
