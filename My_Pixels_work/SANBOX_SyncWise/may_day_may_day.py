@@ -1,4 +1,3 @@
-
 from websocket_client_2 import WebSocketClient
 import asyncio
 from generator_path_4_websocket import IntermediateCoordinatesGenerator
