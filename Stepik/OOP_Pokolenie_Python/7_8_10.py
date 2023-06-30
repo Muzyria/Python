@@ -21,7 +21,7 @@ class ShoppingCart:
         [self.items.remove(i) for i in self.items if i.name == name]
 
     def __str__(self):
-        return f'{self.items[0].__dict__}'
+        return '\n'.join(str(item) for item in self.items)
 
 
 shopping_cart = ShoppingCart([Item('Yoga Mat', 130)])
@@ -35,3 +35,26 @@ shopping_cart = ShoppingCart([Item('Yoga Mat', 130), Item('Flannel Shirt', 22)])
 shopping_cart.remove('Yoga Mat')
 print(shopping_cart)
 print(shopping_cart.total())
+
+shopping_cart = ShoppingCart([Item('Banana', 100), Item('Apple', 120), Item('Orange', 110), Item('Tomato', 180), Item('Cucumber', 150)])
+
+shopping_cart.add(Item('Banana', 100))
+print(shopping_cart)
+print(shopping_cart.total())
+
+shopping_cart.remove('Banana')
+print(shopping_cart)
+print(shopping_cart.total())
+
+#  Banana, 100$
+# Apple, 120$
+# Orange, 110$
+# Tomato, 180$
+# Cucumber, 150$
+# Banana, 100$
+# 760
+# Apple, 120$
+# Orange, 110$
+# Tomato, 180$
+# Cucumber, 150$
+# 560
