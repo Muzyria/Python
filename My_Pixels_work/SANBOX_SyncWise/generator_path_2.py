@@ -18,7 +18,7 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30'}
+    DICT_IP_DEVICES = {'S10115002211180009': '192.168.3.219'}
     START_COORDINATES = "50.07807852323376, 36.23065154766116"
 
     def __init__(self):
@@ -93,7 +93,7 @@ class IntermediateCoordinatesGenerator:
 generator = IntermediateCoordinatesGenerator()
 
 generator.get_start_coordinates()
-generator.run_device(5)
+generator.run_device(20)
 generator.get_start_coordinates()
 
 

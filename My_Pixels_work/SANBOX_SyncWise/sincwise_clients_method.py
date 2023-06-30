@@ -35,7 +35,7 @@ class SyncwiseClient(SyncwiseAPI):
 
         payload = json.dumps({
             "username": "igorperetssuperior",
-            "password": "1234"
+            "password": "Qwerty01!"
         })
         headers = {
             'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
