@@ -29,7 +29,7 @@ class IntermediateCoordinatesGenerator:
         #     ConnectDevice.connect_device(ip_device)
         #     time.sleep(10)
 
-        self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
+        self.client_data = SyncwiseClient("https://api2.syncwise360.com")
         self.client_data.user_account_login()
         self.client_data.course_vector_details()
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)

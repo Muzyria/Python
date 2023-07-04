@@ -6,7 +6,7 @@ import json
 from create_signature_class import SyncwiseAPI
 
 
-# api = SyncwiseAPI("https://dev-api.syncwise360.com")
+# api = SyncwiseAPI("https://api2.syncwise360.com")
 
 
 class SyncwiseClient(SyncwiseAPI):
@@ -41,7 +41,7 @@ class SyncwiseClient(SyncwiseAPI):
             'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
             'Accept': '*/*',
             'Content-Type': 'application/json',
-            'Referer': 'https://sandbox.syncwise360.com/',
+            'Referer': 'https://beta.syncwise360.com/',
             'sec-ch-ua-mobile': '?0',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
             'sec-ch-ua-platform': '"Windows"'
@@ -60,18 +60,25 @@ class SyncwiseClient(SyncwiseAPI):
         action = "CourseGeofenceList"
         url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
         payload = json.dumps({
-            "id_company": 2973,
+            "id_company": 4442,
             "active": 1
         })
+
         headers = {
-            'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
+            'authority': 'api2.syncwise360.com',
+            'accept': '*/*',
+            'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
+            'content-type': 'application/json',
+            'origin': 'https://beta.syncwise360.com',
+            'referer': 'https://beta.syncwise360.com/',
+            'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
             'sec-ch-ua-mobile': '?0',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
-            'Content-Type': 'application/json',
-            'Accept': '*/*',
-            'Referer': 'https://sandbox.syncwise360.com/',
-            'x-access-token': '72Y8ItBOOQT2S2u41cosMWw_hSjrpOreSND8N9iRaoO1B3k3wmUPA7dxt3yb',
-            'sec-ch-ua-platform': '"Windows"'
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+            'x-access-token': '_dHjFdUbm5db7AibFL6fqYVpig1Wb0CyKeryH2YeN7sx2mGg056vEu2MbhkB'
         }
 
         response = requests.request("POST", url, headers=headers, data=payload)
@@ -92,15 +99,15 @@ class SyncwiseClient(SyncwiseAPI):
         action = "CourseVectorDetails"
         url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
         payload = json.dumps({
-            "id_course": "xqrRgFzOAmmP"
+            "id_course": "KoyhA-zWt6os"
         })
         headers = {
-            'authority': 'dev-api.syncwise360.com',
+            'authority': 'api2.syncwise360.com',
             'accept': '*/*',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'content-type': 'application/json',
-            'origin': 'https://sandbox.syncwise360.com',
-            'referer': 'https://sandbox.syncwise360.com/',
+            'origin': 'https://beta.syncwise360.com',
+            'referer': 'https://beta.syncwise360.com/',
             'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -108,7 +115,7 @@ class SyncwiseClient(SyncwiseAPI):
             'sec-fetch-mode': 'cors',
             'sec-fetch-site': 'same-site',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-            'x-access-token': 'bjVDR13m9pZq1wLRRlc2a-qNaqZDM2mbrv78Hnmx7oCZ1qO5hrhnk5AX9mTr'
+            'x-access-token': 'Wrle2mPGpJxOjyVztlCvGVpObNGfJT_xOoiMzRtd1b_eBCIkNBVsemMRGX9f'
         }
 
         response = requests.request("POST", url, headers=headers, data=payload)
@@ -161,7 +168,7 @@ class SyncwiseClient(SyncwiseAPI):
             "active": 1,
             "status": 1,
             "visible": 1,
-            "id_company": 2973,
+            "id_company": 4442,
             "id_geofenceType": 10,
             "name": name,
             "marshallBypass": 1,
@@ -170,17 +177,17 @@ class SyncwiseClient(SyncwiseAPI):
             "customShutdownTimeout": None,
             "customRestoreTimeout": None,
             "geo_fence_type": "cart_control",
-            "id_geofenceActionType": 60,
+            "id_geofenceActionType": 66,
             "points": coordinates,
             "defaultMessage": 1
         })
         headers = {
-            'authority': 'dev-api.syncwise360.com',
+            'authority': 'api2.syncwise360.com',
             'accept': '*/*',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'content-type': 'application/json',
-            'origin': 'https://sandbox.syncwise360.com',
-            'referer': 'https://sandbox.syncwise360.com/',
+            'origin': 'https://beta.syncwise360.com',
+            'referer': 'https://beta.syncwise360.com/',
             'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -188,7 +195,7 @@ class SyncwiseClient(SyncwiseAPI):
             'sec-fetch-mode': 'cors',
             'sec-fetch-site': 'same-site',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-            'x-access-token': 'bjVDR13m9pZq1wLRRlc2a-qNaqZDM2mbrv78Hnmx7oCZ1qO5hrhnk5AX9mTr'
+            'x-access-token': '_dHjFdUbm5db7AibFL6fqYVpig1Wb0CyKeryH2YeN7sx2mGg056vEu2MbhkB'
         }
 
         response = requests.request("POST", url, headers=headers, data=payload)
@@ -196,17 +203,32 @@ class SyncwiseClient(SyncwiseAPI):
         print(response.text)
 
 
-# test_1 = SyncwiseClient("https://dev-api.syncwise360.com")
-# test_1.user_account_login()
+test_1 = SyncwiseClient("https://api2.syncwise360.com")
+test_1.user_account_login()
 
 
-# print(test_1.SECRET_KEY)
+print(test_1.SECRET_KEY)
+
+test_1.course_geofence_create('QWE', [
+    {
+      "lat": 50.09112670368736,
+      "lng": 36.23535633087159
+    },
+    {
+      "lat": 50.09242074333338,
+      "lng": 36.24127864837647
+    },
+    {
+      "lat": 50.09456822137395,
+      "lng": 36.23578548431397
+    }
+  ])
 
 # test_1.course_geofence_list()
+# print(test_1.COURSE_GEOFENCE_LIST)
 
 # test_1.course_vector_details()
-
-
+# # print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 # print(test_1.COURSE_VECTOR_DETAILS)
 # print(test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR)
 
