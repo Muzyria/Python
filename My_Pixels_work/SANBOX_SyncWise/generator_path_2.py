@@ -55,25 +55,48 @@ class IntermediateCoordinatesGenerator:
             os.system(rf'adb -s {ip_device}:5555 shell input tap 700 500')
             print(f'TOUCH SCREEN {id_device} in {datetime.now().time().strftime("%H:%M")}')
 
+    # def get_intermediate_coordinates(self, path, steps):
+    #     if steps <= 1 or len(path) <= 1:
+    #         return path
+    #
+    #     intermediate_coordinates = []
+    #     num_segments = len(path) - 1
+    #     segment_length = steps / num_segments
+    #
+    #     for i in range(num_segments):
+    #         start_coord = path[i]
+    #         end_coord = path[i + 1]
+    #
+    #         for j in range(steps):
+    #             ratio = j / steps
+    #             lat = start_coord['lat'] + (end_coord['lat'] - start_coord['lat']) * ratio
+    #             lng = start_coord['lng'] + (end_coord['lng'] - start_coord['lng']) * ratio
+    #             intermediate_coordinates.append({'lat': lat, 'lng': lng})
+    #
+    #     intermediate_coordinates.append(path[-1])  # Добавляем последнюю координату
+    #     return intermediate_coordinates
+
     def get_intermediate_coordinates(self, path, steps):
         if steps <= 1 or len(path) <= 1:
             return path
 
         intermediate_coordinates = []
         num_segments = len(path) - 1
-        segment_length = steps / num_segments
+        segment_length = int(steps / num_segments)
+        print(f'COUNT SEGMENT --- {segment_length}')
 
         for i in range(num_segments):
             start_coord = path[i]
             end_coord = path[i + 1]
 
-            for j in range(steps):
-                ratio = j / steps
+            for j in range(segment_length):
+                ratio = j / segment_length
                 lat = start_coord['lat'] + (end_coord['lat'] - start_coord['lat']) * ratio
                 lng = start_coord['lng'] + (end_coord['lng'] - start_coord['lng']) * ratio
                 intermediate_coordinates.append({'lat': lat, 'lng': lng})
 
         intermediate_coordinates.append(path[-1])  # Добавляем последнюю координату
+        print(f'COUNT STEPS FOR HOLE --- {len(intermediate_coordinates)}')
         return intermediate_coordinates
 
     def run_device(self, steps):
@@ -93,7 +116,7 @@ class IntermediateCoordinatesGenerator:
 generator = IntermediateCoordinatesGenerator()
 
 generator.get_start_coordinates()
-generator.run_device(20)
+generator.run_device(6)
 generator.get_start_coordinates()
 
 
