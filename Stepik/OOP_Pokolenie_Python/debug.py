@@ -25,7 +25,13 @@
 #     window.show()
 #     sys.exit(app.exec_())
 
+import re
 
-DECK = [(s, r) for s in '♣♢♡♠' for r in ('2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A')]
+regexp = r"^\+[1-9]\d{1,14}$"
 
-print(DECK)
+number = "+11"  # Пример номера
+
+if re.match(regexp, number):
+    print("Номер соответствует формату E.164")
+else:
+    print("Номер не соответствует формату E.164")
