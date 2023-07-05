@@ -1,37 +1,12 @@
-#
-# import sys
-# from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
-#
-# class MyWindow(QWidget):
-#     def __init__(self):
-#         super().__init__()
-#
-#         self.initUI()
-#
-#     def initUI(self):
-#         self.setGeometry(300, 300, 250, 150)
-#         self.setWindowTitle('My Window')
-#
-#         button = QPushButton('Click me', self)
-#         button.setGeometry(50, 50, 100, 30)
-#         button.clicked.connect(self.buttonClicked)
-#
-#     def buttonClicked(self):
-#         print('Button clicked!')
-#
-# if __name__ == '__main__':
-#     app = QApplication(sys.argv)
-#     window = MyWindow()
-#     window.show()
-#     sys.exit(app.exec_())
+from datetime import datetime, timedelta
 
-import re
+# Получаем текущую дату и время
+current_datetime = datetime.now()
 
-regexp = r"^\+[1-9]\d{1,14}$"
 
-number = "+11"  # Пример номера
+# Добавляем timedelta к текущей дате и времени
+new_datetime = current_datetime + timedelta(minutes=0, seconds=120)
 
-if re.match(regexp, number):
-    print("Номер соответствует формату E.164")
-else:
-    print("Номер не соответствует формату E.164")
+print("Текущая дата и время:", current_datetime.strftime('%H:%M:%S'))
+print("Новая дата и время:", new_datetime.strftime('%H:%M:%S'))
+print(current_datetime < new_datetime)

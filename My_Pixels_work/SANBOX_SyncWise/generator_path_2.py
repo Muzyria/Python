@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from sincwise_clients_method import SyncwiseClient
 from connect_device import ConnectDevice
@@ -76,7 +76,7 @@ class IntermediateCoordinatesGenerator:
     #     intermediate_coordinates.append(path[-1])  # Добавляем последнюю координату
     #     return intermediate_coordinates
 
-    def get_intermediate_coordinates(self, path, steps):
+    def get_intermediate_coordinates(self, path, steps):  #  переделланный под работу с кусочками маршрута
         if steps <= 1 or len(path) <= 1:
             return path
 
@@ -112,11 +112,31 @@ class IntermediateCoordinatesGenerator:
                         time_minute = now
                         self.touch_screen()
 
+    def run_device_by_time(self, minutes):  #  генераци нахождения на лунке по времени
+        steps = int(minutes * 30)
+
+        for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
+            time_start_on_hole = datetime.now()
+            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-2)
+            time_minute = datetime.now().time().minute
+            print(f'STARTING TRIP ON HOLE ---> {i} in {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}')
+
+            for step_patch in (patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps)):
+                lat, lng = step_patch['lat'], step_patch['lng']
+                print(f'step -> {lat}, {lng}')
+
+                for ip_device in self.DICT_IP_DEVICES.values():
+                    self.send_adb_command(ip_device, f"{lat}, {lng}")
+                    if (now := datetime.now().time().minute) != time_minute:
+                        time_minute = now
+                        self.touch_screen()
+
 
 generator = IntermediateCoordinatesGenerator()
 
 generator.get_start_coordinates()
-generator.run_device(6)
+# generator.run_device(6)
+generator.run_device_by_time(1)
 generator.get_start_coordinates()
 
 
