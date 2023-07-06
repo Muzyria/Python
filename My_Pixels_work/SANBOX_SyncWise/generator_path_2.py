@@ -114,22 +114,31 @@ class IntermediateCoordinatesGenerator:
 
     def run_device_by_time(self, minutes):  #  генераци нахождения на лунке по времени
         steps = int(minutes * 30)
+        time_on_hole = None  # Declare the variable outside the loop
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
             time_start_on_hole = datetime.now()
-            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-2)
+            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-4)
             time_minute = datetime.now().time().minute
             print(f'STARTING TRIP ON HOLE ---> {i} in {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}')
 
-            for step_patch in (patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps)):
+            for step_patch in (current_patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps)):
                 lat, lng = step_patch['lat'], step_patch['lng']
                 print(f'step -> {lat}, {lng}')
 
-                for ip_device in self.DICT_IP_DEVICES.values():
-                    self.send_adb_command(ip_device, f"{lat}, {lng}")
-                    if (now := datetime.now().time().minute) != time_minute:
-                        time_minute = now
-                        self.touch_screen()
+                if datetime.now() <= time_finish_on_hole:  #  контролируем время нахождения на лунке
+                    for ip_device in self.DICT_IP_DEVICES.values():
+                        self.send_adb_command(ip_device, f"{lat}, {lng}")
+                        if (now := datetime.now().time().minute) != time_minute:
+                            time_minute = now
+                            self.touch_screen()
+
+                else:
+                    for ip_device in self.DICT_IP_DEVICES.values():
+                        print(f'FINISHING TRIP ON HOLE ---> {i}')
+                        lat, lng = current_patch[-1]
+                        self.send_adb_command(ip_device, f"{lat}, {lng}")
+                    break
 
 
 generator = IntermediateCoordinatesGenerator()

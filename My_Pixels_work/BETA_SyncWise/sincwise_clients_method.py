@@ -209,7 +209,7 @@ test_1.user_account_login()
 
 print(test_1.SECRET_KEY)
 
-test_1.course_geofence_create('QWE', [
+test_1.course_geofence_create('QWE5555', [
     {
       "lat": 50.09112670368736,
       "lng": 36.23535633087159

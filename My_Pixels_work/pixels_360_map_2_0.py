@@ -25,7 +25,7 @@ class NoTest1:
         print('Start test')
 
         login_standard_user = "igorperetssuperior"
-        password_all = "1234"
+        password_all = "Qwerty01!"
 
         # LOGIN PAGE
         # INPUT LOGIN
@@ -296,7 +296,7 @@ test.input_name_geofence('100')
 # test.choice_command_geofence()
 # test.input_custom_message()
 # test.button_save_click()
-test.canvas_4()
+test.canvas_3()
 
 time.sleep(5)
 test.driver.close()
