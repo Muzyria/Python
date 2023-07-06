@@ -135,7 +135,7 @@ class IntermediateCoordinatesGenerator:
 
                 else:
                     for ip_device in self.DICT_IP_DEVICES.values():
-                        print(f'FINISHING TRIP ON HOLE ---> {i}')
+                        print(f'FINISHING TRIP ON HOLE ---> {i} IN {datetime.now().strftime("%H:%M:%S")}')
                         lat, lng = current_patch[-1]
                         self.send_adb_command(ip_device, f"{lat}, {lng}")
                     break
