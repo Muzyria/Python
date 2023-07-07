@@ -65,6 +65,8 @@ class IntermediateCoordinatesGenerator:
             print(f'PRESS BUTTON SEND MAIL ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
             os.system(rf'adb -s {ip_device}:5555 shell input tap 50 {random.randint(1, 8)}50')  # SELECT RANDOM MAIL
             print(f'SELECT MAIL ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            print('WAIT FOR FEW SECONDS')
+            time.sleep(2)
             os.system(rf'adb -s {ip_device}:5555 shell input tap 500 650')  # PRESS YES BUTTON
             print(f'PRESS YES BUTTON ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
             os.system(rf'adb -s {ip_device}:5555 shell input tap 100 100')  # PRESS BUTTON PLAY GOLF
@@ -144,7 +146,7 @@ class IntermediateCoordinatesGenerator:
                         self.send_adb_command(ip_device, f"{lat}, {lng}")
                         if (now := datetime.now().time().minute) != time_minute:
                             time_minute = now
-                            # self.touch_screen()
+                            self.touch_screen()
                             self.send_order_food_device() if random.randint(0, 1) else self.send_message_from_device()
 
                 else:
