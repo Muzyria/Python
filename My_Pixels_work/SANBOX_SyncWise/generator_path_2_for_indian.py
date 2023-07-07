@@ -1,6 +1,6 @@
 import os
 from datetime import datetime, timedelta
-
+import random
 from sincwise_clients_method import SyncwiseClient
 from connect_device import ConnectDevice
 from time import perf_counter
@@ -40,7 +40,7 @@ class IntermediateCoordinatesGenerator:
             rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
     def get_start_coordinates(self):
-        for _ in range(120):  # start coordinate for begin
+        for _ in range(35):  # start coordinate for begin
             time_minute = datetime.now().time().minute
 
             for ip_device in self.DICT_IP_DEVICES.values():
@@ -55,26 +55,43 @@ class IntermediateCoordinatesGenerator:
             os.system(rf'adb -s {ip_device}:5555 shell input tap 700 500')
             print(f'TOUCH SCREEN {id_device} in {datetime.now().time().strftime("%H:%M")}')
 
-    # def get_intermediate_coordinates(self, path, steps):
-    #     if steps <= 1 or len(path) <= 1:
-    #         return path
-    #
-    #     intermediate_coordinates = []
-    #     num_segments = len(path) - 1
-    #     segment_length = steps / num_segments
-    #
-    #     for i in range(num_segments):
-    #         start_coord = path[i]
-    #         end_coord = path[i + 1]
-    #
-    #         for j in range(steps):
-    #             ratio = j / steps
-    #             lat = start_coord['lat'] + (end_coord['lat'] - start_coord['lat']) * ratio
-    #             lng = start_coord['lng'] + (end_coord['lng'] - start_coord['lng']) * ratio
-    #             intermediate_coordinates.append({'lat': lat, 'lng': lng})
-    #
-    #     intermediate_coordinates.append(path[-1])  # Добавляем последнюю координату
-    #     return intermediate_coordinates
+    @execution_time_decorator
+    def send_message_from_device(self):
+        for id_device, ip_device in self.DICT_IP_DEVICES.items():
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 50 50')  # PRESS BUTTON MENU
+            print(f'PRESS BUTTON MENU ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 1000 200')  # PRESS BUTTON SEND MAIL
+            print(f'PRESS BUTTON SEND MAIL ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 50 {random.randint(1, 8)}50')  # SELECT RANDOM MAIL
+            print(f'SELECT MAIL ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 500 650')  # PRESS YES BUTTON
+            print(f'PRESS YES BUTTON ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+
+    @execution_time_decorator
+    def send_order_food_device(self):
+        for id_device, ip_device in self.DICT_IP_DEVICES.items():
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 1100 700')  # PRESS BUTTON FOOD and DRINK
+            print(f'PRESS BUTTON FOOD and DRINK ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 50 {random.randint(1, 5)}50')  # SELECT RANDOM FOOD
+            print(f'SELECT RANDOM FOOD ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 50 100')  # PRESS BUTTON FIRST ITEM IN LIST FOOD
+            print(f'PRESS BUTTON FIRST ITEM IN LIST FOOD ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 1100 750')  # PRESS BUTTON ADD TO ORDER
+            print(f'PRESS BUTTON ADD TO ORDER ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            print('WAIT FOR FEW SECONDS')
+            time.sleep(2)
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 1100 750')  # PRESS BUTTON SUBMIT ORDER
+            print(f'PRESS BUTTON SUBMIT ORDER ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 1100 750')  # PRESS BUTTON SUBMIT ORDER
+            print(f'PRESS BUTTON SUBMIT ORDER ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input text "player_1"')  # INPUT NAME FOR ORDER
+            print(f'INPUT NAME FOR ORDER ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input keyevent 66')  # INPUT ENTER BUTTON
+            print(f'INPUT ENTER BUTTON ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 50 100')  # PRESS BUTTON FIRST ITEM IN LIST PRINTERS
+            print(f'PRESS BUTTON FIRST ITEM IN LIST PRINTERS ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 600 650')  # PRESS BUTTON CLOSE
+            print(f'PRESS BUTTON CLOSE ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
 
     def get_intermediate_coordinates(self, path, steps):  #  переделланный под работу с кусочками маршрута
         if steps <= 1 or len(path) <= 1:
@@ -99,22 +116,9 @@ class IntermediateCoordinatesGenerator:
         print(f'COUNT STEPS FOR HOLE --- {len(intermediate_coordinates)}')
         return intermediate_coordinates
 
-    def run_device(self, steps):
-        for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
-            for step_patch in self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps):
-                lat, lng = step_patch['lat'], step_patch['lng']
-                print(f'step -> {lat}, {lng}')
-                time_minute = datetime.now().time().minute
-
-                for ip_device in self.DICT_IP_DEVICES.values():
-                    self.send_adb_command(ip_device, f"{lat}, {lng}")
-                    if (now := datetime.now().time().minute) != time_minute:
-                        time_minute = now
-                        self.touch_screen()
-
     def run_device_by_time(self, minutes):  #  генераци нахождения на лунке по времени
+        """генераци нахождения на лунке по времени"""
         steps = int(minutes * 30)
-        time_on_hole = None  # Declare the variable outside the loop
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
             time_start_on_hole = datetime.now()
@@ -131,7 +135,8 @@ class IntermediateCoordinatesGenerator:
                         self.send_adb_command(ip_device, f"{lat}, {lng}")
                         if (now := datetime.now().time().minute) != time_minute:
                             time_minute = now
-                            self.touch_screen()
+                            # self.touch_screen()
+                            self.send_message_from_device()
 
                 else:
                     for ip_device in self.DICT_IP_DEVICES.values():
