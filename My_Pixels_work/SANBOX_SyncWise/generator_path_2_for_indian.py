@@ -18,7 +18,7 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'O_OLIH': '192.168.3.130'}
+    DICT_IP_DEVICES = {'QWERTY': '192.168.3.130'}
     START_COORDINATES = "50.07807852323376, 36.23065154766116"
 
     def __init__(self):
@@ -119,13 +119,15 @@ class IntermediateCoordinatesGenerator:
 
     def run_device_by_time(self, minutes, count_holes):  #  генераци нахождения на лунке по времени
         """генераци нахождения на лунке по времени"""
-        steps = int(minutes * 30)
 
         for i in range(1, count_holes + 1):
+            minutes = random.randint(3, 4)
+            steps = int(minutes * 30)
+
             time_start_on_hole = datetime.now()
             time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-4)
             time_minute = datetime.now().time().minute
-            print(f'STARTING TRIP ON HOLE ---> {i} in {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}')
+            print(f'STARTING TRIP ON HOLE ---> {i} in {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")} for {minutes} minutes')
 
             for step_patch in (current_patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps)):
                 lat, lng = step_patch['lat'], step_patch['lng']
@@ -151,7 +153,8 @@ generator = IntermediateCoordinatesGenerator()
 
 while True:
     generator.get_start_coordinates(2)
-    generator.run_device_by_time(3, 5)  # minuts on hole, count holes
+
+    generator.run_device_by_time(0, count_holes=3)  # minuts on hole, count holes
     generator.get_start_coordinates(2)
 
 
