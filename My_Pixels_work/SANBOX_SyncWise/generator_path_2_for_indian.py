@@ -39,8 +39,9 @@ class IntermediateCoordinatesGenerator:
         os.system(
             rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
-    def get_start_coordinates(self):
-        for _ in range(35):  # start coordinate for begin
+    def get_start_coordinates(self, minutes):
+        steps = int(minutes * 30)
+        for _ in range(steps):  # start coordinate for begin
             time_minute = datetime.now().time().minute
 
             for ip_device in self.DICT_IP_DEVICES.values():
@@ -116,11 +117,11 @@ class IntermediateCoordinatesGenerator:
         print(f'COUNT STEPS FOR HOLE --- {len(intermediate_coordinates)}')
         return intermediate_coordinates
 
-    def run_device_by_time(self, minutes):  #  генераци нахождения на лунке по времени
+    def run_device_by_time(self, minutes, count_holes):  #  генераци нахождения на лунке по времени
         """генераци нахождения на лунке по времени"""
         steps = int(minutes * 30)
 
-        for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
+        for i in range(1, count_holes + 1):
             time_start_on_hole = datetime.now()
             time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-4)
             time_minute = datetime.now().time().minute
@@ -136,7 +137,7 @@ class IntermediateCoordinatesGenerator:
                         if (now := datetime.now().time().minute) != time_minute:
                             time_minute = now
                             # self.touch_screen()
-                            self.send_message_from_device()
+                            self.send_order_food_device() if random.randint(0, 1) else self.send_message_from_device()
 
                 else:
                     for ip_device in self.DICT_IP_DEVICES.values():
@@ -148,10 +149,10 @@ class IntermediateCoordinatesGenerator:
 
 generator = IntermediateCoordinatesGenerator()
 
-generator.get_start_coordinates()
-# generator.run_device(6)
-generator.run_device_by_time(3)
-generator.get_start_coordinates()
+while True:
+    generator.get_start_coordinates(2)
+    generator.run_device_by_time(3, 5)  # minuts on hole, count holes
+    generator.get_start_coordinates(2)
 
 
 
