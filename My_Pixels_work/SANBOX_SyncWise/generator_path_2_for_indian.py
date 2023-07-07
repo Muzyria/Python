@@ -18,7 +18,7 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'QWERTY': '192.168.3.130'}
+    DICT_IP_DEVICES = {'QWERTY': '192.168.3.219'}
     START_COORDINATES = "50.07807852323376, 36.23065154766116"
 
     def __init__(self):
@@ -63,6 +63,8 @@ class IntermediateCoordinatesGenerator:
             print(f'PRESS BUTTON MENU ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
             os.system(rf'adb -s {ip_device}:5555 shell input tap 1000 200')  # PRESS BUTTON SEND MAIL
             print(f'PRESS BUTTON SEND MAIL ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            print('WAIT FOR FEW SECONDS')
+            time.sleep(2)
             os.system(rf'adb -s {ip_device}:5555 shell input tap 50 {random.randint(1, 8)}50')  # SELECT RANDOM MAIL
             print(f'SELECT MAIL ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
             print('WAIT FOR FEW SECONDS')
@@ -129,7 +131,7 @@ class IntermediateCoordinatesGenerator:
         """генераци нахождения на лунке по времени"""
 
         for i in range(1, count_holes + 1):
-            minutes = random.randint(3, 5)
+            minutes = random.randint(4, 15)
             steps = int(minutes * 30)
 
             time_start_on_hole = datetime.now()
@@ -147,7 +149,7 @@ class IntermediateCoordinatesGenerator:
                         if (now := datetime.now().time().minute) != time_minute:
                             time_minute = now
                             self.touch_screen()
-                            self.send_order_food_device() if random.randint(0, 1) else self.send_message_from_device()
+                            self.send_message_from_device()
 
                 else:
                     for ip_device in self.DICT_IP_DEVICES.values():
