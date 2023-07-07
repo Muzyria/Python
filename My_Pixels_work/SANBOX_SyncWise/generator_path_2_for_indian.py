@@ -67,6 +67,8 @@ class IntermediateCoordinatesGenerator:
             print(f'SELECT MAIL ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
             os.system(rf'adb -s {ip_device}:5555 shell input tap 500 650')  # PRESS YES BUTTON
             print(f'PRESS YES BUTTON ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 50 50')  # PRESS BUTTON PLAY GOLF
+            print(f'PRESS BUTTON PLAY GOLF ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
 
     @execution_time_decorator
     def send_order_food_device(self):
