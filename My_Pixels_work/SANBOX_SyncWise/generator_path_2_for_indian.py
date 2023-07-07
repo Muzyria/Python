@@ -67,7 +67,7 @@ class IntermediateCoordinatesGenerator:
             print(f'SELECT MAIL ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
             os.system(rf'adb -s {ip_device}:5555 shell input tap 500 650')  # PRESS YES BUTTON
             print(f'PRESS YES BUTTON ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
-            os.system(rf'adb -s {ip_device}:5555 shell input tap 50 50')  # PRESS BUTTON PLAY GOLF
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 100 100')  # PRESS BUTTON PLAY GOLF
             print(f'PRESS BUTTON PLAY GOLF ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
 
     @execution_time_decorator
@@ -95,6 +95,10 @@ class IntermediateCoordinatesGenerator:
             print(f'PRESS BUTTON FIRST ITEM IN LIST PRINTERS ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
             os.system(rf'adb -s {ip_device}:5555 shell input tap 600 650')  # PRESS BUTTON CLOSE
             print(f'PRESS BUTTON CLOSE ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
+            print('WAIT FOR FEW SECONDS')
+            time.sleep(2)
+            os.system(rf'adb -s {ip_device}:5555 shell input tap 600 750')  # PRESS BUTTON BACK
+            print(f'PRESS BUTTON BACC ON {id_device} in {datetime.now().time().strftime("%H:%M")}')
 
     def get_intermediate_coordinates(self, path, steps):  #  переделланный под работу с кусочками маршрута
         if steps <= 1 or len(path) <= 1:
@@ -123,7 +127,7 @@ class IntermediateCoordinatesGenerator:
         """генераци нахождения на лунке по времени"""
 
         for i in range(1, count_holes + 1):
-            minutes = random.randint(3, 4)
+            minutes = random.randint(3, 5)
             steps = int(minutes * 30)
 
             time_start_on_hole = datetime.now()
