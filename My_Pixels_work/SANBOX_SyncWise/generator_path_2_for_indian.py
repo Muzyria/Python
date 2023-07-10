@@ -133,6 +133,7 @@ class IntermediateCoordinatesGenerator:
         for i in range(1, count_holes + 1):
             minutes = random.randint(4, 15)
             steps = int(minutes * 30)
+            status_message_on_hole = True
 
             time_start_on_hole = datetime.now()
             time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-4)
@@ -149,7 +150,12 @@ class IntermediateCoordinatesGenerator:
                         if (now := datetime.now().time().minute) != time_minute:
                             time_minute = now
                             self.touch_screen()
-                            self.send_message_from_device()
+                            
+                            if status_message_on_hole:
+                                if random.randint(0, 2) == 1:
+                                    self.send_message_from_device()
+                                    status_message_on_hole = False
+                                continue
 
                 else:
                     for ip_device in self.DICT_IP_DEVICES.values():
