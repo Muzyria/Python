@@ -1,5 +1,6 @@
 from datetime import timedelta
 from enum import Enum
+
 class Weekday(Enum):
     MONDAY = 0
     TUESDAY = 1
@@ -16,16 +17,14 @@ class NextDate:
         self.after_today = after_today
 
     def date(self):
-        if self.after_today and self.weekday.value <= self.today.weekday():
-            days_ahead = (7 - self.today.weekday() + self.weekday.value)
-        else:
-            days_ahead = (self.weekday.value - self.today.weekday())
+        days_ahead = (self.weekday.value - self.today.weekday()) % 7
+        if self.after_today and days_ahead == 0:
+            days_ahead = 7
         next_date = self.today + timedelta(days=days_ahead)
         return next_date
 
     def days_until(self):
-        if self.after_today and self.weekday.value <= self.today.weekday():
-            days_ahead = (7 - self.today.weekday() + self.weekday.value)
-        else:
-            days_ahead = (self.weekday.value - self.today.weekday())
+        days_ahead = (self.weekday.value - self.today.weekday()) % 7
+        if self.after_today and days_ahead == 0:
+            days_ahead = 7
         return days_ahead
