@@ -1,5 +1,4 @@
-import types
-
+import copy
 
 class Selfie:
     def __init__(self):
@@ -8,41 +7,46 @@ class Selfie:
 
     def save_state(self):
         state = {}
-        for attr in dir(self):
-            if not attr.startswith("__"):
-                attr_value = getattr(self, attr)
-                if callable(attr_value):
-                    attr_value = types.MethodType(attr_value, self)
-                state[attr] = attr_value
+        for attr, value in self.__dict__.items():
+            if attr != 'states' and attr != 'current_state':
+                state[attr] = value
         self.states.append(state)
-        self.current_state = len(self.states) - 1
+        self.current_state = state
 
     def recover_state(self, index):
         if index < len(self.states):
-            new_selfie = Selfie()
-            new_selfie.__dict__.update(self.states[index])
-            return new_selfie
+            state = copy.deepcopy(self.states[index])
+            obj = Selfie()
+            for attr, value in state.items():
+                setattr(obj, attr, value)
+            obj.states = self.states
+            obj.current_state = state
+            return obj
         else:
             return self
 
     def n_states(self):
         return len(self.states)
 
+
+
 def sum_a_b(a, b):
     return a + b
+
 
 def sub_a_b(a, b):
     return a - b
 
+
 def mul_a_d(a, b):
     return a * b
+
 
 def truediv_a_b(a, b):
     return a / b
 
 
 obj = Selfie()
-
 obj.sum_a_b = sum_a_b
 print(obj.sum_a_b(1, 2))
 obj.save_state()
