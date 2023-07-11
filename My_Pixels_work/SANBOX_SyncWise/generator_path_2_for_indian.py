@@ -125,6 +125,7 @@ class IntermediateCoordinatesGenerator:
 
         intermediate_coordinates.append(path[-1])  # Добавляем последнюю координату
         print(f'COUNT STEPS FOR HOLE --- {len(intermediate_coordinates)}')
+        # print(intermediate_coordinates)
         return intermediate_coordinates
 
     def run_device_by_time(self, minutes, count_holes):  #  генераци нахождения на лунке по времени
@@ -152,7 +153,7 @@ class IntermediateCoordinatesGenerator:
                             self.touch_screen()
                             
                             if status_message_on_hole:
-                                if random.randint(0, 2) == 1:
+                                if random.randint(0, 1) == 1:
                                     self.send_message_from_device()
                                     status_message_on_hole = False
                                 continue
