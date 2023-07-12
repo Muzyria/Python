@@ -18,7 +18,7 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'O_OLIH': '192.168.3.130'}
+    DICT_IP_DEVICES = {'O_OLIH': '192.168.3.219'}
     START_COORDINATES = "50.07807852323376, 36.23065154766116"
 
     def __init__(self):
@@ -40,7 +40,7 @@ class IntermediateCoordinatesGenerator:
             rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
     def get_start_coordinates(self):
-        for _ in range(120):  # start coordinate for begin
+        for _ in range(60):  # start coordinate for begin
             time_minute = datetime.now().time().minute
 
             for ip_device in self.DICT_IP_DEVICES.values():

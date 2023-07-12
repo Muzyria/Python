@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		/* Set the size of the div element that contains the map */
+		#map {
+			height: 1000px;
+			width: 100%;
+		}
+
+		body {
+			position: relative;
+
+		}
+
+		body,
+		input,
+		button {
+			font-family: Tahoma;
+			font-size: 15px
+		}
+
+		input {
+			padding: 5px;
+			border: 1px solid #CCCCCC;
+			margin-top: 3px;
+			margin-bottom: 7px;
+		}
+
+		label {
+			font-family: Tahoma;
+			font-size: 13px;
+		}
+
+		#menu {
+			z-index: 1;
+			position: fixed;
+			left: 0px;
+			top: 0px;
+			height: 100%;
+			width: 350px;
+		}
+
+		#menu_content {
+			padding: 10px;
+			background: rgb(255, 255, 255);
+			border-right: 1px solid #CCCCCC;
+			width: 300px;
+			height: 100%;
+		}
+
+		#button_toggle_menu {
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 30px;
+			height: 60px;
+			border-right: 1px solid #CCCCCC;
+			border-bottom: 1px solid black;
+			border-left: 0;
+			border-top: 0;
+			color: #000000;
+			font-size: 20px;
+			margin-top: 0;
+
+			background: rgb(255, 255, 255);
+			background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(255, 215, 252, 1) 100%);
+		}
+
+		#version {
+			position: absolute;
+			right: 35px;
+			bottom: 5px;
+		}
+
+		#button_set {
+			/* 	position: absolute; */
+			/* 	right: 10px; */
+			width: 100px;
+		}
+
+		#button_set:active {
+			background: #00FF00
+		}
+	</style>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+</head>
+
+<body>
+
+	<div id="menu">
+		<div id="menu_content">
+			<div style="padding-bottom: 10px">
+				<label>Address:</label><br><input id="input_address" /><input type="button" id="button_connect"
+					style="width: 100px; margin-left: 5px;" value="Connect"><br><br>
+				<label>Lat:</label><br><input id="input_lat" /><input type="button" id="button_set"
+					style="width: 100px; margin-left: 5px;" value="Set Location"><br>
+				<label>Lng:</label><br><input id="input_lng" /><br>
+			</div>
+			<br>
+			<div style="padding-bottom: 10px">
+				<label>Speed (m/s):</label><br><input id="input_speed"><input type="checkbox" id="check_speed"><br>
+				<label>Alt (m):</label><br><input id="input_alt"><input type="checkbox" id="check_alt"><br>
+				<label>Acc (m):</label><br><input id="input_acc">
+			</div>
+
+
+			<br>
+			<div id="version"><label>v0.2.1 (requires MockGPS v1.2.2)</label></div>
+		</div>
+
+		<input type="button" id="button_toggle_menu" value="<">
+	</div>
+
+	<div id="map"></div>
+
+	<script>
+		button_toggle_menu.addEventListener("click", function (event) {
+			if (menu.style.left == "") {
+				menu.style.left = "-320px";
+				button_toggle_menu.value = ">";
+			} else {
+				menu.style.left = "";
+				button_toggle_menu.value = "<";
+			}
+		});
+	</script>
+
+	<script>
+
+		class Preferences {
+			#defaultConfig = {
+				lastLat: 50.01218,
+				lastLng: 36.244125,
+				lastAddress: "192.168.3.219",
+				lastSpeed: 0,
+				useSpeed: 1,
+				lastAcc: 0,
+				lastAlt: 0,
+				useAlt: 1
+			};
+
+
+
+			#jsonObject;
+
+			constructor() {
+				//localStorage.clear();
+
+				const prefs = localStorage.getItem("preferences");
+				this.#jsonObject = prefs == null ? this.#defaultConfig : JSON.parse(prefs);
+			}
+
+			lastLat(lat) {
+				if (lat == undefined) {
+					return this.#jsonObject.lastLat
+				}
+
+				this.#jsonObject.lastLat = lat;
+				return this;
+			}
+
+			lastLng(lng) {
+				if (lng == undefined) {
+					return this.#jsonObject.lastLng;
+				}
+
+				this.#jsonObject.lastLng = lng;
+				return this;
+			}
+
+			lastAddress(address) {
+				if (address == undefined) {
+					return this.#jsonObject.lastAddress;
+				}
+
+				this.#jsonObject.lastAddress = address;
+				return this;
+			}
+
+			lastSpeed(speed) {
+				if (speed == undefined) {
+					return this.#jsonObject.lastSpeed;
+				}
+
+				this.#jsonObject.lastSpeed = speed;
+				return this;
+			}
+
+			useSpeed(use) {
+				if (use == undefined) {
+					return this.#jsonObject.useSpeed;
+				}
+
+				this.#jsonObject.useSpeed = use;
+				return this;
+			}
+
+			lastAcc(acc) {
+				if (acc == undefined) {
+					return this.#jsonObject.lastAcc;
+				}
+
+				this.#jsonObject.lastAcc = acc;
+				return this;
+			}
+
+			lastAlt(alt) {
+				if (alt == undefined) {
+					return this.#jsonObject.lastAlt;
+				}
+
+				this.#jsonObject.lastAlt = alt;
+				return this;
+			}
+
+			useAlt(use) {
+				if (use == undefined) {
+					return this.#jsonObject.useAlt;
+				}
+
+				this.#jsonObject.useAlt = use;
+				return this;
+			}
+
+			apply() {
+				localStorage.setItem("preferences", JSON.stringify(this.#jsonObject));
+			}
+		}
+
+		var marker;
+		var map;
+		var socket;
+
+
+
+		const ConnectionStateConnecting = 1;
+		const ConnectionStateConnected = 2;
+		const ConnectionStateDisconnected = 3;
+
+		var connectionState = ConnectionStateDisconnected;
+
+		const prefs = new Preferences();
+
+		function setConnectionState(state) {
+			connectionState = state;
+
+			switch (state) {
+				case ConnectionStateConnecting:
+					button_connect.value = "Connecting...";
+					button_connect.style.background = '#AAAAAA';
+					break;
+				case ConnectionStateConnected:
+					button_connect.value = "Disconnect";
+					button_connect.style.background = '#FF0000';
+					break;
+				case ConnectionStateDisconnected:
+					button_connect.value = "Connect";
+					button_connect.style.background = '#00FF00';
+					break;
+			}
+		}
+
+		function openConnection(address) {
+			socket = new WebSocket('ws://' + address + ':5557');
+
+			setConnectionState(ConnectionStateConnecting);
+
+			// Connection opened			
+			socket.addEventListener('open', function (event) {
+				setConnectionState(ConnectionStateConnected);
+			});
+
+			socket.addEventListener('close', function (event) {
+				setConnectionState(ConnectionStateDisconnected);
+			});
+
+			socket.addEventListener('error', function (event) {
+				closeConnection();
+				alert('Connection error');
+			});
+		}
+
+		function closeConnection() {
+			if (socket == null) {
+				return;
+			}
+
+			socket.close();
+			socket = null;
+
+			setConnectionState(ConnectionStateDisconnected);
+		}
+
+		// Initialize and add the map
+		function initMap() {
+			var startLocation = { lat: parseFloat(prefs.lastLat()), lng: parseFloat(prefs.lastLng()) };
+			input_lat.value = startLocation.lat;
+			input_lng.value = startLocation.lng;
+			input_address.value = prefs.lastAddress();
+			input_speed.value = prefs.lastSpeed();
+			input_acc.value = prefs.lastAcc();
+			input_alt.value = prefs.lastAlt();
+			check_speed.checked = prefs.useSpeed() != 0;
+			input_speed.disabled = !check_speed.checked;
+			check_alt.checked = prefs.useAlt() != 0;
+			input_alt.disabled = !check_alt.checked;
+
+			// The map, centered at Uluru
+			map = new google.maps.Map(
+				document.getElementById('map'),
+				{
+					zoom: 18,
+					center: startLocation,
+					streetViewControl: false,
+					fullscreenControl: false,
+					mapTypeId: "satellite"
+				}
+			);
+
+			marker = new google.maps.Marker({ position: startLocation, map: map });
+
+			map.addListener('click', function (e) {
+				onMapClick(e.latLng);
+			});
+
+			button_connect.addEventListener('click', function (event) {
+				switch (connectionState) {
+					case ConnectionStateConnected:
+						closeConnection();
+						break;
+					case ConnectionStateDisconnected:
+						var address = input_address.value;
+
+						prefs.lastAddress(address).apply();
+
+						openConnection(address);
+						break;
+				}
+
+			});
+
+			button_set.addEventListener('click', function (event) {
+				var latLng = new google.maps.LatLng(input_lat.value, input_lng.value);
+
+				prefs.lastLat(input_lat.value)
+					.lastLng(input_lng.value)
+					.lastSpeed(input_speed.value)
+					.lastAcc(input_acc.value)
+					.lastAlt(input_alt.value)
+					.useSpeed(check_speed.checked ? 1 : 0)
+					.useAlt(check_alt.checked ? 1 : 0)
+					.apply();
+
+				marker.setPosition(latLng);
+				map.panTo(latLng);
+
+				pushLocationToWebSocket();
+			});
+
+			check_speed.addEventListener("change", (event) => {
+				input_speed.disabled = !event.currentTarget.checked;
+				prefs.useSpeed(event.currentTarget.checked ? 1 : 0).apply();
+			});
+
+			check_alt.addEventListener("change", (event) => {
+				input_alt.disabled = !event.currentTarget.checked;
+				prefs.useAlt(event.currentTarget.checked ? 1 : 0).apply();
+			});
+
+			setConnectionState(ConnectionStateDisconnected);
+
+			setInterval(function () {
+				pushLocationToWebSocket();
+			}, 500);
+		}
+
+		function onMapClick(latLng) {
+			input_lat.value = latLng.lat();
+			input_lng.value = latLng.lng();
+
+			prefs.lastLat(latLng.lat())
+				.lastLng(latLng.lng())
+				.apply();
+
+			marker.setPosition(latLng);
+
+			pushLocationToWebSocket();
+		}
+
+		function pushLocationToWebSocket() {
+			if (socket == null) {
+				return;
+			}
+
+			if (connectionState != ConnectionStateConnected) {
+				return;
+			}
+
+			const lat = prefs.lastLat();
+			const lng = prefs.lastLng();
+			const acc = prefs.lastAcc();
+
+			const packet = {
+				version: 1,
+				lat: parseFloat(lat),
+				lng: parseFloat(lng),
+				acc: parseFloat(acc)
+			};
+
+			if (prefs.useSpeed() == 1) {
+				const speed = prefs.lastSpeed();
+				packet.speed = parseFloat(speed);
+			}
+
+			if (prefs.useAlt() == 1) {
+				const alt = prefs.lastAlt();
+				packet.alt = parseFloat(alt);
+			}
+
+			//console.log("packet: " + JSON.stringify(packet));
+			socket.send(JSON.stringify(packet));
+		}
+
+	</script>
+
+	<div>
+		<script async defer
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdOD01Om2KhYbnJ2TDLime8Zf8AdXIwZc&callback=initMap"></script>
+	</div>
+
+</body>
+
+</html>
