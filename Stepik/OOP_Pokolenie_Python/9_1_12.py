@@ -1,70 +1,67 @@
-import copy
-
 class Selfie:
     def __init__(self):
         self.states = []
-        self.current_state = None
+        self.current_state = {}
 
     def save_state(self):
-        state = {}
-        for attr, value in self.__dict__.items():
-            if attr != 'states' and attr != 'current_state':
-                state[attr] = value
-        self.states.append(state)
-        self.current_state = state
+        self.states.append(self.current_state.copy())
 
     def recover_state(self, index):
-        if index < len(self.states):
-            state = copy.deepcopy(self.states[index])
-            obj = Selfie()
-            for attr, value in state.items():
-                setattr(obj, attr, value)
-            obj.states = self.states
-            obj.current_state = state
-            return obj
+        if 0 <= index < len(self.states):
+            new_selfie = Selfie()
+            new_selfie.states = self.states[:index + 1]
+            new_selfie.current_state = self.states[index].copy()
+            return new_selfie
         else:
             return self
 
     def n_states(self):
         return len(self.states)
 
+    def __setattr__(self, name, value):
+        self.current_state[name] = value
+        super().__setattr__(name, value)
+
+    def __getattr__(self, name):
+        return self.current_state.get(name, None)
 
 
 
-def sum_a_b(a, b):
-    return a + b
 
-
-def sub_a_b(a, b):
-    return a - b
-
-
-def mul_a_d(a, b):
-    return a * b
-
-
-def truediv_a_b(a, b):
-    return a / b
 
 
 obj = Selfie()
-obj.sum_a_b = sum_a_b
-print(obj.sum_a_b(1, 2))
+
+obj.x = 1
+obj.y = 2
+
+print(obj.x)
+print(obj.y)
+
+obj.save_state()
+obj.x = 0
+obj.y = 0
+
+print(obj.x)
+print(obj.y)
+obj = obj.recover_state(0)
+print(obj.x)
+print(obj.y)
+
+
+from string import ascii_lowercase
+
+obj = Selfie()
+for char in ascii_lowercase:
+    obj.__dict__[char] = ord(char)
+
+print(*(obj.__dict__[char] for char in ascii_lowercase))
 obj.save_state()
 
-obj.sub_a_b = sub_a_b
-print(obj.sub_a_b(1, 2))
-obj.save_state()
+for char in ascii_lowercase:
+    obj.__dict__[char] = ord(char) + 100
 
-obj.mul_a_d = mul_a_d
-print(obj.mul_a_d(1, 2))
-obj.save_state()
+print(*(obj.__dict__[char] for char in ascii_lowercase))
+obj = obj.recover_state(0)
 
-obj.truediv_a_b = truediv_a_b
-print(obj.truediv_a_b(1, 2))
-obj.save_state()
-
-print(obj.n_states())
-obj = obj.recover_state(1)
-
-print(obj.n_states())
+print(*(obj.__dict__[char] for char in ascii_lowercase))
