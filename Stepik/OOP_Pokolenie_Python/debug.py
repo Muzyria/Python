@@ -1,8 +1,8 @@
 def takes_positive(func):
     def wrapper(*args, **kwargs):
-        if not all(type(i) == int for i in [args, kwargs.values()]):
+        if not all(type(i) == int for i in [*args, *kwargs.values()]):
             raise TypeError
-        elif not all(i > 0 for i in [args, kwargs.values()]):
+        elif not all(i > 0 for i in [*args, *kwargs.values()]):
             raise ValueError
         else:
             return func(*args, **kwargs)
