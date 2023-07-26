@@ -198,12 +198,12 @@ class SyncwiseClient(SyncwiseAPI):
 
 # test_1 = SyncwiseClient("https://dev-api.syncwise360.com")
 # test_1.user_account_login()
-
-
+#
+#
 # print(test_1.SECRET_KEY)
-
+#
 # test_1.course_geofence_list()
-
+#
 # test_1.course_vector_details()
 
 
