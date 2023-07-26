@@ -5,6 +5,7 @@ from sincwise_clients_method import SyncwiseClient
 from connect_device import ConnectDevice
 from time import perf_counter
 import time
+import random
 
 
 def execution_time_decorator(func):
@@ -20,19 +21,26 @@ class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
     DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.3.219'}
     START_COORDINATES = "50.07807852323376, 36.23065154766116"
+    PATH_LIST_HOLES = None
+
 
     def __init__(self):
         ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
         time.sleep(5)
 
-        # for ip_device in self.DICT_IP_DEVICES.values():
-        #     ConnectDevice.connect_device(ip_device)
-        #     time.sleep(10)
-
         self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
         self.client_data.user_account_login()
         self.client_data.course_vector_details()
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
+
+
+    def generate_random_path(self, number_holes, range_time: tuple):
+        """Generator random path with range of time"""
+        path = [(i, random.randint(range_time[0], range_time[1])) for i in range(1, number_holes + 1)]
+        random.shuffle(path)
+        print(path)  # [(1, 3), (11, 3), (4, 3), (17, 3), (13, 3), (8, 3), (6, 3), (2, 3), (10, 3), (18, 3), (15, 4), (5, 4), (16, 3), (12, 3), (14, 4), (3, 3), (7, 4), (9, 3)]
+        print(f"TIME FOR ALL PATH MORE THEN {sum(map(lambda x: x[1], path))}")
+        self.PATH_LIST_HOLES = path
 
     @execution_time_decorator
     def send_adb_command(self, ip_device, location):
@@ -140,13 +148,37 @@ class IntermediateCoordinatesGenerator:
                         self.send_adb_command(ip_device, f"{lat}, {lng}")
                     break
 
+    def run_device_by_random_path(self):  #  генераци нахождения на лунке по времени
+
+        for item in self.PATH_LIST_HOLES:  #
+            steps = int(item[1] * 30)  # count steps
+            time_start_on_hole = datetime.now()  # start time
+            time_finish_on_hole = time_start_on_hole + timedelta(minutes=item[1], seconds=-4)  # finish time
+            time_minute = datetime.now().time().minute
+            print(f'STARTING TRIP ON HOLE ---> {item[0]} in {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}')
+
+            for step_patch in (current_patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[item[0]], steps)):
+                lat, lng = step_patch['lat'], step_patch['lng']
+                print(f'step -> {lat}, {lng}')
+
+                if datetime.now() <= time_finish_on_hole:  #  контролируем время нахождения на лунке
+                    for ip_device in self.DICT_IP_DEVICES.values():
+                        self.send_adb_command(ip_device, f"{lat}, {lng}")
+                        if (now := datetime.now().time().minute) != time_minute:
+                            time_minute = now
+                            self.touch_screen()
+
+                else:
+                    for ip_device in self.DICT_IP_DEVICES.values():
+                        print(f'FINISHING TRIP ON HOLE ---> {item} IN {datetime.now().strftime("%H:%M:%S")}')
+                        lat, lng = current_patch[-1]
+                        self.send_adb_command(ip_device, f"{lat}, {lng}")
+                    break
+
 
 generator = IntermediateCoordinatesGenerator()
 
-generator.get_start_coordinates()
-# generator.run_device(6)
-generator.run_device_by_time(3)
-generator.get_start_coordinates()
+generator.generate_random_path(18, (4, 6))
 
 
 
