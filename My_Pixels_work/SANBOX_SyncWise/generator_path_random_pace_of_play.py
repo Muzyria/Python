@@ -151,7 +151,7 @@ class IntermediateCoordinatesGenerator:
         for item in self.PATH_LIST_HOLES:  #
             print(f'MOVE TO HOLE {item[0]}')
 
-            self.run_device_last_step_to_next_point([self.last_coordinate[0], self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[item[0]][0]], 60)  #
+            self.run_device_last_step_to_next_point([self.last_coordinate[0], self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[item[0]][0]], 40)  #
 
             steps = int(item[1] * 30)  # count steps
             time_start_on_hole = datetime.now()  # start time
@@ -174,7 +174,7 @@ class IntermediateCoordinatesGenerator:
                     for ip_device in self.DICT_IP_DEVICES.values():
                         print(f'FINISHING TRIP ON HOLE ---> {item[0]} IN {datetime.now().strftime("%H:%M:%S")}')
                         lat, lng = current_patch[-1]
-                        self.last_coordinate = [current_patch[1]]
+                        self.last_coordinate = [current_patch[-1]]
                         print(f'laaaaaaast coordinate ------------------------ {self.last_coordinate}')
                         self.send_adb_command(ip_device, f"{lat}, {lng}")
                     break
@@ -185,7 +185,7 @@ generator = IntermediateCoordinatesGenerator()
 generator.get_start_coordinates(60)
 generator.generate_random_path(18, (4, 10))
 generator.run_device_by_random_path()
-generator.run_device_last_step_to_next_point([generator.last_coordinate[0], generator.START_COORDINATES[0]], 60)
+generator.run_device_last_step_to_next_point([generator.last_coordinate[0], generator.START_COORDINATES[0]], 40)
 generator.get_start_coordinates(60)
 
 print("Everything went well.".upper())
