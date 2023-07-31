@@ -1,52 +1,41 @@
+from bisect import insort
+from datetime import datetime, timedelta
+
+from dateutil.relativedelta import relativedelta
+
+
 class Lecture:
-    def __init__(self, title, start_time, duration):
-        self.title = title
-        self.start_time = start_time
-        self.duration = duration
+    _PATTERN = '%H:%M'
+
+    def __init__(self, topic, start_time, duration):
+        self.topic = topic
+        self.start_time = datetime.strptime(start_time, self._PATTERN)
+        self.duration = datetime.strptime(duration, self._PATTERN)
+        self.end_time = self.start_time + timedelta(hours=self.duration.hour, minutes=self.duration.minute)
+
 
 class Conference:
     def __init__(self):
         self.lectures = []
 
     def add(self, lecture):
-        self.lectures.append(lecture)
+        for cur_lecture in self.lectures:
+            if any((
+                    cur_lecture.start_time <= lecture.start_time < cur_lecture.end_time,
+                    lecture.start_time <= cur_lecture.start_time < lecture.end_time,
+            )):
+                raise ValueError('Провести выступление в это время невозможно')
+        insort(self.lectures, lecture, key=lambda item: item.start_time)
 
     def total(self):
-        total_duration = sum(int(lecture.duration) for lecture in self.lectures)
-        hours = total_duration // 60
-        minutes = total_duration % 60
-        return f"{hours:02d}:{minutes:02d}"
+        total = sum((lecture.end_time - lecture.start_time for lecture in self.lectures), start=relativedelta())
+        return f'{total.hours:0>2}:{total.minutes:0>2}'
 
     def longest_lecture(self):
-        longest = max(self.lectures, key=lambda lecture: int(lecture.duration))
-        return longest.title
+        longest = max(lecture.duration for lecture in self.lectures)
+        return f'{longest.hour:0>2}:{longest.minute:0>2}'
 
     def longest_break(self):
-        sorted_lectures = sorted(self.lectures, key=lambda lecture: lecture.start_time)
-        longest_break = max(
-            (sorted_lectures[i + 1].start_time - sorted_lectures[i].end_time)
-            for i in range(len(sorted_lectures) - 1)
-        )
-        hours = longest_break // 60
-        minutes = longest_break % 60
-        return f"{hours:02d}:{minutes:02d}"
-
-conference = Conference()
-
-conference.add(Lecture('Простые числа', '08:00', '01:30'))
-conference.add(Lecture('Жизнь после ChatGPT', '10:00', '02:00'))
-conference.add(Lecture('Муравьиный алгоритм', '13:30', '01:50'))
-
-print(conference.total())
-print(conference.longest_lecture())
-print(conference.longest_break())
-
-
-
-conference = Conference()
-conference.add(Lecture('Простые числа', '08:00', '01:30'))
-conference.add(Lecture('Жизнь после ChatGPT', '10:00', '02:00'))
-conference.add(Lecture('Муравьиный алгоритм', '13:30', '01:50'))
-print(conference.total())  # Ожидаемый результат: 05:20
-print(conference.longest_lecture())  # Ожидаемый результат: Жизнь после ChatGPT
-print(conference.longest_break())  # Ожидаемый результат: 01:30
+        longest = max(self.lectures[i + 1].start_time - self.lectures[i].end_time for i in range(len(self.lectures) - 1))
+        hours, minutes = int(longest.total_seconds()) // 3600, (int(longest.total_seconds()) // 60) % 60
+        return f'{hours:0>2}:{minutes:0>2}'

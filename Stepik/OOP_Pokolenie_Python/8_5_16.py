@@ -1,46 +1,18 @@
-import functools
-
 def limiter(limit, unique, lookup):
-    def decorator(init_func):
-        instances = {}
+    instances = {}
+    lookups = {}
 
-        @functools.wraps(init_func)
-        def wrapper(self, *args, **kwargs):
-            value = kwargs.get(unique)
-            if value in instances:
-                if lookup == 'FIRST':
-                    return instances[value][0]
-                elif lookup == 'LAST':
-                    return instances[value][-1]
-            instance = init_func(self, *args, **kwargs)
-            if value:
-                if value in instances:
-                    if len(instances[value]) >= limit:
-                        if lookup == 'FIRST':
-                            return instances[value][0]
-                        elif lookup == 'LAST':
-                            return instances[value][-1]
-                    else:
-                        instances[value].append(instance)
-                else:
-                    instances[value] = [instance]
-            return instance
+    def wrapper(cls):
+        def get_instance(*args, **kwargs):
+            instance = cls(*args, **kwargs)
+            lookups.setdefault('FIRST', instance)
+            identifier = getattr(instance, unique)
+            if len(instances) < limit:
+                if identifier not in instances:
+                    lookups['LAST'] = instances[identifier] = instance
+                return instances[identifier]
+            return instances.get(identifier) or lookups.get(lookup)
 
-        return wrapper
+        return get_instance
 
-    return decorator
-
-
-class MyClass:
-    @limiter(2, 'ID', 'FIRST')
-    def __init__(self, ID, value):
-        self.ID = ID
-        self.value = value
-
-obj1 = MyClass(1, 5)
-obj2 = MyClass(2, 8)
-obj3 = MyClass(1, 20)
-obj4 = MyClass(3, 0)
-
-print(obj3.value)  # 5
-print(obj4.value)  # 5
+    return wrapper
