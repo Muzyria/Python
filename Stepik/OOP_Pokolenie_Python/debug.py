@@ -1,20 +1,12 @@
-def takes_positive(func):
-    def wrapper(*args, **kwargs):
-        if not all(type(i) == int for i in [*args, *kwargs.values()]):
-            raise TypeError
-        elif not all(i > 0 for i in [*args, *kwargs.values()]):
-            raise ValueError
-        else:
-            return func(*args, **kwargs)
-    return wrapper
+import random
 
 
-@takes_positive
-def positive_sum(*args, **kwargs):
-    return sum(args) + sum(kwargs.values())
+def generate_random_path( number_holes, range_time: tuple):
+    """Generator random path with range of time"""
+    path = [(i, (random.randint(range_time[0], range_time[1])) * 30) for i in range(1, number_holes + 1)]
+    print(sum(map(lambda x: x[1], path)))
+    random.shuffle(path)
+    print(path)
 
 
-try:
-    print(positive_sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, par1=1, sep=-40))
-except Exception as err:
-    print(type(err))
+generate_random_path(18, (3, 4))
