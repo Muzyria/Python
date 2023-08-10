@@ -1,4 +1,5 @@
 import time
+import random
 
 import requests
 import json
@@ -197,57 +198,24 @@ class SyncwiseClient(SyncwiseAPI):
 
         print(response.text)
 
-    # def course_geofence_advertisement_type_create(self, name, coordinates=None):
-    #     """
-    #     Create course geofence advertisement type
-    #     """
-    #     action = "CourseGeofenceCreate"
-    #     url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
-    #
-    #     payload = {
-    #         'request': {
-    #             "fileType": "image/jpeg",
-    #             "companyCode": "lsQafn5n7DUK",
-    #             "active": 1,
-    #             "id_company": 2325,
-    #             "geofenceStatus": 1,
-    #             "visible": 1,
-    #             "id_geofenceType": 17,
-    #             "marshallBypass": 1,
-    #             "disabilityBypass": 0,
-    #             "name": name,
-    #             "points": [
-    #                 {"lat": 32.95181966580096, "lng": -82.85081863403322},
-    #                 {"lat": 32.951837671538215, "lng": -82.85045385360719},
-    #                 {"lat": 32.9515135677063, "lng": -82.85062551498415}
-    #             ]
-    #         }
-    #     }
-    #
-    #     files = {
-    #         'file': ('image.jpg', open('C:\Git_Muzyria\Python\Python\My_Pixels_work\SANBOX_SyncWise\script_to_generate_500_geofences\image\image.jpg', 'rb'), 'image/jpeg')
-    #     }
-    #
-    #     headers = {
-    #         'authority': 'dev-api.syncwise360.com',
-    #         'accept': 'application/json',
-    #         'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
-    #         'origin': 'https://sandbox.syncwise360.com',
-    #         'referer': 'https://sandbox.syncwise360.com/',
-    #         'sec-ch-ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
-    #         'sec-ch-ua-mobile': '?0',
-    #         'sec-ch-ua-platform': '"Windows"',
-    #         'sec-fetch-dest': 'empty',
-    #         'sec-fetch-mode': 'cors',
-    #         'sec-fetch-site': 'same-site',
-    #         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
-    #     }
-    #
-    #     payload_json = json.dumps(payload)
-    #
-    #     response = requests.post(url, headers=headers, data=payload_json, files=files)
-    #
-    #     print(response.text)
+
+    def move_geofence_to_square(self, geofence, target_square_center):
+        # Вычислить смещение (разницу) между центрами
+        lat_offset = target_square_center["lat"] - (geofence[0]["lat"] + geofence[1]["lat"] + geofence[2]["lat"]) / 3
+        lng_offset = target_square_center["lng"] - (geofence[0]["lng"] + geofence[1]["lng"] + geofence[2]["lng"]) / 3
+
+        # Применить смещение ко всем точкам геофенса
+        moved_geofence = [
+            {"lat": point["lat"] + lat_offset, "lng": point["lng"] + lng_offset}
+            for point in geofence
+        ]
+
+        return moved_geofence
+
+    def generate_random_target_square(self, min_lat, max_lat, min_lng, max_lng):
+        random_lat = random.uniform(min_lat, max_lat)
+        random_lng = random.uniform(min_lng, max_lng)
+        return {"lat": random_lat, "lng": random_lng}
 
     def course_geofence_advertisement_type_create(self, name, coordinates=None):
         """
@@ -319,9 +287,24 @@ print(test_1.SECRET_KEY)
 
 # test_1.course_geofence_create('Back_ground', test_1.COURSE_VECTOR_DETAILS_BACKGROUND[1])
 
-coordinate = [
-                    {"lat": 32.95181966580096, "lng": -82.85081863403322},
-                    {"lat": 32.951837671538215, "lng": -82.85045385360719},
-                    {"lat": 32.9515135677063, "lng": -82.85062551498415}
-                ]
-test_1.course_geofence_advertisement_type_create("WWW_WWW", coordinate)
+
+min_square_lat = 32.943122465997
+max_square_lat = 32.956014903445
+min_square_lng = -82.847149372101
+max_square_lng = -82.832450866699
+
+geofence = [
+    {"lat": 32.95181966580096, "lng": -82.85081863403322},
+    {"lat": 32.951837671538215, "lng": -82.85045385360719},
+    {"lat": 32.9515135677063, "lng": -82.85062551498415}
+]
+
+for number in range(1, 495):
+    # Генерировать случайный центр в заданных границах квадрата
+    random_target_square = test_1.generate_random_target_square(min_square_lat, max_square_lat, min_square_lng, max_square_lng)
+    # Переместить геофенс в случайный квадрат
+    moved_geofence = test_1.move_geofence_to_square(geofence, random_target_square)
+    test_1.course_geofence_advertisement_type_create(f"advertisement_type_{number}", moved_geofence)
+    print(f"GEOFENCE --- {number} CREATED")
+
+# test_1.course_geofence_advertisement_type_create(f"advertisement_type_", moved_geofence)
