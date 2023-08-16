@@ -3,36 +3,43 @@ import subprocess
 import time
 from datetime import datetime, timedelta
 
-def set_time():
-    now = datetime.now()  # получаем текущее время
-    one_minute_later = now + timedelta(minutes=1, seconds=10)  # добавляем 1 минуту к текущему времени
-    hour = one_minute_later.time().hour  # получаем часы через 1 минуту
-    minute = one_minute_later.time().minute  # получаем минуты через 1 минуту
-    print(f'Будет установалено power_off_time={hour:02}:{minute:02}')
-    print()
-    return f'{hour:02}{minute:02}'
 
-def check_devices_active():
-    # Запускаем команду adb devices для получения списка устройств
-    output = subprocess.check_output(['adb', 'devices'])
-    # Проверяем, есть ли подключенные устройства в выводе
-    if b'device' in output:
-        print('Устройство Android подключено и активно.')
-        return True
-
-    else:
-        print('Устройство Android не найдено или неактивно. -----> ')
-        return False
-
-def get_time_off():
-    os.system(f'adb shell settings get system power_off_time')
-
-
-while True:
-    if check_devices_active():
-        os.system(f'adb shell settings put system power_off_time {set_time()}')
-        get_time_off()
+class Scheduler:
+    def set_time(self, minutes=1, seconds=10):
+        now = datetime.now()  # получаем текущее время
+        one_minute_later = now + timedelta(minutes=minutes, seconds=seconds)  # добавляем 1 минуту к текущему времени
+        hour = one_minute_later.time().hour  # получаем часы через 1 минуту
+        minute = one_minute_later.time().minute  # получаем минуты через 1 минуту
+        print(f'Будет установалено power_off_time={hour:02}:{minute:02}')
         print()
-        time.sleep(175)
-    else:
-        time.sleep(60)
+        return f'{hour:02}{minute:02}'
+
+    def check_devices_active(self):
+        # Запускаем команду adb devices для получения списка устройств
+        output = subprocess.check_output(['adb', 'devices'])
+        # Проверяем, есть ли подключенные устройства в выводе
+        if b'device' in output:
+            print('Устройство Android подключено и активно.')
+            return True
+
+        else:
+            print('Устройство Android не найдено или неактивно. -----> ')
+            return False
+
+    def get_time_off(self):
+        os.system(f'adb shell settings get system power_off_time')
+
+
+    def put_time_off(self, time):
+        os.system(f'adb shell settings put system power_off_time {time}')
+
+
+
+# while True:
+#     if check_devices_active():
+#         os.system(f'adb shell settings put system power_off_time {set_time()}')
+#         get_time_off()
+#         print()
+#         time.sleep(175)
+#     else:
+#         time.sleep(60)
