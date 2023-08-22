@@ -17,11 +17,11 @@ class Scheduler:
     def check_devices_active(self, ip_address=None):
         output = subprocess.check_output(['adb', 'devices'])
         # Проверяем, есть ли подключенные устройства в выводе
-        if ip_address in str(output):
+        if ip_address in str(output) and "offline" not in str(output):
             print('Устройство Android подключено и активно.')
 
         else:
-            print('Устройство Android будет подключено. -----> ')
+            print(f'Устройство Android {ip_address} будет подключено. -----> ')
             self.device_disconnect()
             self.device_connect(ip_address)
 
