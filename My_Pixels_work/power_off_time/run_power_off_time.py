@@ -25,6 +25,10 @@ class Scheduler:
             self.device_disconnect()
             self.device_connect(ip_address)
 
+    def adb_get_state(self):
+        output = os.system('adb get-state')
+        print(f'{output}-------------')
+
     def device_disconnect(self):
         os.system(f'adb disconnect')
 
@@ -43,6 +47,9 @@ class Scheduler:
 
     def put_random_power_off_time(self, time):
         os.system(f'shell settings put system random_power_off_time {time}')
+
+    def open_date_settings(self):
+        os.system('adb shell am start -a android.settings.DATE_SETTINGS')
 
 
 
