@@ -1,194 +1,86 @@
-*%{background:yellow}All cases passed with expected behavior%*
+*Date: 08.22.23
+OS Build: 2.14.2_E
+APK Build: 2.1.77
+Environment: Live
+Cable FW Build:
+Device(s): YTR
+Device ID: S10150000211018049
+Test Location: Office
+UUA : 1.4.0
+MB: 1.5*
 
-*PRECONDITIONS*
-* Confirm current update.txt server settings
-* Flash modules to different FW versions, to perform updates
-* Assign  device to test course
-* Setup/enable cart barn geofence
-* Test will require access to cell/WIFI
-* Tolerance Test Cases will require Faraday cage
 
-h2. *I. GENERAL FUNCTIONALITY TEST CASES*
+*%{background:yellow}All test cases passed with expected behavior%*
 
-- Confirm a solid data connection prior to testing
-- Complete each test case once with the UBLOX module and once with the LC79D module
-- Be sure to clearly state what versions updating to/form for each case, and what time the update was queued
+*Preconditions*
+* Within 360 create/update a cart-barn geofence and hole for test setup *Confirmed*
+* Allow time for geofences to sync and save on tablet *Confirmed*
+* Assign tablet to course (make sure 360 matches APK environment: dev v. live) *Confirmed*
+* Confirm device setting option appears in 360 > YamaTrack Module > Course Set Up *Confirmed*
 
-h2. *Cellular*
+Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
 
-h2. *with the U- blox module*
+*%{background:yellow}AC Full Controller%*
 
-*CASE A: Cart Barn Sleep*
-1. With device awake, connect the device to GPS module (with different FW qued on the server) and confirm device establishes a GPS fix - *Confirmed*
-2. Allow device to go to Cart Barn Sleep - *Confirmed at 11:21*
-3. Wake up device - *Confirmed at 11:24*
-- Note if able to tap flag to see GPS download available status  - *Confirmed*
-- If YES - Confirm download status bar is updating during download - *Confirmed*
--  Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
-4. Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
-5. Allow device to go back to CBS, and then wake up - *Confirmed at 11:32*
-6. Confirm GPS module installs new FW version upon waking up from Cart Barn Sleep - *Confirmed*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - *Confirmed*
-7. Put the device into Cart Barn sleep and then update the server to a different FW version available when the device is asleep (or switch the GPS module to a different FW version) - *Confirmed at 11:34*
-8. Wake up device, and confirm it downloaded the update (check the download icon status on PlayGolf screen) - *Confirmed*
-9. Exit the YamaTrack app and check the UUA app - *Confirmed at 11:34*
-- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update - *Confirmed*
-- Confirm within tablet Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
-- Confirm after installing the update, exiting UUA and then returning to UUA, no updates are available - *Confirmed*  14:20
+*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 11:43*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+   - Standby *Confirmed 12:04*
+   - Cart-barn *Confirmed 11:48*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*CASE B: Off Hole Sleep*
-1. With device awake, connect device to GPS module (with different FW qued on server) and confirm device establishes a GPS fix - *Confirmed*
-2. Allow device to go to Off Hole Sleep - *Confirmed*
-3. Wake up device - *Confirmed*
-- Note if able to tap flag to see GPS download available status  - *Confirmed*
-- If YES - Confirm download status bar is updating during download - *Confirmed*
--  Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
-4. Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
-5. Allow device to go back to Off Hole Sleep and then wake up - *Confirmed*
-6. Confirm GPS module *DOES NOT install* new FW version upon waking up from Off Hole Sleep - *Confirmed*
-7. Press the checkmark icon, and confirm the GPS FW will install - *Confirmed*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - *Confirmed*
-8. With device awake, connect device to GPS module (with different FW qued on server) and confirm device establishes a GPS fix - *Confirmed*
-9. Allow device to go to Off Hole Sleep - *Confirmed at 11:41*
-10. . Wake up the device, and confirm it downloaded the update (check the download icon status on the PlayGolf screen) - *Confirmed*
-10. Exit the YamaTrack app and check the UUA app (install updates) - *Confirmed*
-- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update - *Confirmed*
-- Confirm after installing the update, exiting UUA, and then returning to UUA, no updates are available - *Confirmed*
-- Confirm within tablet Asset Details, 360, and Control - updated software version is displayed - *Confirmed*  14:38
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed 12:07*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 12:16*
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+   - Standby *Confirmed 12:35*
+   - Cart-barn *Confirmed 12:21*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 12:35*
+6. Place tablet into Cart Barn sleep *CBS 12:41*
+- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
+7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*CASE C: Upon Boot Up*
-1. With device in ship mode/powered off, connect to GPS module with different FW than what is queud on the server  - *Confirmed Ship Mode
-2. Confirm device recognizes an update available (via logs, or by tapping the flag to display the download icon status) when powering on - *Confirmed*
-- Confirm there is no visible interference with the Play Golf/APK while the download is taking place - *Confirmed*
-- Confirm download status bar is updating during download - Note: ER=Unknown for this specific step, I don't believe this will apply - *Confirmed*
-- Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
-6. Put device to CBS, confirm device installs download upon waking up from sleep  - *Confirmed*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control  - *Confirmed*
+*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 12:46*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+   - Standby *Confirmed 13:04*
+   - Cart-barn *Confirmed 12:53*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*CASE D: Full App Reset - Don't know if this applies*
-1. With device awake, connect to GPS module with different FW than what is queud on the server  - *Confirmed*
-2. Select Full App Reset within the APK, Menu options.   - *Confirmed*
-3. Confirm the app resets, and checks/loads any updates. Note this process maybe a little longer than normal as it is downloading and installing the updated SW version.  - *Confirmed (Only downloaded update - It's Expected)*
-4. Confirm app loads completely on Play Golf screen, and does not again reattempt to install software update at a later time  - *Confirmed (after Full Up Reset)*.
-5. Confirm the device installed the updated software version  - *Confirmed*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control  - *Confirmed* 15:54
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed  13:05*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 13:10*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+   - Standby *Confirmed 13:30*
+   - Cart-barn *Confirmed 13:22*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 13:33*
+6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 13:37*
+- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
 
-*CASE E: Simultaneous OS/APK and GPS Updates*
-1. With device awake, que all OS and APK update within Control  - *Confirmed*
-2. Connect the device to the GPS module with a different FW that is queued on the server  - *Confirmed*
-2. Confirm how the device recognizes and handles OS and APK and GPS updates.
-- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed(GPS, OS, APK)*
-- Falling asleep/waking up from Off hole sleep  - *Confirmed*
-- Power on  - *Confirmed(GPS, OS, APK)*
-- Device Reset/Full App Reset  - *Confirmed *
-3. Verify order of priority for each case (expected: 1st-OS, 2nd-APK, 3rd-GPS)
-4.  Confirm Update icon status updates accordingly (if applies)
-5. Confirm the downloaded update installs upon
-- Falling asleep/waking up from Cart Barn Sleep - *Confirmed(1st-OS, 2nd-APK, 3rd-GPS)
-- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to a module with different FW) - *Confirmed at 12:25 (1st-OS, 2nd-APK, 3rd-GPS)*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW)  - *Confirmed  (1st-OS, 2nd-APK, 3rd-GPS)*
-6. Note if there is any difference in precedence in what installs - *Confirmed*
-
-*APK and GPS*
-CASE F: Simultaneous APK and GPS Updates
-1. With device awake, que  APK update within Control Que - *Confirmed*
-2. Connect the device to GPS module with a different FW that is queued on the server
-2. Confirm how device recognizes and handles APK and GPS updates.
-- Falling asleep/waking up from Cart Barn Sleep CBS  - *Confirmed*
-- Falling asleep/waking up from Off hole sleep  - *Confirmed*
-- Power on Ship Mode  - *Confirmed*
-- Device Reset/Full App Reset  - *Confirmed*
-3. Verify order of priority for each case (ex: 1st-APK, 2nd-GPS)
-- Falling asleep/waking up from Cart Barn Sleep - *Confirmed (GPS, APK)*
-- Falling asleep/waking up from Off hole sleep - *Confirmed (GPS, APK)*
-- Power on - *Confirmed  (GPS, APK)*
-- Device Reset/Full App Reset - *Confirmed (GPS, APK)*
-4. Confirm Update icon status updates accordingly (if applies)
-5. Confirm the downloaded update installs upon
-- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed*
-- Falling asleep/waking up from Off hole sleep Off Hole Sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to module with different FW)  - *Confirmed*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW)  - *Confirmed*
-6. Note if there is any difference in precedence in what installs (ex: 1st-APK, 2nd-GPS)
-- Falling asleep/waking up from Cart Barn Sleep - *Confirmed(1st-APK, 2nd-GPS)*
-- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to module with different FW) - *Confirmed(1st-APK, 2nd-GPS)*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - *Confirmed(1st-APK, 2nd-GPS)*
-
-*OS and GPS*
-CASE G: Simultaneous OS and GPS Updates
-1. With device awake, que all OS update within Control Que  - *Confirmed*
-2. Connect device to GPS module with a different FW that is queued on the server   - *Confirmed*
-2. Confirm how device recognizes and handles OS  and GPS updates upon.  - *Confirmed*
-- Falling asleep/waking up from Cart Barn Sleep   - *Confirmed*
-- Falling asleep/waking up from Off hole sleep   - *Confirmed*
-- Power on Ship Mode  - *Confirmed*
-- Device Reset/Full App Reset at  - *Confirmed*
-3. Verify order of priority for each case (ex: 1st-OS, 2nd-GPS)
-- Falling asleep/waking up from Cart Barn Sleep   - *Confirmed (GPS, OS)*
-- Falling asleep/waking up from Off hole sleep - *Confirmed*
-- Power on  - *Confirmed(GPS, OS)*
-- Device Reset/Full App Reset  - *Confirmed*
-4. Confirm Update icon status updates accordingly (if applies)  - *Confirmed*
-5. Confirm the downloaded update installs upon  - *Confirmed*
-- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed*
-- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to module with different FW)  - *Confirmed*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW)  - *Confirmed*
-6. Note if there is any difference in precedence in what installs (ex: 1st-OS, 2nd-GPS)
-- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed(1st-OS, 2nd-GPS)*
-- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to module with different FW)  - *Confirmed*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - *Confirmed*
-
-*CASE H: Confirm Full-Functionality of UUA*
-1. With device awake, connect GPS module with different FW than what is queued on the server - *Confirmed at 17:10*
-- Confirm GPS establishes a fix - *Confirmed*
-2. Exit YamaTrack App, and open the UUA app - *Confirmed*
-3. Select GPS FW Updates  - *Confirmed*
-4. Confirm if the device recognizes an update available - *Confirmed*
-5. Press install and confirm the device downloads firmware properly. - *Confirmed*
-6. Confirm FW installs successfully - *Confirmed*
-7. Exit UUA and boot YamaTrack - *Confirmed*
-8. Exit YamaTrack and return to UUA to check if the device DOES NOT recognize GPS FW update available - *Confirmed*
-
-h2. TOLERANCE CASES ( check once  with GPS and once with OS + APK + GPS)
-
-*Automatic OS + APK + GPS  Updates: Test Cases:*
-
-Test Results: Provide test summary here/highlight any issues
-
-*A) No WIFI/Cellular*  - *Confirmed*
-ER: Device is unable to download OS , APK  & GPS update files until it establishes cellular or wifi connectivity
-
-*B) No Power From Cable*  - *Confirmed*
-ER: Device can download/install OS/APK/GPS updates even if the device is not connected to cart/receiving power from cable  - *Confirmed*
-
-*C) GPS update queued – but then removed*
-- For these cases, we need to also consider if a device is off when an update is queued
-ER: If the device downloaded update files successfully, the device proceeds to install downloaded files next time it wakes up from tablet sync/power cycles *Confirmed*
-If the device did NOT download files successfully, the device does not reattempt to download files once the update queue is removed from the Control *Confirmed*
-- For these cases, we need to also consider if a device is off when an update is queued - (CBS)- *Confirmed*
-
-*D) GPS update queued – then updated to a different version*
-- For these cases, we need to also consider if a device is off when an update is queued *Confirmed*
-ER: If previous update files did not download successfully/completely, the tablet will see a new updated version available and will download the updated version queued -
-If updated files DID download successfully, the device will check and compare different/new updated versions that are available and will download new OS/APK/GPS update files available (NOT INSTALL previously downloaded files).
-
-*E) OS/APK/GPS update queued – files downloaded, update still queued* - *Confirmed*
-- For these cases we need to also consider if a device is off when update is queued
-ER: Device checks if any new updates are queued *Confirmed*
-If files downloaded = the same update that is currently queued, device installs files upon tablet sync/power cycle.
-If files downloaded are DIFFERENT than update version that is queued - see logic for Case F (downloads new files instead) - *Confirmed*
-
-*F) OS/APK/GPS update queued – files installed, update still queued*  - *Confirmed*
-ER: Device checks if any new updates are queued *Confirmed*
-If files installed = the same update that is currently queued, nothing occurs
-If files installed are DIFFERENT than update version that is queued - see logic for Case F (downloads new files )
-
-*G) Download/Install of APK/OS/GPS in process, then app crashes*
-ER: App will be able to load correctly, and upon recovering that app will attempt to re-download the queued update the next time to goes through tablet sync, power up, falling asleep). (Full Up)
-- Test process of downloading APK, then exit app  - while  download  APK exit app then launch Yamatrack  and confirm -   APK downloading again *Confirmed*
-- Test process of downloading OS, then exit app - while download  OS exit app then launch Yamatrack  and confirm - OS downloading again - *Confirmed*
-- Test process of installing GPS, then exit app - while installing  GPS exit app then launch Yamatrack  and confirm -   GPS installing again - *Confirmed*
+*CASE C:*
+- Complete once over cell, then once over WIFI *WiFi only*
+1. Place device into cart barn sleep *CBS 13:49*
+2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
+3. Wait 5+ min. *Confirmed*
+4. Confirm device will   wake by Motion/Touch *Confirmed 13:55*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+5. Repeat step 1-3 *Confirmed*
+6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 14:21*
+7. Confirm tablet wakes up automatically *Confirmed*
+- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*
