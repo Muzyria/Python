@@ -39,6 +39,8 @@ class IntermediateCoordinatesGenerator:
         path = [(i, random.randint(range_time[0], range_time[1])) for i in range(1, number_holes + 1)]
         random.shuffle(path)
         print(path)  # [(1, 3), (11, 3), (4, 3), (17, 3), (13, 3), (8, 3), (6, 3), (2, 3), (10, 3), (18, 3), (15, 4), (5, 4), (16, 3), (12, 3), (14, 4), (3, 3), (7, 4), (9, 3)]
+        with open("PATH.txt", "w") as file:
+            file.write(str(path))
         print(f"TIME FOR ALL PATH MORE THEN {sum(map(lambda x: x[1], path))}")
         self.PATH_LIST_HOLES = path
 
@@ -182,10 +184,10 @@ class IntermediateCoordinatesGenerator:
 
 generator = IntermediateCoordinatesGenerator()
 
-generator.get_start_coordinates(60)
-generator.generate_random_path(18, (4, 10))
+generator.get_start_coordinates(160)
+generator.generate_random_path(18, (4, 5))
 generator.run_device_by_random_path()
 generator.run_device_last_step_to_next_point([generator.last_coordinate[0], generator.START_COORDINATES[0]], 40)
-generator.get_start_coordinates(60)
+generator.get_start_coordinates(160)
 
 print("Everything went well.".upper())
