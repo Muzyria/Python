@@ -35,8 +35,8 @@ class SyncwiseClient(SyncwiseAPI):
         url = f"{self.host}/rest/action/{self.create_url_test_with_public()}"
 
         payload = json.dumps({
-            "username": "qauatwincitydev",
-            "password": "1234"
+            "username": "igorperetssuperior",
+            "password": "Qwerty01!"
         })
         headers = {
             'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
@@ -61,7 +61,7 @@ class SyncwiseClient(SyncwiseAPI):
         action = "CourseGeofenceList"
         url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
         payload = json.dumps({
-            "id_company": 2325,
+            "id_company": 2973,
             "active": 1
         })
         headers = {
@@ -71,7 +71,7 @@ class SyncwiseClient(SyncwiseAPI):
             'Content-Type': 'application/json',
             'Accept': '*/*',
             'Referer': 'https://sandbox.syncwise360.com/',
-            'x-access-token': 'V6ip6O0U1IeWmHLe09NW26px9kVZfsax2QUp7lAdsyt0xZkG4DssxGstmCfJ',
+            'x-access-token': '72Y8ItBOOQT2S2u41cosMWw_hSjrpOreSND8N9iRaoO1B3k3wmUPA7dxt3yb',
             'sec-ch-ua-platform': '"Windows"'
         }
 
@@ -95,7 +95,7 @@ class SyncwiseClient(SyncwiseAPI):
         action = "CourseVectorDetails"
         url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
         payload = json.dumps({
-            "id_course": "8A0HlSzGG9Sx"
+            "id_course": "xqrRgFzOAmmP"
         })
         headers = {
             'authority': 'dev-api.syncwise360.com',
@@ -111,7 +111,7 @@ class SyncwiseClient(SyncwiseAPI):
             'sec-fetch-mode': 'cors',
             'sec-fetch-site': 'same-site',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-            'x-access-token': 'V6ip6O0U1IeWmHLe09NW26px9kVZfsax2QUp7lAdsyt0xZkG4DssxGstmCfJ'
+            'x-access-token': 'bjVDR13m9pZq1wLRRlc2a-qNaqZDM2mbrv78Hnmx7oCZ1qO5hrhnk5AX9mTr'
         }
 
         response = requests.request("POST", url, headers=headers, data=payload)
@@ -227,9 +227,9 @@ class SyncwiseClient(SyncwiseAPI):
         payload = {
             'request': json.dumps({
                 "fileType": "image/jpeg",
-                "companyCode": "lsQafn5n7DUK",
+                "companyCode": "DDg2_tDaqpk7",
                 "active": 1,
-                "id_company": 2325,
+                "id_company": 2973,
                 "geofenceStatus": 1,
                 "visible": 1,
                 "id_geofenceType": 17,
@@ -240,7 +240,7 @@ class SyncwiseClient(SyncwiseAPI):
             }),
         }
 
-        files = [('file', ('image.jpg', open('image.jpg', 'rb'), 'image/jpeg'))]
+        files = [('file', ('image.jpg', open('image_2.jpg', 'rb'), 'image/jpeg'))]
 
         headers = {
             'authority': 'dev-api.syncwise360.com',
@@ -288,23 +288,35 @@ print(test_1.SECRET_KEY)
 # test_1.course_geofence_create('Back_ground', test_1.COURSE_VECTOR_DETAILS_BACKGROUND[1])
 
 
-min_square_lat = 32.943122465997
-max_square_lat = 32.956014903445
-min_square_lng = -82.847149372101
-max_square_lng = -82.832450866699
+min_square_lat = 50.08022234377751
+max_square_lat = 50.09313658004037
+
+min_square_lng = 36.24363899230958
+max_square_lng = 36.25930309295655
+
 
 geofence = [
-    {"lat": 32.95181966580096, "lng": -82.85081863403322},
-    {"lat": 32.951837671538215, "lng": -82.85045385360719},
-    {"lat": 32.9515135677063, "lng": -82.85062551498415}
+  {
+    "lat": 50.090761888323954,
+    "lng": 36.24425053596497
+  },
+  {
+    "lat": 50.091006246091446,
+    "lng": 36.24435245990754
+  },
+  {
+    "lat": 50.090834163286345,
+    "lng": 36.24464213848115
+  }
 ]
 
-for number in range(1, 495):
+
+for number in range(1, 331):
     # Генерировать случайный центр в заданных границах квадрата
     random_target_square = test_1.generate_random_target_square(min_square_lat, max_square_lat, min_square_lng, max_square_lng)
     # Переместить геофенс в случайный квадрат
     moved_geofence = test_1.move_geofence_to_square(geofence, random_target_square)
-    test_1.course_geofence_advertisement_type_create(f"advertisement_type_{number}", moved_geofence)
+    # test_1.course_geofence_advertisement_type_create(f"adv_type_{number}", moved_geofence)
+    test_1.course_geofence_create(f"regular_type_{number}", moved_geofence)
     print(f"GEOFENCE --- {number} CREATED")
 
-# test_1.course_geofence_advertisement_type_create(f"advertisement_type_", moved_geofence)
