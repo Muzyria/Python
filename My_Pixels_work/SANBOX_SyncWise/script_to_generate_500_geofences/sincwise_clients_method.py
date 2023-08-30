@@ -261,6 +261,38 @@ class SyncwiseClient(SyncwiseAPI):
         print(response.text)
 
 
+    def course_geofence_advertisement_type_turn_off(self, id_geofence):
+        # url = "https://dev-api.syncwise360.com/rest/action/CourseGeofenceUpdate/FVyzsVqr-BmP280/QA/1.0/2.0/HmacSHA256/jfC2MNAcNijykJPGY9Bytb_ZZEgS_tt_9k2EXFy3zF0/230830155134+0300/JSON"
+
+        action = "CourseGeofenceUpdate"
+        url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
+
+        payload = json.dumps({
+            "id_geofence": id_geofence,
+            "status": 0
+        })
+        headers = {
+            'authority': 'dev-api.syncwise360.com',
+            'accept': '*/*',
+            'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
+            'content-type': 'application/json',
+            'origin': 'https://sandbox.syncwise360.com',
+            'referer': 'https://sandbox.syncwise360.com/',
+            'sec-ch-ua': '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
+            'x-access-token': 'mBH0N6fxP_Lnz8nCkNn8zH5w67VX7m8F_a_IHBotPJGrWAFiDf3B1YoObC_G'
+        }
+
+        response = requests.request("POST", url, headers=headers, data=payload)
+
+        print(response.text)
+
+
 test_1 = SyncwiseClient("https://dev-api.syncwise360.com")
 test_1.user_account_login()
 
@@ -310,13 +342,16 @@ geofence = [
   }
 ]
 
+for id_geo in range(12149, 12256):
+    test_1.course_geofence_advertisement_type_turn_off(id_geo)
 
-for number in range(1, 331):
-    # Генерировать случайный центр в заданных границах квадрата
-    random_target_square = test_1.generate_random_target_square(min_square_lat, max_square_lat, min_square_lng, max_square_lng)
-    # Переместить геофенс в случайный квадрат
-    moved_geofence = test_1.move_geofence_to_square(geofence, random_target_square)
-    # test_1.course_geofence_advertisement_type_create(f"adv_type_{number}", moved_geofence)
-    test_1.course_geofence_create(f"regular_type_{number}", moved_geofence)
-    print(f"GEOFENCE --- {number} CREATED")
+
+# for number in range(1, 331):
+#     # Генерировать случайный центр в заданных границах квадрата
+#     random_target_square = test_1.generate_random_target_square(min_square_lat, max_square_lat, min_square_lng, max_square_lng)
+#     # Переместить геофенс в случайный квадрат
+#     moved_geofence = test_1.move_geofence_to_square(geofence, random_target_square)
+#     # test_1.course_geofence_advertisement_type_create(f"adv_type_{number}", moved_geofence)
+#     test_1.course_geofence_create(f"regular_type_{number}", moved_geofence)
+#     print(f"GEOFENCE --- {number} CREATED")
 
