@@ -20,7 +20,7 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.3.219'}
+    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.1.132'}
     START_COORDINATES = [{'lat': 50.07807852323376, 'lng': 36.23065154766116}]
     PATH_LIST_HOLES = None
 
@@ -39,7 +39,7 @@ class IntermediateCoordinatesGenerator:
         path = [(i, random.randint(range_time[0], range_time[1])) for i in range(1, number_holes + 1)]
         random.shuffle(path)
         print(path)  # [(1, 3), (11, 3), (4, 3), (17, 3), (13, 3), (8, 3), (6, 3), (2, 3), (10, 3), (18, 3), (15, 4), (5, 4), (16, 3), (12, 3), (14, 4), (3, 3), (7, 4), (9, 3)]
-        with open("PATH_1.txt", "w") as file:
+        with open("PATH_2.txt", "w") as file:
             file.write(str(path))
         print(f"TIME FOR ALL PATH MORE THEN {sum(map(lambda x: x[1], path))}")
         self.PATH_LIST_HOLES = path

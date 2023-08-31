@@ -6,15 +6,14 @@ print(sorted(cord))
 
 
 
+DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.3.219'}
 
+print(DICT_IP_DEVICES)
 
-def one(i):
-    def two():
-        print("two")
-
-    for _ in range(i):
-        two()
-
-
-
-one(5)
+# def one(i):
+#     def two():
+#         print("two")
+#
+#     for _ in range(i):
+#         two()
+# one(5)
