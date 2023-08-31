@@ -292,13 +292,66 @@ class SyncwiseClient(SyncwiseAPI):
 
         print(response.text)
 
+    def course_geofence_advertisement_type_delete(self, id_geofence):
+        # url = "https://dev-api.syncwise360.com/rest/action/CourseGeofenceUpdate/FVyzsVqr-BmP280/QA/1.0/2.0/HmacSHA256/dXKNzzJzuWDgVFBTwgCo2fAx_sVfHa5Op_PPLRbF9uo/230831123505+0300/JSON"
+
+        action = "CourseGeofenceUpdate"
+        url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
+
+        payload = json.dumps({
+            "id_geofence": id_geofence,
+            "active": 0
+        })
+        headers = {
+            'authority': 'dev-api.syncwise360.com',
+            'accept': '*/*',
+            'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
+            'content-type': 'application/json',
+            'origin': 'https://sandbox.syncwise360.com',
+            'referer': 'https://sandbox.syncwise360.com/',
+            'sec-ch-ua': '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
+            'x-access-token': 'ZV6AcGrwX6sXgb5UZPspXhYk9q2oayu200_V6IX9A_c5QrXK9wEd2y4HuG6t'
+        }
+
+        response = requests.request("POST", url, headers=headers, data=payload)
+
+        print(response.text)
+
+
+
+
 
 test_1 = SyncwiseClient("https://dev-api.syncwise360.com")
 test_1.user_account_login()
 
 print(test_1.SECRET_KEY)
 
-# test_1.course_geofence_list()
+test_1.course_geofence_list()
+# print(test_1.COURSE_GEOFENCE_LIST)
+# print(test_1.COURSE_GEOFENCE_LIST["resultList"])
+
+
+# for item in test_1.COURSE_GEOFENCE_LIST["resultList"]:
+#     if item["id_geofenceType"] == 10 and "regular_type" in item["name"]:
+#         print(f'{item["name"]} {item["id_geofence"]}')
+
+
+adv_list = [item["id_geofence"] for item in test_1.COURSE_GEOFENCE_LIST["resultList"] if item["id_geofenceType"] == 10 and "regular_type" in item["name"]]
+    # if item["id_geofenceType"] == 17:
+    #     print(f'{item["name"]} {item["id_geofence"]}')
+
+print(adv_list)
+print(len(adv_list))
+
+for i in adv_list:
+    test_1.course_geofence_advertisement_type_delete(i)
+
 
 #
 # test_1.course_vector_details()
@@ -342,8 +395,7 @@ geofence = [
   }
 ]
 
-for id_geo in range(12149, 12256):
-    test_1.course_geofence_advertisement_type_turn_off(id_geo)
+
 
 
 # for number in range(1, 331):
