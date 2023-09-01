@@ -184,7 +184,7 @@ class IntermediateCoordinatesGenerator:
 
 generator = IntermediateCoordinatesGenerator()
 
-generator.get_start_coordinates(40)
+generator.get_start_coordinates(160)
 generator.generate_random_path(18, (10, 11))
 generator.run_device_by_random_path()
 generator.run_device_last_step_to_next_point([generator.last_coordinate[0], generator.START_COORDINATES[0]], 40)
