@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 
 class Scheduler:
-    def set_power_of_time(self, minutes=1, seconds=10):
+    def get_value_new_time(self, minutes=1, seconds=10):
         now = datetime.now()  # получаем текущее время
         one_minute_later = now + timedelta(minutes=minutes, seconds=seconds)  # добавляем 1 минуту к текущему времени
         hour = one_minute_later.time().hour  # получаем часы через 1 минуту

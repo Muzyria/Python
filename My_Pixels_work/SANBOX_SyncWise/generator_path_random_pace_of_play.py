@@ -20,9 +20,10 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    # DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.3.219'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.1.133'}
+    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.3.219'}
+    # DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.1.133'}
     START_COORDINATES = [{'lat': 50.07807852323376, 'lng': 36.23065154766116}]
+    OUT_OFF_COURSE_COORDINATES = [{'lat': 50.07810572861073, 'lng': 36.22751781974624}]
     PATH_LIST_HOLES = None
 
     def __init__(self):
@@ -63,6 +64,20 @@ class IntermediateCoordinatesGenerator:
                     time_minute = now
                     self.touch_screen()
             self.last_coordinate = self.START_COORDINATES
+
+    def get_out_off_course_coordinates(self, steps):
+        print('OUT OFF COURSE COORDINATE')
+        for _ in range(steps):  # start coordinate for begin
+            time_minute = datetime.now().time().minute
+
+            for ip_device in self.DICT_IP_DEVICES.values():
+                lat, lng = self.OUT_OFF_COURSE_COORDINATES[0]['lat'], self.OUT_OFF_COURSE_COORDINATES[0]['lng']
+                print(f'step -> {lat}, {lng}')
+                self.send_adb_command(ip_device, f"{lat}, {lng}")
+                if (now := datetime.now().time().minute) != time_minute:
+                    time_minute = now
+                    self.touch_screen()
+            self.last_coordinate = self.OUT_OFF_COURSE_COORDINATES
 
     @execution_time_decorator
     def touch_screen(self):
@@ -185,10 +200,15 @@ class IntermediateCoordinatesGenerator:
 
 generator = IntermediateCoordinatesGenerator()
 
-generator.get_start_coordinates(80)
-generator.generate_random_path(9, (4, 4))
+generator.get_start_coordinates(40)
+generator.generate_random_path(2, (4, 4))
 generator.run_device_by_random_path()
 generator.run_device_last_step_to_next_point([generator.last_coordinate[0], generator.START_COORDINATES[0]], 40)
-generator.get_start_coordinates(80)
+generator.get_start_coordinates(160)
+
+# -------------------------------------------------------
+generator.run_device_last_step_to_next_point([generator.last_coordinate[0], generator.OUT_OFF_COURSE_COORDINATES[0]], 40)
+generator.get_out_off_course_coordinates(40)
+
 
 print("Everything went well.".upper())
