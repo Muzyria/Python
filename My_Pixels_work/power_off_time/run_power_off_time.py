@@ -10,7 +10,7 @@ class Scheduler:
         one_minute_later = now + timedelta(minutes=minutes, seconds=seconds)  # добавляем 1 минуту к текущему времени
         hour = one_minute_later.time().hour  # получаем часы через 1 минуту
         minute = one_minute_later.time().minute  # получаем минуты через 1 минуту
-        print(f'Будет установалено power_off_time={hour:02}:{minute:02}')
+        print(f'Расчетное время power_off_time={hour:02}:{minute:02}')
         print()
         return f'{hour:02}{minute:02}'
 
