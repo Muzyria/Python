@@ -45,16 +45,47 @@ class TestCheckBox:
         print(f'input search --- {data}')
         time.sleep(1)
 
-        # result_salt = self.driver.find_element(By.XPATH, '//*[text()="Salt Creek Golf Club"]')
-        # result_salt.click()
-        # print('Click result')
-        # time.sleep(3)
+        result_salt = self.driver.find_element(By.XPATH, '//*[text()="MGI Golf"]')
+        result_salt.click()
+        print('Click result')
+        time.sleep(1)
+
+    def manage_devise_click(self):
+        manage_button = self.driver.find_element(By.CSS_SELECTOR, 'section[class="horizontal-box stretched-box"] div[class="i"]:nth-child(4)')
+        manage_button.click()
+        print('Click Manage Device')
+        time.sleep(1)
+
+    def display_all_click(self):
+        display_all_button = self.driver.find_element(By.CSS_SELECTOR, 'th[class="bt display-all"]')
+        display_all_button.click()
+        print('Click display_all')
+        time.sleep(5)
+
+    def all_list(self):
+        table = self.driver.find_elements(By.CSS_SELECTOR, 'table[class="style4 center company-devices-tbl"] tbody tr')
+
+        for number, item in enumerate(table, 1):
+            name_item = item.text.split(" ")[0]
+            print(f'{name_item} Clicked ---> {number}')
+            item.find_element(By.CSS_SELECTOR, 'input').click()
+
+
+
+        time.sleep(120)
+
+
 
 
 test = TestCheckBox()
 test.run()
 test.login()
 test.search('mgi ')
+
+test.manage_devise_click()
+test.display_all_click()
+
+test.all_list()
 
 time.sleep(5)
 
