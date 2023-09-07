@@ -1,4 +1,4 @@
-
+import random
 import time
 from selenium import webdriver
 from selenium.webdriver import ActionChains, Keys
@@ -15,6 +15,7 @@ class TestCheckBox:
 
     def __init__(self):
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+
 
     def run(self):
         base_url = 'https://dev-control.syncwise360.com/#login'
@@ -65,14 +66,33 @@ class TestCheckBox:
     def all_list(self):
         table = self.driver.find_elements(By.CSS_SELECTOR, 'table[class="style4 center company-devices-tbl"] tbody tr')
 
-        for number, item in enumerate(table, 1):
+        list_all_check_boxes = [item for item in table]
+        random.shuffle(list_all_check_boxes)
+
+        for number, item in enumerate(list_all_check_boxes, 1):
             name_item = item.text.split(" ")[0]
             print(f'{name_item} Clicked ---> {number}')
             try:
                 item.find_element(By.CSS_SELECTOR, 'input').click()
+                time.sleep(5)
+
+                # item.find_element(By.CSS_SELECTOR, 'input')
+                # self.driver.execute_script("arguments[0].scrollIntoView();", item)
+                # element = WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'input')))
+                # element.click()
+                # item.find_element(By.CSS_SELECTOR, 'input').click()
             except Exception:
                 print(f"Ошибка: при попытке --- {number}")
                 break
+
+        # for number, item in enumerate(table, 1):
+        #     name_item = item.text.split(" ")[0]
+        #     print(f'{name_item} Clicked ---> {number}')
+        #     try:
+        #         item.find_element(By.CSS_SELECTOR, 'input').click()
+        #     except Exception:
+        #         print(f"Ошибка: при попытке --- {number}")
+        #         break
 
 
         time.sleep(300)
