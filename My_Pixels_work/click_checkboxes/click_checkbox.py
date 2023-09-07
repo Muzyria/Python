@@ -68,11 +68,14 @@ class TestCheckBox:
         for number, item in enumerate(table, 1):
             name_item = item.text.split(" ")[0]
             print(f'{name_item} Clicked ---> {number}')
-            item.find_element(By.CSS_SELECTOR, 'input').click()
+            try:
+                item.find_element(By.CSS_SELECTOR, 'input').click()
+            except Exception:
+                print(f"Ошибка: при попытке --- {number}")
+                break
 
 
-
-        time.sleep(120)
+        time.sleep(300)
 
 
 
