@@ -20,29 +20,29 @@ MB: 1.7*
 
 Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
 
-*%{background:yellow}EFI Full Controller%*
+*%{background:yellow}AC Full Controller%*
 
 *Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
 *CASE A:*
 - Complete Case A over Cell *Cell only*
 1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 10:18*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 13:46*
 - When device is asleep CONFIRM that final uGaugeType = 4 report is reported
 3. Confirm if device wakes up from all types of sleep via MOTION
-   - Standby *Confirmed 10:38*
-   - Cart-barn *Confirmed 10:21*
+   - Standby *Confirmed 14:09*
+   - Cart-barn *Confirmed 13:51*
 4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
 *CASE B:*
 - Complete Case B over WIFI *WiFi only*
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed 10:42*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 10:49*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed 14:10*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 14:20*
 3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
 4. Confirm device ONLY wakes up from sleep mode via TOUCH
-   - Standby *Confirmed 11:09*
-   - Cart-barn *Confirmed 10:54*
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 11:10*
-6. Place tablet into Cart Barn sleep *CBS 11:16*
+   - Standby *Confirmed 14:40*
+   - Cart-barn *Confirmed 14:24*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 14:38*
+6. Place tablet into Cart Barn sleep *CBS 14:46*
 - When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
 7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
 - Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
@@ -51,36 +51,36 @@ Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
 *CASE A:*
 - Complete Case A over Cell *Cell only*
 1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 11:21*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 14:51*
 - When device is asleep CONFIRM that final uGaugeType = 4 report is reported
 3. Confirm if device wakes up from all types of sleep via MOTION
-   - Standby *Confirmed 11:37*
-   - Cart-barn *Confirmed 11:28*
+   - Standby *Confirmed 15:07*
+   - Cart-barn *Confirmed 14:57*
 4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
 *CASE B:*
 - Complete Case B over WIFI *WiFi only*
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed  11:38*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 11:44*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed  15:09*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 15:14*
 - When device is asleep CONFIRM that final uGaugeType = 4 report is reported
 3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
 4. Confirm device ONLY wakes up from sleep mode via TOUCH
-   - Standby *Confirmed 12:05*
-   - Cart-barn *Confirmed 11:55*
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 12:06*
-6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 12:11*
+   - Standby *Confirmed 15:33*
+   - Cart-barn *Confirmed 15:27*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 15:37*
+6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 15:41*
 - Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
 - Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
 
 *CASE C:*
 - Complete once over cell, then once over WIFI *WiFi only*
-1. Place device into cart barn sleep *CBS 12:22*
+1. Place device into cart barn sleep *CBS 15:54*
 2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
 3. Wait 5+ min. *Confirmed*
-4. Confirm device will   wake by Motion/Touch *Confirmed 12:29*
+4. Confirm device will   wake by Motion/Touch *Confirmed 15:58*
 - Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 5. Repeat step 1-3 *Confirmed*
-6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 12:54*
+6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 16:26*
 7. Confirm tablet wakes up automatically *Confirmed*
 - Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*
