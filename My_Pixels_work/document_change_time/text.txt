@@ -1,326 +1,86 @@
-*Date: 08.28.23
-OS Build: 2.14.2_E
-APK Build: 2.1.77
+*Date: 09.08.23
+OS Build: 2.14.3_E
+APK Build: 2.1.95
 Environment: Live
-Cable FW Build: AC_TCC_V1.2_1.0.9
+Cable FW Build:
 Device(s): YTR
-Device ID: S10150000211018049
+Device ID: S1011500221118000B
 Test Location: Office
-UUA : 1.4.0
-MB: 1.5*
+UUA : 1.4.1
+MB: 1.7*
 
 
-*%{Background:yellow}All test cases passed successfully with expected results.%*
+*%{background:yellow}All test cases passed with expected behavior%*
 
-*AC*
+*Preconditions*
+* Within 360 create/update a cart-barn geofence and hole for test setup *Confirmed*
+* Allow time for geofences to sync and save on tablet *Confirmed*
+* Assign tablet to course (make sure 360 matches APK environment: dev v. live) *Confirmed*
+* Confirm device setting option appears in 360 > YamaTrack Module > Course Set Up *Confirmed*
 
-*Test 1*
-*(USB connection established while tablet is off, and then tablet powered on)*
-1. Place Tablet Into SHIP MODE - *Into Ship Mode at 12:42*
-2. Connect control cable and power On
-Note time started - *Connected and powered on at 12:43*
-Confirm Tablet is Booting - *Confirmed*
-Confirm Battery is charging - *Confirmed*
-Confirm that the Application autostarts after the Tablet is finished booting. - *Confirmed at 12:45*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
+Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
 
-*Test 2*
-*(Cable Connected/Run App --> Close App/Disconnect Cable --> Reconnect Cable/Restart APP)*
-If Case 1 successfully completes, continue right into this test
-1. After 3 minutes, POWER OFF the cable and kill the application (go to recent apps page, and swipe the app closed)
-Note the time this occurs - *Cable powered off and App Killed at 12:47*
-Leave the unpowered cable connected - *Confirmed*
-2. Power Cable Back on - *Cable powered back on at 12:50*
-Confirm app auto starts - *Confirmed*
-Note the time this occurs - *12:50*
-Confirm Battery is charging - *Confirmed at 12:53*
-3. Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
+*%{background:yellow}EFI Full Controller%*
 
-*Test 3*
-*(USB clean-up and recovery after app is killed)*
-If Case 2 has successfully passed go right into this test case.
-1. Kill the app, but leave cable connected. - *App killed at 13:03*
-Note the time this occurs - *13:03*
-2. After 2-3 minutes, reopen app - *Reopened at 13:05*
-Note the time this occurs - *13:05*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialParam02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery still charging - *Confirmed at 13:06*
+*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 10:18*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+   - Standby *Confirmed 10:38*
+   - Cart-barn *Confirmed 10:21*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Test 4*
-*(App Running, and Cable disconnected and reconnected while app still running)*
-If Case 3 passes, continue right into this test
-1. While YamaTrack app is STILL running, Power off cable 2 minutes, then Power cable back on
-Mark Times at which cable is powered off and back on. - *Cable powered off at 13:07 - Powered back on at 13:09*
-Confirm GPS is still properly updating while TCC is OFF - *Office Test - No GPS Signal*
-After turning cable back on confirm Battery is charging - *Confirmed*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed 10:42*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 10:49*
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+   - Standby *Confirmed 11:09*
+   - Cart-barn *Confirmed 10:54*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 11:10*
+6. Place tablet into Cart Barn sleep *CBS 11:16*
+- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
+7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Test 5*
-*(Tablet BOOTED with BATTERY ONLY, then cable powered later on+)*
-1. Turn off Cable AND Tablet--> Then Power Tablet Back on by toggling BATTERY Power (leave battery disconnected for at least 1 minute before reconnecting when in ship mode) - *Cable powered off at 13:12 - Into Ship Mode at 13:12 - Battery pulled at 13:13- Battery reconnected at 13:15*
-2. Wait a few minutes then start-up Tablet Control Cable later - *Cable powered back on at 13:17*
-Mark Times at which app is started and cable turned back on - *App started with battery power at 13:15 - Cable back on at 11:17*
-MOST IMPORTANT: Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery is charging - *Confirmed*
+*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 11:21*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+   - Standby *Confirmed 11:37*
+   - Cart-barn *Confirmed 11:28*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Test 6*
-*(Previously Test 5, App started with Battery Only)*
-If Test 5 Passes, go right into this test case
-1. Kill App and Turn off Cable (leave cable connected) - *App killed and Cable off at 13:19*
-2. Start Yamatrack App on tablet
-Note time started - *13:19*
-Monitor UtilityGauge reports (SerialInfo in 360 Control or Asset Details in 360) --- should report 0's or nulls for serialParam data ("Cart Battery Voltage" and all other Controller Data like MCU Mode/Previous Mode will be empty or zero)
-3. After a few minutes, Power ON the cable - *Cable powered back on at 13:21*
-It should NOT cause app to restart - *Confirmed*
-Confirm Battery is charging - *Confirmed*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed  11:38*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 11:44*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+   - Standby *Confirmed 12:05*
+   - Cart-barn *Confirmed 11:55*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 12:06*
+6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 12:11*
+- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
 
-*Test 7*
-*(STability after Tablet Restart)*
-After Case 6 passes, go right into this test case
-1. Leaving cable CONNECTED, Restart Tablet Via Power Menu - *Restarted YTR at 13:22*
-Confirm that the Application autostarts after the Tablet is finished booting. - *Confirmed*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery is charging - *Confirmed*
-
-*Test 8*
-*(Stability After OTA Update)*
-1. Leaving cable CONNECTED, Execute OTA Update from Settings Menu OR From Utility Update app (if on OS version 1.48.x and later) - *At 13:27 – OS 2.11.12_E  to OS 2.12.0_E *
-2. After OTA update is completed confirm the following:
-Confirm that the Application autostarts after the Tablet is finished booting. - *Confirmed at 13:34*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery is charging - *Confirmed*
-
-*Date: 08.28.23
-OS Build: 2.14.2_E
-APK Build: 2.1.77
-Environment: Live
-Cable FW Build: YDTCC2.2_1.1.02VI
-Device(s): YTR
-Device ID: S10150000211018049
-Test Location: Office
-UUA : 1.4.0
-MB: 1.5*
-
-
-*%{Background:yellow}All test cases passed successfully with expected results.%*
-
-*DC*
-
-*Test 1*
-*(USB connection established while tablet is off, and then tablet powered on)*
-1. Place Tablet Into SHIP MODE - *Into Ship Mode at 13:46*
-2. Connect control cable and power On
-Note time started - *Connected and powered on at 13:47*
-Confirm Tablet is Booting - *Confirmed*
-Confirm Battery is charging - *Confirmed*
-Confirm that the Application autostarts after the Tablet is finished booting. - *Confirmed at 13:47*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-
-*Test 2*
-*(Cable Connected/Run App --> Close App/Disconnect Cable --> Reconnect Cable/Restart APP)*
-If Case 1 successfully completes, continue right into this test
-1. After 3 minutes, POWER OFF the cable and kill the application (go to recent apps page, and swipe the app closed)
-Note the time this occurs - *Cable powered off and App Killed at 13:52*
-Leave the unpowered cable connected - *Confirmed*
-2. Power Cable Back on - *Cable powered back on at 13:55*
-Confirm app auto starts - *Confirmed*
-Note the time this occurs - *13:55*
-Confirm Battery is charging - *Confirmed at 13:55*
-3. Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-
-*Test 3*
-*(USB clean-up and recovery after app is killed)*
-If Case 2 has successfully passed go right into this test case.
-1. Kill the app, but leave cable connected. - *App killed at 14:06*
-Note the time this occurs - *14:06*
-2. After 2-3 minutes, reopen app - *Reopened at 14:08*
-Note the time this occurs - *14:08*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialParam02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery still charging - *Confirmed at 14:08*
-
-*Test 4*
-*(App Running, and Cable disconnected and reconnected while app still running)*
-If Case 3 passes, continue right into this test
-1. While YamaTrack app is STILL running, Power off cable 2 minutes, then Power cable back on
-Mark Times at which cable is powered off and back on. - *Cable powered off at 14:35 - Powered back on at 14:37*
-Confirm GPS is still properly updating while TCC is OFF - *Office Test - No GPS Signal*
-After turning cable back on confirm Battery is charging - *Confirmed*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-
-*Test 5*
-*(Tablet BOOTED with BATTERY ONLY, then cable powered later on+)*
-1. Turn off Cable AND Tablet--> Then Power Tablet Back on by toggling BATTERY Power (leave battery disconnected for at least 1 minute before reconnecting when in ship mode) - *Cable powered off at 14:37 - Into Ship Mode at 15:38 - Battery pulled at 14:39 - Battery reconnected at 14:41*
-2. Wait a few minutes then start-up Tablet Control Cable later - *Cable powered back on at 14:43*
-Mark Times at which app is started and cable turned back on - *App started with battery power at 14:41 - Cable back on at 14:43*
-MOST IMPORTANT: Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery is charging - *Confirmed*
-
-*Test 6*
-*(Previously Test 5, App started with Battery Only)*
-If Test 5 Passes, go right into this test case
-1. Kill App and Turn off Cable (leave cable connected) - *App killed and Cable off at 14:45*
-2. Start Yamatrack App on tablet
-Note time started - *14:45*
-Monitor UtilityGauge reports (SerialInfo in 360 Control or Asset Details in 360) --- should report 0's or nulls for serialParam data ("Cart Battery Voltage" and all other Controller Data like MCU Mode/Previous Mode will be empty or zero)
-3. After a few minutes, Power ON the cable - *Cable powered back on at 14:47*
-It should NOT cause app to restart - *Confirmed*
-Confirm Battery is charging - *Confirmed*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-
-*Test 7*
-*(STability after Tablet Restart)*
-After Case 6 passes, go right into this test case
-1. Leaving cable CONNECTED, Restart Tablet Via Power Menu - *Restarted YTR at 14:50*
-Confirm that the Application autostarts after the Tablet is finished booting. - *Confirmed*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery is charging - *Confirmed*
-
-*Test 8*
-*(Stability After OTA Update)*
-1. Leaving cable CONNECTED, Execute OTA Update from Settings Menu OR From Utility Update app (if on OS version 1.48.x and later) - *At 14:53 – OS 2.11.12_E  to OS 2.12.0_E*
-2. After OTA update is completed confirm the following:
-Confirm that the Application autostarts after the Tablet is finished booting. - *Confirmed at 15:02*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery is charging - *Confirmed*
-
-*Date: 08.28.23
-OS Build: 2.14.2_E
-APK Build: 2.1.77
-Environment: Live
-Cable FW Build: YEVCC_1.1_1.0.04
-Device(s): YTR
-Device ID: S10150000211018049
-Test Location: Office
-UUA : 1.4.0
-MB: 1.5*
-
-
-*%{Background:yellow}All test cases passed successfully with expected results.%*
-
-*EFI*
-
-*Test 1*
-*(USB connection established while tablet is off, and then tablet powered on)*
-1. Place Tablet Into SHIP MODE - *Into Ship Mode at 15:07*
-2. Connect control cable and power On
-Note time started - *Connected and powered on at 15:08*
-Confirm Tablet is Booting - *Confirmed*
-Confirm Battery is charging - Confirmed*
-Confirm that the Application autostarts after the Tablet is finished booting. - *Confirmed at 15:08*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-
-*Test 2*
-*(Cable Connected/Run App --> Close App/Disconnect Cable --> Reconnect Cable/Restart APP)*
-If Case 1 successfully completes, continue right into this test
-1. After 3 minutes, POWER OFF the cable and kill the application (go to recent apps page, and swipe the app closed)
-Note the time this occurs - *Cable powered off and App Killed at 15:21*
-Leave the unpowered cable connected - *Confirmed*
-2. Power Cable Back on - *Cable powered back on at 15:24*
-Confirm app auto starts - *Confirmed*
-Note the time this occurs - *15:24*
-Confirm Battery is charging - *Confirmed at 15:25*
-3. Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-
-*Test 3*
-*(USB clean-up and recovery after app is killed)*
-If Case 2 has successfully passed go right into this test case.
-1. Kill the app, but leave cable connected. - *App killed at 15:26*
-Note the time this occurs - *15:26*
-2. After 2-3 minutes, reopen app - *Reopened at 15:29*
-Note the time this occurs - *15:29*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialParam02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery still charging - *Confirmed at 15:30*
-
-*Test 4*
-*(App Running, and Cable disconnected and reconnected while app still running)*
-If Case 3 passes, continue right into this test
-1. While YamaTrack app is STILL running, Power off cable 2 minutes, then Power cable back on
-Mark Times at which cable is powered off and back on. - *Cable powered off at 15:31 - Powered back on at 15:34*
-Confirm GPS is still properly updating while TCC is OFF - *Office Test - No GPS Signal*
-After turning cable back on confirm Battery is charging - *Confirmed*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-
-*Test 5*
-*(Tablet BOOTED with BATTERY ONLY, then cable powered later on+)*
-1. Turn off Cable AND Tablet--> Then Power Tablet Back on by toggling BATTERY Power (leave battery disconnected for at least 1 minute before reconnecting when in ship mode) - *Cable powered off at 15:39 - Into Ship Mode at 15:40 - Battery pulled at 15:40 - Battery reconnected at 15:44*
-2. Wait a few minutes then start-up Tablet Control Cable later - *Cable powered back on at 15:46*
-Mark Times at which app is started and cable turned back on - *App started with battery power at 15:44 - Cable back on at 15:46*
-MOST IMPORTANT: Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery is charging - *Confirmed*
-
-*Test 6*
-*(Previously Test 5, App started with Battery Only)*
-If Test 5 Passes, go right into this test case
-1. Kill App and Turn off Cable (leave cable connected) - *App killed and Cable off at 15:48*
-2. Start Yamatrack App on tablet
-Note time started - *15:50*
-Monitor UtilityGauge reports (SerialInfo in 360 Control or Asset Details in 360) --- should report 0's or nulls for serialParam data ("Cart Battery Voltage" and all other Controller Data like MCU Mode/Previous Mode will be empty or zero)
-3. After a few minutes, Power ON the cable - *Cable powered back on at 15:50*
-It should NOT cause app to restart - *Confirmed*
-Confirm Battery is charging - *Confirmed*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-
-*Test 7*
-*(STability after Tablet Restart)*
-After Case 6 passes, go right into this test case
-1. Leaving cable CONNECTED, Restart Tablet Via Power Menu - *Restarted YTR at 15:51*
-Confirm that the Application autostarts after the Tablet is finished booting. - *Confirmed*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery is charging - *Confirmed*
-
-*Test 8*
-*(Stability After OTA Update)*
-1. Leaving cable CONNECTED, Execute OTA Update from Settings Menu OR From Utility Update app (if on OS version 1.48.x and later) - *At 15:54 – OS 2.11.12_E  to OS 2.12.0_E*
-2. After OTA update is completed confirm the following:
-Confirm that the Application autostarts after the Tablet is finished booting. - *Confirmed at 16:04*
-Monitor UtilityGauge reports (Asset Details in APK or SerialInfo in 360 Control or Asset Details in 360) again and confirm the following:
-For AC and DC Control Cable: Confirm "Cart Battery Voltage" (serialParam16) updates by tweaking the controller power source voltage up and down and all other Controller Data (MCU Mode/Previous Mode, serialParam) data is populated - *Office Test*
-For EFI Control Cable: Confirm "Engine Temp" (serialPAram02) updates by adjusting potentiometer up and down and all other ECU Data is populated
-Confirm Battery is charging - *Confirmed*
+*CASE C:*
+- Complete once over cell, then once over WIFI *WiFi only*
+1. Place device into cart barn sleep *CBS 12:22*
+2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
+3. Wait 5+ min. *Confirmed*
+4. Confirm device will   wake by Motion/Touch *Confirmed 12:29*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+5. Repeat step 1-3 *Confirmed*
+6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 12:54*
+7. Confirm tablet wakes up automatically *Confirmed*
+- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*
