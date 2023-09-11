@@ -1,4 +1,4 @@
-*Date: 09.08.23
+*Date: 09.11.23
 OS Build: 2.14.3_E
 APK Build: 2.1.95
 Environment: Live
@@ -20,7 +20,7 @@ MB: 1.7*
 
 Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
 
-*%{background:yellow}AC Full Controller%*
+*%{background:yellow}Power Supply%*
 
 *Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
 *CASE A:*
