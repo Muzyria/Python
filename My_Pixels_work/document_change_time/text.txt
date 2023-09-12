@@ -1,4 +1,4 @@
-*Date: 09.11.23
+*Date: 09.12.23
 OS Build: 2.14.3_E
 APK Build: 2.1.95
 Environment: Live
@@ -10,77 +10,228 @@ UUA : 1.4.1
 MB: 1.7*
 
 
-*%{background:yellow}All test cases passed with expected behavior%*
+Phones:
+Android 8: Galaxy J5 Prime
 
-*Preconditions*
-* Within 360 create/update a cart-barn geofence and hole for test setup *Confirmed*
-* Allow time for geofences to sync and save on tablet *Confirmed*
-* Assign tablet to course (make sure 360 matches APK environment: dev v. live) *Confirmed*
-* Confirm device setting option appears in 360 > YamaTrack Module > Course Set Up *Confirmed*
+*%{background:yellow} All cases passed with expected behavior%*
 
-Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
 
-*%{background:yellow}Power Supply%*
+*Test Plan*
+*I. Preliminary Checks*
+Preliminary Checks only need to be done ONCE
+A) Enable/Disable Check: In Accounts 360, under YamaTrack Module, enable "Music Playback Over Bluetooth" - *Confirmed 11:22*
+• 1. Allow Tablet to resync course settings and confirm that BT Sync option becomes available. *Full App reset 11:24*
+o Double check and confirm BT is automatically enabled after the BT sync and Android DOES NOT prompt user to "Allow" BT access (Issue #11593) - *Confimed 11:24*
 
-*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
-*CASE A:*
-- Complete Case A over Cell *Cell only*
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 13:46*
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
-3. Confirm if device wakes up from all types of sleep via MOTION
-   - Standby *Confirmed 14:09*
-   - Cart-barn *Confirmed 13:51*
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+• 2. Disable the Music Playback in Accounts 360 and Resync Tablet *Confirmed 11:25*
+o Confirm Tablet resyncs in a stable manner and there is no BT Syncing Option available - *Full App reset 11:26*
+o Confirm Pressing BT cap touch button has no effect - *Confirmed 11:28*
 
-*CASE B:*
-- Complete Case B over WIFI *WiFi only*
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed 14:10*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 14:20*
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
-4. Confirm device ONLY wakes up from sleep mode via TOUCH
-   - Standby *Confirmed 14:40*
-   - Cart-barn *Confirmed 14:24*
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 14:38*
-6. Place tablet into Cart Barn sleep *CBS 14:46*
-- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
-7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+B) Temporarily assign Tablet to either Salt greeck golf club Course *Confirmed 11:30*
+• Confirm Tablet resyncs to new golf course in a stable manner and there is no BT Syncing Option available - *Confirmed 11:35*
+• Confirm Pressing BT cap touch button has no effect - *Confirmed at 11:36*
+Before proceeding with remainder of tests, restore Tablet back to YURASSIC PARK and Leave music Playback ON For Rest of the Test *Confirmed*
 
-*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*
-*CASE A:*
-- Complete Case A over Cell *Cell only*
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 14:51*
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
-3. Confirm if device wakes up from all types of sleep via MOTION
-   - Standby *Confirmed 15:07*
-   - Cart-barn *Confirmed 14:57*
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+C) Confirm Cap Touch Button / Bluetooth Menu Functionality and 300 second timeout (Issue #11133/ #11616/ #11638)
+(only one person needs to test this)
+• 1. Open Initial BT Discovery Prompt by pressing BT Cap Touch Button from Home Screen *Confirmed 11:37*
+o Wait 300 seconds and confirm prompt goes away - *Confirmed 11:42*
+o After the prompt goes away, Confirm that BT cap touch button AND Menu Screen - BT Option are still responsive when pressed - *Confirmed 11:43*
 
-*CASE B:*
-- Complete Case B over WIFI *WiFi only*
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed  15:09*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 15:14*
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
-4. Confirm device ONLY wakes up from sleep mode via TOUCH
-   - Standby *Confirmed 15:33*
-   - Cart-barn *Confirmed 15:27*
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 15:37*
-6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 15:41*
-- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
-8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
+• 2. Open Initial BT Discovery Prompt by pressing Menu Screen - BT Option *Confirmed 11:44*
+o Wait 300 seconds and confirm prompt goes away - *Confirmed 11:49*
+o After the prompt goes away, Confirm that BT cap touch button AND Menu Screen - BT Option are still responsive when pressed - *Confirmed 11:49*
 
-*CASE C:*
-- Complete once over cell, then once over WIFI *WiFi only*
-1. Place device into cart barn sleep *CBS 15:54*
-2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
-3. Wait 5+ min. *Confirmed*
-4. Confirm device will   wake by Motion/Touch *Confirmed 15:58*
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
-5. Repeat step 1-3 *Confirmed*
-6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 16:26*
-7. Confirm tablet wakes up automatically *Confirmed*
-- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*
+D) Confirm BT Control Panel has BT Settings/Disconnect Button (Issue #11646)
+• Do a quick pairing with a phone and sync with any phone and confirm that now there is a updated "BT+Settings Icon" in the left hand corner of the BT Control Panel Bar, according to Issue #11646 - *Confirmed*
+• Confirm that when pressing this button, it initiates the SAME workflow that is seen when the "Menu Screen - BT Option" is selected after a phone is already paired. - *Confirmed 11:51*
+
+*II. BT Syncing Test*
+• Test once with initiating BT Discovery Prompt via BT Cap Touch Button and once via Menu Screen BT Option
+Complete all steps once with an Android phone and then with an iPhone. Please clearly document each type of phone model tested.
+
+A) Cart Name Adjustment Test - Issue #11637 / #11736
+• Click here for suggested test Plan in Isuse #11637
+• Note: If running this test for the FIRST time after reflashing OS, Phone may show "i.mx6". Simply cancel the Initial Discovery Prompt on tablet and press BT again. Otherwise tablet MUST show the correct cart name and never show the old cart name. - *Confirmed 12:05*
+• Verify that "YamaTrack" always appears before cart name - *Confirmed 12:06*
+
+B) After pairing the first time, IMMEDIATELY unpair the device by using the NEW BT+Settings Button on the Control Panel and Follow all directions and also FORGET THE YTR paired tablet on the phone *Confirmed 12:07*
+• PROCEED WITH STEP C to confirm successful re-paring
+
+C) Confirm successful re-pairing from tablet to phone - Via Cap Touch Button and Select pressing the pair button from the TABLET first - *Confirmed 12:07*
+• Confirm that only a YamaTrack prompt shows up to pair (and not a native Android prompt) - *Confirmed 12:07*
+• Confirm there is no excessive delays or weird graphical overlays when attempting to pair (Issue #11142) - *Confirmed 12:08*
+
+D) Confirm after successful re-pairing, that the tablet is not seen as available by OTHER phones (Issue #11149) - *Confirmed 12:09*
+
+*III. BT Functional Tests*
+• BEFORE pairing (OR re-pairing) phone, set tablet volume to 50%, and set Phone MEDIA volume to 100% - Issue #11636
+• Also try multiple music playing apps per Phone (ex. Spotify, Youtube, whatever native media player is on the Phone)
+Complete all steps with an iPhone phone. Please clearly document each type of phone model tested.
+
+A) Confirm Two-Way Playback Status Synchronization (Issue #11180/ #11151/ #11622)
+• 1. Ensure that the play/pause state is the same on both Tablet and Phone, whether you are adjusting from the tablet or adjusting from the phone
+o a. Test periodically pressing play/pause on the Tablet and confirm the phone is in sync with the tablet's play/pause status - *Confirmed 12:14*
+o b. Test periodically pressing play/pause on the phone and confirm the tablet is in sync with the phone's play/pause status - *Confirmed 12:17*
+o c. Test alternating pressing play/pause on the phone and tablet and confirm play/pause status remains in sync - *Confirmed 12:18*
+Example: Press pause on phone --> Press Play on Tablet --> Press Pause On Tablet --> Press Play on Phone
+(Please test at "moderate" pace. This is not intended to be a stress to failure test)
+
+• 2. While Testing this also confirm Hole Switching Does not Interrupt Playback (Issue #11131)
+See Redmine issue for example of bug behavior - *Confirmed 12:21*
+
+• 3. Confirm SKIPPING Songs does not break BT sync connection (make sure to especially test with an iPhone XS if available) (Issue #11147)
+o a. Test periodically skipping forward or back on the Tablet and confirm the phone responds to the skips and the phone is in sync with the tablet's play/pause status *Confirmed 12:22*
+Also try rapidly skipping many songs - *Confirmed*
+o b. Test periodically skipping forward or back on the phone and confirm the tablet is in sync with the phone's play/pause status *Confirmed 12:25*
+Also try rapidly skipping many songs - *Confirmed*
+o c. Test alternating pressing skip forward or back on the phone and tablet and confirm play/pause status remains in sync - *Confirmed 12:30*
+(Please test at "moderate" pace. This is not intended to be a stress to failure test)
+
+• 4. Confirm map interface is NOT effected when adjusting BT playback (see Issue #11130) - *Confirmed 12:32*
+
+• 5. Switching Apps - *Confirmed to YouTube*
+o Switch to an alternate media app and repeat steps 1-4
+• Repeat Steps 1-4 with alternate media app
+
+• 1. Ensure that the play/pause state is the same on both Tablet and Phone, whether you are adjusting from the tablet or adjusting from the phone
+o a. Test periodically pressing play/pause on the Tablet and confirm the phone is in sync with the tablet's play/pause status - *Confirmed 12:34*
+o b. Test periodically pressing play/pause on the phone and confirm the tablet is in sync with the phone's play/pause status - *Confirmed 12:36*
+o c. Test alternating pressing play/pause on the phone and tablet and confirm play/pause status remains in sync - *Confirmed 12:38*
+Example: Press pause on phone --> Press Play on Tablet --> Press Pause On Tablet --> Press Play on Phone
+(Please test at "moderate" pace. This is not intended to be a stress to failure test)
+
+• 2. While Testing this also confirm Hole Switching Does not Interrupt Playback (Issue #11131) - *Confirmed 12:39*
+See Redmine issue for example of bug behavior
+
+• 3. Confirm SKIPPING Songs does not break BT sync connection (make sure to especially test with an iPhone XS if available) (Issue #11147)
+o a. Test periodically skipping forward or back on the Tablet and confirm the phone responds to the skips and the phone is in sync with the tablet's play/pause status *Confirmed 12:42*
+Also try rapidly skipping many songs - *Confirmed*
+o b. Test periodically skipping forward or back on the phone and confirm the tablet is in sync with the phone's play/pause status *Confirmed 12:45*
+Also try rapidly skipping many songs - *Confirmed*
+o c. Test alternating pressing skip forward or back on the phone and tablet and confirm play/pause status remains in sync - *Confirmed 12:47*
+(Please test at "moderate" pace. This is not intended to be a stress to failure test)
+
+• 4. Confirm map interface is NOT effected when adjusting BT playback (see Issue #11130) - *Confirmed*
+o Afterwards switch back to original app and do a sanity confirmation play/pause is in sync - *Confirmed 12:48*
+
+• 5. Additional Test Scenarios
+Close media app on phone and reopen before initiate each of these tests
+• See #11622 description - *Confirmed 12:49*
+• See #11622-4 (do this one on a NON YOUTUBE app for iPhone) *Confirmed 12:51*
+
+B) Confirm Volume Level Synchronization (Issue #11181/#11146)
+• 1. Ensure that the volume level is approximately the same on both Tablet and Phone, whether you are adjusting from the tablet or adjusting from the phone
+o Test periodically sliding volume level on the Tablet and confirm the phone volume level is in sync with the tablet's volume level - *Confirmed 12:52*
+o Also test periodically sliding volume level on the phone and confirm the tablet volume level is in sync with the phone's volume level - *Confirmed 12:53*
+
+• 2. While testing this confirm that only YamaTrack volume bar (not Native Android volume bar) shows up consistently while in other Yamatrack menus screens (Issue #11120) - *Confirmed*
+See Redmine issue for example of bug behavior
+
+• 3. For iPhones  *N/A*
+o Note whether or not there any delays for the volume to sync on the iPhone side (#11191) - Slightest delay when adjusting from tablet - Normal results - Almost not noticeable *No delay*
+o Confirm the precision of the volume level accuracy are close between the iPhone and the tablet (if phone shows roughly 75% volume that the tablet should show roughly 75% volume as well)
+
+• 4. Confirm map interface is NOT effected when adjusting audio level (see Issue #11130) - *Confirmed*
+
+• 5. Switching Apps - *Confirmed*
+o Switch to an alternate media app and repeat steps 1-4
+
+Repeat Steps 1-4 with alternate media app
+• 1. Ensure that the volume level is approximately the same on both Tablet and Phone, whether you are adjusting from the tablet or adjusting from the phone
+o Test periodically sliding volume level on the Tablet and confirm the phone volume level is in sync with the tablet's volume level - *Confirmed 13:15*
+o Also test periodically sliding volume level on the phone and confirm the tablet volume level is in sync with the phone's volume level - *Confirmed 13:17*
+
+• 2. While testing this confirm that only YamaTrack volume bar (not Native Android volume bar) shows up consistently while in other Yamatrack menus screens (Issue #11120) *Confirmed 13:18*
+See Redmine issue for example of bug behavior
+
+• 3. For iPhones - *N/A*
+o Note whether or not there any delays for the volume to sync on the iPhone side (#11191) - Slightest delay when adjusting from tablet - Normal results - Almost not noticeable *No Delay*
+o Confirm the precision of the volume level accuracy are close between the iPhone and the tablet (if phone shows roughly 75% volume that the tablet should show roughly 75% volume as well)
+
+• 4. Confirm map interface is NOT effected when adjusting audio level (see Issue #11130) - *Confirmed*
+o Afterwards switch back to original app and do a sanity confirmation play/pause is in sync - *Confirmed 13:20*
+o Note: Volume level may jump to another level. Please note this. However, as long as the volume level is still synchronized on both Phone/Tablet it does not need to be marked as a failure.
+
+C) Additional Check Items
+• Confirm touch area for BT Control Panel buttons are not too narrow or limited - Issue #11620 - *Confirmed 13:21*
+• Confirm BT Control Panel doesn't time-out/disappear WHILE interacting with the BT bar functions - Issue #11621 - *Confirmed 13:23*
+• Confirm multiple BT Control Panels do not appear when pressing the BT Cap Touch Button - Issue #11624 - *Confirmed 13:23*
+
+D) Sanity Check ability to re-pair after disconnecting via "Menu Screen - BT option) (Issue #11154/#11150)
++ Playing Music At Time of RE-Pairing - *Confirmed*
+• Go to the "Menu Screen BT Option" and confirm that you intend to disconnect BT connection between devices *Confirmed*
+E) Follow all directions and also FORGET THE YTR paired tablet on the phone *Confirmed*
+o Note for iOS/Apple devices you must also and close/reopen the Bluetooth setting on the phone
+• For this round, start playing music BEFORE pairing - *Confirmed 13:28*
+• Afterwards, attempt to reconnect/re-pair with the phone. - *Confirmed*
+• Confirm that the full Initial Discovery Prompt + Pair Prompt Screens occur
+(IF some other behavior occurs, please document it) - *Confirmed 13:29*
+• Repeat steps D-E - Paired with MENU SCREEN BT OPTION and pair from PHONE first. - *Confirmed 13:31*
+
+D) Confirm after successful re-pairing, that the tablet is not seen as available by OTHER phones (Issue #11149) - *Confirmed*
+
+*IV. Failure Tests*
+Also do the following tests once with each phone (Android and iPhone)
+
+A) Pairing Timeout
+Disconnect / End BT Session with phone after step II-H - *Confirmed*
+• 1. After reaching the pair screen, select pair on the TABLET, but NOT on the phone. - *Confirmed 13:33*
+Time how long the tablet waits before it returns an error message and gives up on the pairing process - *31 seconds*
+(it should not take longer than 1 minute, but could vary based on the phone)
+• 2. Repeat Case 1, but this time, select pair on the PHONE, but NOT on the tablet. - *Confirmed 13:34, 30 seconds*
+• 3. Repeat Case 1, but this time, do not press pair on EITHER side - *Confirmed 13:37, 32 seconds*
+
+B) Out of range testing
+• 1. While the phone is paired, walk away from the tablet until the phone is out of range and bluetooth connection consistently lost (not intermittent, but definitively not playing sound)
+Wait approximately 15 seconds and then return back within range of the tablet – *Confirmed 13:42*
+o Confirm whether or not phone and tablet automatically re-syncs and plays music - *13:43 Phone and Tablet did not automatically re-sync*
+ IF it remains paired, but does not automatically resume playing music, confirm whether pressing play on the phone will resume playing on the tablet.
+Otherwise, RE-PAIR the phone and tablet confirming normal-repairing workflow works - *Confirmed normal-repairing workflow at 13:44*
+• 2. Repeat above case, but wait approximately 1 minute before walking back into range. - * 13:46 Phone and Tablet did not automatically re-sync*
+
+C) Phone Call Test
+• 1. While music is still playing, place a phone call to the phone connected to the tablet - *Confirmed 14:08*
+Describe music playback behavior while the phone is ringing - *Confirmed at 14:08 (Playback stopped - Phone ringing (Android 8: Galaxy J5 Prime))*
+• 2. ANSWER the phone. - *Confirmed at 14:09*
+o Confirm that music temporarily stops playing and confirm voice sounds are only on the phone speaker. *Confirmed*
+• 3. End the call and confirm the following:
+• Does the music resume playing? - *Yes*
+• OR Does user need to press play on the phone or tablet? - *No*
+• OR Does the user need to fully reconnect to the tablet?- *No*
+o If user needs to fully reconnect to the tablet, please initate the reconnection from the TABLET (BT cap touch, or menu BT option)
+Confirm that you can successfully reconnect without any issues *Did not need to*
+
+o D) Final Unpairing / Forgetting
+Before moving on to next phone to test
+• Disconnect/End Bluetooth Session via the BT Control Panel Settings Button -  *Confirmed at 14:11*
+Follow all instructions and ALSO forget the tablet on the phone. When starting test plan again for NEW Phone, confirm that is is NOT trying to connect to the previous phone
+
+
+*V. Bluetooth ON by default in Demo Mode*
+
+*CASE A: Bluetooth = OFF, Demo Mode = YES*
+# via 360, enter YamaTrack > Course Setup *Confirmed*
+# Set Bluetooth to OFF *Confirmed 14:21*
+# Update settings on device and confirm Bluetooth menu is not available *Confirmed*
+# via tablet, enter Menu > Settings > Demo Mode *Confirmed*
+# Set Demo Mode to YES and return to Play Golf home screen *Confirmed 14:22*
+# Press the Bluetooth cap touch button and confirm the Bluetooth pairing prompt populates *Confirmed*
+# Enter Menu > Bluetooth and confirm the Bluetooth pairing prompt populates *Confirmed*
+# Confirm ability to connect to BT to play music  *Confirmed 14:29*
+# Enter Menu > Settings > Demo Mode *Confirmed*
+# Set Demo Mode to NO and return to Play Golf home screen *Confirmed*
+# Confirm once returning to regular Play Golf screen, Bluetooth is not an option *Confirmed*
+
+*CASE B: Bluetooth = ON, Demo Mode = YES*
+# via 360, enter YamaTrack > Course Setup *Confirmed*
+# Set Bluetooth to ON *Confirmed 14:32*
+# Update settings on device and confirm Bluetooth menu is available *Confirmed 14:33*
+# via tablet, enter Menu > Settings > Demo Mode *Confirmed*
+# Set Demo Mode to YES and return to Play Golf home screen *Confirmed 14:36*
+# Press the Bluetooth cap touch button and confirm the Bluetooth pairing prompt populates *Confirmed*
+# Enter Menu > Bluetooth and confirm the Bluetooth pairing prompt populates *Confirmed*
+# Confirm ability to connect to BT to play music *Confirmed 14:37*
+# Enter Menu > Settings > Demo Mode *Confirmed*
+# Set Demo Mode to NO and return to Play Golf home screen *Confirmed 14:38*
+# Confirm once returning to regular Play Golf screen, Bluetooth is still available *Confirmed*
