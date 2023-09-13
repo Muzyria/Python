@@ -10,228 +10,197 @@ UUA : 1.4.1
 MB: 1.7*
 
 
-Phones:
-Android 8: Galaxy J5 Prime
+*%{background:yellow}All cases passed with expected behavior%*
 
-*%{background:yellow} All cases passed with expected behavior%*
+*PRECONDITIONS*
+* Confirm current update.txt server settings
+* Flash modules to different FW versions, to perform updates
+* Assign  device to test course
+* Setup/enable cart barn geofence
+* Test will require access to cell/WIFI
+* Tolerance Test Cases will require Faraday cage
 
+h2. *I. GENERAL FUNCTIONALITY TEST CASES*
 
-*Test Plan*
-*I. Preliminary Checks*
-Preliminary Checks only need to be done ONCE
-A) Enable/Disable Check: In Accounts 360, under YamaTrack Module, enable "Music Playback Over Bluetooth" - *Confirmed 11:22*
-• 1. Allow Tablet to resync course settings and confirm that BT Sync option becomes available. *Full App reset 11:24*
-o Double check and confirm BT is automatically enabled after the BT sync and Android DOES NOT prompt user to "Allow" BT access (Issue #11593) - *Confimed 11:24*
+- Confirm a solid data connection prior to testing
+- Complete each test case once with the UBLOX module and once with the LC79D module
+- Be sure to clearly state what versions updating to/form for each case, and what time the update was queued
 
-• 2. Disable the Music Playback in Accounts 360 and Resync Tablet *Confirmed 11:25*
-o Confirm Tablet resyncs in a stable manner and there is no BT Syncing Option available - *Full App reset 11:26*
-o Confirm Pressing BT cap touch button has no effect - *Confirmed 11:28*
+*WIFI*
+ *with the LC79D module*
 
-B) Temporarily assign Tablet to either Salt greeck golf club Course *Confirmed 11:30*
-• Confirm Tablet resyncs to new golf course in a stable manner and there is no BT Syncing Option available - *Confirmed 11:35*
-• Confirm Pressing BT cap touch button has no effect - *Confirmed at 11:36*
-Before proceeding with remainder of tests, restore Tablet back to YURASSIC PARK and Leave music Playback ON For Rest of the Test *Confirmed*
+*CASE A: Cart Barn Sleep*
+1. With device awake, connect the device to GPS module (with different FW qued on the server) and confirm device establishes a GPS fix - *Confirmed*
+2. Allow device to go to Cart Barn Sleep - *Confirmed at 10:12*
+3. Wake up device - *Confirmed at 10:13*
+- Note if able to tap flag to see GPS download available status  - *Confirmed*
+- If YES - Confirm download status bar is updating during download - *Confirmed*
+-  Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
+4. Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
+5. Allow device to go back to CBS, and then wake up - *Confirmed at 10:20*
+6. Confirm GPS module installs new FW version upon waking up from Cart Barn Sleep - *Confirmed*
+- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - *Confirmed*
+7. Put the device into Cart Barn sleep and then update the server to a different FW version available when the device is asleep (or switch the GPS module to a different FW version) - *Confirmed at 10:52*
+8. Wake up device, and confirm it downloaded the update (check the download icon status on PlayGolf screen) - *Confirmed*
+9. Exit the YamaTrack app and check the UUA app - *Confirmed at 10 :53*
+- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update - *Confirmed*
+- Confirm within tablet Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
+- Confirm after installing the update, exiting UUA and then returning to UUA, no updates are available - *Confirmed*
 
-C) Confirm Cap Touch Button / Bluetooth Menu Functionality and 300 second timeout (Issue #11133/ #11616/ #11638)
-(only one person needs to test this)
-• 1. Open Initial BT Discovery Prompt by pressing BT Cap Touch Button from Home Screen *Confirmed 11:37*
-o Wait 300 seconds and confirm prompt goes away - *Confirmed 11:42*
-o After the prompt goes away, Confirm that BT cap touch button AND Menu Screen - BT Option are still responsive when pressed - *Confirmed 11:43*
+*CASE B: Off Hole Sleep*
+1. With device awake, connect device to GPS module (with different FW qued on server) and confirm device establishes a GPS fix - *Confirmed*
+2. Allow device to go to Off Hole Sleep - *Confirmed*
+3. Wake up device - *Confirmed at 10:59*
+- Note if able to tap flag to see GPS download available status  - *Confirmed*
+- If YES - Confirm download status bar is updating during download - *Confirmed*
+-  Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
+4. Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
+5. Allow device to go back to Off Hole Sleep and then wake up - *Confirmed*
+6. Confirm GPS module *DOES NOT install* new FW version upon waking up from Off Hole Sleep - *Confirmed*
+7. Press the checkmark icon, and confirm the GPS FW will install - *Confirmed at 11:05*
+- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - *Confirmed*
+8. With device awake, connect device to GPS module (with different FW qued on server) and confirm device establishes a GPS fix - *Confirmed*
+9. Allow device to go to Off Hole Sleep - *Confirmed at 11:10*
+10. . Wake up the device, and confirm it downloaded the update (check the download icon status on the PlayGolf screen) - *Confirmed*
+10. Exit the YamaTrack app and check the UUA app (install updates) - *Confirmed*
+- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update - *Confirmed*
+- Confirm after installing the update, exiting UUA, and then returning to UUA, no updates are available - *Confirmed*
+- Confirm within tablet Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
 
-• 2. Open Initial BT Discovery Prompt by pressing Menu Screen - BT Option *Confirmed 11:44*
-o Wait 300 seconds and confirm prompt goes away - *Confirmed 11:49*
-o After the prompt goes away, Confirm that BT cap touch button AND Menu Screen - BT Option are still responsive when pressed - *Confirmed 11:49*
+*CASE C: Upon Boot Up*
+1. With device in ship mode/powered off, connect to GPS module with different FW than what is queud on the server  - *Confirmed Ship Mode at 11:14*
+2. Confirm device recognizes an update available (via logs, or by tapping the flag to display the download icon status) when powering on - *Confirmed at 11:15*
+- Confirm there is no visible interference with the Play Golf/APK while the download is taking place - *Confirmed*
+- Confirm download status bar is updating during download - Note: ER=Unknown for this specific step, I don't believe this will apply - *Confirmed*
+- Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
+6. Put device to CBS, confirm device installs download upon waking up from sleep  - *Confirmed at 11:21*
+- Confirm updated software version is displayed in tablet Asset Details, 360, and Control  - *Confirmed*
 
-D) Confirm BT Control Panel has BT Settings/Disconnect Button (Issue #11646)
-• Do a quick pairing with a phone and sync with any phone and confirm that now there is a updated "BT+Settings Icon" in the left hand corner of the BT Control Panel Bar, according to Issue #11646 - *Confirmed*
-• Confirm that when pressing this button, it initiates the SAME workflow that is seen when the "Menu Screen - BT Option" is selected after a phone is already paired. - *Confirmed 11:51*
+*CASE D: Full App Reset - Don't know if this applies*
+1. With device awake, connect to GPS module with different FW than what is queud on the server  - *Confirmed*
+2. Select Full App Reset within the APK, Menu options.   - *Confirmed*
+3. Confirm the app resets, and checks/loads any updates. Note this process maybe a little longer than normal as it is downloading and installing the updated SW version.  - *Confirmed (Only downloaded update - It's Expected)*
+4. Confirm app loads completely on Play Golf screen, and does not again reattempt to install software update at a later time  - *Confirmed (after Full Up Reset)*.
+5. Confirm the device installed the updated software version  - *Confirmed*
+- Confirm updated software version is displayed in tablet Asset Details, 360, and Control  - *Confirmed*
 
-*II. BT Syncing Test*
-• Test once with initiating BT Discovery Prompt via BT Cap Touch Button and once via Menu Screen BT Option
-Complete all steps once with an Android phone and then with an iPhone. Please clearly document each type of phone model tested.
+*CASE E: Simultaneous OS/APK and GPS Updates*
+1. With device awake, que all OS and APK update within Control  - *Confirmed*
+2. Connect the device to the GPS module with a different FW that is queued on the server  - *Confirmed*
+2. Confirm how the device recognizes and handles OS and APK and GPS updates.
+- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed at 14:27 (GPS, OS, APK)*
+- Falling asleep/waking up from Off hole sleep  - *Confirmed at 14:51*
+- Power on  - *Confirmed at 13:41 (GPS, OS, APK)*
+- Device Reset/Full App Reset  - *Confirmed at 10:37*
+3. Verify order of priority for each case (expected: 1st-OS, 2nd-APK, 3rd-GPS)
+4.  Confirm Update icon status updates accordingly (if applies)
+5. Confirm the downloaded update installs upon
+- Falling asleep/waking up from Cart Barn Sleep - *Confirmed at 14:48 (1st-OS, 2nd-APK, 3rd-GPS)
+- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
+- Power on (device asleep, connected to a module with different FW) - *Confirmed at 13:58 (1st-OS, 2nd-APK, 3rd-GPS)*
+- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW)  - *Confirmed  (1st-OS, 2nd-APK, 3rd-GPS)*
+6. Note if there is any difference in precedence in what installs - *Confirmed*
 
-A) Cart Name Adjustment Test - Issue #11637 / #11736
-• Click here for suggested test Plan in Isuse #11637
-• Note: If running this test for the FIRST time after reflashing OS, Phone may show "i.mx6". Simply cancel the Initial Discovery Prompt on tablet and press BT again. Otherwise tablet MUST show the correct cart name and never show the old cart name. - *Confirmed 12:05*
-• Verify that "YamaTrack" always appears before cart name - *Confirmed 12:06*
+*APK and GPS*
+CASE F: Simultaneous APK and GPS Updates
+1. With device awake, que  APK update within Control Que - *Confirmed at 15:05*
+2. Connect the device to GPS module with a different FW that is queued on the server
+2. Confirm how device recognizes and handles APK and GPS updates.
+- Falling asleep/waking up from Cart Barn Sleep CBS  - *Confirmed at 15:11*
+- Falling asleep/waking up from Off hole sleep  - *Confirmed at 15:26*
+- Power on Ship Mode  - *Confirmed*
+- Device Reset/Full App Reset  - *Confirmed at 15:37*
+3. Verify order of priority for each case (ex: 1st-APK, 2nd-GPS)
+- Falling asleep/waking up from Cart Barn Sleep - *Confirmed at 15:09 (GPS, APK)*
+- Falling asleep/waking up from Off hole sleep - *Confirmed (GPS, APK)*
+- Power on - *Confirmed  (GPS, APK)*
+- Device Reset/Full App Reset - *Confirmed (GPS, APK)*
+4. Confirm Update icon status updates accordingly (if applies)
+5. Confirm the downloaded update installs upon
+- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed at 15:19*
+- Falling asleep/waking up from Off hole sleep Off Hole Sleep - *NOT Confirmed - It's Expected*
+- Power on (device asleep, connected to module with different FW)  - *Confirmed*
+- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW)  - *Confirmed*
+6. Note if there is any difference in precedence in what installs (ex: 1st-APK, 2nd-GPS)
+- Falling asleep/waking up from Cart Barn Sleep - *Confirmed at 15:30 (1st-APK, 2nd-GPS)*
+- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
+- Power on (device asleep, connected to module with different FW) - *Confirmed at 15:40 (1st-APK, 2nd-GPS)*
+- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - *Confirmed at 15:42 (1st-APK, 2nd-GPS)*
 
-B) After pairing the first time, IMMEDIATELY unpair the device by using the NEW BT+Settings Button on the Control Panel and Follow all directions and also FORGET THE YTR paired tablet on the phone *Confirmed 12:07*
-• PROCEED WITH STEP C to confirm successful re-paring
+*OS and GPS*
+CASE G: Simultaneous OS and GPS Updates
+1. With device awake, que all OS update within Control Que  - *Confirmed*
+2. Connect device to GPS module with a different FW that is queued on the server   - *Confirmed*
+2. Confirm how device recognizes and handles OS  and GPS updates upon.  - *Confirmed*
+- Falling asleep/waking up from Cart Barn Sleep   - *Confirmed at 12:14*
+- Falling asleep/waking up from Off hole sleep   - *Confirmed at 12:05*
+- Power on Ship Mode  - *Confirmed at 12:28*
+- Device Reset/Full App Reset at  - *Confirmed*
+3. Verify order of priority for each case (ex: 1st-OS, 2nd-GPS)
+- Falling asleep/waking up from Cart Barn Sleep   - *Confirmed at 12:05 (GPS, OS)*
+- Falling asleep/waking up from Off hole sleep - *Confirmed*
+- Power on  - *Confirmed at 12:19 (GPS, OS)*
+- Device Reset/Full App Reset  - *Confirmed*
+4. Confirm Update icon status updates accordingly (if applies)  - *Confirmed*
+5. Confirm the downloaded update installs upon  - *Confirmed*
+- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed*
+- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
+- Power on (device asleep, connected to module with different FW)  - *Confirmed*
+- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW)  - *Confirmed*
+6. Note if there is any difference in precedence in what installs (ex: 1st-OS, 2nd-GPS)
+- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed at 12:25 (1st-OS, 2nd-GPS)*
+- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
+- Power on (device asleep, connected to module with different FW)  - *Confirmed*
+- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - *Confirmed*
 
-C) Confirm successful re-pairing from tablet to phone - Via Cap Touch Button and Select pressing the pair button from the TABLET first - *Confirmed 12:07*
-• Confirm that only a YamaTrack prompt shows up to pair (and not a native Android prompt) - *Confirmed 12:07*
-• Confirm there is no excessive delays or weird graphical overlays when attempting to pair (Issue #11142) - *Confirmed 12:08*
+*CASE H: Confirm Full-Functionality of UUA*
+1. With device awake, connect GPS module with different FW than what is queued on the server - *Confirmed*
+- Confirm GPS establishes a fix - *Confirmed*
+2. Exit YamaTrack App, and open the UUA app - *Confirmed*
+3. Select GPS FW Updates  - *Confirmed*
+4. Confirm if the device recognizes an update available - *Confirmed*
+5. Press install and confirm the device downloads firmware properly. - *Confirmed*
+6. Confirm FW installs successfully - *Confirmed*
+7. Exit UUA and boot YamaTrack - *Confirmed*
+8. Exit YamaTrack and return to UUA to check if the device DOES NOT recognize GPS FW update available - *Confirmed*
 
-D) Confirm after successful re-pairing, that the tablet is not seen as available by OTHER phones (Issue #11149) - *Confirmed 12:09*
+h2. TOLERANCE CASES ( check once  with GPS and once with OS + APK + GPS)
 
-*III. BT Functional Tests*
-• BEFORE pairing (OR re-pairing) phone, set tablet volume to 50%, and set Phone MEDIA volume to 100% - Issue #11636
-• Also try multiple music playing apps per Phone (ex. Spotify, Youtube, whatever native media player is on the Phone)
-Complete all steps with an iPhone phone. Please clearly document each type of phone model tested.
+*Automatic OS + APK + GPS  Updates: Test Cases:*
 
-A) Confirm Two-Way Playback Status Synchronization (Issue #11180/ #11151/ #11622)
-• 1. Ensure that the play/pause state is the same on both Tablet and Phone, whether you are adjusting from the tablet or adjusting from the phone
-o a. Test periodically pressing play/pause on the Tablet and confirm the phone is in sync with the tablet's play/pause status - *Confirmed 12:14*
-o b. Test periodically pressing play/pause on the phone and confirm the tablet is in sync with the phone's play/pause status - *Confirmed 12:17*
-o c. Test alternating pressing play/pause on the phone and tablet and confirm play/pause status remains in sync - *Confirmed 12:18*
-Example: Press pause on phone --> Press Play on Tablet --> Press Pause On Tablet --> Press Play on Phone
-(Please test at "moderate" pace. This is not intended to be a stress to failure test)
+Test Results: Provide test summary here/highlight any issues
 
-• 2. While Testing this also confirm Hole Switching Does not Interrupt Playback (Issue #11131)
-See Redmine issue for example of bug behavior - *Confirmed 12:21*
+*A) No WIFI/Cellular*  - *Confirmed*
+ER: Device is unable to download OS , APK  & GPS update files until it establishes cellular or wifi connectivity
 
-• 3. Confirm SKIPPING Songs does not break BT sync connection (make sure to especially test with an iPhone XS if available) (Issue #11147)
-o a. Test periodically skipping forward or back on the Tablet and confirm the phone responds to the skips and the phone is in sync with the tablet's play/pause status *Confirmed 12:22*
-Also try rapidly skipping many songs - *Confirmed*
-o b. Test periodically skipping forward or back on the phone and confirm the tablet is in sync with the phone's play/pause status *Confirmed 12:25*
-Also try rapidly skipping many songs - *Confirmed*
-o c. Test alternating pressing skip forward or back on the phone and tablet and confirm play/pause status remains in sync - *Confirmed 12:30*
-(Please test at "moderate" pace. This is not intended to be a stress to failure test)
+*B) No Power From Cable*  - *Confirmed*
+ER: Device can download/install OS/APK/GPS updates even if the device is not connected to cart/receiving power from cable  - *Confirmed*
 
-• 4. Confirm map interface is NOT effected when adjusting BT playback (see Issue #11130) - *Confirmed 12:32*
+*C) GPS update queued – but then removed*
+- For these cases, we need to also consider if a device is off when an update is queued
+ER: If the device downloaded update files successfully, the device proceeds to install downloaded files next time it wakes up from tablet sync/power cycles *Confirmed*
+If the device did NOT download files successfully, the device does not reattempt to download files once the update queue is removed from the Control *Confirmed*
+- For these cases, we need to also consider if a device is off when an update is queued - (CBS)- *Confirmed*
 
-• 5. Switching Apps - *Confirmed to YouTube*
-o Switch to an alternate media app and repeat steps 1-4
-• Repeat Steps 1-4 with alternate media app
+*D) GPS update queued – then updated to a different version*  *%{background:yellow} Skiped (There is no other version)%*
+- For these cases, we need to also consider if a device is off when an update is queued
+ER: If previous update files did not download successfully/completely, the tablet will see a new updated version available and will download the updated version queued -
 
-• 1. Ensure that the play/pause state is the same on both Tablet and Phone, whether you are adjusting from the tablet or adjusting from the phone
-o a. Test periodically pressing play/pause on the Tablet and confirm the phone is in sync with the tablet's play/pause status - *Confirmed 12:34*
-o b. Test periodically pressing play/pause on the phone and confirm the tablet is in sync with the phone's play/pause status - *Confirmed 12:36*
-o c. Test alternating pressing play/pause on the phone and tablet and confirm play/pause status remains in sync - *Confirmed 12:38*
-Example: Press pause on phone --> Press Play on Tablet --> Press Pause On Tablet --> Press Play on Phone
-(Please test at "moderate" pace. This is not intended to be a stress to failure test)
+If updated files DID download successfully, the device will check and compare different/new updated versions that are available and will download new OS/APK/GPS update files available (NOT INSTALL previously downloaded files).
 
-• 2. While Testing this also confirm Hole Switching Does not Interrupt Playback (Issue #11131) - *Confirmed 12:39*
-See Redmine issue for example of bug behavior
+*E) OS/APK/GPS update queued – files downloaded, update still queued* - *Confirmed*
+- For these cases we need to also consider if a device is off when update is queued
+ER: Device checks if any new updates are queued *Confirmed*
+If files downloaded = the same update that is currently queued, device installs files upon tablet sync/power cycle.
+If files downloaded are DIFFERENT than update version that is queued - see logic for Case F (downloads new files instead) - *Confirmed*
 
-• 3. Confirm SKIPPING Songs does not break BT sync connection (make sure to especially test with an iPhone XS if available) (Issue #11147)
-o a. Test periodically skipping forward or back on the Tablet and confirm the phone responds to the skips and the phone is in sync with the tablet's play/pause status *Confirmed 12:42*
-Also try rapidly skipping many songs - *Confirmed*
-o b. Test periodically skipping forward or back on the phone and confirm the tablet is in sync with the phone's play/pause status *Confirmed 12:45*
-Also try rapidly skipping many songs - *Confirmed*
-o c. Test alternating pressing skip forward or back on the phone and tablet and confirm play/pause status remains in sync - *Confirmed 12:47*
-(Please test at "moderate" pace. This is not intended to be a stress to failure test)
+*F) OS/APK/GPS update queued – files installed, update still queued*  - *Confirmed*
+ER: Device checks if any new updates are queued *Confirmed*
+If files installed = the same update that is currently queued, nothing occurs
+If files installed are DIFFERENT than update version that is queued - see logic for Case F (downloads new files )
 
-• 4. Confirm map interface is NOT effected when adjusting BT playback (see Issue #11130) - *Confirmed*
-o Afterwards switch back to original app and do a sanity confirmation play/pause is in sync - *Confirmed 12:48*
-
-• 5. Additional Test Scenarios
-Close media app on phone and reopen before initiate each of these tests
-• See #11622 description - *Confirmed 12:49*
-• See #11622-4 (do this one on a NON YOUTUBE app for iPhone) *Confirmed 12:51*
-
-B) Confirm Volume Level Synchronization (Issue #11181/#11146)
-• 1. Ensure that the volume level is approximately the same on both Tablet and Phone, whether you are adjusting from the tablet or adjusting from the phone
-o Test periodically sliding volume level on the Tablet and confirm the phone volume level is in sync with the tablet's volume level - *Confirmed 12:52*
-o Also test periodically sliding volume level on the phone and confirm the tablet volume level is in sync with the phone's volume level - *Confirmed 12:53*
-
-• 2. While testing this confirm that only YamaTrack volume bar (not Native Android volume bar) shows up consistently while in other Yamatrack menus screens (Issue #11120) - *Confirmed*
-See Redmine issue for example of bug behavior
-
-• 3. For iPhones  *N/A*
-o Note whether or not there any delays for the volume to sync on the iPhone side (#11191) - Slightest delay when adjusting from tablet - Normal results - Almost not noticeable *No delay*
-o Confirm the precision of the volume level accuracy are close between the iPhone and the tablet (if phone shows roughly 75% volume that the tablet should show roughly 75% volume as well)
-
-• 4. Confirm map interface is NOT effected when adjusting audio level (see Issue #11130) - *Confirmed*
-
-• 5. Switching Apps - *Confirmed*
-o Switch to an alternate media app and repeat steps 1-4
-
-Repeat Steps 1-4 with alternate media app
-• 1. Ensure that the volume level is approximately the same on both Tablet and Phone, whether you are adjusting from the tablet or adjusting from the phone
-o Test periodically sliding volume level on the Tablet and confirm the phone volume level is in sync with the tablet's volume level - *Confirmed 13:15*
-o Also test periodically sliding volume level on the phone and confirm the tablet volume level is in sync with the phone's volume level - *Confirmed 13:17*
-
-• 2. While testing this confirm that only YamaTrack volume bar (not Native Android volume bar) shows up consistently while in other Yamatrack menus screens (Issue #11120) *Confirmed 13:18*
-See Redmine issue for example of bug behavior
-
-• 3. For iPhones - *N/A*
-o Note whether or not there any delays for the volume to sync on the iPhone side (#11191) - Slightest delay when adjusting from tablet - Normal results - Almost not noticeable *No Delay*
-o Confirm the precision of the volume level accuracy are close between the iPhone and the tablet (if phone shows roughly 75% volume that the tablet should show roughly 75% volume as well)
-
-• 4. Confirm map interface is NOT effected when adjusting audio level (see Issue #11130) - *Confirmed*
-o Afterwards switch back to original app and do a sanity confirmation play/pause is in sync - *Confirmed 13:20*
-o Note: Volume level may jump to another level. Please note this. However, as long as the volume level is still synchronized on both Phone/Tablet it does not need to be marked as a failure.
-
-C) Additional Check Items
-• Confirm touch area for BT Control Panel buttons are not too narrow or limited - Issue #11620 - *Confirmed 13:21*
-• Confirm BT Control Panel doesn't time-out/disappear WHILE interacting with the BT bar functions - Issue #11621 - *Confirmed 13:23*
-• Confirm multiple BT Control Panels do not appear when pressing the BT Cap Touch Button - Issue #11624 - *Confirmed 13:23*
-
-D) Sanity Check ability to re-pair after disconnecting via "Menu Screen - BT option) (Issue #11154/#11150)
-+ Playing Music At Time of RE-Pairing - *Confirmed*
-• Go to the "Menu Screen BT Option" and confirm that you intend to disconnect BT connection between devices *Confirmed*
-E) Follow all directions and also FORGET THE YTR paired tablet on the phone *Confirmed*
-o Note for iOS/Apple devices you must also and close/reopen the Bluetooth setting on the phone
-• For this round, start playing music BEFORE pairing - *Confirmed 13:28*
-• Afterwards, attempt to reconnect/re-pair with the phone. - *Confirmed*
-• Confirm that the full Initial Discovery Prompt + Pair Prompt Screens occur
-(IF some other behavior occurs, please document it) - *Confirmed 13:29*
-• Repeat steps D-E - Paired with MENU SCREEN BT OPTION and pair from PHONE first. - *Confirmed 13:31*
-
-D) Confirm after successful re-pairing, that the tablet is not seen as available by OTHER phones (Issue #11149) - *Confirmed*
-
-*IV. Failure Tests*
-Also do the following tests once with each phone (Android and iPhone)
-
-A) Pairing Timeout
-Disconnect / End BT Session with phone after step II-H - *Confirmed*
-• 1. After reaching the pair screen, select pair on the TABLET, but NOT on the phone. - *Confirmed 13:33*
-Time how long the tablet waits before it returns an error message and gives up on the pairing process - *31 seconds*
-(it should not take longer than 1 minute, but could vary based on the phone)
-• 2. Repeat Case 1, but this time, select pair on the PHONE, but NOT on the tablet. - *Confirmed 13:34, 30 seconds*
-• 3. Repeat Case 1, but this time, do not press pair on EITHER side - *Confirmed 13:37, 32 seconds*
-
-B) Out of range testing
-• 1. While the phone is paired, walk away from the tablet until the phone is out of range and bluetooth connection consistently lost (not intermittent, but definitively not playing sound)
-Wait approximately 15 seconds and then return back within range of the tablet – *Confirmed 13:42*
-o Confirm whether or not phone and tablet automatically re-syncs and plays music - *13:43 Phone and Tablet did not automatically re-sync*
- IF it remains paired, but does not automatically resume playing music, confirm whether pressing play on the phone will resume playing on the tablet.
-Otherwise, RE-PAIR the phone and tablet confirming normal-repairing workflow works - *Confirmed normal-repairing workflow at 13:44*
-• 2. Repeat above case, but wait approximately 1 minute before walking back into range. - * 13:46 Phone and Tablet did not automatically re-sync*
-
-C) Phone Call Test
-• 1. While music is still playing, place a phone call to the phone connected to the tablet - *Confirmed 14:08*
-Describe music playback behavior while the phone is ringing - *Confirmed at 14:08 (Playback stopped - Phone ringing (Android 8: Galaxy J5 Prime))*
-• 2. ANSWER the phone. - *Confirmed at 14:09*
-o Confirm that music temporarily stops playing and confirm voice sounds are only on the phone speaker. *Confirmed*
-• 3. End the call and confirm the following:
-• Does the music resume playing? - *Yes*
-• OR Does user need to press play on the phone or tablet? - *No*
-• OR Does the user need to fully reconnect to the tablet?- *No*
-o If user needs to fully reconnect to the tablet, please initate the reconnection from the TABLET (BT cap touch, or menu BT option)
-Confirm that you can successfully reconnect without any issues *Did not need to*
-
-o D) Final Unpairing / Forgetting
-Before moving on to next phone to test
-• Disconnect/End Bluetooth Session via the BT Control Panel Settings Button -  *Confirmed at 14:11*
-Follow all instructions and ALSO forget the tablet on the phone. When starting test plan again for NEW Phone, confirm that is is NOT trying to connect to the previous phone
-
-
-*V. Bluetooth ON by default in Demo Mode*
-
-*CASE A: Bluetooth = OFF, Demo Mode = YES*
-# via 360, enter YamaTrack > Course Setup *Confirmed*
-# Set Bluetooth to OFF *Confirmed 14:21*
-# Update settings on device and confirm Bluetooth menu is not available *Confirmed*
-# via tablet, enter Menu > Settings > Demo Mode *Confirmed*
-# Set Demo Mode to YES and return to Play Golf home screen *Confirmed 14:22*
-# Press the Bluetooth cap touch button and confirm the Bluetooth pairing prompt populates *Confirmed*
-# Enter Menu > Bluetooth and confirm the Bluetooth pairing prompt populates *Confirmed*
-# Confirm ability to connect to BT to play music  *Confirmed 14:29*
-# Enter Menu > Settings > Demo Mode *Confirmed*
-# Set Demo Mode to NO and return to Play Golf home screen *Confirmed*
-# Confirm once returning to regular Play Golf screen, Bluetooth is not an option *Confirmed*
-
-*CASE B: Bluetooth = ON, Demo Mode = YES*
-# via 360, enter YamaTrack > Course Setup *Confirmed*
-# Set Bluetooth to ON *Confirmed 14:32*
-# Update settings on device and confirm Bluetooth menu is available *Confirmed 14:33*
-# via tablet, enter Menu > Settings > Demo Mode *Confirmed*
-# Set Demo Mode to YES and return to Play Golf home screen *Confirmed 14:36*
-# Press the Bluetooth cap touch button and confirm the Bluetooth pairing prompt populates *Confirmed*
-# Enter Menu > Bluetooth and confirm the Bluetooth pairing prompt populates *Confirmed*
-# Confirm ability to connect to BT to play music *Confirmed 14:37*
-# Enter Menu > Settings > Demo Mode *Confirmed*
-# Set Demo Mode to NO and return to Play Golf home screen *Confirmed 14:38*
-# Confirm once returning to regular Play Golf screen, Bluetooth is still available *Confirmed*
+*G) Download/Install of APK/OS/GPS in process, then app crashes*
+ER: App will be able to load correctly, and upon recovering that app will attempt to re-download the queued update the next time to goes through tablet sync, power up, falling asleep). (Full Up)
+- Test process of downloading APK, then exit app  - while  download  APK exit app then launch Yamatrack  and confirm -   APK downloading again *Confirmed*
+- Test process of downloading OS, then exit app - while download  OS exit app then launch Yamatrack  and confirm - OS downloading again - *Confirmed*
+- Test process of installing GPS, then exit app - while installing  GPS exit app then launch Yamatrack  and confirm -   GPS installing again - *Confirmed*
