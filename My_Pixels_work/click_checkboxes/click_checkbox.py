@@ -90,9 +90,11 @@ class TestCheckBox:
             print(f'{name_item} Clicked ---> {number}')
             try:
                 item.find_element(By.CSS_SELECTOR, 'input').click()
+                # time.sleep(0.1)
             except Exception:
                 print(f"Ошибка: при попытке --- {number}")
-                break
+                time.sleep(30)
+                continue
 
 
         time.sleep(300)
@@ -110,6 +112,6 @@ test.display_all_click()
 
 test.all_list()
 
-time.sleep(5)
+time.sleep(600)
 
 test.driver.close()

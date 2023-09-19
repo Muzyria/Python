@@ -53,7 +53,7 @@ class IntermediateCoordinatesGenerator:
 
     def get_start_coordinates(self, steps):
         print('RETURN AREA COORDINATE')
-        for _ in range(steps):  # start coordinate for begin
+        for _ in range(steps):  # start coordinate for begin192.168
             time_minute = datetime.now().time().minute
 
             for ip_device in self.DICT_IP_DEVICES.values():
