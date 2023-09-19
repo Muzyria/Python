@@ -18,7 +18,7 @@ class TestCheckBox:
 
 
     def run(self):
-        base_url = 'https://dev-control.syncwise360.com/#login'
+        base_url = 'https://control.syncwise360.com/#login'
         self.driver.get(base_url)
         self.driver.maximize_window()
         time.sleep(2)
