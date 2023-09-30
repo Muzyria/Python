@@ -76,6 +76,6 @@ def change_customer_devices_direct():
                     number_row += 1
 
 
-# change_consumer_client()
-# change_customer_devices()
+change_consumer_client()
+change_customer_devices()
 change_customer_devices_direct()
