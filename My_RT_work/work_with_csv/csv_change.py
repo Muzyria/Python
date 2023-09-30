@@ -55,7 +55,7 @@ def change_customer_devices():
 
 def change_customer_devices_direct():
     # Открываем customer_devices_direct.csv
-    with open('csv_files/customer_devices.csv', mode='r', encoding='utf-8') as file:
+    with open('csv_files/customer_devices_direct.csv', mode='r', encoding='utf-8') as file:
          with open(f'{path_customer_devices_direct}/sql_without_eic.txt', mode='w', encoding='utf-8') as file_sql_without_eic:
             with open(f'{path_customer_devices_direct}/sql_with_eic.txt', mode='w', encoding='utf-8') as file_sql_with_eic:
                 # Создаем объект CSV reader
