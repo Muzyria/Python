@@ -5,7 +5,7 @@ test = Scheduler()
 
 # test.open_date_settings()
 
-test.check_devices_active("192.168.1.133")
+test.check_devices_active("192.168.3.236")
 print(test.get_value_new_time(5))
 # test.put_time_off(test.set_power_of_time())
 
