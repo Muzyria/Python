@@ -36,17 +36,18 @@ class Scheduler:
         os.system(f'adb connect {ip_address}')
 
     def get_time_off(self):
+        print('time_off ', end='')
         os.system(f'adb shell settings get system power_off_time')
 
     def get_random_power_off_time(self):
+        print('random_power_off_time ', end='')
         os.system(f'adb shell settings get system random_power_off_time')
-
 
     def put_time_off(self, time):
         os.system(f'adb shell settings put system power_off_time {time}')
 
     def put_random_power_off_time(self, time):
-        os.system(f'shell settings put system random_power_off_time {time}')
+        os.system(f'adb shell settings put system random_power_off_time {time}')
 
     def open_date_settings(self):
         os.system('adb shell am start -a android.settings.DATE_SETTINGS')
