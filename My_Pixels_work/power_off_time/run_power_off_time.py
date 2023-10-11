@@ -23,6 +23,7 @@ class Scheduler:
         else:
             print(f'Устройство Android {ip_address} будет подключено. -----> ')
             self.device_disconnect()
+            time.sleep(2)
             self.device_connect(ip_address)
 
     def adb_get_state(self):
