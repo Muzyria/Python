@@ -1,15 +1,16 @@
 import unittest
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
+from appium.webdriver.common.mobileby import MobileBy
 
 capabilities = dict(
-    platformName='Android',
-    automationName='uiautomator2',
-    deviceName='Android',
-    appPackage='com.android.settings',
-    appActivity='.Settings',
-    language='en',
-    locale='US'
+    platformName='android',
+    # automationName='uiautomator2',
+    deviceName='dbe407da',
+    # appPackage='com.android.settings',
+    # appActivity='.Settings',
+    # language='en',
+    # locale='US'
 )
 
 appium_server_url = 'http://localhost:4723'
@@ -22,9 +23,16 @@ class TestAppium(unittest.TestCase):
         if self.driver:
             self.driver.quit()
 
-    def test_find_battery(self) -> None:
-        el = self.driver.find_element(by=AppiumBy.XPATH, value='//*[@text="Battery"]')
-        el.click()
+    # def test_find_battery(self) -> None:
+    #     el = self.driver.find_element(by=AppiumBy.XPATH, value='//*[@text="Battery"]')
+    #     el.click()
+
+    def test_click_menu(self) -> None:
+         buton = self.driver.find_element(by=AppiumBy.XPATH, value='//*[@id="com.l1inc.yamatrack3d:id/buttonMenu"]')
+         buton.click()
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
