@@ -1,27 +1,29 @@
-# This sample code uses the Appium python client v2
-# pip install Appium-Python-Client
-# Then you can paste this into a file and simply run with Python
-
+import unittest
 from appium import webdriver
-from appium.webdriver.common.appiumby import AppiumBy
+from appium.webdriver.common.mobileby import MobileBy
 
-# For W3C actions
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.actions import interaction
-from selenium.webdriver.common.actions.action_builder import ActionBuilder
-from selenium.webdriver.common.actions.pointer_input import PointerInput
+capabilities = {
+    "platformName": "android",
+    "automationName": "uiautomator2",
+    "deviceName": "dbe407da",
+    "appPackage": "com.l1inc.yamatrack3d",
+    # "language": "en",
+    # "locale": "US"
+}
 
-caps = {}
-caps["appium:deviceName"] = "dbe407da"
-caps["platformName"] = "android"
-caps["appium:ensureWebviewsHavePages"] = True
-caps["appium:nativeWebScreenshot"] = True
-caps["appium:newCommandTimeout"] = 3600
-caps["appium:connectHardwareKeyboard"] = True
+appium_server_url = 'http://127.0.0.1:4723/wd/hub'
 
-print(caps)
+class TestAppium(unittest.TestCase):
+    def setUp(self):
+        self.driver = webdriver.Remote(appium_server_url, capabilities)
 
-driver = webdriver.Remote("http://localhost:4723/wd/hub/", caps)
+    def tearDown(self):
+        if self.driver:
+            self.driver.quit()
 
+    def test_click_menu(self):
+        button = self.driver.find_element(MobileBy.XPATH, '//*[@id="com.l1inc.yamatrack3d:id/buttonMenu"]')
+        button.click()
 
-driver.quit()
+if __name__ == '__main__':
+    unittest.main()

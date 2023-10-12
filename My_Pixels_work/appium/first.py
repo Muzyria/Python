@@ -1,30 +1,32 @@
 import unittest
 from appium import webdriver
-from appium.webdriver.common.mobileby import MobileBy
+from appium.webdriver.common.appiumby import AppiumBy
 
-capabilities = {
-    "platformName": "android",
-    "automationName": "uiautomator2",
-    "deviceName": "dbe407da",
-    "appPackage": "com.l1inc.yamatrack3d",
-    # "language": "en",
-    # "locale": "US"
-}
+capabilities = dict(
+    platformName='android',
+    automationName='uiautomator2',
+    deviceName='dbe407da',
+    appPackage='com.l1inc.yamatrack3d',
+    # language='en',
+    # locale='US'
+)
 
-appium_server_url = 'http://localhost:4723/wd/hub'
+appium_server_url = 'http://localhost:4723'
 
 class TestAppium(unittest.TestCase):
-    def setUp(self):
+    def setUp(self) -> None:
         self.driver = webdriver.Remote(appium_server_url, capabilities)
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         if self.driver:
             self.driver.quit()
 
-    def test_click_menu(self):
-        button = self.driver.find_element(MobileBy.XPATH, '//*[@resource-id="com.l1inc.yamatrack3d:id/buttonMenu"]')
-        button.click()
+
+    def test_click_menu(self) -> None:
+         buton = self.driver.find_element(by=AppiumBy.XPATH, value='//*[@resource-id="com.l1inc.yamatrack3d:id/buttonMenu"]')
+         buton.click()
+
+
 
 if __name__ == '__main__':
     unittest.main()
-
