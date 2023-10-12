@@ -5,10 +5,10 @@ from appium.webdriver.common.mobileby import MobileBy
 
 capabilities = dict(
     platformName='android',
-    # automationName='uiautomator2',
+    automationName='uiautomator2',
     deviceName='dbe407da',
-    # appPackage='com.android.settings',
-    # appActivity='.Settings',
+    appPackage='com.l1inc.yamatrack3d',
+    # appActivity='.activities.MapActivity10Inch_',
     # language='en',
     # locale='US'
 )
