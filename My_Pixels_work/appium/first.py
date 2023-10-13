@@ -36,7 +36,10 @@ for i in '123999':
 
 driver.find_element(By.ID, 'com.l1inc.yamatrack3d:id/buttonSubmit').click()
 print("PRESS SUBMIT")
-time.sleep()
+time.sleep(0.1)
+
+driver.find_element(By.ID, 'com.l1inc.yamatrack3d:id/listView/android.widget.LinearLayout[5]').click()
+# print(data)
 
 
 

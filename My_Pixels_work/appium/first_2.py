@@ -37,6 +37,6 @@ driver.find_element(MobileBy.ID, 'com.l1inc.yamatrack3d:id/buttonSubmit').click(
 print("PRESS SUBMIT")
 
 wait.until(EC.element_to_be_clickable((MobileBy.ID, 'com.l1inc.yamatrack3d:id/listView')))
-data = driver.find_element(MobileBy.ID, 'com.l1inc.yamatrack3d:id/listView').__dict__
-print(data)
+data = driver.find_element(MobileBy.ID, 'com.l1inc.yamatrack3d:id/listView')
+
 
