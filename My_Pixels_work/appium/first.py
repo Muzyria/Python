@@ -4,8 +4,10 @@ from appium.webdriver.common.appiumby import By
 
 capabilities = dict(
     platformName='android',
-    # automationName='uiautomator2',
-    deviceName='dbe407da',
+    automationName='uiautomator2',
+    # deviceName='dbe407da',
+    deviceName='192.168.3.236:5555',
+    uiautomator2ServerInstallTimeout=30000,  # Увеличьте таймаут
     # appPackage='com.l1inc.yamatrack3d',
     # language='en',
     # locale='US'
