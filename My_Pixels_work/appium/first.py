@@ -1,7 +1,11 @@
+import os
 import time
 import unittest
 from appium import webdriver
 from appium.webdriver.common.appiumby import By
+
+
+os.system(f'adb connect 192.168.3.221')
 
 capabilities = dict(
     platformName='android',
@@ -12,8 +16,14 @@ capabilities = dict(
 driver = webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_capabilities=capabilities)
 driver.implicitly_wait(10)
 
-driver.find_element(By.ID, 'com.l1inc.yamatrack3d:id/buttonMenu').click()
-print("CLICK BUTTON MENU")
+
+os.system('adb shell am start -a android.settings.DATE_SETTINGS')
+
+
+
+# button_menu = driver.find_element(By.ID, 'com.l1inc.yamatrack3d:id/buttonMenu')
+# button_menu.click()
+# print("CLICK BUTTON MENU")
 
 
 # driver.find_element(By.ID, 'com.l1inc.yamatrack3d:id/linearLayoutSettings').click()
