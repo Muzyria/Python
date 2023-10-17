@@ -1,6 +1,6 @@
 import pytest
 from appium import webdriver
-from appium.webdriver.common.mobileby import MobileBy
+from appium.webdriver.common.mobileby import AppiumBy
 
 capabilities = {
     'platformName': 'android',
@@ -17,5 +17,5 @@ def appium_driver():
     driver.quit()
 
 def test_find_battery(appium_driver):
-    el = appium_driver.find_element(by=MobileBy.ID, value='com.l1inc.yamatrack3d:id/buttonMenu')
+    el = appium_driver.find_element(by=AppiumBy.ID, value='com.l1inc.yamatrack3d:id/buttonMenu')
     el.click()
