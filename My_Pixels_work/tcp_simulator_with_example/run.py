@@ -1,5 +1,5 @@
 import os
-
+from threading import Thread
 
 PATH = fr"C:\Program Files\Java\jre-1.8\bin\java.exe"
 
@@ -8,6 +8,24 @@ PATH = fr"C:\Program Files\Java\jre-1.8\bin\java.exe"
 
 os.system(fr'java -jar syncwise-tcp-simulator-0.6.jar --help')
 
-os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env live --request-type utilitygauge --device S10150000211018050 --limit 10')
 
 
+# os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 10 -i 0')
+
+
+def first_fun():
+    print('First GO')
+    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env live --request-type utilitygauge --device S10150000211018049 --limit 10 -i 0')
+    print('First have DONE')
+
+
+def second_fun():
+    print('Second GO')
+    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env live --request-type utilitygauge --device L10116001811250A52 --limit 10 -i 0')
+    print('Second have DONE')
+
+
+th1 = Thread(target=first_fun)
+th1.start()
+th2 = Thread(target=second_fun)
+th2.start()
