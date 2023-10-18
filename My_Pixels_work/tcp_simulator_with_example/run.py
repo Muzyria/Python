@@ -8,6 +8,6 @@ PATH = fr"C:\Program Files\Java\jre-1.8\bin\java.exe"
 
 os.system(fr'java -jar syncwise-tcp-simulator-0.6.jar --help')
 
-os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 2')
+os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env live --request-type utilitygauge --device S10150000211018050 --limit 10')
 
 
