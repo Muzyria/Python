@@ -16,13 +16,13 @@ os.system(fr'java -jar syncwise-tcp-simulator-0.6.jar --help')
 def first_fun():
     print('First GO')
     os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env live --request-type utilitygauge --device S10150000211018049 --limit 10 -i 0')
-    print('First have DONE')
+    print('First has DONE')
 
 
 def second_fun():
     print('Second GO')
     os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env live --request-type utilitygauge --device L10116001811250A52 --limit 10 -i 0')
-    print('Second have DONE')
+    print('Second has DONE')
 
 
 th1 = Thread(target=first_fun)
