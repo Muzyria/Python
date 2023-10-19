@@ -16,7 +16,7 @@ os.system(fr'java -jar syncwise-tcp-simulator-0.6.jar --help')
 
 
 for _ in range(1):
-    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -sc utilitygauge_2.csv -env dev --request-type utilitygauge --device S10150000211018049 --limit 1 -i 0')
+    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -sc utilitygauge_2.csv -env dev --request-type utilitygauge --device S10150000211018049 --limit 100 -i 0')
 
 
 def first_fun():

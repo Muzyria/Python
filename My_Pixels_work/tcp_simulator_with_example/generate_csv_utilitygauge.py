@@ -20,7 +20,7 @@ header = ["id", "deviceid", "date_recorded", "epochtime", "ugaugereporttype", "i
 data = {'id': '61328', 'deviceid': 'S10150000211018049', 'date_recorded': '1.71E+11', 'epochtime': '1511999433',
          'ugaugereporttype': '3', 'inputvolt': '11.8', 'battpackvolt': 'NULL', 'alt': 'NULL', 'calfixstatus': '0',
          'hdop': 'NULL', 'headingdirection': 'NULL', 'gpsaccuracy': 'NULL', 'gpsspeed': 'NULL', 'gpsstatus': 'NULL',
-         'lat': '3310.061294', 'lon': '-11709.517005', 'lostfixtime': 'NULL', 'numbersat': 'NULL', 'rssi': '-70',
+         'lat': '5004.670665', 'lon': '3613.827855', 'lostfixtime': 'NULL', 'numbersat': 'NULL', 'rssi': '-70',
          'serialcode': '53', 'serialreportflag': '1', 'serialparam00': '2', 'serialparam01': '100',
          'serialparam02': 'NULL', 'serialparam03': 'NULL', 'serialparam04': 'NULL', 'serialparam05': 'NULL',
          'serialparam06': 'NULL', 'serialparam07': 'NULL', 'serialparam08': 'NULL', 'serialparam09': '0',
@@ -49,8 +49,8 @@ with open(filename, mode='w', newline='') as file:
 
     # Запись данных
     for i in range(100):
-        lat = data['lat'][:-3] + str(random.randint(100, 200))
-        lon = data['lon'][:-3] + str(random.randint(100, 200))
+        lat = data['lat'][:-5] + str(random.randint(0, 99999)).zfill(5)
+        lon = data['lon'][:-5] + str(random.randint(0, 99999)).zfill(5)
         print(lat, lon)
         data['lat'], data['lon'] = lat, lon
         data['id'] = i
