@@ -21,19 +21,19 @@ def first_fun():
 
 def second_fun():
     print('Second GO')
-    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env dev --request-type utilitygauge --device L10116001811250A52 --limit 15 -i 0')
+    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 15 -i 0')
     print('Second has DONE')
 
 
 def third_fun():
     print('Third GO')
-    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env dev --request-type utilitygauge --device S10115002211180009 --limit 15 -i 0')
+    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 15 -i 0')
     print('Third has DONE')
 
 
 def fourth_fun():
     print('Fourth GO')
-    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env dev --request-type utilitygauge --device S10150000211018050 --limit 15 -i 0')
+    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.6.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 15 -i 0')
     print('Fourth has DONE')
 
 
