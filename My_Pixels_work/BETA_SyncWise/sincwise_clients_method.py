@@ -224,11 +224,13 @@ test_1.course_geofence_create('QWE5555', [
     }
   ])
 
+
+
 # test_1.course_geofence_list()
 # print(test_1.COURSE_GEOFENCE_LIST)
-
+#
 # test_1.course_vector_details()
-# # print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
+# print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 # print(test_1.COURSE_VECTOR_DETAILS)
 # print(test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR)
 
