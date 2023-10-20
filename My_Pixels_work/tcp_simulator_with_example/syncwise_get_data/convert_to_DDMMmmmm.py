@@ -18,7 +18,8 @@ def convert_lat_lng_to_ddmm(lat_lng):
 
     return f'{int(degrees)}{minutes}'
 
-for item in c:
+
+def get_new_DDDDmmmm_formate(item):
     lat, lng = item.split(',')
     result = convert_lat_lng_to_ddmm(lat) + ',' + convert_lat_lng_to_ddmm(lng)
-    print(result)
+    return result
