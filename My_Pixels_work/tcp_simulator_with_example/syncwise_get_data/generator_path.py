@@ -25,11 +25,9 @@ class IntermediateCoordinatesGenerator:
     PATH_LIST_HOLES = None
 
     def __init__(self):
-
         self.client_data = SyncwiseClient("https://api2.syncwise360.com")
         self.client_data.user_account_login()
         self.client_data.course_vector_details()
-        # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
         self.last_coordinate = None
 
 
@@ -40,11 +38,10 @@ class IntermediateCoordinatesGenerator:
         for _ in range(steps):  # start coordinate for begin192.168
             time_minute = datetime.now().time().minute
 
-            for ip_device in self.DICT_IP_DEVICES.values():
-                lat, lng = self.START_COORDINATES[0]['lat'], self.START_COORDINATES[0]['lng']
-                print(f'step -> {lat}, {lng}')
+            lat, lng = self.START_COORDINATES[0]['lat'], self.START_COORDINATES[0]['lng']
+            print(f'step -> {lat}, {lng}')
 
-            self.last_coordinate = self.START_COORDINATES
+        self.last_coordinate = self.START_COORDINATES
 
 
 
@@ -80,18 +77,14 @@ class IntermediateCoordinatesGenerator:
         for step_patch in self.get_intermediate_coordinates(path, steps):
             lat, lng = step_patch['lat'], step_patch['lng']
             print(f'step -> {lat}, {lng}')
-            time_minute = datetime.now().time().minute
+
 
 
     def run_device_by_time(self, minutes):  #  генераци нахождения на лунке по времени
-        steps = int(minutes * 30)
-        time_on_hole = None  # Declare the variable outside the loop
+        steps = int(minutes * 60)
+
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
-            time_start_on_hole = datetime.now()
-            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-4)
-            time_minute = datetime.now().time().minute
-            print(f'STARTING TRIP ON HOLE ---> {i} in {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}')
 
             for step_patch in (current_patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps)):
                 lat, lng = step_patch['lat'], step_patch['lng']
