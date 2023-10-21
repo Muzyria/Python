@@ -38,7 +38,7 @@ data = {'id': '61328', 'deviceid': 'S10150000211018049', 'date_recorded': '1.71E
 
 
 # Имя файла
-filename = 'utilitygauge_2.csv'
+filename = '../utilitygauge_2.csv'
 
 
 def write_utilitygauge_2_csv(list_coordinate):
@@ -58,7 +58,7 @@ def write_utilitygauge_2_csv(list_coordinate):
 
             writer.writerow(data)
 
-    print(f'CSV файл "{filename}" успешно создан.')
+    print(f'CSV файл "{filename}" успешно создан. файл содержиит {len(list_coordinate)} строк')
 
 
 def write_utilitygauge_2_csv_with_random():

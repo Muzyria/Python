@@ -1,7 +1,7 @@
 from sincwise_clients_method import SyncwiseClient
 import time
 from convert_to_DDMMmmmm import get_new_DDDDmmmm_formate
-
+from generate_csv_utilitygauge import write_utilitygauge_2_csv
 
 def execution_time_decorator(func):
     def wrapper(*args, **kwargs):
@@ -32,7 +32,7 @@ class IntermediateCoordinatesGenerator:
         for _ in range(steps):  # start coordinate for begin
             lat, lng = self.START_COORDINATES[0]['lat'], self.START_COORDINATES[0]['lng']
             self.PATH_LIST_HOLES_COORDINATES.append(get_new_DDDDmmmm_formate(f'{lat},{lng}'))
-            print(f'step -> {lat}, {lng}')
+            print(f'step By get_start_coordinates -> {lat}, {lng}')
 
         self.last_coordinate = self.START_COORDINATES
 
@@ -102,4 +102,5 @@ generator.get_start_coordinates(0.1)
 
 
 print("Everything has gone well.".upper())
-# generate_csv_utilitygauge.write_utilitygauge_2_csv(generator.PATH_LIST_HOLES_COORDINATES)
+print(f'TOTAL STEPS - {len(generator.PATH_LIST_HOLES_COORDINATES)}')
+write_utilitygauge_2_csv(generator.PATH_LIST_HOLES_COORDINATES)
