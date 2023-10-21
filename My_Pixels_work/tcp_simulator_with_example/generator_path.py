@@ -66,6 +66,7 @@ class IntermediateCoordinatesGenerator:
         for step_patch in (current_patch := self.get_intermediate_coordinates(path, steps)):
             lat, lng = step_patch['lat'], step_patch['lng']
             print(f'step By run_device_last_step_to_next_point -> {lat}, {lng}')
+            self.PATH_LIST_HOLES_COORDINATES.append(get_new_DDDDmmmm_formate(f'{lat},{lng}'))
         self.last_coordinate = [current_patch[-1]]
 
     def run_device_by_time(self, minutes):  #  генераци нахождения на лунке по времени
@@ -75,6 +76,7 @@ class IntermediateCoordinatesGenerator:
             for step_patch in (current_patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps)):
                 lat, lng = step_patch['lat'], step_patch['lng']
                 print(f'step By run_device_by_time -> ON HOLE ({i}) -> {lat}, {lng}')
+                self.PATH_LIST_HOLES_COORDINATES.append(get_new_DDDDmmmm_formate(f'{lat},{lng}'))
             self.last_coordinate = [current_patch[-1]]
 
 
@@ -89,16 +91,15 @@ class IntermediateCoordinatesGenerator:
         self.run_device_last_step_to_next_point([self.last_coordinate[0], self.START_COORDINATES[0]], minutes)
 
 
+
+
 generator = IntermediateCoordinatesGenerator()
 
 generator.get_start_coordinates(0.1)
-
-# print(generator.PATH_LIST_HOLES_COORDINATES)
-
 generator.run_device_by_time(0.1)
-
 generator.run_device_from_last_hole_to_start_coordinate(0.1)
-# generator.get_start_coordinates(0.1)
+generator.get_start_coordinates(0.1)
 
 
 print("Everything has gone well.".upper())
+# generate_csv_utilitygauge.write_utilitygauge_2_csv(generator.PATH_LIST_HOLES_COORDINATES)

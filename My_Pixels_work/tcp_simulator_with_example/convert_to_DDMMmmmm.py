@@ -6,6 +6,7 @@
 #     ]
 c = ['50.079514046962544, 36.22933503792094']
 
+
 def convert_lat_lng_to_ddmm(lat_lng):
     degrees = int(float(lat_lng))
     hours = float(lat_lng) - degrees

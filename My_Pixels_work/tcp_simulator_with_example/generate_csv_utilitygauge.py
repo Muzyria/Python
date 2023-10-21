@@ -40,21 +40,46 @@ data = {'id': '61328', 'deviceid': 'S10150000211018049', 'date_recorded': '1.71E
 # Имя файла
 filename = 'utilitygauge_2.csv'
 
-# Запись заголовка и данных в CSV файл
-with open(filename, mode='w', newline='') as file:
-    writer = csv.DictWriter(file, fieldnames=header)
 
-    # Запись заголовка
-    writer.writeheader()
+def write_utilitygauge_2_csv(list_coordinate):
+    # Запись заголовка и данных в CSV файл
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=header)
 
-    # Запись данных
-    for i in range(100):
-        lat = data['lat'][:-5] + str(random.randint(0, 99999)).zfill(5)
-        lon = data['lon'][:-5] + str(random.randint(0, 99999)).zfill(5)
-        print(lat, lon)
-        data['lat'], data['lon'] = lat, lon
-        data['id'] = i
+        # Запись заголовка
+        writer.writeheader()
 
-        writer.writerow(data)
+        # Запись данных
+        for item in list_coordinate:
+            lat, lon = item.split(',')
+            print(lat, lon)
+            data['lat'], data['lon'] = lat, lon
+            data['id'] = item
 
-print(f'CSV файл "{filename}" успешно создан.')
+            writer.writerow(data)
+
+    print(f'CSV файл "{filename}" успешно создан.')
+
+
+def write_utilitygauge_2_csv_with_random():
+    # Запись заголовка и данных в CSV файл
+    with open(filename, mode='w', newline='') as file:
+        writer = csv.DictWriter(file, fieldnames=header)
+
+        # Запись заголовка
+        writer.writeheader()
+
+        # Запись данных
+        for i in range(10):
+            lat = data['lat'][:-5] + str(random.randint(0, 99999)).zfill(5)
+            lon = data['lon'][:-5] + str(random.randint(0, 99999)).zfill(5)
+            print(lat, lon)
+            data['lat'], data['lon'] = lat, lon
+            data['id'] = i
+
+            writer.writerow(data)
+
+    print(f'CSV файл "{filename}" успешно создан.')
+
+
+# write_utilitygauge_2_csv(['5004.684711,3613.839093', '5004.684711,3613.839093'])
