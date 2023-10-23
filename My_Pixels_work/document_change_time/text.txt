@@ -1,85 +1,63 @@
-*Date: 08.22.23
-OS Build: 2.14.2_E
+*Date: 10.23.23
+OS Build: 2.54.0
 APK Build: 2.1.77
 Environment: Live
 Cable FW Build:
-Device(s): YTR
-Device ID: S10150000211018049
+Device(s): YTX
+Device ID: L10116001811250A52
 Test Location: Office
-UUA : 1.4.1
-MB: 1.5*
+UUA : 1.4.1*
 
-*%{background:yellow}All test cases passed with expected behavior%*
 
-*Preconditions*
-* Within 360 create/update a cart-barn geofence and hole for test setup *Confirmed*
-* Allow time for geofences to sync and save on tablet *Confirmed*
-* Assign tablet to course (make sure 360 matches APK environment: dev v. live) *Confirmed*
-* Confirm device setting option appears in 360 > YamaTrack Module > Course Set Up *Confirmed*
 
-Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
+*%{Background:yellow}All cases passed with expected results for Authorized and Unauthorized NFC tag%*
 
-*%{background:yellow}DC Full Controller%*
+h2. Preconditions
 
-*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
-*CASE A:*
-- Complete Case A over Cell *Cell only*
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 10:51*
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
-3. Confirm if device wakes up from all types of sleep via MOTION
-   - Standby *Confirmed 11:14*
-   - Cart-barn *Confirmed 10:56*
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+* Obtain two security bypass NFC cards/tags (one authorized and one unauthorized) for use in this test plan
+** +NFC ID: *Confirmed*+
 
-*CASE B:*
-- Complete Case B over WIFI *WiFi only*
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed 11:13*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 11:24*
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
-4. Confirm device ONLY wakes up from sleep mode via TOUCH
-   - Standby *Confirmed 11:45*
-   - Cart-barn *Confirmed 11:28*
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 11:41*
-6. Place tablet into Cart Barn sleep *CBS 11:51*
-- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
-7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+h2. Test Cases
 
-*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*
-*CASE A:*
-- Complete Case A over Cell *Cell only*
-1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 11:55*
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
-3. Confirm if device wakes up from all types of sleep via MOTION
-   - Standby *Confirmed 12:11*
-   - Cart-barn *Confirmed 12:01*
-4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+h3. General Check
 
-*CASE B:*
-- Complete Case B over WIFI *WiFi only*
-1. Select WAKE UP VIA TOUCH in 360 *Confirmed  12:14*
-2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 12:17*
-- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
-3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
-4. Confirm device ONLY wakes up from sleep mode via TOUCH
-   - Standby *Confirmed 12:38*
-   - Cart-barn *Confirmed 12:31*
-5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 12:41*
-6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 12:44*
-- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
-8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
+*MANUAL*
+# Enter the Play Golf Screen > Menu > Settings menu and confirm code prompt appears *Confirmed 19:02*
+# Enter code and confirm code prompt disappears and access is now granted *Confirmed 19:02*
+# From the Settings menu, select Exit Application and confirm exit by selecting YES *Select 19:02*
+# Select the File Manager app and confirm password prompt appears *Confirmed 19:03*
+# Enter the password and confirm password prompt disappears and access is now granted *Confirmed 19:04*
+# Hold power button (red cap-touch button) until password prompt appears *Confirmed 19:04*
+# Enter the password and confirm password prompt disappears and access is now granted *Confirmed 19:04*
 
-*CASE C:*
-- Complete once over cell, then once over WIFI *WiFi only*
-1. Place device into cart barn sleep *CBS 12:59*
-2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
-3. Wait 5+ min. *Confirmed*
-4. Confirm device will   wake by Motion/Touch *Confirmed 13:01*
-- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
-5. Repeat step 1-3 *Confirmed*
-6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 13:30*
-7. Confirm tablet wakes up automatically *Confirmed*
-- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*
+*Authorized NFC tag*
+# Start in BIOS mode *Skip (not implemented)*
+# Enter Test Menu *Skip (not implemented)*
+# Run NFC test and follow onscreen instructions (+NOTE:+ NFC reader should be on the left side of the device when facing the screen) *Skip (not implemented)*
+# Confirm tablet NFC hardware is working properly via passed test *Skip (not implemented)*
+# Exit Test Menu, start tablet normally and allow loading of Play Golf screen *Boot to Android 19:26*
+# Enter the Play Golf Screen > Menu > Settings menu and confirm code prompt appears *Confirmed 19:26*
+# Apply NFC card/tag to tablet NFC reader and confirm code prompt disappears and access is now granted *Confirmed 19:27*
+# From the Settings menu, select Exit Application and confirm exit by selecting YES *Select YES 19:27*
+# Select the File Manager app and confirm password prompt appears *Confirmed 19:28*
+# Apply NFC card/tag to tablet NFC reader and confirm password prompt disappears and access is now granted *Confirmed 19:29*
+# Hold power button (red cap-touch button) until password prompt appears *Confirmed 19:29*
+# Apply NFC card/tag to tablet NFC reader and confirm password prompt disappears and access is now granted *Confirmed 19:29*
+# Select Android Settings icon and confirm password prompt appears *Confirmed 19:29*
+# Apply NFC card/tag to tablet NFC reader and confirm password prompt disappears and access is now granted *Confirmed 19:30*
+
+*Unauthorized NFC tag*
+# Start in BIOS mode *Skip (not implemented)*
+# Enter Test Menu *Skip (not implemented)*
+# Run NFC test and follow onscreen instructions (NOTE: NFC reader should be on the left side of the device when facing the screen) *Skip (not implemented)*
+# Confirm tablet NFC hardware is working properly via passed test *Skip (not implemented)*
+# Exit Test Menu, start tablet normally and allow loading of Play Golf screen *Boot to Android 19:30*
+# Enter the Play Golf Screen > Menu > Settings menu and confirm code prompt appears *Confirmed 19:31*
+# Apply NFC card/tag to tablet NFC reader and confirm Error appears *Confirmed 19:31*
+# From the Settings menu, select Exit Application and confirm exit by selecting YES *Select YES 19:31*
+# Select the File Manager app and confirm password prompt appears *Confirmed 19:31*
+# Apply NFC card/tag to tablet NFC reader and confirm Error prompt appears *Confirmed 19:31*
+# Hold power button (red cap-touch button) until password prompt appears *Confirmed 19:32*
+# Apply NFC card/tag to tablet NFC reader and confirm Error prompt appears *Confirmed 19:32*
+# Select Android Settings icon and confirm password prompt appears *Confirmed 19:32*
+# Apply NFC card/tag to tablet NFC reader and confirm Error prompt appears *Confirmed 19:32*
