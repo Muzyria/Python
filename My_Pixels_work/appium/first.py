@@ -45,6 +45,11 @@ time.sleep(5)
 
 ok_button = driver.find_element(By.ID, 'android:id/button1').click()
 
+
+
+
+
+
 # button_menu = driver.find_element(By.ID, 'com.l1inc.yamatrack3d:id/buttonMenu')
 # button_menu.click()
 # print("CLICK BUTTON MENU")
