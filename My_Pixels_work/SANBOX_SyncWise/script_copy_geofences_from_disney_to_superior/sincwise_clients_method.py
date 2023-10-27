@@ -39,8 +39,8 @@ class SyncwiseClient(SyncwiseAPI):
         url = f"{self.host}/rest/action/{self.create_url_test_with_public()}"
 
         payload = json.dumps({
-            "username": "igorperetssuperior",
-            "password": "Qwerty01!"
+            "username": self.username,
+            "password": self.password
         })
         headers = {
             'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
@@ -329,16 +329,14 @@ class SyncwiseClient(SyncwiseAPI):
 
 
 
+test_1 = SyncwiseClient("https://dev-api.syncwise360.com", 'igorperetssuperior', 'Qwerty01!')
+test_1.user_account_login()
 
+print('SECRET KEY ->', end=' ')
+print(test_1.SECRET_KEY)
 
-test_1 = SyncwiseClient("https://dev-api.syncwise360.com")
-# test_1.user_account_login()
-#
-# print('SECRET KEY ->', end=' ')
-# print(test_1.SECRET_KEY)
-#
-# test_1.course_geofence_list()
-# print(test_1.COURSE_GEOFENCE_LIST)
+test_1.course_geofence_list()
+print(test_1.COURSE_GEOFENCE_LIST)
 
 # print(test_1.COURSE_GEOFENCE_LIST["resultList"])
 
