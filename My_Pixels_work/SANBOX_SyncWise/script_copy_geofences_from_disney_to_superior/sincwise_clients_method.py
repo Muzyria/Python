@@ -26,6 +26,10 @@ class SyncwiseClient(SyncwiseAPI):
     #
     COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH = {}  # Special format for DEVICE GET or SENS COORDINATES - centralpatch
 
+    def __init__(self, host, username, password):
+        super().__init__(host)  # Вызываем конструктор родительского класса
+        self.username = username
+        self.password = password
 
     # PUBLIC
     def user_account_login(self):
@@ -328,13 +332,14 @@ class SyncwiseClient(SyncwiseAPI):
 
 
 test_1 = SyncwiseClient("https://dev-api.syncwise360.com")
-test_1.user_account_login()
+# test_1.user_account_login()
+#
+# print('SECRET KEY ->', end=' ')
+# print(test_1.SECRET_KEY)
+#
+# test_1.course_geofence_list()
+# print(test_1.COURSE_GEOFENCE_LIST)
 
-print('SECRET KEY ->', end=' ')
-print(test_1.SECRET_KEY)
-
-test_1.course_geofence_list()
-print(test_1.COURSE_GEOFENCE_LIST)
 # print(test_1.COURSE_GEOFENCE_LIST["resultList"])
 
 
