@@ -329,31 +329,34 @@ class SyncwiseClient(SyncwiseAPI):
         print(response.text)
 
 
-
-
-dev_url = 'https://dev-api.syncwise360.com'
-live_url = 'https://api2.syncwise360.com'
-
-
-# id_course = {'superior': 'xqrRgFzOAmmP',
-#              'disney': 'f1wKXtcAgZ1n'}
-
-payloads_dev = {'superior': {
+payloads_live = {'superior': {
+                    "host": "https://api2.syncwise360.com",
                     "username": "igorperetssuperior",
                     "password": "Qwerty01!",
-                    "id_company": 2973,
-                    "id_course": "xqrRgFzOAmmP"
+                    "id_company": "4442",
+                    "id_course": "KoyhA-zWt6os"
                         },
-            'disney': {
+                'disney': {
+                    "host": "https://api2.syncwise360.com",
                     "username": "SyncwiseDisney",
                     "password": "92108340",
-                    "id_company": "",
-                    "id_course": ""
+                    "id_company": "4820",
+                    "id_course": "f1wKXtcAgZ1n"
                         }
-            }
+                }
 
-# test_1 = SyncwiseClient("https://dev-api.syncwise360.com", 'igorperetssuperior', 'Qwerty01!', 2973)
-test_1 = SyncwiseClient("https://dev-api.syncwise360.com", **payloads_dev['superior'])
+
+payloads_dev = {'superior': {
+                    "host": "https://dev-api.syncwise360.com",
+                    "username": "igorperetssuperior",
+                    "password": "Qwerty01!",
+                    "id_company": "2973",
+                    "id_course": "xqrRgFzOAmmP"
+                        },
+                }
+
+
+test_1 = SyncwiseClient(**payloads_live['disney'])
 test_1.user_account_login()
 
 print('SECRET KEY ->', end=' ')
