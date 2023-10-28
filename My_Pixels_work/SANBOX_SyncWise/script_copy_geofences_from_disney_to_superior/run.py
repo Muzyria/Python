@@ -2,6 +2,7 @@ from sincwise_clients_method import SyncwiseClient
 
 payloads_live = {'superior': {
                     "host": "https://api2.syncwise360.com",
+                    "url": "https://beta.syncwise360.com/",
                     "username": "igorperetssuperior",
                     "password": "Qwerty01!",
                     "id_company": "4442",
@@ -9,6 +10,7 @@ payloads_live = {'superior': {
                         },
                 'disney': {
                     "host": "https://api2.syncwise360.com",
+                    "url": "https://beta.syncwise360.com/",
                     "username": "SyncwiseDisney",
                     "password": "92108340",
                     "id_company": "4820",
@@ -19,6 +21,7 @@ payloads_live = {'superior': {
 
 payloads_dev = {'superior': {
                     "host": "https://dev-api.syncwise360.com",
+                    "url": "https://sandbox.syncwise360.com",
                     "username": "igorperetssuperior",
                     "password": "Qwerty01!",
                     "id_company": "2973",
