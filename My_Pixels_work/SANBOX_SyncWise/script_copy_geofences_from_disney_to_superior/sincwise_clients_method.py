@@ -94,6 +94,37 @@ class SyncwiseClient(SyncwiseAPI):
         #
         # print(poligone_list)
 
+    # PRIVATE
+    def course_geofence_details(self, id_geofence):
+        """Get course geofence details"""
+        action = "CourseGeofenceDetails"
+        url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
+        payload = json.dumps({
+            "id_geofence": id_geofence
+        })
+        headers = {
+            'authority': self.host,
+            'accept': '*/*',
+            'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
+            'content-type': 'application/json',
+            'origin': self.url,
+            'referer': self.url,
+            'sec-ch-ua': '"Chromium";v="118", "Google Chrome";v="118", "Not=A?Brand";v="99"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
+            'x-access-token': 'oHHw9yOaplcl7DQLCiAdIRDsoNJ2JWHEhgDluvlPrlZeLE1jSNXc4Sha_hnQ'
+        }
+
+        response = requests.request("POST", url, headers=headers, data=payload)
+        print(response.text)
+        data = response.json()
+        return data
+
+    # PRIVATE
     def course_vector_details(self):
         """
         Get course vector details
@@ -266,6 +297,17 @@ class SyncwiseClient(SyncwiseAPI):
         response = requests.request("POST", url, headers=headers, data=payload, files=files)
         print(response.text)
 
+    def course_geofence_advertisement_download_file(self, name, image_url):
+        """Отправить GET-запрос для загрузки изображения"""
+        response = requests.get(image_url)
+        if response.status_code == 200:
+            # Открыть файл для записи в бинарном режиме
+            with open(f"downloaded_images/{name}.jpg", "wb") as file:
+                # Записать полученные данные в файл
+                file.write(response.content)
+            print("Изображение успешно скачано")
+        else:
+            print("Ошибка при скачивании изображения. Код статуса:", response.status_code)
 
     def course_geofence_advertisement_type_turn_off(self, id_geofence):
         # url = "https://dev-api.syncwise360.com/rest/action/CourseGeofenceUpdate/FVyzsVqr-BmP280/QA/1.0/2.0/HmacSHA256/jfC2MNAcNijykJPGY9Bytb_ZZEgS_tt_9k2EXFy3zF0/230830155134+0300/JSON"
@@ -367,7 +409,15 @@ print('SECRET KEY ->', end=' ')
 print(test_1.SECRET_KEY)
 
 test_1.course_geofence_list()
-print(test_1.COURSE_GEOFENCE_LIST)
+# print(test_1.COURSE_GEOFENCE_LIST)
+for item in test_1.COURSE_GEOFENCE_LIST['resultList']:
+    if item['id_geofenceType'] == 17:
+        print(id_geofence := item['id_geofence'])
+        data_url_image = test_1.course_geofence_details(id_geofence)
+        print(data_url_image["adsImage"])
+        test_1.course_geofence_advertisement_download_file(id_geofence, data_url_image["adsImage"])
+
+
 
 # print(test_1.COURSE_GEOFENCE_LIST["resultList"])
 
