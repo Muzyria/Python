@@ -485,7 +485,7 @@ geofence = [
 ]
 
 
-test_1.course_geofence_advertisement_type_create("12345", "34391.jpg", geofence)
+
 
 # for number in range(1, 331):
 #     # Генерировать случайный центр в заданных границах квадрата
