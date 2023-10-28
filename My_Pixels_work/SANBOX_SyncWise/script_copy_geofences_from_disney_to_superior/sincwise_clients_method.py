@@ -26,8 +26,9 @@ class SyncwiseClient(SyncwiseAPI):
     #
     COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH = {}  # Special format for DEVICE GET or SENS COORDINATES - centralpatch
 
-    def __init__(self, host, username, password, id_company, id_course):
+    def __init__(self, host, url, username, password, id_company, id_course):
         super().__init__(host, username)  # Вызываем конструктор родительского класса
+        self.url = url
         self.password = password
         self.id_company = id_company
         self.id_course = id_course
@@ -47,7 +48,7 @@ class SyncwiseClient(SyncwiseAPI):
             'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
             'Accept': '*/*',
             'Content-Type': 'application/json',
-            'Referer': 'https://sandbox.syncwise360.com/',
+            'Referer': self.url,
             'sec-ch-ua-mobile': '?0',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
             'sec-ch-ua-platform': '"Windows"'
@@ -75,7 +76,7 @@ class SyncwiseClient(SyncwiseAPI):
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
             'Content-Type': 'application/json',
             'Accept': '*/*',
-            'Referer': 'https://sandbox.syncwise360.com/',
+            'Referer': self.url,
             'x-access-token': '72Y8ItBOOQT2S2u41cosMWw_hSjrpOreSND8N9iRaoO1B3k3wmUPA7dxt3yb',
             'sec-ch-ua-platform': '"Windows"'
         }
@@ -100,15 +101,15 @@ class SyncwiseClient(SyncwiseAPI):
         action = "CourseVectorDetails"
         url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
         payload = json.dumps({
-            "id_course": "xqrRgFzOAmmP"
+            "id_course": self.id_course
         })
         headers = {
-            'authority': 'dev-api.syncwise360.com',
+            'authority': self.host,
             'accept': '*/*',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'content-type': 'application/json',
-            'origin': 'https://sandbox.syncwise360.com',
-            'referer': 'https://sandbox.syncwise360.com/',
+            'origin': self.url,
+            'referer': self.url,
             'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -183,12 +184,12 @@ class SyncwiseClient(SyncwiseAPI):
             "defaultMessage": 1
         })
         headers = {
-            'authority': 'dev-api.syncwise360.com',
+            'authority': self.host,
             'accept': '*/*',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'content-type': 'application/json',
-            'origin': 'https://sandbox.syncwise360.com',
-            'referer': 'https://sandbox.syncwise360.com/',
+            'origin': self.url,
+            'referer': self.url,
             'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -248,11 +249,11 @@ class SyncwiseClient(SyncwiseAPI):
         files = [('file', ('image.jpg', open('image_2.jpg', 'rb'), 'image/jpeg'))]
 
         headers = {
-            'authority': 'dev-api.syncwise360.com',
+            'authority': self.host,
             'accept': 'application/json',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
-            'origin': 'https://sandbox.syncwise360.com',
-            'referer': 'https://sandbox.syncwise360.com/',
+            'origin': self.url,
+            'referer': self.url,
             'sec-ch-ua': '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -277,12 +278,12 @@ class SyncwiseClient(SyncwiseAPI):
             "status": 0
         })
         headers = {
-            'authority': 'dev-api.syncwise360.com',
+            'authority': self.host,
             'accept': '*/*',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'content-type': 'application/json',
-            'origin': 'https://sandbox.syncwise360.com',
-            'referer': 'https://sandbox.syncwise360.com/',
+            'origin':self.url,
+            'referer': self.url,
             'sec-ch-ua': '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -308,12 +309,12 @@ class SyncwiseClient(SyncwiseAPI):
             "active": 0
         })
         headers = {
-            'authority': 'dev-api.syncwise360.com',
+            'authority': self.host,
             'accept': '*/*',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'content-type': 'application/json',
-            'origin': 'https://sandbox.syncwise360.com',
-            'referer': 'https://sandbox.syncwise360.com/',
+            'origin': self.url,
+            'referer': self.url,
             'sec-ch-ua': '"Chromium";v="116", "Not)A;Brand";v="24", "Google Chrome";v="116"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -331,6 +332,7 @@ class SyncwiseClient(SyncwiseAPI):
 
 payloads_live = {'superior': {
                     "host": "https://api2.syncwise360.com",
+                    "url": "https://beta.syncwise360.com/",
                     "username": "igorperetssuperior",
                     "password": "Qwerty01!",
                     "id_company": "4442",
@@ -338,6 +340,7 @@ payloads_live = {'superior': {
                         },
                 'disney': {
                     "host": "https://api2.syncwise360.com",
+                    "url": "https://beta.syncwise360.com/",
                     "username": "SyncwiseDisney",
                     "password": "92108340",
                     "id_company": "4820",
@@ -348,6 +351,7 @@ payloads_live = {'superior': {
 
 payloads_dev = {'superior': {
                     "host": "https://dev-api.syncwise360.com",
+                    "url": "https://sandbox.syncwise360.com",
                     "username": "igorperetssuperior",
                     "password": "Qwerty01!",
                     "id_company": "2973",
@@ -356,7 +360,7 @@ payloads_dev = {'superior': {
                 }
 
 
-test_1 = SyncwiseClient(**payloads_live['disney'])
+test_1 = SyncwiseClient(**payloads_live['superior'])
 test_1.user_account_login()
 
 print('SECRET KEY ->', end=' ')
