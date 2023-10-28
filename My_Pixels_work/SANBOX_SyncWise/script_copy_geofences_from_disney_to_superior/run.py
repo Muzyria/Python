@@ -9,11 +9,13 @@ id_course = {'superior': 'xqrRgFzOAmmP',
 
 payloads = {'superior': {
                     "username": "igorperetssuperior",
-                    "password": "Qwerty01!"
+                    "password": "Qwerty01!",
+                    "id_company": 2973
                         },
             'disney': {
                     "username": "SyncwiseDisney",
-                    "password": "92108340"
+                    "password": "92108340",
+                    "id_company": 2973
                         }
             }
 

@@ -26,10 +26,11 @@ class SyncwiseClient(SyncwiseAPI):
     #
     COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH = {}  # Special format for DEVICE GET or SENS COORDINATES - centralpatch
 
-    def __init__(self, host, username, password):
-        super().__init__(host)  # Вызываем конструктор родительского класса
-        self.username = username
+    def __init__(self, host, username, password, id_company, id_course):
+        super().__init__(host, username)  # Вызываем конструктор родительского класса
         self.password = password
+        self.id_company = id_company
+        self.id_course = id_course
 
     # PUBLIC
     def user_account_login(self):
@@ -65,7 +66,7 @@ class SyncwiseClient(SyncwiseAPI):
         action = "CourseGeofenceList"
         url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
         payload = json.dumps({
-            "id_company": 2973,
+            "id_company": self.id_company,
             "active": 1
         })
         headers = {
@@ -329,7 +330,30 @@ class SyncwiseClient(SyncwiseAPI):
 
 
 
-test_1 = SyncwiseClient("https://dev-api.syncwise360.com", 'igorperetssuperior', 'Qwerty01!')
+
+dev_url = 'https://dev-api.syncwise360.com'
+live_url = 'https://api2.syncwise360.com'
+
+
+# id_course = {'superior': 'xqrRgFzOAmmP',
+#              'disney': 'f1wKXtcAgZ1n'}
+
+payloads_dev = {'superior': {
+                    "username": "igorperetssuperior",
+                    "password": "Qwerty01!",
+                    "id_company": 2973,
+                    "id_course": "xqrRgFzOAmmP"
+                        },
+            'disney': {
+                    "username": "SyncwiseDisney",
+                    "password": "92108340",
+                    "id_company": "",
+                    "id_course": ""
+                        }
+            }
+
+# test_1 = SyncwiseClient("https://dev-api.syncwise360.com", 'igorperetssuperior', 'Qwerty01!', 2973)
+test_1 = SyncwiseClient("https://dev-api.syncwise360.com", **payloads_dev['superior'])
 test_1.user_account_login()
 
 print('SECRET KEY ->', end=' ')

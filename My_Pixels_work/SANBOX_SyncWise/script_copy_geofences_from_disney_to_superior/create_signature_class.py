@@ -4,8 +4,9 @@ import base64
 import time
 
 class SyncwiseAPI:
-    def __init__(self, host):
+    def __init__(self, host, username):
         self.host = host
+        self.username = username
         self.SLASH = "/"
         self.APIVersion = "1.0"
         self.SignatureVersion = "2.0"
@@ -26,7 +27,7 @@ class SyncwiseAPI:
     def create_url_test_with_private(self, action, user_secret_key):
         application_api_key = "FVyzsVqr-BmP280"
         application_secret_key = "L4ccbyhS9xlDjd3vgnw_LZTqsrCvLO"
-        username = "igorperetssuperior"
+        username = self.username
 
         url = self.get_url_for_action(action, True, user_secret_key, username,
                                       application_api_key, application_secret_key)
