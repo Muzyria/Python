@@ -26,12 +26,13 @@ class SyncwiseClient(SyncwiseAPI):
     #
     COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH = {}  # Special format for DEVICE GET or SENS COORDINATES - centralpatch
 
-    def __init__(self, host, url, username, password, id_company, id_course):
+    def __init__(self, host, url, username, password, id_company, id_course, company_code):
         super().__init__(host, username)  # Вызываем конструктор родительского класса
         self.url = url
         self.password = password
         self.id_company = id_company
         self.id_course = id_course
+        self.company_code = company_code
 
     # PUBLIC
     def user_account_login(self):
@@ -254,7 +255,7 @@ class SyncwiseClient(SyncwiseAPI):
         random_lng = random.uniform(min_lng, max_lng)
         return {"lat": random_lat, "lng": random_lng}
 
-    def course_geofence_advertisement_type_create(self, name, coordinates=None):
+    def course_geofence_advertisement_type_create(self, name, file_name='image.jpg', coordinates=None):
         """
         Create course geofence advertisement type
         """
@@ -264,9 +265,9 @@ class SyncwiseClient(SyncwiseAPI):
         payload = {
             'request': json.dumps({
                 "fileType": "image/jpeg",
-                "companyCode": "DDg2_tDaqpk7",
+                "companyCode": self.company_code,
                 "active": 1,
-                "id_company": 2973,
+                "id_company": self.id_company,
                 "geofenceStatus": 1,
                 "visible": 1,
                 "id_geofenceType": 17,
@@ -277,7 +278,7 @@ class SyncwiseClient(SyncwiseAPI):
             }),
         }
 
-        files = [('file', ('image.jpg', open('image_2.jpg', 'rb'), 'image/jpeg'))]
+        files = [('file', (file_name, open(f'downloaded_images/{file_name}', 'rb'), 'image/jpeg'))]
 
         headers = {
             'authority': self.host,
@@ -378,16 +379,18 @@ payloads_live = {'superior': {
                     "username": "igorperetssuperior",
                     "password": "Qwerty01!",
                     "id_company": "4442",
-                    "id_course": "KoyhA-zWt6os"
-                        },
+                    "id_course": "KoyhA-zWt6os",
+                    "company_code": "HLxTfxrUaaI0"
+                             },
                 'disney': {
                     "host": "https://api2.syncwise360.com",
                     "url": "https://beta.syncwise360.com/",
                     "username": "SyncwiseDisney",
                     "password": "92108340",
                     "id_company": "4820",
-                    "id_course": "f1wKXtcAgZ1n"
-                        }
+                    "id_course": "f1wKXtcAgZ1n",
+                    "companyCode": ""
+                          }
                 }
 
 
@@ -397,8 +400,9 @@ payloads_dev = {'superior': {
                     "username": "igorperetssuperior",
                     "password": "Qwerty01!",
                     "id_company": "2973",
-                    "id_course": "xqrRgFzOAmmP"
-                        },
+                    "id_course": "xqrRgFzOAmmP",
+                    "companyCode":"DDg2_tDaqpk7"
+                            },
                 }
 
 
@@ -410,12 +414,12 @@ print(test_1.SECRET_KEY)
 
 test_1.course_geofence_list()
 # print(test_1.COURSE_GEOFENCE_LIST)
-for item in test_1.COURSE_GEOFENCE_LIST['resultList']:
-    if item['id_geofenceType'] == 17:
-        print(id_geofence := item['id_geofence'])
-        data_url_image = test_1.course_geofence_details(id_geofence)
-        print(data_url_image["adsImage"])
-        test_1.course_geofence_advertisement_download_file(id_geofence, data_url_image["adsImage"])
+# for item in test_1.COURSE_GEOFENCE_LIST['resultList']:
+#     if item['id_geofenceType'] == 17:
+#         print(id_geofence := item['id_geofence'])
+#         data_url_image = test_1.course_geofence_details(id_geofence)
+#         print(data_url_image["adsImage"])
+#         test_1.course_geofence_advertisement_download_file(id_geofence, data_url_image["adsImage"])
 
 
 
@@ -481,7 +485,7 @@ geofence = [
 ]
 
 
-
+test_1.course_geofence_advertisement_type_create("12345", "34391.jpg", geofence)
 
 # for number in range(1, 331):
 #     # Генерировать случайный центр в заданных границах квадрата
