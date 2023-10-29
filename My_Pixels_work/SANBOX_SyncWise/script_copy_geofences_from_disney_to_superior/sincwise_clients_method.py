@@ -236,6 +236,44 @@ class SyncwiseClient(SyncwiseAPI):
 
         print(response.text)
 
+    def course_geofence_pro_tips_create(self, coordinates, pro_tip_hole_number, pro_tip_message="PRO_TIP"):
+        """
+        Create course geofence ProTips
+        """
+        action = "CourseGeofenceCreate"
+        url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
+        payload = json.dumps({
+            "active": 1,
+            "status": 1,
+            "visible": 1,
+            "id_geofenceType": 15,
+            "id_company": self.id_company,
+            "name": f'Hole {pro_tip_hole_number} - Pro Tip',
+            "id_course": self.id_course,
+            "proTipHoleNumber": pro_tip_hole_number,
+            "proTipMessage": pro_tip_message + " HOLE " + str(pro_tip_hole_number),
+            "points": coordinates
+        })
+        headers = {
+            'authority': self.host,
+            'accept': '*/*',
+            'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
+            'content-type': 'application/json',
+            'origin': self.url,
+            'referer': self.url,
+            'sec-ch-ua': '"Chromium";v="118", "Google Chrome";v="118", "Not=A?Brand";v="99"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
+            'x-access-token': 'nkQiNRoRsVa0B-uxO79sw-1f82u0HVvIFFuPyKUD4IOPJscv-64lxFd2bufQ'
+        }
+
+        response = requests.request("POST", url, headers=headers, data=payload)
+
+        print(response.text)
 
     def move_geofence_to_square(self, geofence, target_square_center):
         # Вычислить смещение (разницу) между центрами
@@ -373,131 +411,149 @@ class SyncwiseClient(SyncwiseAPI):
         print(response.text)
 
 
-payloads_live = {'superior': {
-                    "host": "https://api2.syncwise360.com",
-                    "url": "https://beta.syncwise360.com/",
-                    "username": "igorperetssuperior",
-                    "password": "Qwerty01!",
-                    "id_company": "4442",
-                    "id_course": "KoyhA-zWt6os",
-                    "company_code": "HLxTfxrUaaI0"
-                             },
-                'disney': {
-                    "host": "https://api2.syncwise360.com",
-                    "url": "https://beta.syncwise360.com/",
-                    "username": "SyncwiseDisney",
-                    "password": "92108340",
-                    "id_company": "4820",
-                    "id_course": "f1wKXtcAgZ1n",
-                    "company_code": ""
-                          }
-                }
-
-
-payloads_dev = {'superior': {
-                    "host": "https://dev-api.syncwise360.com",
-                    "url": "https://sandbox.syncwise360.com",
-                    "username": "igorperetssuperior",
-                    "password": "Qwerty01!",
-                    "id_company": "2973",
-                    "id_course": "xqrRgFzOAmmP",
-                    "company_code": "DDg2_tDaqpk7"
-                            },
-                }
-
-
-test_1 = SyncwiseClient(**payloads_live['disney'])
-test_1.user_account_login()
-
-print('SECRET KEY ->', end=' ')
-print(test_1.SECRET_KEY)
-
-test_1.course_geofence_list()
-print(test_1.COURSE_GEOFENCE_LIST)
-
-type_geo = set()
-for item in test_1.COURSE_GEOFENCE_LIST['resultList']:
-    type_geo.add(item['id_geofenceType'])
-
-print(type_geo)
-#     if item['id_geofenceType'] == 17:
-#         print(id_geofence := item['id_geofence'])
-#         data_url_image = test_1.course_geofence_details(id_geofence)
-#         print(data_url_image["adsImage"])
-#         test_1.course_geofence_advertisement_download_file(id_geofence, data_url_image["adsImage"])
-
-
-
-# print(test_1.COURSE_GEOFENCE_LIST["resultList"])
-
-
-# for item in test_1.COURSE_GEOFENCE_LIST["resultList"]:
-#     if item["id_geofenceType"] == 10 and "regular_type" in item["name"]:
-#         print(f'{item["name"]} {item["id_geofence"]}')
-
-
-# adv_list = [item["id_geofence"] for item in test_1.COURSE_GEOFENCE_LIST["resultList"] if item["id_geofenceType"] == 10 and "regular_type" in item["name"]]
-    # if item["id_geofenceType"] == 17:
-    #     print(f'{item["name"]} {item["id_geofence"]}')
+# payloads_live = {'superior': {
+#                     "host": "https://api2.syncwise360.com",
+#                     "url": "https://beta.syncwise360.com/",
+#                     "username": "igorperetssuperior",
+#                     "password": "Qwerty01!",
+#                     "id_company": "4442",
+#                     "id_course": "KoyhA-zWt6os",
+#                     "company_code": "HLxTfxrUaaI0"
+#                              },
+#                 'disney': {
+#                     "host": "https://api2.syncwise360.com",
+#                     "url": "https://beta.syncwise360.com/",
+#                     "username": "SyncwiseDisney",
+#                     "password": "92108340",
+#                     "id_company": "4820",
+#                     "id_course": "f1wKXtcAgZ1n",
+#                     "company_code": ""
+#                           }
+#                 }
 #
-# print(adv_list)
-# print(len(adv_list))
 #
-# for i in adv_list:
-#     test_1.course_geofence_advertisement_type_delete(i)
-
-
+# payloads_dev = {'superior': {
+#                     "host": "https://dev-api.syncwise360.com",
+#                     "url": "https://sandbox.syncwise360.com",
+#                     "username": "igorperetssuperior",
+#                     "password": "Qwerty01!",
+#                     "id_company": "2973",
+#                     "id_course": "xqrRgFzOAmmP",
+#                     "company_code": "DDg2_tDaqpk7"
+#                             },
+#                 }
 #
-# test_1.course_vector_details()
-
-
-# print(test_1.COURSE_VECTOR_DETAILS)
-# print(test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR)
-
-# for k, v in test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR.items():  # Create shape geofence
-#     test_1.course_geofence_create(f"a_shape_{k}", test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR[k])
-#     print(f"CREATE GEOFENCE - {k}")
-#     time.sleep(10)
-
-# for k, v in test_1.COURSE_VECTOR_DETAILS_CLUBHOUSE.items():
-#     print(k, v, len(v))
-
-# print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
-
-# test_1.course_geofence_create('Back_ground', test_1.COURSE_VECTOR_DETAILS_BACKGROUND[1])
-
-
-min_square_lat = 50.08022234377751
-max_square_lat = 50.09313658004037
-
-min_square_lng = 36.24363899230958
-max_square_lng = 36.25930309295655
-
-
-geofence = [
-  {
-    "lat": 50.090761888323954,
-    "lng": 36.24425053596497
-  },
-  {
-    "lat": 50.091006246091446,
-    "lng": 36.24435245990754
-  },
-  {
-    "lat": 50.090834163286345,
-    "lng": 36.24464213848115
-  }
-]
-
-
-
-
-# for number in range(1, 331):
-#     # Генерировать случайный центр в заданных границах квадрата
-#     random_target_square = test_1.generate_random_target_square(min_square_lat, max_square_lat, min_square_lng, max_square_lng)
-#     # Переместить геофенс в случайный квадрат
-#     moved_geofence = test_1.move_geofence_to_square(geofence, random_target_square)
-#     # test_1.course_geofence_advertisement_type_create(f"adv_type_{number}", moved_geofence)
-#     test_1.course_geofence_create(f"regular_type_{number}", moved_geofence)
-#     print(f"GEOFENCE --- {number} CREATED")
+# """MAIN"""
+# """Type Geofence
+# 10 - Regular Geofence (when enter)
+# 12 - # непонятный новый геофенс что то странное
+# 13 - Regular Geofence (when leave)
+#
+# 14 - Tournament Lock Down
+# 15 - ProTips
+# 16 - Cart Burn
+# 17 - ADV
+# 18 - Cart Path
+# """
+# test_1 = SyncwiseClient(**payloads_live['disney'])  # MAIN
+# test_1.user_account_login()
+#
+# print('SECRET KEY ->', end=' ')
+# print(test_1.SECRET_KEY)
+#
+# test_1.course_geofence_list()
+# # print(test_1.COURSE_GEOFENCE_LIST)
+#
+# value_count = {}
+# for item in test_1.COURSE_GEOFENCE_LIST['resultList']:
+#     print(item['id_geofenceType'], end=" -> ")
+#     print(item)
+#     value = item['id_geofenceType']
+#     if value in value_count:
+#         value_count[value] += 1
+#     else:
+#         value_count[value] = 1
+#
+# print(value_count)
+# print(sum([int(i) for i in value_count.values()]))
+# #     if item['id_geofenceType'] == 17:
+# #         print(id_geofence := item['id_geofence'])
+# #         data_url_image = test_1.course_geofence_details(id_geofence)
+# #         print(data_url_image["adsImage"])
+# #         test_1.course_geofence_advertisement_download_file(id_geofence, data_url_image["adsImage"])
+#
+#
+#
+# # print(test_1.COURSE_GEOFENCE_LIST["resultList"])
+#
+#
+# # for item in test_1.COURSE_GEOFENCE_LIST["resultList"]:
+# #     if item["id_geofenceType"] == 10 and "regular_type" in item["name"]:
+# #         print(f'{item["name"]} {item["id_geofence"]}')
+#
+#
+# # adv_list = [item["id_geofence"] for item in test_1.COURSE_GEOFENCE_LIST["resultList"] if item["id_geofenceType"] == 10 and "regular_type" in item["name"]]
+#     # if item["id_geofenceType"] == 17:
+#     #     print(f'{item["name"]} {item["id_geofence"]}')
+# #
+# # print(adv_list)
+# # print(len(adv_list))
+# #
+# # for i in adv_list:
+# #     test_1.course_geofence_advertisement_type_delete(i)
+#
+#
+# #
+# # test_1.course_vector_details()
+#
+#
+# # print(test_1.COURSE_VECTOR_DETAILS)
+# # print(test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR)
+#
+# # for k, v in test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR.items():  # Create shape geofence
+# #     test_1.course_geofence_create(f"a_shape_{k}", test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR[k])
+# #     print(f"CREATE GEOFENCE - {k}")
+# #     time.sleep(10)
+#
+# # for k, v in test_1.COURSE_VECTOR_DETAILS_CLUBHOUSE.items():
+# #     print(k, v, len(v))
+#
+# # print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
+#
+# # test_1.course_geofence_create('Back_ground', test_1.COURSE_VECTOR_DETAILS_BACKGROUND[1])
+#
+#
+# min_square_lat = 50.08022234377751
+# max_square_lat = 50.09313658004037
+#
+# min_square_lng = 36.24363899230958
+# max_square_lng = 36.25930309295655
+#
+#
+# geofence = [
+#   {
+#     "lat": 50.090761888323954,
+#     "lng": 36.24425053596497
+#   },
+#   {
+#     "lat": 50.091006246091446,
+#     "lng": 36.24435245990754
+#   },
+#   {
+#     "lat": 50.090834163286345,
+#     "lng": 36.24464213848115
+#   }
+# ]
+#
+#
+#
+#
+# # for number in range(1, 331):
+# #     # Генерировать случайный центр в заданных границах квадрата
+# #     random_target_square = test_1.generate_random_target_square(min_square_lat, max_square_lat, min_square_lng, max_square_lng)
+# #     # Переместить геофенс в случайный квадрат
+# #     moved_geofence = test_1.move_geofence_to_square(geofence, random_target_square)
+# #     # test_1.course_geofence_advertisement_type_create(f"adv_type_{number}", moved_geofence)
+# #     test_1.course_geofence_create(f"regular_type_{number}", moved_geofence)
+# #     print(f"GEOFENCE --- {number} CREATED")
 
