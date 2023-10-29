@@ -389,7 +389,7 @@ payloads_live = {'superior': {
                     "password": "92108340",
                     "id_company": "4820",
                     "id_course": "f1wKXtcAgZ1n",
-                    "companyCode": ""
+                    "company_code": ""
                           }
                 }
 
@@ -401,20 +401,25 @@ payloads_dev = {'superior': {
                     "password": "Qwerty01!",
                     "id_company": "2973",
                     "id_course": "xqrRgFzOAmmP",
-                    "companyCode":"DDg2_tDaqpk7"
+                    "company_code": "DDg2_tDaqpk7"
                             },
                 }
 
 
-test_1 = SyncwiseClient(**payloads_live['superior'])
+test_1 = SyncwiseClient(**payloads_live['disney'])
 test_1.user_account_login()
 
 print('SECRET KEY ->', end=' ')
 print(test_1.SECRET_KEY)
 
 test_1.course_geofence_list()
-# print(test_1.COURSE_GEOFENCE_LIST)
-# for item in test_1.COURSE_GEOFENCE_LIST['resultList']:
+print(test_1.COURSE_GEOFENCE_LIST)
+
+type_geo = set()
+for item in test_1.COURSE_GEOFENCE_LIST['resultList']:
+    type_geo.add(item['id_geofenceType'])
+
+print(type_geo)
 #     if item['id_geofenceType'] == 17:
 #         print(id_geofence := item['id_geofence'])
 #         data_url_image = test_1.course_geofence_details(id_geofence)
