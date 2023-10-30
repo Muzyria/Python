@@ -88,15 +88,20 @@ disney_live.course_geofence_list()
 
 
 # value_count = 0
+s = [3173, 3174, 3175, 3176, 3177, 3178, 3179, 3180, 3181, 3182, 3183, 3184, 3185, 3186, 3187, 3188, 3189, 3190, 3173,
+     3174, 3175, 3176, 3177, 3178, 3179, 3180, 3181, 3182, 3183, 3184, 3185, 3186, 3187, 3188, 3189, 3190, 3173, 3174,
+     3175, 3176, 3177, 3178, 3179, 3180, 3181, 3182, 3183, 3184, 3185, 3186, 3187, 3188, 3189, 3190]
 
 for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
     if item['id_geofenceType'] == 18:
-        print(item['id_coursecheckpoint'])
         print(id_geofence := item['id_geofence'])
         # print(id_geofence_action_type := item['id_geofenceActionType'])
         print(name_geofence := item['name'])
         print(points := item['points'])
         print(new_coord := convert_coordinates(new_center, disney_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
+
+
+        # superior_dev.course_geofence_cart_path_create(name_geofence, new_coord, s.pop())
 
 
 
