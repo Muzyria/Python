@@ -2,7 +2,6 @@ cord = [50.09299891996568, 36.24363899230958, 50.09313658004037, 36.259303092956
         36.258916854858406, 50.08022234377751, 36.24402523040772]
 
 # Новые координаты (центр) в формате словаря
-# new_center = {"lat": 50.0806375, "lng": 36.2288086}
 new_center = {"lat": 50.0856375, "lng": 36.2198086}
 
 # Точка на старой карте в формате словаря
@@ -48,16 +47,16 @@ def convert_coordinates(center, coordinates, lat_diff, lng_diff):
 new_coordinates = convert_coordinates(new_center, old_coordinates, lat_diff, lng_diff)
 print(new_coordinates)
 
-# # Функция для преобразования строковых координат в тип float
-#
+
 # def convert_coordinates_to_float(coordinates):
+#     """Функция для преобразования строковых координат в тип float"""
 #     converted_coordinates = []
 #     for coord in coordinates:
 #         lat = float(coord["lat"])
 #         lng = float(coord["lng"])
 #         converted_coordinates.append({"lat": lat, "lng": lng})
 #     return converted_coordinates
-#
+
 # # Вызываем функцию и получаем координаты в формате float
 # coordinates_float = convert_coordinates_to_float(old_coordinates)
 # print(coordinates_float)

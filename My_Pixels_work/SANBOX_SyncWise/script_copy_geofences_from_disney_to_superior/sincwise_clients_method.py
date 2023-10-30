@@ -192,7 +192,7 @@ class SyncwiseClient(SyncwiseAPI):
             self.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[item + 1] = [
                 {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
 
-    def course_geofence_create(self, name, coordinates):
+    def course_geofence_create(self, name, coordinates, id_geofence_action_type=60):
         """
         Create course geofence
         """
@@ -211,7 +211,7 @@ class SyncwiseClient(SyncwiseAPI):
             "customShutdownTimeout": None,
             "customRestoreTimeout": None,
             "geo_fence_type": "cart_control",
-            "id_geofenceActionType": 60,
+            "id_geofenceActionType": id_geofence_action_type,
             "points": coordinates,
             "defaultMessage": 1
         })
@@ -274,6 +274,15 @@ class SyncwiseClient(SyncwiseAPI):
         response = requests.request("POST", url, headers=headers, data=payload)
 
         print(response.text)
+
+    def convert_coordinates_to_float(self, coordinates):
+        """Функция для преобразования строковых координат в тип float"""
+        converted_coordinates = []
+        for coord in coordinates:
+            lat = float(coord["lat"])
+            lng = float(coord["lng"])
+            converted_coordinates.append({"lat": lat, "lng": lng})
+        return converted_coordinates
 
     def move_geofence_to_square(self, geofence, target_square_center):
         # Вычислить смещение (разницу) между центрами
