@@ -45,21 +45,25 @@ payloads_dev = {'superior': {
 18 - Cart Path
 """
 
-test_1 = SyncwiseClient(**payloads_live['superior'])  # MAIN
+test_1 = SyncwiseClient(**payloads_live['disney'])  # MAIN
 test_1.user_account_login()
 
 print('SECRET KEY ->', end=' ')
 print(test_1.SECRET_KEY)
 
-coord = [{'lat': 50.0940599, 'lng': 36.2164416}, {'lat': 50.091650099999995, 'lng': 36.2165305}, {'lat': 50.0912612, 'lng': 36.216888899999994}, {'lat': 50.0909237, 'lng': 36.217313499999996}, {'lat': 50.0907136, 'lng': 36.2175485}, {'lat': 50.0903953, 'lng': 36.2176567}, {'lat': 50.08968779999999, 'lng': 36.2177318}, {'lat': 50.089697199999996, 'lng': 36.2177532}, {'lat': 50.087364699999995, 'lng': 36.2194704}, {'lat': 50.085031199999996, 'lng': 36.220951899999996}, {'lat': 50.0847929, 'lng': 36.221039299999994}, {'lat': 50.0816468, 'lng': 36.2222482}, {'lat': 50.0795238, 'lng': 36.224318399999994}, {'lat': 50.07759899999999, 'lng': 36.226538600000005}, {'lat': 50.076473299999996, 'lng': 36.225468799999994}, {'lat': 50.076303499999995, 'lng': 36.222090099999996}, {'lat': 50.0754428, 'lng': 36.2208769}, {'lat': 50.0741972, 'lng': 36.2202763}, {'lat': 50.071404199999996, 'lng': 36.218763900000006}, {'lat': 50.069682799999995, 'lng': 36.2160881}, {'lat': 50.0700508, 'lng': 36.2116368}, {'lat': 50.0804638, 'lng': 36.2115442}, {'lat': 50.0793882, 'lng': 36.2052802}, {'lat': 50.080298799999994, 'lng': 36.2021765}, {'lat': 50.0822613, 'lng': 36.199356400000006}, {'lat': 50.0829392, 'lng': 36.1985932}, {'lat': 50.083823499999994, 'lng': 36.1987102}, {'lat': 50.08571, 'lng': 36.200408700000004}, {'lat': 50.0892157, 'lng': 36.2004753}, {'lat': 50.0902063, 'lng': 36.2062352}, {'lat': 50.0912158, 'lng': 36.208337500000006}, {'lat': 50.0909843, 'lng': 36.210108600000005}, {'lat': 50.0929655, 'lng': 36.2124684}, {'lat': 50.0938618, 'lng': 36.2136482}, {'lat': 50.094220299999996, 'lng': 36.21413929999999}, {'lat': 50.09419199999999, 'lng': 36.214688599999995}, {'lat': 50.0940599, 'lng': 36.2164416}]
+test_1.course_geofence_list()
+print(test_1.COURSE_GEOFENCE_LIST)
 
-
-test_1.course_geofence_pro_tips_create(coord, 1)
-# test_1.course_geofence_list()
-# # print(test_1.COURSE_GEOFENCE_LIST)
-#
 # value_count = {}
-# for item in test_1.COURSE_GEOFENCE_LIST['resultList']:
+for item in test_1.COURSE_GEOFENCE_LIST['resultList']:
+    # if item['id_geofenceType'] == 17:
+    #     print(id_geofence := item['id_geofence'])
+    #     data_url_image = test_1.course_geofence_details(id_geofence)
+    #     print(data_url_image["adsImage"])
+    #     test_1.course_geofence_advertisement_download_file(id_geofence, data_url_image["adsImage"])
+    pass
+
+
 #     print(item['id_geofenceType'], end=" -> ")
 #     print(item)
 #     value = item['id_geofenceType']
@@ -70,11 +74,7 @@ test_1.course_geofence_pro_tips_create(coord, 1)
 #
 # print(value_count)
 # print(sum([int(i) for i in value_count.values()]))
-#     if item['id_geofenceType'] == 17:
-#         print(id_geofence := item['id_geofence'])
-#         data_url_image = test_1.course_geofence_details(id_geofence)
-#         print(data_url_image["adsImage"])
-#         test_1.course_geofence_advertisement_download_file(id_geofence, data_url_image["adsImage"])
+
 
 
 
