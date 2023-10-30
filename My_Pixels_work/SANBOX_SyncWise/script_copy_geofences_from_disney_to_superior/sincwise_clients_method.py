@@ -275,6 +275,45 @@ class SyncwiseClient(SyncwiseAPI):
 
         print(response.text)
 
+    def course_geofence_cart_path_create(self,name, coordinates, id_coursecheckpoint): # superior id_coursecheckpoint 3173-3190
+        """
+        Create course geofence Cart Path
+        """
+        action = "CourseGeofenceCreate"
+        url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
+        payload = json.dumps({
+            "active": 1,
+            "status": 1,
+            "visible": 1,
+            "id_company": self.id_company,
+            "id_geofenceType": 18,
+            "points": coordinates,
+            "name": name,
+            "geo_fence_type": "cart_path",
+            "id_coursecheckpoint": id_coursecheckpoint
+        })
+        headers = {
+            'authority': self.host,
+            'accept': '*/*',
+            'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
+            'content-type': 'application/json',
+            'origin': self.url,
+            'referer': self.url,
+            'sec-ch-ua': '"Chromium";v="118", "Google Chrome";v="118", "Not=A?Brand";v="99"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+            'sec-fetch-dest': 'empty',
+            'sec-fetch-mode': 'cors',
+            'sec-fetch-site': 'same-site',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
+            'x-access-token': 'NvOzltkl8f7AlxbxHARoV1cNOBAPYrd4CDi2xCpn6sHVLAnqj0UIFKplWJKy'
+        }
+
+        response = requests.request("POST", url, headers=headers, data=payload)
+
+        print(response.text)
+
+
     def convert_coordinates_to_float(self, coordinates):
         """Функция для преобразования строковых координат в тип float"""
         converted_coordinates = []

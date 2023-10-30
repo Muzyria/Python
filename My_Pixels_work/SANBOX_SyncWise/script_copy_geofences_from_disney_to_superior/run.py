@@ -74,7 +74,7 @@ print(disney_live.SECRET_KEY)
 print('SECRET KEY ->', end=' ')
 print(superior_dev.SECRET_KEY)
 
-# disney_live.course_geofence_list()
+disney_live.course_geofence_list()
 # superior_dev.course_geofence_list()
 
 
@@ -87,18 +87,19 @@ print(superior_dev.SECRET_KEY)
 
 
 
-# value_count = {}
+# value_count = 0
 
-# for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
-#     if item['id_geofenceType'] == 18:
-#         print(item)
-    #     print(id_geofence := item['id_geofence'])
-    #     # print(id_geofence_action_type := item['id_geofenceActionType'])
-    #     print(name_geofence := item['name'])
-    #     print(points := item['points'])
-    #     print(new_coord := convert_coordinates(new_center, disney_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
-    #
-    #     superior_dev.course_geofence_pro_tips_create(new_coord, )
+for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
+    if item['id_geofenceType'] == 18:
+        print(item['id_coursecheckpoint'])
+        # print(id_geofence := item['id_geofence'])
+        # # print(id_geofence_action_type := item['id_geofenceActionType'])
+        # print(name_geofence := item['name'])
+        # print(points := item['points'])
+        # print(new_coord := convert_coordinates(new_center, disney_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
+
+
+
 
 
 
