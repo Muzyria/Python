@@ -45,10 +45,14 @@ payloads_dev = {'superior': {
 18 - Cart Path
 """
 
+# # Новые координаты (центр) в формате словаря
+# new_center = {"lat": 50.0856375, "lng": 36.2198086}
+# # Точка на старой карте в формате словаря
+old_point = {"lat": 28.4037203, "lng": -81.5869747} # Disney
 # Новые координаты (центр) в формате словаря
-new_center = {"lat": 50.0856375, "lng": 36.2198086}
+new_center = {"lat": 50.09844995667801, "lng": 36.257673034667976}   # 36.247673034667976
 # Точка на старой карте в формате словаря
-old_point = {"lat": 28.4037203, "lng": -81.5869747}
+# old_point = {"lat": 50.0856375, "lng": 36.2198086}
 # Рассчитываем разницу в координатах
 lat_diff = new_center["lat"] - old_point["lat"]
 lng_diff = new_center["lng"] - old_point["lng"]
@@ -65,46 +69,57 @@ def convert_coordinates(center, coordinates, lat_diff, lng_diff):
 disney_live = SyncwiseClient(**payloads_live['disney'])  # MAIN
 disney_live.user_account_login()
 
+# superior_live = SyncwiseClient(**payloads_live['superior'])  # MAIN
+# superior_live.user_account_login()
+
 superior_dev = SyncwiseClient(**payloads_dev['superior'])  # MAIN
 superior_dev.user_account_login()
 
-print('SECRET KEY ->', end=' ')
-print(disney_live.SECRET_KEY)
+# print('SECRET KEY ->', end=' ')
+# print(superior_live.SECRET_KEY)
 
-print('SECRET KEY ->', end=' ')
-print(superior_dev.SECRET_KEY)
+# print('SECRET KEY ->', end=' ')
+# print(superior_dev.SECRET_KEY)
 
+# superior_live.course_geofence_list()
 disney_live.course_geofence_list()
-# superior_dev.course_geofence_list()
 
 
-# print('disney -----')
+
 
 # print(disney_live.COURSE_GEOFENCE_LIST)
-#
-# print('superior -----')
+
 # print(superior_dev.COURSE_GEOFENCE_LIST)
 
 
 
-# value_count = 0
-s = [3173, 3174, 3175, 3176, 3177, 3178, 3179, 3180, 3181, 3182, 3183, 3184, 3185, 3186, 3187, 3188, 3189, 3190, 3173,
-     3174, 3175, 3176, 3177, 3178, 3179, 3180, 3181, 3182, 3183, 3184, 3185, 3186, 3187, 3188, 3189, 3190, 3173, 3174,
-     3175, 3176, 3177, 3178, 3179, 3180, 3181, 3182, 3183, 3184, 3185, 3186, 3187, 3188, 3189, 3190]
+# value_count = 1
+s = [8952, 8953, 8954, 8955, 8956, 8957, 8958, 8959, 8960, 8961, 8962, 8963, 8964, 8965, 8966, 8967, 8968, 8969, 8952, 8953, 8954, 8955, 8956, 8957, 8958, 8959, 8960, 8961, 8962, 8963, 8964, 8965, 8966, 8967, 8968, 8969, 8952, 8953, 8954, 8955, 8956, 8957, 8958, 8959, 8960, 8961, 8962, 8963, 8964, 8965, 8966, 8967, 8968, 8969]
+#
+# for item in superior_live.COURSE_GEOFENCE_LIST['resultList']:
+#     if item['id_geofenceType'] == 10:
+#         print(item)
+#         print(id_geofence := item['id_geofence'])
+#         print(id_geofence_action_type := item['id_geofenceActionType'])
+#         print(name_geofence := item['name'])
+#         print(points := item['points'])
+#         # print(new_coord := superior_dev.convert_coordinates_to_float(points))
+#         print(new_coord := convert_coordinates(new_center, superior_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
+#
+#         superior_dev.course_geofence_create(name_geofence + '_2', new_coord, id_geofence_action_type)
+
+        # value_count += 1
 
 for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
-    if item['id_geofenceType'] == 18:
+    if item['id_geofenceType'] == 17:
+        print(item)
         print(id_geofence := item['id_geofence'])
         # print(id_geofence_action_type := item['id_geofenceActionType'])
         print(name_geofence := item['name'])
         print(points := item['points'])
-        print(new_coord := convert_coordinates(new_center, disney_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
+        print(new_coord := convert_coordinates(new_center, superior_dev.convert_coordinates_to_float(points), lat_diff, lng_diff))
 
-
-        # superior_dev.course_geofence_cart_path_create(name_geofence, new_coord, s.pop())
-
-
-
+        superior_dev.course_geofence_advertisement_type_create(name_geofence + "_4", f'{id_geofence}.jpg', new_coord)
 
 
 

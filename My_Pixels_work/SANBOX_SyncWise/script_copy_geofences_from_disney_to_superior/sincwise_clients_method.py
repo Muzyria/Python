@@ -202,7 +202,7 @@ class SyncwiseClient(SyncwiseAPI):
             "active": 1,
             "status": 1,
             "visible": 1,
-            "id_company": 2973,
+            "id_company": self.id_company,
             "id_geofenceType": 10,
             "name": name,
             "marshallBypass": 1,
