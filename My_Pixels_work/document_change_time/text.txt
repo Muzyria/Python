@@ -10,195 +10,92 @@ UUA : 1.4.1*
 
 *%{background:yellow}All cases passed with expected behavior%*
 
-*PRECONDITIONS*
-* Confirm current update.txt server settings
-* Flash modules to different FW versions, to perform updates
-* Assign  device to test course
-* Setup/enable cart barn geofence
-* Test will require access to cell/WIFI
-* Tolerance Test Cases will require Faraday cage
 
-h2. *I. GENERAL FUNCTIONALITY TEST CASES*
+*Downloading Logs - Test Plan*
 
-- Confirm a solid data connection prior to testing
-- Complete each test case once with the UBLOX module and once with the LC79D module
-- Be sure to clearly state what versions updating to/form for each case, and what time the update was queued
+Complete all tests – Once over WIFI and Once over Cellular
 
-*WIFI*
- *with the UBLOX module*
+*Passed with WI-FI network*
 
-*CASE A: Cart Barn Sleep*
-1. With device awake, connect the device to GPS module (with different FW qued on the server) and confirm device establishes a GPS fix - *Confirmed*
-2. Allow device to go to Cart Barn Sleep - *Confirmed at 12:15*
-3. Wake up device - *Confirmed at 12:16*
-- Note if able to tap flag to see GPS download available status  - *Confirmed*
-- If YES - Confirm download status bar is updating during download - *Confirmed*
--  Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
-4. Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
-5. Allow device to go back to CBS, and then wake up - *Confirmed at 12:25*
-6. Confirm GPS module installs new FW version upon waking up from Cart Barn Sleep - *Confirmed*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - *Confirmed*
-7. Put the device into Cart Barn sleep and then update the server to a different FW version available when the device is asleep (or switch the GPS module to a different FW version) - *Confirmed at 12:57*
-8. Wake up device, and confirm it downloaded the update (check the download icon status on PlayGolf screen) - *Confirmed*
-9. Exit the YamaTrack app and check the UUA app - *Confirmed at 10 :53*
-- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update - *Confirmed*
-- Confirm within tablet Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
-- Confirm after installing the update, exiting UUA and then returning to UUA, no updates are available - *Confirmed*
+*Case A) Download All Logs*
+Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 13:25*
+Select Download all logs within Control – Record Time – *Confirmed at 13:26*
+Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 13:26*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:27*
+Confirm Logs appear in Control with the specified type “All Logs” in the list. - *Confirmed*
+Review logs to confirm they contain logs more than one day - *Confirmed*
 
-*CASE B: Off Hole Sleep*
-1. With device awake, connect device to GPS module (with different FW qued on server) and confirm device establishes a GPS fix - *Confirmed*
-2. Allow device to go to Off Hole Sleep - *Confirmed*
-3. Wake up device - *Confirmed at 13:04*
-- Note if able to tap flag to see GPS download available status  - *Confirmed*
-- If YES - Confirm download status bar is updating during download - *Confirmed*
--  Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
-4. Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
-5. Allow device to go back to Off Hole Sleep and then wake up - *Confirmed*
-6. Confirm GPS module *DOES NOT install* new FW version upon waking up from Off Hole Sleep - *Confirmed*
-7. Press the checkmark icon, and confirm the GPS FW will install - *Confirmed at 13:10*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - *Confirmed*
-8. With device awake, connect device to GPS module (with different FW qued on server) and confirm device establishes a GPS fix - *Confirmed*
-9. Allow device to go to Off Hole Sleep - *Confirmed at 13:13*
-10. . Wake up the device, and confirm it downloaded the update (check the download icon status on the PlayGolf screen) - *Confirmed*
-10. Exit the YamaTrack app and check the UUA app (install updates) - *Confirmed*
-- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update - *Confirmed*
-- Confirm after installing the update, exiting UUA, and then returning to UUA, no updates are available - *Confirmed*
-- Confirm within tablet Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
+*Case B) Device Powered Off/Disconnected > Power On*
+With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 13:29*
+Wait several minutes, then flip to RUN/supply power to a device- *Confirmed*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 13:34*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 13:35*
+Confirm Logs appear in Control with the specified type “All Logs” in the list. *Confirmed*
+Review logs to confirm they contain logs more than one day - *Confirmed*
 
-*CASE C: Upon Boot Up*
-1. With device in ship mode/powered off, connect to GPS module with different FW than what is queud on the server  - *Confirmed Ship Mode at 13:17*
-2. Confirm device recognizes an update available (via logs, or by tapping the flag to display the download icon status) when powering on - *Confirmed at 13:20*
-- Confirm there is no visible interference with the Play Golf/APK while the download is taking place - *Confirmed*
-- Confirm download status bar is updating during download - Note: ER=Unknown for this specific step, I don't believe this will apply - *Confirmed*
-- Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
-6. Put device to CBS, confirm device installs download upon waking up from sleep  - *Confirmed at 13:24*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control  - *Confirmed*
+*Case C) Device Powered on > Sleep mode > Woke up*
+Select Download all logs within Control – Record Time - *Confirmed at 13:37*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 13:39*
+Review logs to confirm they contain logs more than one day - *Confirmed*
 
-*CASE D: Full App Reset - Don't know if this applies*
-1. With device awake, connect to GPS module with different FW than what is queud on the server  - *Confirmed*
-2. Select Full App Reset within the APK, Menu options.   - *Confirmed*
-3. Confirm the app resets, and checks/loads any updates. Note this process maybe a little longer than normal as it is downloading and installing the updated SW version.  - *Confirmed (Only downloaded update - It's Expected)*
-4. Confirm app loads completely on Play Golf screen, and does not again reattempt to install software update at a later time  - *Confirmed (after Full Up Reset)*.
-5. Confirm the device installed the updated software version  - *Confirmed*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control  - *Confirmed*
+*Case D) Download Logs by Day in Past*
+Select to download logs for a day in the past - *Confirmed at 13:41*
+Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 13:43*
+Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 13:45*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:47*
 
-*CASE E: Simultaneous OS/APK and GPS Updates*
-1. With device awake, que all OS and APK update within Control  - *Confirmed*
-2. Connect the device to the GPS module with a different FW that is queued on the server  - *Confirmed*
-2. Confirm how the device recognizes and handles OS and APK and GPS updates.
-- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed at 16:30 (GPS, OS, APK)*
-- Falling asleep/waking up from Off hole sleep  - *Confirmed at 16:56*
-- Power on  - *Confirmed at 15:46 (GPS, OS, APK)*
-- Device Reset/Full App Reset  - *Confirmed at 12:42*
-3. Verify order of priority for each case (expected: 1st-OS, 2nd-APK, 3rd-GPS)
-4.  Confirm Update icon status updates accordingly (if applies)
-5. Confirm the downloaded update installs upon
-- Falling asleep/waking up from Cart Barn Sleep - *Confirmed at 16:53 (1st-OS, 2nd-APK, 3rd-GPS)
-- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to a module with different FW) - *Confirmed at 16:01 (1st-OS, 2nd-APK, 3rd-GPS)*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW)  - *Confirmed  (1st-OS, 2nd-APK, 3rd-GPS)*
-6. Note if there is any difference in precedence in what installs - *Confirmed*
+*Case E) Device Powered Off/Disconnected > Power On*
+With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 13:47*
+Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 13:48*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 13:49*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:51*
+Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 13:51*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 13:51*
 
-*APK and GPS*
-CASE F: Simultaneous APK and GPS Updates
-1. With device awake, que  APK update within Control Que - *Confirmed at 17:10*
-2. Connect the device to GPS module with a different FW that is queued on the server
-2. Confirm how device recognizes and handles APK and GPS updates.
-- Falling asleep/waking up from Cart Barn Sleep CBS  - *Confirmed at 17:14*
-- Falling asleep/waking up from Off hole sleep  - *Confirmed at 17:30*
-- Power on Ship Mode  - *Confirmed*
-- Device Reset/Full App Reset  - *Confirmed at 17:41*
-3. Verify order of priority for each case (ex: 1st-APK, 2nd-GPS)
-- Falling asleep/waking up from Cart Barn Sleep - *Confirmed at 17:13 (GPS, APK)*
-- Falling asleep/waking up from Off hole sleep - *Confirmed (GPS, APK)*
-- Power on - *Confirmed  (GPS, APK)*
-- Device Reset/Full App Reset - *Confirmed (GPS, APK)*
-4. Confirm Update icon status updates accordingly (if applies)
-5. Confirm the downloaded update installs upon
-- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed at 17:24*
-- Falling asleep/waking up from Off hole sleep Off Hole Sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to module with different FW)  - *Confirmed*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW)  - *Confirmed*
-6. Note if there is any difference in precedence in what installs (ex: 1st-APK, 2nd-GPS)
-- Falling asleep/waking up from Cart Barn Sleep - *Confirmed at 17:35 (1st-APK, 2nd-GPS)*
-- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to module with different FW) - *Confirmed at 17:43 (1st-APK, 2nd-GPS)*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - *Confirmed at 17:45 (1st-APK, 2nd-GPS)*
+*Case F) Device Powered on > Sleep mode > Woke up*
+Select Download for a day in the past within Control – Record Time - *Confirmed at 13:53*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 13:57*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 13:58*
 
-*OS and GPS*
-CASE G: Simultaneous OS and GPS Updates
-1. With device awake, que all OS update within Control Que  - *Confirmed*
-2. Connect device to GPS module with a different FW that is queued on the server   - *Confirmed*
-2. Confirm how device recognizes and handles OS  and GPS updates upon.  - *Confirmed*
-- Falling asleep/waking up from Cart Barn Sleep   - *Confirmed at 14:18*
-- Falling asleep/waking up from Off hole sleep   - *Confirmed at 14:10*
-- Power on Ship Mode  - *Confirmed at 14:33*
-- Device Reset/Full App Reset at  - *Confirmed*
-3. Verify order of priority for each case (ex: 1st-OS, 2nd-GPS)
-- Falling asleep/waking up from Cart Barn Sleep   - *Confirmed at 14:08 (GPS, OS)*
-- Falling asleep/waking up from Off hole sleep - *Confirmed*
-- Power on  - *Confirmed at 14:24 (GPS, OS)*
-- Device Reset/Full App Reset  - *Confirmed*
-4. Confirm Update icon status updates accordingly (if applies)  - *Confirmed*
-5. Confirm the downloaded update installs upon  - *Confirmed*
-- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed*
-- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to module with different FW)  - *Confirmed*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW)  - *Confirmed*
-6. Note if there is any difference in precedence in what installs (ex: 1st-OS, 2nd-GPS)
-- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed at 14:30 (1st-OS, 2nd-GPS)*
-- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to module with different FW)  - *Confirmed*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - *Confirmed*
+*Case G) Download Logs by Day – Current Day*
+Select to download logs for SAME DAY
+Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 13:58*
+Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 13:58*
+Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 14:01*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 14:02*
 
-*CASE H: Confirm Full-Functionality of UUA*
-1. With device awake, connect GPS module with different FW than what is queued on the server - *Confirmed*
-- Confirm GPS establishes a fix - *Confirmed*
-2. Exit YamaTrack App, and open the UUA app - *Confirmed*
-3. Select GPS FW Updates  - *Confirmed*
-4. Confirm if the device recognizes an update available - *Confirmed*
-5. Press install and confirm the device downloads firmware properly. - *Confirmed*
-6. Confirm FW installs successfully - *Confirmed*
-7. Exit UUA and boot YamaTrack - *Confirmed*
-8. Exit YamaTrack and return to UUA to check if the device DOES NOT recognize GPS FW update available - *Confirmed*
+*Case H) Device Powered Off/Disconnected > Power On*
+With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 14:11*
+Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 14:14*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 14:15*
+Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 14:16*
+Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 14:20*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 14:21*
 
-h2. TOLERANCE CASES ( check once  with GPS and once with OS + APK + GPS)
+*Case I) Device Powered on > Sleep mode > Woke up*
+Select Download for a current Day within Control – Record Time - *Confirmed at 14:03*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 14:05*
+Note – these may not upload until the device wakes up
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 14:07*
 
-*Automatic OS + APK + GPS  Updates: Test Cases:*
+*Corner Cases:*
 
-Test Results: Provide test summary here/highlight any issues
+*Case J) Multiple Log Requests – Send All Logs request two times*
+Verify if log request goes through (one/both) -  *requested at 14:21 / Then at 14:21 got one (04) custom message/ at 14:22 - only one log appeared*
+Confirm if logs uploaded are correct - *Confirmed at 14:26*
 
-*A) No WIFI/Cellular*  - *Confirmed*
-ER: Device is unable to download OS , APK  & GPS update files until it establishes cellular or wifi connectivity
+*Case K) Multiple Log Requests – Send All Logs request, then By Day*
+Verify if log request goes through (one/both) -*Requested at 14:27 / Then at 14:27. At 14:28 and 14:33 logs appear: All Logs and By Day respectively*
+Confirm if logs uploaded are correct - *Confirmed*
 
-*B) No Power From Cable*  - *Confirmed*
-ER: Device can download/install OS/APK/GPS updates even if the device is not connected to cart/receiving power from cable  - *Confirmed*
+*Case L) Multiple Log Requests - By Day – same day 2x times*
+Verify if log request goes through (one/both) - *Select By Day logs twice at 14:34, 60 seconds between selections, confirm requests went through*
+Confirm if logs uploaded are correct - *Confirmed At 14:38 and 14:42 logs appear*
 
-*C) GPS update queued – but then removed*
-- For these cases, we need to also consider if a device is off when an update is queued
-ER: If the device downloaded update files successfully, the device proceeds to install downloaded files next time it wakes up from tablet sync/power cycles *Confirmed*
-If the device did NOT download files successfully, the device does not reattempt to download files once the update queue is removed from the Control *Confirmed*
-- For these cases, we need to also consider if a device is off when an update is queued - (CBS)- *Confirmed*
+*Case M) Multiple Log Requests - By Day – one day, then another day*
+Verify if log request goes through (one/both) - *Select By Day logs twice at 14:45, 10 seconds between selections, confirm requests went through*
+Confirm if logs uploaded are correct - *Confirmed At 14:50 and 14:52 logs appear*
 
-*D) GPS update queued – then updated to a different version*  *%{background:yellow} Skiped (There is no other version)%*
-- For these cases, we need to also consider if a device is off when an update is queued
-ER: If previous update files did not download successfully/completely, the tablet will see a new updated version available and will download the updated version queued -
-
-If updated files DID download successfully, the device will check and compare different/new updated versions that are available and will download new OS/APK/GPS update files available (NOT INSTALL previously downloaded files).
-
-*E) OS/APK/GPS update queued – files downloaded, update still queued* - *Confirmed*
-- For these cases we need to also consider if a device is off when update is queued
-ER: Device checks if any new updates are queued *Confirmed*
-If files downloaded = the same update that is currently queued, device installs files upon tablet sync/power cycle.
-If files downloaded are DIFFERENT than update version that is queued - see logic for Case F (downloads new files instead) - *Confirmed*
-
-*F) OS/APK/GPS update queued – files installed, update still queued*  - *Confirmed*
-ER: Device checks if any new updates are queued *Confirmed*
-If files installed = the same update that is currently queued, nothing occurs
-If files installed are DIFFERENT than update version that is queued - see logic for Case F (downloads new files )
-
-*G) Download/Install of APK/OS/GPS in process, then app crashes*
-ER: App will be able to load correctly, and upon recovering that app will attempt to re-download the queued update the next time to goes through tablet sync, power up, falling asleep). (Full Up)
-- Test process of downloading APK, then exit app  - while  download  APK exit app then launch Yamatrack  and confirm -   APK downloading again *Confirmed*
-- Test process of downloading OS, then exit app - while download  OS exit app then launch Yamatrack  and confirm - OS downloading again - *Confirmed*
-- Test process of installing GPS, then exit app - while installing  GPS exit app then launch Yamatrack  and confirm -   GPS installing again - *Confirmed*
+*Case N) Multiple Log Requests –By Day, then All Logs*
+Verify if log request goes through (one/both) - *Requested at 14:53 / Then at 14:53. At 14:58 and 15:00 logs appear: By Day and All Logs respectively*
+Confirm if logs uploaded are correct - *Confirmed at 15:02*
