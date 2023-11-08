@@ -104,7 +104,7 @@ class IntermediateCoordinatesGenerator:
         return intermediate_coordinates
 
     def run_device_last_step_to_next_point(self, path, minutes):
-        steps = int(minutes * 60)
+        steps = int(minutes * 42)
         print(f'MOVED LAST COORDINATE TO NEXT POINT')
         for step_patch in (current_patch := self.get_intermediate_coordinates(path, steps)):
             lat, lng = step_patch['lat'], step_patch['lng']
@@ -113,7 +113,7 @@ class IntermediateCoordinatesGenerator:
         self.last_coordinate = [current_patch[-1]]
 
     def run_device_by_time(self, minutes):  #  генераци нахождения на лунке по времени
-        steps = int(minutes * 60)
+        steps = int(minutes * 42)
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
             # self.run_device_last_step_to_next_point([self.last_coordinate[0], self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i][0]], 0.1)
             for step_patch in (current_patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps)):
@@ -137,7 +137,7 @@ class IntermediateCoordinatesGenerator:
 
     def run_device_from_start_coordinate_to_first_hole(self, minutes):
         """ Расчет маршрута от стартовых координат к координатам HOLE 1"""
-        steps = int(minutes * 60)
+        steps = int(minutes * 42)
         self.run_device_last_step_to_next_point([self.last_coordinate[0], self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[1][0]], steps)
 
     def run_device_from_last_hole_to_start_coordinate(self, minutes):
