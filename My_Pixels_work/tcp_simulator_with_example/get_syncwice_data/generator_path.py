@@ -3,6 +3,48 @@ import time
 from convert_to_DDMMmmmm import get_new_DDDDmmmm_formate
 from generate_csv_utilitygauge import write_utilitygauge_2_csv
 
+
+payloads_live = {'superior': {
+                    "host": "https://api2.syncwise360.com",
+                    "url": "https://beta.syncwise360.com/",
+                    "username": "igorperetssuperior",
+                    "password": "Qwerty01!",
+                    "id_company": "4442",
+                    "id_course": "KoyhA-zWt6os",
+                    "company_code": "HLxTfxrUaaI0"
+                             },
+                'disney': {
+                    "host": "https://api2.syncwise360.com",
+                    "url": "https://beta.syncwise360.com/",
+                    "username": "SyncwiseDisney",
+                    "password": "92108340",
+                    "id_company": "4820",
+                    "id_course": "f1wKXtcAgZ1n",
+                    "company_code": ""
+                          }
+                }
+
+
+payloads_dev = {'superior': {
+                    "host": "https://dev-api.syncwise360.com",
+                    "url": "https://sandbox.syncwise360.com",
+                    "username": "igorperetssuperior",
+                    "password": "Qwerty01!",
+                    "id_company": "2973",
+                    "id_course": "xqrRgFzOAmmP",
+                    "company_code": "DDg2_tDaqpk7"
+                            },
+                }
+
+
+# superior_dev = SyncwiseClient(**payloads_dev['superior'])  # MAIN
+# superior_dev.user_account_login()
+#
+# superior_dev.course_geofence_list()
+#
+# print(superior_dev.COURSE_GEOFENCE_LIST)
+
+
 def execution_time_decorator(func):
     def wrapper(*args, **kwargs):
         start_time = time.perf_counter()
@@ -21,8 +63,9 @@ class IntermediateCoordinatesGenerator:
     # LAST_COORDINATE = None
 
     def __init__(self):
-        self.client_data = SyncwiseClient("https://api2.syncwise360.com")
+        self.client_data = SyncwiseClient(**payloads_dev['superior'])  # MAIN
         self.client_data.user_account_login()
+        self.client_data.course_vector_details()
         self.client_data.course_vector_details()
         self.last_coordinate = None
 
@@ -72,7 +115,7 @@ class IntermediateCoordinatesGenerator:
     def run_device_by_time(self, minutes):  #  генераци нахождения на лунке по времени
         steps = int(minutes * 60)
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
-            self.run_device_last_step_to_next_point([self.last_coordinate[0], self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i][0]], 0.1)
+            # self.run_device_last_step_to_next_point([self.last_coordinate[0], self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i][0]], 0.1)
             for step_patch in (current_patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps)):
                 lat, lng = step_patch['lat'], step_patch['lng']
                 print(f'step By run_device_by_time -> ON HOLE ({i}) -> {lat}, {lng}')
@@ -91,16 +134,16 @@ class IntermediateCoordinatesGenerator:
         self.run_device_last_step_to_next_point([self.last_coordinate[0], self.START_COORDINATES[0]], minutes)
 
 
-
-
 generator = IntermediateCoordinatesGenerator()
 
-generator.get_start_coordinates(0.1)
-generator.run_device_by_time(0.1)
-generator.run_device_from_last_hole_to_start_coordinate(0.1)
-generator.get_start_coordinates(0.1)
 
 
-print("Everything has gone well.".upper())
-print(f'TOTAL STEPS - {len(generator.PATH_LIST_HOLES_COORDINATES)}')
-write_utilitygauge_2_csv(generator.PATH_LIST_HOLES_COORDINATES)
+# generator.get_start_coordinates(3)
+# generator.run_device_by_time(4)
+# # generator.run_device_from_last_hole_to_start_coordinate(0.1)
+# generator.get_start_coordinates(3)
+#
+#
+# print("Everything has gone well.".upper())
+# print(f'TOTAL STEPS - {len(generator.PATH_LIST_HOLES_COORDINATES)}')
+# write_utilitygauge_2_csv(generator.PATH_LIST_HOLES_COORDINATES)

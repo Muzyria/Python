@@ -12,31 +12,34 @@ PATH = fr"C:\Program Files\Java\jre-1.8\bin\java.exe"
 os.system(fr'java -jar syncwise-tcp-simulator-0.6.jar --help')
 
 
-os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -sc utilitygauge_2.csv -env dev --request-type utilitygauge --device S10150000211018049 -i 0')
+# os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -sc utilitygauge_2.csv -env dev --request-type utilitygauge --device S10150000211018049 -i 1')
 
 
-def first_fun():
-    print('First GO')
-    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 50 -i 0')
-    print('First has DONE')
+os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -sc utilitygauge_2.csv -env dev --request-type utilitygauge --device L10116001811250A52 -i 1')
 
 
-def second_fun():
-    print('Second GO')
-    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 15')
-    print('Second has DONE')
-
-
-def third_fun():
-    print('Third GO')
-    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 15 -i 0')
-    print('Third has DONE')
-
-
-def fourth_fun():
-    print('Fourth GO')
-    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 15 -i 0')
-    print('Fourth has DONE')
+# def first_fun():
+#     print('First GO')
+#     os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 50 -i 0')
+#     print('First has DONE')
+#
+#
+# def second_fun():
+#     print('Second GO')
+#     os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 15')
+#     print('Second has DONE')
+#
+#
+# def third_fun():
+#     print('Third GO')
+#     os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 15 -i 0')
+#     print('Third has DONE')
+#
+#
+# def fourth_fun():
+#     print('Fourth GO')
+#     os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -env dev --request-type utilitygauge --device S10150000211018049 --limit 15 -i 0')
+#     print('Fourth has DONE')
 
 
 # th1 = Thread(target=first_fun)
