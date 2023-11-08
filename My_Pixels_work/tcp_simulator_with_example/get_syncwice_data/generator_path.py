@@ -65,12 +65,12 @@ class IntermediateCoordinatesGenerator:
     def __init__(self):
         self.client_data = SyncwiseClient(**payloads_dev['superior'])  # MAIN
         self.client_data.user_account_login()
-        self.client_data.course_vector_details()
+        # self.client_data.course_vector_details()
         self.client_data.course_vector_details()
         self.last_coordinate = None
 
     def get_start_coordinates(self, minutes):
-        steps = int(minutes * 60)
+        steps = int(minutes * 42)
         print('RETURN AREA COORDINATE')
         for _ in range(steps):  # start coordinate for begin
             lat, lng = self.START_COORDINATES[0]['lat'], self.START_COORDINATES[0]['lng']
@@ -122,6 +122,18 @@ class IntermediateCoordinatesGenerator:
                 self.PATH_LIST_HOLES_COORDINATES.append(get_new_DDDDmmmm_formate(f'{lat},{lng}'))
             self.last_coordinate = [current_patch[-1]]
 
+    def run_device_by_time_only_on_green(self, minutes):  #  генераци нахождения на лунке по времени в одном месте на грине
+        steps = int(minutes * 42)
+        for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
+            current_patch = self.client_data.COURSE_VECTOR_DETAILS_HOLES_GREENCENTER[i][0]
+            # print(current_patch)
+            # print()
+            for _ in range(steps):
+                lat, lng = current_patch['lat'], current_patch['lng']
+                print(f'step By run_device_by_time -> ON HOLE ({i}) -> {lat}, {lng}')
+                self.PATH_LIST_HOLES_COORDINATES.append(get_new_DDDDmmmm_formate(f'{lat},{lng}'))
+
+
 
     def run_device_from_start_coordinate_to_first_hole(self, minutes):
         """ Расчет маршрута от стартовых координат к координатам HOLE 1"""
@@ -135,15 +147,15 @@ class IntermediateCoordinatesGenerator:
 
 
 generator = IntermediateCoordinatesGenerator()
+print(generator.client_data.COURSE_VECTOR_DETAILS_HOLES_GREENCENTER)
 
 
-
-# generator.get_start_coordinates(3)
-# generator.run_device_by_time(4)
+generator.get_start_coordinates(3)
+generator.run_device_by_time_only_on_green(4)
 # # generator.run_device_from_last_hole_to_start_coordinate(0.1)
-# generator.get_start_coordinates(3)
+generator.get_start_coordinates(3)
 #
 #
-# print("Everything has gone well.".upper())
-# print(f'TOTAL STEPS - {len(generator.PATH_LIST_HOLES_COORDINATES)}')
-# write_utilitygauge_2_csv(generator.PATH_LIST_HOLES_COORDINATES)
+print("Everything has gone well.".upper())
+print(f'TOTAL STEPS - {len(generator.PATH_LIST_HOLES_COORDINATES)}')
+write_utilitygauge_2_csv(generator.PATH_LIST_HOLES_COORDINATES)
