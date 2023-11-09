@@ -40,7 +40,7 @@ class IntermediateCoordinatesGenerator:
             rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
     def get_start_coordinates(self):
-        for _ in range(60):  # start coordinate for begin
+        for _ in range(90):  # start coordinate for begin
             time_minute = datetime.now().time().minute
 
             for ip_device in self.DICT_IP_DEVICES.values():
@@ -145,7 +145,7 @@ generator = IntermediateCoordinatesGenerator()
 
 generator.get_start_coordinates()
 # generator.run_device(6)
-generator.run_device_by_time(3)
+generator.run_device_by_time(4)
 generator.get_start_coordinates()
 
 

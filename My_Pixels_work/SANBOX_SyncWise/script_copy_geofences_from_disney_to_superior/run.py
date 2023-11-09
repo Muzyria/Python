@@ -67,8 +67,8 @@ def convert_coordinates(center, coordinates, lat_diff, lng_diff):
     return converted_coordinates
 
 
-disney_live = SyncwiseClient(**payloads_live['disney'])  # MAIN
-disney_live.user_account_login()
+# disney_live = SyncwiseClient(**payloads_live['disney'])  # MAIN
+# disney_live.user_account_login()
 
 # superior_live = SyncwiseClient(**payloads_live['superior'])  # MAIN
 # superior_live.user_account_login()
@@ -82,8 +82,8 @@ superior_dev.user_account_login()
 # print('SECRET KEY ->', end=' ')
 # print(superior_dev.SECRET_KEY)
 
-# superior_dev.course_geofence_list()
-disney_live.course_geofence_list()
+superior_dev.course_geofence_list()
+# disney_live.course_geofence_list()
 
 
 
@@ -97,30 +97,31 @@ disney_live.course_geofence_list()
 # value_count = 1
 # s = [8952, 8953, 8954, 8955, 8956, 8957, 8958, 8959, 8960, 8961, 8962, 8963, 8964, 8965, 8966, 8967, 8968, 8969, 8952, 8953, 8954, 8955, 8956, 8957, 8958, 8959, 8960, 8961, 8962, 8963, 8964, 8965, 8966, 8967, 8968, 8969, 8952, 8953, 8954, 8955, 8956, 8957, 8958, 8959, 8960, 8961, 8962, 8963, 8964, 8965, 8966, 8967, 8968, 8969]
 #
-# for item in superior_live.COURSE_GEOFENCE_LIST['resultList']:
+for item in superior_dev.COURSE_GEOFENCE_LIST['resultList']:
+    if item['id_geofenceType'] == 10 and (item['id_geofence'] not in [12694, 12696, 12698, 12699, 12700, 12702]):
+        print(item)
+        print(id_geofence := item['id_geofence'])
+        # print(id_geofence_action_type := item['id_geofenceActionType'])
+        print(name_geofence := item['name'])
+        # print(points := item['points'])
+        # print(new_coord := superior_dev.convert_coordinates_to_float(points))
+        # print(new_coord := convert_coordinates(new_center, superior_dev.convert_coordinates_to_float(points), lat_diff, lng_diff))
+
+        superior_dev.course_geofence_advertisement_type_delete(id_geofence)
+
+
+        # value_count += 1
+
+# for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
 #     if item['id_geofenceType'] == 10:
 #         print(item)
 #         print(id_geofence := item['id_geofence'])
 #         print(id_geofence_action_type := item['id_geofenceActionType'])
 #         print(name_geofence := item['name'])
 #         print(points := item['points'])
-#         # print(new_coord := superior_dev.convert_coordinates_to_float(points))
-#         print(new_coord := convert_coordinates(new_center, superior_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
+#         print(new_coord := convert_coordinates(new_center, superior_dev.convert_coordinates_to_float(points), lat_diff, lng_diff))
 #
-#         superior_dev.course_geofence_create(name_geofence + '_2', new_coord, id_geofence_action_type)
-
-        # value_count += 1
-
-for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
-    if item['id_geofenceType'] == 10:
-        print(item)
-        print(id_geofence := item['id_geofence'])
-        print(id_geofence_action_type := item['id_geofenceActionType'])
-        print(name_geofence := item['name'])
-        print(points := item['points'])
-        print(new_coord := convert_coordinates(new_center, superior_dev.convert_coordinates_to_float(points), lat_diff, lng_diff))
-
-        superior_dev.course_geofence_create(name_geofence + '_8', new_coord, id_geofence_action_type)
+#         superior_dev.course_geofence_create(name_geofence + '_8', new_coord, id_geofence_action_type)
 
 
 
