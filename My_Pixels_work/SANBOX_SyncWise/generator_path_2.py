@@ -147,6 +147,3 @@ generator.get_start_coordinates()
 # generator.run_device(6)
 generator.run_device_by_time(4)
 generator.get_start_coordinates()
-
-
-
