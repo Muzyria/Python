@@ -18,7 +18,7 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.3.219'}
+    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.3.220'}
     START_COORDINATES = "50.07807852323376, 36.23065154766116"
 
     def __init__(self):
@@ -142,8 +142,37 @@ class IntermediateCoordinatesGenerator:
 
 
 generator = IntermediateCoordinatesGenerator()
+for n in range(1, 3):
+    print()
+    print(f"START GAME - {n} -----------------------------------------------------------------------------------------")
+    generator.get_start_coordinates()
+    # generator.run_device(6)
+    generator.run_device_by_time(4)
+    generator.get_start_coordinates()
+    print()
+    print(f'FINISH GAME {n} ------------------------------------------------------------------------------------------')
 
-generator.get_start_coordinates()
-# generator.run_device(6)
-generator.run_device_by_time(4)
-generator.get_start_coordinates()
+
+# [
+#   -59,
+#   -59,
+#   -59,
+#   -58,
+#   -59,
+#   -90,
+#   -60,
+#   -59,
+#   -59,
+#   -58,
+#   -59,
+#   -67,
+#   -60,
+#   -32,
+#   -34,
+#   -119,
+#   -26,
+#   -85,
+#   null
+# ]
+
+

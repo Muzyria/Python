@@ -40,17 +40,29 @@ class NoTest:
         button_login = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'button[aria-label="submit"]')))
         button_login.click()
         print('Click Login Button')
-        time.sleep(5)
+        time.sleep(10)
 
     def take_picture(self):
         # CLICK
         nav_yama = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//span[@class="number" and text()="49"]')))
         nav_yama.click()
-        print('Click Button')
-        time.sleep(3)
+        print('Click Car Button')
+        time.sleep(5)
 
-        hole_list = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.viewFrontBack')))
+        print('Try move slider')
+        # slider_input = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'div.ng-scroll-content')))
+        slider_input = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//li[@class="blank_hole" and text()="9"]')))
+        # slider_input.click()
 
+
+
+        action = ActionChains(self.driver)
+        action.move_to_element(slider_input).perform()
+
+
+        # action.drag_and_drop_by_offset(slider_input, 0, 300)
+        # action.perform()
+        time.sleep(10)
 
 
 
