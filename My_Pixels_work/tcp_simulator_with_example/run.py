@@ -24,7 +24,7 @@ os.system(fr'java -jar syncwise-tcp-simulator-0.6.jar --help')
 
 @execution_time_decorator
 def run():
-    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -sc utilitygauge_2.csv -env dev --request-type utilitygauge --device L10116001811250A52 -i 1')
+    os.system(fr'"{PATH}" -jar syncwise-tcp-simulator-0.7-same-recordedDate.jar -sc utilitygauge_2.csv -env dev --request-type utilitygauge --device S10150000211018049 -i 1')
 
 
 run()
