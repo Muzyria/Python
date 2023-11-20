@@ -35,6 +35,6 @@ time.sleep(1)
 pyautogui.typewrite(r'cd C:\scrcpy-win64-v2.0\scrcpy-win64-v2.0')
 pyautogui.press('enter')
 
-pyautogui.typewrite(r'scrcpy --tcpip=192.168.3.128:41311')  # MY POCO
-# pyautogui.typewrite(r'scrcpy --tcpip=192.168.3.236:5555')
+pyautogui.typewrite(r'scrcpy --tcpip=192.168.3.128:39107')  # MY POCO
+# pyautogui.typewrite(r'scrcpy --tcpip=192.168.2.186:5555')
 pyautogui.press('enter')
