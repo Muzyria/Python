@@ -23,3 +23,5 @@ for item in data:
 # Выводим результат
 for k, v in manf.items():
     print(k, v, len(v))
+
+
