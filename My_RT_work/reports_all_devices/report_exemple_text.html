@@ -40,7 +40,7 @@
     <!-- Дополнительные параметры для отчета -->
     <div>
         <label for="additionalParams">Дополнительные параметры для отчета:</label>
-        <input type="checkbox" id="additionalParams">
+        <input type="checkbox" id="additionalParams" onchange="updateDescription()">
     </div>
 
     <!-- Отображение текстового содержимого -->
@@ -87,23 +87,22 @@
         updateDescription();
     }
 
-    document.getElementById('device').addEventListener('change', updateDescription);
-
-    async function updateDescription() {
+    // Обработчик изменения устройства или чекбокса
+    function updateDescription() {
         const selectedManufacturer = document.getElementById('manufacturer').value;
         const selectedDevice = document.getElementById('device').value;
         const additionalParamsCheckbox = document.getElementById('additionalParams');
 
         const fileName = `${selectedManufacturer}_${selectedDevice}${additionalParamsCheckbox.checked ? '_additional' : ''}.txt`;
 
-        try {
-            const response = await fetch(`text_reports/${fileName}`);
-            const textContent = await response.text();
-
-            document.getElementById('description').textContent = textContent;
-        } catch (error) {
-            console.error('Ошибка при загрузке файла:', error);
-        }
+        fetch(`text_reports/${fileName}`)
+            .then(response => response.text())
+            .then(textContent => {
+                document.getElementById('description').textContent = textContent;
+            })
+            .catch(error => {
+                console.error('Ошибка при загрузке файла:', error);
+            });
     }
 
     // Инициализация списка устройств при загрузке страницы
