@@ -59,6 +59,14 @@ class NoTest:
         print('Click Report Button')
         time.sleep(5)
 
+    def list_pages(self):
+        button = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#qwertyd > nz-spin > div > nz-pagination > ul > li.ant-pagination-options.ng-star-inserted > nz-select > nz-select-top-control > nz-select-item')))
+        button.click()
+        time.sleep(2)
+        button100 = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, '//*[text()="100 / стр."]')))
+        button100.click()
+        time.sleep(5)
+
     def click_button_generate(self):
         # CLICK REPORT BUTTON
         button_login = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'section.section - button div.button - generate')))
@@ -73,9 +81,30 @@ class NoTest:
         check_box_kkorr.click()
         print('Click KKORR CheckBox')
 
+    def click_pre_view(self):
+        # CLICK  BUTTON
+        button_login = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '//*[text()="Предварительный просмотр"]')))
+        button_login.click()
+        print('Click pre view Button')
+
+    def input_manufacture(self, data):
+        input_manuf = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#qwertyd > nz-spin > div > div > nz-table-inner-default > div > table > thead > tr > th:nth-child(2) > nz-table-filter > span > div > input')))
+        input_manuf.send_keys(data)
+        print('input manufacture')
+
+    def input_type_device(self, data):
+        input_type = WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '#qwertyd > nz-spin > div > div > nz-table-inner-default > div > table > thead > tr > th:nth-child(3) > nz-table-filter > span > div > input')))
+        input_type.send_keys(data)
+        print('input type device')
+
 
 test = NoTest()
 test.login_site()
 test.report_page()
-test.click_check_box_all()
-time.sleep(5)
+
+test.list_pages()
+# test.click_check_box_all()
+
+test.input_manufacture('RGK')
+test.input_type_device('smart104')
+time.sleep(10)
