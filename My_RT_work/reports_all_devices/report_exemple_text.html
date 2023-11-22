@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог отчетов</title>
+    <style>
+        /* Ваши стили */
+    </style>
+</head>
+<body>
+
+<h1>Каталог отчетов</h1>
+
+<div>
+    <!-- Производитель -->
+    <div>
+        <label for="manufacturer">Производитель:</label>
+        <select id="manufacturer" onchange="updateDevices()">
+            <option value="Слот">Слот</option>
+            <option value="УкрГазтех">УкрГазтех</option>
+            <option value="Радмиртех">Радмиртех</option>
+            <option value="Вычислительные технологии">Вычислительные технологии</option>
+            <option value="RGK">RGK</option>
+            <option value="Гремпис">Гремпис</option>
+            <option value="Тандем">Тандем</option>
+            <option value="УкрГазтех_Imod">УкрГазтех_Imod</option>
+            <!-- Добавьте других производителей по мере необходимости -->
+        </select>
+    </div>
+    <p>
+    <!-- Тип устройства -->
+    <div>
+        <label for="device">Тип устройства:</label>
+        <select id="device">
+            <!-- Опции для устройств добавятся динамически после выбора производителя -->
+        </select>
+    </div>
+    <p>
+    <!-- Дополнительные параметры для отчета -->
+    <div>
+        <label for="additionalParams">Дополнительные параметры для отчета:</label>
+        <input type="checkbox" id="additionalParams">
+    </div>
+
+    <!-- Отображение текстового содержимого -->
+    <div>
+        <h2>Описание:</h2>
+        <pre id="description"></pre>
+    </div>
+</div>
+
+<script>
+    const devicesData = {
+        "Слот": ['oe_22la', 'oe_vpt', 'oe_vt'],
+        "УкрГазтех": ['floutek_tm_vr_1', 'floutek_tm_board2', 'pk_v', 'corrector_pc_2'],
+        "Радмиртех": ['kvr_1_02', 'kplg_1_01', 'vega_1_01', 'radio_modul', 'kplg_2_01r', 'tkb', 'vega_1_01_nvch', 'kvr_1_01n', 'kplg_1_02r', 'vega_2_01n', 'tkb_1', 'kplg_1_02rv', 'kvr_1_01', 'vega_1_01vch', 'vega_2_01', 'vega_1_01n'],
+        "Вычислительные технологии": ['v25'],
+        "RGK": ['smart104'],
+        "Гремпис": ['universal_01', 'universal_m', 'universal_02', 'universal_mt'],
+        "Тандем": ['tandem_tr', 'tandem_t'],
+        "УкрГазтех_Imod": ['corrector_pc_2'],
+        // Добавьте данные для других производителей
+    };
+
+    function updateDevices() {
+        const manufacturerSelect = document.getElementById('manufacturer');
+        const deviceSelect = document.getElementById('device');
+        const descriptionContainer = document.getElementById('description');
+
+        // Очищаем текущие опции устройств
+        deviceSelect.innerHTML = '';
+        descriptionContainer.innerHTML = '';
+
+        // Получаем выбранный производитель
+        const selectedManufacturer = manufacturerSelect.value;
+
+        // Добавляем опции устройств для выбранного производителя
+        devicesData[selectedManufacturer].forEach(device => {
+            const option = document.createElement('option');
+            option.value = device;
+            option.textContent = device;
+            deviceSelect.appendChild(option);
+        });
+
+        // Обновляем описание при изменении производителя
+        updateDescription();
+    }
+
+    document.getElementById('device').addEventListener('change', updateDescription);
+
+    async function updateDescription() {
+        const selectedManufacturer = document.getElementById('manufacturer').value;
+        const selectedDevice = document.getElementById('device').value;
+        const additionalParamsCheckbox = document.getElementById('additionalParams');
+
+        const fileName = `${selectedManufacturer}_${selectedDevice}${additionalParamsCheckbox.checked ? '_additional' : ''}.txt`;
+
+        try {
+            const response = await fetch(`text_reports/${fileName}`);
+            const textContent = await response.text();
+
+            document.getElementById('description').textContent = textContent;
+        } catch (error) {
+            console.error('Ошибка при загрузке файла:', error);
+        }
+    }
+
+    // Инициализация списка устройств при загрузке страницы
+    updateDevices();
+</script>
+
+</body>
+</html>
