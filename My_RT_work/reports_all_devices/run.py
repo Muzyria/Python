@@ -7,6 +7,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.action_chains import ActionChains
 
+"""
+Slot {'oe_22la', 'oe_vpt', 'oe_vt'} 3
+Ukrgaztech {'floutek_tm_vr_1', 'floutek_tm_board2', 'pk_v', 'corrector_pc_2'} 4
+Radmirtech {'kvr_1_02', 'kplg_1_01', 'vega_1_01', 'radio_modul', 'kplg_2_01r', 'tkb', 'vega_1_01_nvch', 'kvr_1_01n', 'kplg_1_02r', 'vega_2_01n', 'tkb_1', 'kplg_1_02rv', 'kvr_1_01', 'vega_1_01vch', 'vega_2_01', 'vega_1_01n'} 16
+Vymiruvalnitechnologii {'v25'} 1
+rgk {'smart104'} 1
+Grempis {'universal_01', 'universal_m', 'universal_02', 'universal_mt'} 4
+Tandem {'tandem_tr', 'tandem_t'} 2
+Ukrgaztech_Imod {'corrector_pc_2'} 1
+"""
+
 
 class NoTest:
     def __init__(self):
