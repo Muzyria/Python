@@ -11,17 +11,35 @@ with open(file_path, 'r', encoding='utf-8') as file:
 names = [name for name in data[0]]
 # print(names)
 
-manf = {}  # Создаем пустой словарь
+result_dict = {}  # Создаем пустой словарь
 
-for item in data:
+for block in data:
+    manf = block["manf"]
+    type_ = block["type"]
+    serNum = block["serNum"]
+    mfDev = block["mfDev"]
+    typeDev = block["typeDev"]
+    chNum = block["chNum"]
     # Проверяем, есть ли производитель в словаре
-    if item['manf'] not in manf:
-        manf[item['manf']] = set()  # Если нет, создаем пустой список для этого производителя
 
-    manf[item['manf']].add(item['type'])  # Добавляем тип в список для данного производителя
+    # Проверка наличия manf в словаре
+    if manf not in result_dict:
+        result_dict[manf] = []
+
+    # Проверка наличия type в списке значений для manf
+    if type_ not in result_dict[manf]:
+        result_dict[manf].append({
+            "type": type_,
+            "serNum": serNum,
+            "mfDev": mfDev,
+            "typeDev": typeDev,
+            "chNum": chNum
+        })
+
 
 # Выводим результат
-for k, v in manf.items():
+for k, v in result_dict.items():
+    print()
     print(k, v, len(v))
 
 
