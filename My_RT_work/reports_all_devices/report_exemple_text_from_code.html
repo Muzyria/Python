@@ -95,22 +95,22 @@
     }
 
     // Обработчик изменения устройства или чекбокса
+
     function updateDescription() {
         const selectedManufacturer = document.getElementById('manufacturer').value;
         const selectedDevice = document.getElementById('device').value;
         const additionalParamsCheckbox = document.getElementById('additionalParams');
 
-        const fileName = `${selectedManufacturer}_${selectedDevice}${additionalParamsCheckbox.checked ? '_additional' : ''}.txt`;
+        // Формируем ключ для выбора соответствующей переменной
+        const key = `${selectedManufacturer}_${selectedDevice}${additionalParamsCheckbox.checked ? '_additional' : ''}`;
 
-        fetch(`text_reports/${fileName}`)
-            .then(response => response.text())
-            .then(textContent => {
-                document.getElementById('description').textContent = textContent;
-            })
-            .catch(error => {
-                console.error('Ошибка при загрузке файла:', error);
-            });
+        // Используем переменную с текстом отчета
+        const textContent = reportTexts[key] || "Отчет не найден"; // Если отчет не найден, можно вывести какое-то сообщение
+
+        document.getElementById('description').textContent = textContent;
     }
+
+
 
     // Инициализация списка устройств при загрузке страницы
     updateDevices();
