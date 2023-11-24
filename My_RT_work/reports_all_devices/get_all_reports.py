@@ -20,21 +20,19 @@ for block in data:
     mfDev = block["mfDev"]
     typeDev = block["typeDev"]
     chNum = block["chNum"]
-    # Проверяем, есть ли производитель в словаре
 
     # Проверка наличия manf в словаре
     if manf not in result_dict:
-        result_dict[manf] = []
+        result_dict[manf] = {}
 
-    # Проверка наличия type в списке значений для manf
+    # Проверка наличия type в словаре manf
     if type_ not in result_dict[manf]:
-        result_dict[manf].append({
-            "type": type_,
+        result_dict[manf][type_] = {
             "serNum": serNum,
             "mfDev": mfDev,
             "typeDev": typeDev,
             "chNum": chNum
-        })
+        }
 
 
 # Выводим результат
