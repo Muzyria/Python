@@ -29,17 +29,60 @@ for block in data:
     if type_ not in result_dict[manf]:
         result_dict[manf][type_] = {
             "serNum": serNum,
+            "chNum": chNum,
             "mfDev": mfDev,
-            "typeDev": typeDev,
-            "chNum": chNum
+            "typeDev": typeDev
         }
+
+translation_dict = {
+    "Slot_oe_vpt": "Слот_OE-VPT",
+    "Slot_oe_22la": "Слот_OE-22ЛА",
+    "Slot_oe_vt": "Слот_OR-VT",
+
+    "Ukrgaztech_corrector_pc_2": "УкрГазтех_Корректор ПК-2",
+    "Ukrgaztech_floutek_tm_vr_1": "УкрГазтех_ФЛОУТЭК-ТМ-ВР-1",
+    "Ukrgaztech_pk_v": "УкрГазтех_ПК-В",
+    "Ukrgaztech_floutek_tm_board2": "УкрГазтех_ФЛОУТЭК-ТМ (плата 2)",
+
+    "Radmirtech_vega_1_01": "Радмиртех_ВЕГА-1.01",
+    "Radmirtech_kvr_1_01": "Радмиртех_КВР-1.01",
+    "Radmirtech_tkb": "Радмиртех_ТКБ",
+    "Radmirtech_vega_1_01n": "Радмиртех_ВЕГА-1.01Н",
+    "Radmirtech_kplg_1_02r": "Радмиртех_КПЛГ-1.02Р",
+    "Radmirtech_vega_2_01n": "Радмиртех_ВЕГА-2.01Н",
+    "Radmirtech_kvr_1_02": "Радмиртех_КВР-1.02",
+    "Radmirtech_kplg_2_01r": "Радмиртех_КПЛГ-2.01Р",
+    "Radmirtech_vega_2_01": "Радмиртех_ВЕГА-2.01",
+    "Radmirtech_vega_1_01vch": "Радмиртех_ВЕГА-1.01ВЧ",
+    "Radmirtech_kvr_1_01n": "Радмиртех_КВР-1.01Н",
+    "Radmirtech_tkb_1": "Радмиртех_ТКБ-1",
+    "Radmirtech_kplg_1_02rv": "Радмиртех_КПЛГ-1.02РВ",
+    "Radmirtech_kplg_1_01": "Радмиртех_КПЛГ-1.01",
+    "Radmirtech_radio_modul": "Радмиртех_РАДИО-МОДУЛЬ",
+    "Radmirtech_vega_1_01_nvch": "Радмиртех_ВЕГА-1.01 НВЧ",
+
+    "Vymiruvalnitechnologii_v25": "",
+
+    "rgk_smart104": "",
+
+    "Grempis_universal_01": "",
+    "Grempis_universal_02": "",
+    "Grempis_universal_m": "",
+    "Grempis_universal_mt": "",
+
+    "Tandem_tandem_tr": "",
+    "Tandem_tandem_t": "",
+
+    "Ukrgaztech_Imod_corrector_pc_2": "",
+}
 
 
 # Выводим результат
-for k, v in result_dict.items():
-    print()
-    print(k, v, len(v))
+for key, value in result_dict.items():
+    for k, v in value.items():
 
+        print(f'"{key}_{k}": "",')
+        # print(key, k)
 
 """
 Slot {'oe_22la', 'oe_vpt', 'oe_vt'} 3
