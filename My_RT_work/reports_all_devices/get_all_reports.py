@@ -61,19 +61,19 @@ translation_dict = {
     "Radmirtech_radio_modul": "Радмиртех_РАДИО-МОДУЛЬ",
     "Radmirtech_vega_1_01_nvch": "Радмиртех_ВЕГА-1.01 НВЧ",
 
-    "Vymiruvalnitechnologii_v25": "",
+    "Vymiruvalnitechnologii_v25": "Вычислительные технологии_V25",
 
-    "rgk_smart104": "",
+    "rgk_smart104": "RGK_smart104",
 
-    "Grempis_universal_01": "",
-    "Grempis_universal_02": "",
-    "Grempis_universal_m": "",
-    "Grempis_universal_mt": "",
+    "Grempis_universal_01": "Гремпис_Универсал-01",
+    "Grempis_universal_02": "Гремпис_Универсал-02",
+    "Grempis_universal_m": "Гремпис_Универсал-М",
+    "Grempis_universal_mt": "Гремпис_Универсал-МT",
 
-    "Tandem_tandem_tr": "",
-    "Tandem_tandem_t": "",
+    "Tandem_tandem_tr": "Тандем_Тандем-ТР",
+    "Tandem_tandem_t": "Тандем_Тандем-Т",
 
-    "Ukrgaztech_Imod_corrector_pc_2": "",
+    "Ukrgaztech_Imod_corrector_pc_2": "УкрГазтех_Imod_Корректор ПК-2",
 }
 
 
