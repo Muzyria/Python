@@ -1,4 +1,7 @@
 import json
+import time
+
+from request import login, get_report
 
 # Укажите путь к вашему файлу JSON
 file_path = 'data.json'
@@ -76,13 +79,24 @@ translation_dict = {
     "Ukrgaztech_Imod_corrector_pc_2": "УкрГазтех_Imod_Корректор ПК-2",
 }
 
+log_token = login()
+
 
 # Выводим результат
 for key, value in result_dict.items():
     for k, v in value.items():
+        ser_num = v["serNum"]
+        ch_num = v["chNum"]
+        mf_dev = v["mfDev"]
+        type_dev = v["typeDev"]
 
-        print(f'"{key}_{k}": "",')
-        # print(key, k)
+        result = get_report(ser_num, ch_num, mf_dev, type_dev,log_token, kgs='false', kkorr='false')
+        print(f'"{translation_dict[f"{key}_{k}"]}": ' + result[1:-1] + ",")
+        time.sleep(3)
+        result = get_report(ser_num, ch_num, mf_dev, type_dev, log_token, kgs='true', kkorr='true')
+        print(f'"{translation_dict[f"{key}_{k}"]}_additional": ' + result[1:-1] + ",")
+        time.sleep(3)
+
 
 """
 Slot {'oe_22la', 'oe_vpt', 'oe_vt'} 3

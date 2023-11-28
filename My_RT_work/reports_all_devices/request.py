@@ -26,14 +26,14 @@ def login():
     return response.json()['access']
 
 
-def get_report(ser_num, ch_num, mf_num, type_dev, token, kgs='false', kkorr='false'):
+def get_report(ser_num, ch_num, mf_dev, type_dev, token, kgs='false', kkorr='false'):
     url = f"https://rest-direct-dev.hasgas.com.ua/api/v1/report?from=2023-10-01&to=2023-10-31&ksg={kgs}&kkorr={kkorr}"
 
     payload = json.dumps([
       {
         "serNUM": ser_num,
         "chNUM": ch_num,
-        "mfDEV": mf_num,
+        "mfDEV": mf_dev,
         "typeDEV": type_dev
       }
     ])
@@ -50,8 +50,9 @@ def get_report(ser_num, ch_num, mf_num, type_dev, token, kgs='false', kkorr='fal
 
     response = requests.request("POST", url, headers=headers, data=payload)
 
-    print(rf'{response.text}')
-
+    # print(rf'{response.text}')
+    return response.text
 
 # get_report()
-# print(login())
+# print(log_token := login())
+# get_report("43217", 0, 2, 1, log_token, kgs='false', kkorr='false')
