@@ -1,27 +1,62 @@
 import json
 
-# Укажите путь к вашему файлу JSON
-file_path = 'data.json'
+# Ваш JSON-строк
+json_str = '''
+[
+    {
+        "id": 2891,
+        "serNum": "57467",
+        "manf": "Ukrgaztech",
+        "type": "corrector_pc_2",
+        "mfDev": 5,
+        "typeDev": 12,
+        "chNum": 0,
+        "meteringStation": "0097359301",
+        "cardNo": "+380679241941",
+        "org": "ДП Укргазтех",
+        "adr": "ЖУРНАЛIСТIВ 15",
+        "gasName": "dnipro",
+        "clientEic": "",
+        "note": null,
+        "dataComplete": false,
+        "dvst_alwrk": null,
+        "dvwrk_alwrk": null
+    },
+    # Дополнительные блоки...
+]
+'''
 
-# Открытие файла и чтение данных
-with open(file_path, 'r', encoding='utf-8') as file:
-    # Загрузка данных из файла
-    data = json.load(file)
+# Преобразование строки JSON в объект Python
+data = json.loads(json_str)
 
-names = [name for name in data[0]]
-# print(names)
+# Создание словаря
+result_dict = {}
 
-manf = {}  # Создаем пустой словарь
+# Обработка каждого блока данных
+for block in data:
+    manf = block["manf"]
+    type_ = block["type"]
+    serNum = block["serNum"]
+    mfDev = block["mfDev"]
+    typeDev = block["typeDev"]
+    chNum = block["chNum"]
 
-for item in data:
-    # Проверяем, есть ли производитель в словаре
-    if item['manf'] not in manf:
-        manf[item['manf']] = set()  # Если нет, создаем пустой список для этого производителя
+    # Проверка наличия manf в словаре
+    if manf not in result_dict:
+        result_dict[manf] = []
 
-    manf[item['manf']].add(item['type'])  # Добавляем тип в список для данного производителя
+    # Проверка наличия type в списке значений для manf
+    if type_ not in result_dict[manf]:
+        result_dict[manf].append({
+            "type": type_,
+            "serNum": serNum,
+            "mfDev": mfDev,
+            "typeDev": typeDev,
+            "chNum": chNum
+        })
 
-# Выводим результат
-for k, v in manf.items():
-    print(k, v, len(v))
-
-
+# Вывод результата
+for manf, values in result_dict.items():
+    print(f"Manufacturer: {manf}")
+    for item in values:
+        print(f"  Type: {item['type']}, SerNum: {item['serNum']}, mfDev: {item['mfDev']}, typeDev: {item['typeDev']}, chNum: {item['chNum']}")

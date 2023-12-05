@@ -7,6 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.action_chains import ActionChains
 
+from request import login, get_report
+
 """
 Slot {'oe_22la', 'oe_vpt', 'oe_vt'} 3
 Ukrgaztech {'floutek_tm_vr_1', 'floutek_tm_board2', 'pk_v', 'corrector_pc_2'} 4
@@ -111,11 +113,11 @@ class NoTest:
 
 test = NoTest()
 test.login_site()
-test.report_page()
-
-test.list_pages()
-# test.click_check_box_all()
-
-test.input_manufacture('RGK')
-test.input_type_device('smart104')
+# test.report_page()
+#
+# test.list_pages()
+# # test.click_check_box_all()
+#
+# test.input_manufacture('RGK')
+# test.input_type_device('smart104')
 time.sleep(10)
