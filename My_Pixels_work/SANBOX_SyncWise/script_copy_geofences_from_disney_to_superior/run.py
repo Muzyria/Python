@@ -71,18 +71,19 @@ def convert_coordinates(center, coordinates, lat_diff, lng_diff):
 # disney_live.user_account_login()
 # disney_live.course_geofence_list()
 
-# superior_live = SyncwiseClient(**payloads_live['superior'])  # MAIN
-# superior_live.user_account_login()
+superior_live = SyncwiseClient(**payloads_live['superior'])  # MAIN
+superior_live.user_account_login()
+superior_live.course_geofence_list()
 
-superior_dev = SyncwiseClient(**payloads_dev['superior'])  # MAIN
-superior_dev.user_account_login()
-superior_dev.course_geofence_list()
+# superior_dev = SyncwiseClient(**payloads_dev['superior'])  # MAIN
+# superior_dev.user_account_login()
+# superior_dev.course_geofence_list()
 
 
 # s = [8952, 8953, 8954, 8955, 8956, 8957, 8958, 8959, 8960, 8961, 8962, 8963, 8964, 8965, 8966, 8967, 8968, 8969, 8952, 8953, 8954, 8955, 8956, 8957, 8958, 8959, 8960, 8961, 8962, 8963, 8964, 8965, 8966, 8967, 8968, 8969, 8952, 8953, 8954, 8955, 8956, 8957, 8958, 8959, 8960, 8961, 8962, 8963, 8964, 8965, 8966, 8967, 8968, 8969]
 value_count = 0
-for item in superior_dev.COURSE_GEOFENCE_LIST['resultList']:
-    if item['id_geofenceType'] == 10 and (item['id_geofence'] not in [12694, 12696, 12698, 12699, 12700, 12702]):
+for item in superior_live.COURSE_GEOFENCE_LIST['resultList']:
+    if item['id_geofenceType'] == 18:
         print(item)
         print(id_geofence := item['id_geofence'])
         # print(id_geofence_action_type := item['id_geofenceActionType'])
@@ -91,10 +92,9 @@ for item in superior_dev.COURSE_GEOFENCE_LIST['resultList']:
         # print(new_coord := superior_dev.convert_coordinates_to_float(points))
         # print(new_coord := convert_coordinates(new_center, superior_dev.convert_coordinates_to_float(points), lat_diff, lng_diff))
 
-        superior_dev.course_geofence_advertisement_type_delete(id_geofence)
-        value_count += 1
-        if value_count == 11:
-            break
+        superior_live.course_geofence_advertisement_type_delete(id_geofence)
+
+
 
 # for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
 #     if item['id_geofenceType'] == 10:
