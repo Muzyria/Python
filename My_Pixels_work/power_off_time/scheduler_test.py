@@ -13,6 +13,6 @@ test.put_random_power_off_time(new_time[1])
 #
 test.get_time_off()
 test.get_random_power_off_time()
-test.open_date_settings()
+# test.open_date_settings()
 
-print(test.__dict__)
+# print(test.__dict__)
