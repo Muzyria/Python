@@ -8,15 +8,20 @@ class Scheduler:
     def __init__(self, ip_device):
         self.ip_device = ip_device
 
-    def get_value_new_time(self, minutes=1, seconds=10):
-        """RETURN NEW TIME"""
+    def get_value_new_time(self, minutes: int = 1, seconds: int = 10, minutes_pw_off: int = 3):
+        """RETURN NEW TIME """
         now = datetime.now()  # получаем текущее время
-        one_minute_later = now + timedelta(minutes=minutes, seconds=seconds)  # добавляем 1 минуту к текущему времени
-        hour = one_minute_later.time().hour  # получаем часы через 1 минуту
-        minute = one_minute_later.time().minute  # получаем минуты через 1 минуту
-        print(f'Расчетное время power_off_time={hour:02}:{minute:02}')
+        minutes_later_power_off = now + timedelta(minutes=minutes, seconds=seconds)  # добавляем минут к текущему времени
+        hour_power_off = minutes_later_power_off.time().hour  # получаем часы через минутs
+        minute_power_off = minutes_later_power_off.time().minute  # получаем минуты через минутs
+
+        minutes_later_random_power_off = now + timedelta(minutes=minutes + minutes_pw_off, seconds=seconds)  # добавляем минут к текущему времени
+        hour_random_power_off = minutes_later_random_power_off.time().hour  # получаем часы через минутs
+        minute_random_power_off = minutes_later_random_power_off.time().minute  # получаем минуты через минутs
+        print(f'Расчетное время power_off_time={hour_power_off:02}:{minute_power_off:02}')
+        print(f'Расчетное время power_randome_off_time={hour_random_power_off:02}:{minute_random_power_off:02}')
         print()
-        return f'{hour:02}{minute:02}'
+        return (f'{hour_power_off:02}{minute_power_off:02}', f'{hour_random_power_off:02}{minute_random_power_off:02}')
 
     def check_devices_active(self):
         output = subprocess.check_output(['adb', 'devices'])
@@ -56,6 +61,3 @@ class Scheduler:
 
     def open_date_settings(self):
         os.system('adb shell am start -a android.settings.DATE_SETTINGS')
-
-
-
