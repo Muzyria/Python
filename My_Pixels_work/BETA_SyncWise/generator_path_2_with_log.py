@@ -18,7 +18,7 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.102'}
+    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.101'}
     START_COORDINATES = "50.07807852323376, 36.23065154766116"
 
     def __init__(self):
@@ -45,7 +45,7 @@ class IntermediateCoordinatesGenerator:
             log_file.write(message + '\n')
 
     def get_start_coordinates(self, minutes):
-        steps = int(minutes * 30)
+        steps = int(minutes * 40)
         for _ in range(steps):  # start coordinate for begin
             time_minute = datetime.now().time().minute
 
@@ -98,11 +98,11 @@ class IntermediateCoordinatesGenerator:
                         self.touch_screen()
 
     def run_device_by_time(self, minutes):  #  генераци нахождения на лунке по времени
-        steps = int(minutes * 30)
+        steps = int(minutes * 40)
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
             time_start_on_hole = datetime.now()
-            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-4)
+            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-1)
             time_minute = datetime.now().time().minute
             message = f'STARTING TRIP ON HOLE -> {i} from {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}'
             self.log_to_file(message)
@@ -134,10 +134,10 @@ generator = IntermediateCoordinatesGenerator()
 print()
 print(f"START GAME - -----------------------------------------------------------------------------------------")
 generator.log_to_file(f'the game started at {datetime.now().strftime("%H:%M:%S")}')
-generator.get_start_coordinates(2)
+generator.get_start_coordinates(3)
 # generator.run_device(6)
-generator.run_device_by_time(2)
-generator.get_start_coordinates(2)
+generator.run_device_by_time(4)
+generator.get_start_coordinates(5)
 print()
 generator.log_to_file(f'the game finished at {datetime.now().strftime("%H:%M:%S")}')
 print(f'FINISH GAME ------------------------------------------------------------------------------------------')
