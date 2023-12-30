@@ -203,26 +203,26 @@ class SyncwiseClient(SyncwiseAPI):
         print(response.text)
 
 
-test_1 = SyncwiseClient("https://api2.syncwise360.com")
-test_1.user_account_login()
-
-
-print(test_1.SECRET_KEY)
-
-test_1.course_geofence_create('QWE5555', [
-    {
-      "lat": 50.09112670368736,
-      "lng": 36.23535633087159
-    },
-    {
-      "lat": 50.09242074333338,
-      "lng": 36.24127864837647
-    },
-    {
-      "lat": 50.09456822137395,
-      "lng": 36.23578548431397
-    }
-  ])
+# test_1 = SyncwiseClient("https://api2.syncwise360.com")
+# test_1.user_account_login()
+#
+#
+# print(test_1.SECRET_KEY)
+#
+# test_1.course_geofence_create('QWE5555', [
+#     {
+#       "lat": 50.09112670368736,
+#       "lng": 36.23535633087159
+#     },
+#     {
+#       "lat": 50.09242074333338,
+#       "lng": 36.24127864837647
+#     },
+#     {
+#       "lat": 50.09456822137395,
+#       "lng": 36.23578548431397
+#     }
+#   ])
 
 
 
