@@ -1,84 +1,103 @@
-*WIFI*
- *with the LC79D module*
-
-*CASE A: Cart Barn Sleep*
-1. With device awake, connect the device to GPS module (with different FW qued on the server) and confirm device establishes a GPS fix - *Confirmed*
-2. Allow device to go to Cart Barn Sleep - *Confirmed at 11:48*
-3. Wake up device - *Confirmed at 11:49*
-- Note if able to tap flag to see GPS download available status  - *Confirmed*
-- If YES - Confirm download status bar is updating during download - *Confirmed*
--  Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
-4. Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
-5. Allow device to go back to CBS, and then wake up - *Confirmed at 12:00*
-6. Confirm GPS module installs new FW version upon waking up from Cart Barn Sleep - *Confirmed*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - *Confirmed*
-7. Put the device into Cart Barn sleep and then update the server to a different FW version available when the device is asleep (or switch the GPS module to a different FW version) - *Confirmed at 12:30*
-8. Wake up device, and confirm it downloaded the update (check the download icon status on PlayGolf screen) - *Confirmed*
-9. Exit the YamaTrack app and check the UUA app - *Confirmed at 10 :53*
-- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update - *Confirmed*
-- Confirm within tablet Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
-- Confirm after installing the update, exiting UUA and then returning to UUA, no updates are available - *Confirmed*
-
-*CASE B: Off Hole Sleep*
-1. With device awake, connect device to GPS module (with different FW qued on server) and confirm device establishes a GPS fix - *Confirmed*
-2. Allow device to go to Off Hole Sleep - *Confirmed*
-3. Wake up device - *Confirmed at 12:37*
-- Note if able to tap flag to see GPS download available status  - *Confirmed*
-- If YES - Confirm download status bar is updating during download - *Confirmed*
--  Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
-4. Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
-5. Allow device to go back to Off Hole Sleep and then wake up - *Confirmed*
-6. Confirm GPS module *DOES NOT install* new FW version upon waking up from Off Hole Sleep - *Confirmed*
-7. Press the checkmark icon, and confirm the GPS FW will install - *Confirmed at 12:45*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - *Confirmed*
-8. With device awake, connect device to GPS module (with different FW qued on server) and confirm device establishes a GPS fix - *Confirmed*
-9. Allow device to go to Off Hole Sleep - *Confirmed at 12:47*
-10. . Wake up the device, and confirm it downloaded the update (check the download icon status on the PlayGolf screen) - *Confirmed*
-10. Exit the YamaTrack app and check the UUA app (install updates) - *Confirmed*
-- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update - *Confirmed*
-- Confirm after installing the update, exiting UUA, and then returning to UUA, no updates are available - *Confirmed*
-- Confirm within tablet Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
-
-*CASE C: Upon Boot Up*
-1. With device in ship mode/powered off, connect to GPS module with different FW than what is queud on the server  - *Confirmed Ship Mode at 12:50*
-2. Confirm device recognizes an update available (via logs, or by tapping the flag to display the download icon status) when powering on - *Confirmed at 12:55*
-- Confirm there is no visible interference with the Play Golf/APK while the download is taking place - *Confirmed*
-- Confirm download status bar is updating during download - Note: ER=Unknown for this specific step, I don't believe this will apply - *Confirmed*
-- Confirm when download is complete, the icon indicates the download was successful - *Confirmed*
-6. Put device to CBS, confirm device installs download upon waking up from sleep  - *Confirmed at 12:58*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control  - *Confirmed*
-
-*CASE D: Full App Reset - Don't know if this applies*
-1. With device awake, connect to GPS module with different FW than what is queud on the server  - *Confirmed*
-2. Select Full App Reset within the APK, Menu options.   - *Confirmed*
-3. Confirm the app resets, and checks/loads any updates. Note this process maybe a little longer than normal as it is downloading and installing the updated SW version.  - *Confirmed (Only downloaded update - It's Expected)*
-4. Confirm app loads completely on Play Golf screen, and does not again reattempt to install software update at a later time  - *Confirmed (after Full Up Reset)*.
-5. Confirm the device installed the updated software version  - *Confirmed*
-- Confirm updated software version is displayed in tablet Asset Details, 360, and Control  - *Confirmed*
+*Date: 04.14.23
+OS Build: 2.11.12_E
+APK Build: 2.1.93
+Environment: Live
+Cable FW Build:
+Device(s): YTR
+Device ID: S10150000211018050
+Test Location:
+UUA : 1.4.0
+MB: 1.5*
 
 
-*APK and GPS*
-CASE F: Simultaneous APK and GPS Updates
-1. With device awake, que  APK update within Control Que - *Confirmed at 16:45*
-2. Connect the device to GPS module with a different FW that is queued on the server
-2. Confirm how device recognizes and handles APK and GPS updates.
-- Falling asleep/waking up from Cart Barn Sleep CBS  - *Confirmed at 16:47*
-- Falling asleep/waking up from Off hole sleep  - *Confirmed at 17:04*
-- Power on Ship Mode  - *Confirmed*
-- Device Reset/Full App Reset  - *Confirmed at 17:16*
-3. Verify order of priority for each case (ex: 1st-APK, 2nd-GPS)
-- Falling asleep/waking up from Cart Barn Sleep - *Confirmed at 16:47 (GPS, APK)*
-- Falling asleep/waking up from Off hole sleep - *Confirmed (GPS, APK)*
-- Power on - *Confirmed  (GPS, APK)*
-- Device Reset/Full App Reset - *Confirmed (GPS, APK)*
-4. Confirm Update icon status updates accordingly (if applies)
-5. Confirm the downloaded update installs upon
-- Falling asleep/waking up from Cart Barn Sleep  - *Confirmed at 16:57*
-- Falling asleep/waking up from Off hole sleep Off Hole Sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to module with different FW)  - *Confirmed*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW)  - *Confirmed*
-6. Note if there is any difference in precedence in what installs (ex: 1st-APK, 2nd-GPS)
-- Falling asleep/waking up from Cart Barn Sleep - *Confirmed at 17:10 (1st-APK, 2nd-GPS)*
-- Falling asleep/waking up from Off hole sleep - *NOT Confirmed - It's Expected*
-- Power on (device asleep, connected to module with different FW) - *Confirmed at 17:18 (1st-APK, 2nd-GPS)*
-- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - *Confirmed at 17:20 (1st-APK, 2nd-GPS)*
+*%{Background:yellow}All  cases passed with expected behavior%*
+
+h2. Test Plan
+
+*Preconditions:*
+* Assign tablet to the *COPY SUPERIOR* test account
+
+h3. I. 1.5x FIXES
+
+*CASE A: Map Loading After Exiting Food/Drink Menu* - Issue #11132 *Confirmed at 11:47*
+* See Issue #11132 for test plan
+
+*CASE B: New Hole Prompt + Advertising* - Issue #11124 *Confirmed at 12:06*
+Confirm bug cannot be reproduced by following workflow in Issue #11124
+
+*CASE C: Advertisement Optimization* - Issue #11111 *Confirmed 12:36*
+* Test with LIVE GPS
+* See Issue #10994-3 for additional test plan
+** (Covers: Advertisement Failing to Download - Issue #10994 / Network Timeout Handling Issue #10774)
+
+
+*CASE D: TCP Library Crash Bug* - Issue #11007 *Confirmed*
+* Please see Issue #10067-22 for test plan.
+* Execute only test plans B and C with follow-up optional suggestion with Wifi Hotspot
+* Make sure device knows SyncWise Wifie network and for hotspot create a network using YamaTrack1 or YamaTrack2 "network names/passwords":https://redmine.syncwise.com/documents/768
+
+*CASE E: Automatic Brightness Update* - #10827 / #10895 *Confirmed*
+* See #10827-4 update 4 for test plan
+* Make sure bug in 10895 is resolved
+
+*CASE F: Beeping to Non Beeping Geofences* - #10853 *Confirmed*
+* Requires testing outdoor with GPS Module
+* Review bug in #10853 and confirm bug is no longer occurring
+** Make sure tablet is configured as an AC cart and do beeping only geofence VS message only geofence
+
+*CASE G: Default Distance Unit Settings Handling* - Issue #10850 --- KEY FEATURE *Confirmed*
+* See #10850-3 update 3 for test plan
+
+*CASE H: App Does Not Crash in Demo Mode* - Issue #10684 (1.5.3) *Confirmed*
+* Review issue and confirm bug cannot be replicated
+
+*CASE I: Update Menu - No Server Info* (1.5.2) - #10610 *Confirmed*
+* Confirm correct error message when requesting updates but with no cellular signal
+* Confirm dynamic updating of screen when returning to good coverage area
+
+
+h3. II. Deep Regression Tests
+
+*CASE A: Asset Lock Down* #13008
+
+*CASE B: Updates via Tablet Sync*: Pin-Locations, Advertisements, Food & Beverage *Confirmed*
+1. With Cell/Wifi Connection
+* Place tablet into cart-barn sleep
+* Within 360 update pin-locations/advertisements/food & beverage
+** For Pin Locations complete:  A) Move the pin location  B) Change the rotation date, from a different date, to the current test date (for example have it set to rotate on Thursday, but update it to Tuesday if testing on a Tuesday)
+* Confirm when waking up if tablet receives updates *Confirmed*
+* With tablet awake - update pin-locations/advertisements/food & beverage items
+* On YTX/YTR go to Menu > Settings > Updates and check to see if an update is recognized for each item, when an update was made
+* If update is recognized, select UPDATE, and confirm update applies *Confirmed*
+
+2. Without Cell/Wifi Connection *Confirmed*
+* Place tablet in cartbarn geofence, and disable cell/wifi.
+* Allow device to go to sleep then update pin locations/advertisements/food & bev within 360
+* Wake up tablet - allow YamaTrack app to fully load on Play Golf Screen
+* Enter scores within scorecard for several holes
+* Enable cell/wifi and confirm if tablet will automatically perform tablet sync (splash screen appears with "Loading Updates" message *Confirmed*
+* Confirm all previous changes updated successfully
+* Confirm scores within scorecard were not cleared *Confirmed*
+
+*CASE C: Dynamic Updates*: Geofences, Pin-Locations *Confirmed*
+* Have tablet on/active
+* Update a geofence settings, turn/on off within 360
+* Wait 2 min. and confirm if updated settings apply
+* Re-draw geofence lines for a specific geofence within 360
+* Wait 2 min. and confirm if updated settings apply  *Confirmed*
+* Update Pin-location for a hole within 360
+* Wait 2 min. and on the YTX select the hole that was updated
+* Confirm the pin-location on the screen updated *Confirmed*
+
+*CASE D: Cart Path Only Functionality* *Confirmed*
+* Confirm new CPO methodology works
+# On Test Course account create multiple CPO geofences associated with different holes
+#  From "Course Map" Screen in Accounts 360, activate "Cart Path Only" for some of the holes, but leave other holes disabled (for example if you created CPO geofences for hole 1, 2, 3, only activate 1 and 3) with SPEED control
+# Confirm that speed control and CPO messages only show up for holes that are active and does not activate in holes that are not active *Confirmed*
+# Change "Cart Path Only" control to "Immediate Shutdown" and repeat step 2
+# When stuck in a shutdown geofence, restore movement through the "Asset Details" >> "Asset Shutdown" screen and press Restore Cart
+# Confirm cart drive-ability is restored *Confirmed*
+
+*CASE E: Screen freezes after tapping Home (Power button) button while going to standby mode*  (1.5.1) - #10758 *Confirmed at 15:27*
+* Review Redmine Issue for nature of the bug and confirm it cannot be replicated
+* Between taps, confirm that no "Android Not Responding" messages arise. *Confirmed*
