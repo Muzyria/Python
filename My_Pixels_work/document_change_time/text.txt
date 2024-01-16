@@ -1,10 +1,10 @@
-*Date: 04.14.23
-OS Build: 2.11.12_E
-APK Build: 2.1.93
+*Date: 01.10.23
+OS Build: 2.14.7_E
+APK Build: 2.1.96
 Environment: Live
 Cable FW Build:
 Device(s): YTR
-Device ID: S10150000211018050
+Device ID: S10150000211018049
 Test Location:
 UUA : 1.4.1
 MB: 1.5*
@@ -19,84 +19,84 @@ Complete all tests – Once over WIFI and Once over Cellular
 *Passed with WI-FI network*
 
 *Case A) Download All Logs*
-Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 16:00*
-Select Download all logs within Control – Record Time – *Confirmed at 16:00*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 16:00*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 16:01*
+Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 13:03*
+Select Download all logs within Control – Record Time – *Confirmed at 13:04*
+Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 13:04*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:08*
 Confirm Logs appear in Control with the specified type “All Logs” in the list. - *Confirmed*
 Review logs to confirm they contain logs more than one day - *Confirmed*
 
 *Case B) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 16:04*
+With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 13:09*
 Wait several minutes, then flip to RUN/supply power to a device- *Confirmed*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 16:08*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 16:08*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 13:12*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 13:16*
 Confirm Logs appear in Control with the specified type “All Logs” in the list. *Confirmed*
 Review logs to confirm they contain logs more than one day - *Confirmed*
 
 *Case C) Device Powered on > Sleep mode > Woke up*
-Select Download all logs within Control – Record Time - *Confirmed at 16:12*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 16:14*
+Select Download all logs within Control – Record Time - *Confirmed at 13:18*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 13:25*
 Review logs to confirm they contain logs more than one day - *Confirmed*
 
 *Case D) Download Logs by Day in Past*
-Select to download logs for a day in the past - *Confirmed at 16:14*
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 16:17*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 16:18*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 16:22*
+Select to download logs for a day in the past - *Confirmed at 13:27*
+Confirm request is sent/displays correctly within Control – Record Time - *Confirmed*
+Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 13:21*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:32*
 
 *Case E) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 16:22*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 16:23*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 16:24*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 16:25*
-Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 16:24*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:24*
+With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 13:29*
+Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 13:31*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 13:32*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:34*
+Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 13:38*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 13:39*
 
 *Case F) Device Powered on > Sleep mode > Woke up*
-Select Download for a day in the past within Control – Record Time - *Confirmed at 16:27*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 16:31*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:31*
+Select Download for a day in the past within Control – Record Time - *Confirmed at 13:42*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 13:44*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 13:49*
 
 *Case G) Download Logs by Day – Current Day*
 Select to download logs for SAME DAY
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 16:32*
-Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 16:31*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 16:34*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:36*
+Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 13:51*
+Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 13:53*
+Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:58*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 14:00*
 
 *Case H) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 16:44*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 16:49*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 16:50*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 16:51*
-Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 16:53*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:55*
+With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 14:02*
+Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 14:04*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 14:07*
+Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 14:12*
+Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 14:16*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 14:18*
 
 *Case I) Device Powered on > Sleep mode > Woke up*
-Select Download for a current Day within Control – Record Time - *Confirmed at 16:37*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 16:38*
+Select Download for a current Day within Control – Record Time - *Confirmed at 14:24*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 14:28*
 Note – these may not upload until the device wakes up
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:41*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 14:35*
 
 *Corner Cases:*
 
 *Case J) Multiple Log Requests – Send All Logs request two times*
-Verify if log request goes through (one/both) -  *requested at 16:54 / Then at 16:54 got one (04) custom message/ at 16:54 - only one log appeared*
-Confirm if logs uploaded are correct - *Confirmed at 16:59*
+Verify if log request goes through (one/both) -  *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed at 14:45*
 
 *Case K) Multiple Log Requests – Send All Logs request, then By Day*
-Verify if log request goes through (one/both) -*Requested at 17:02 / Then at 17:02. At 17:02 and 17:02 logs appear: All Logs and By Day respectively*
+Verify if log request goes through (one/both) - *Confirmed*
 Confirm if logs uploaded are correct - *Confirmed*
 
 *Case L) Multiple Log Requests - By Day – same day 2x times*
-Verify if log request goes through (one/both) - *Select By Day logs twice at 17:09, 60 seconds between selections, confirm requests went through*
-Confirm if logs uploaded are correct - *Confirmed At 17:12 and 17:12 logs appear*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed*
 
 *Case M) Multiple Log Requests - By Day – one day, then another day*
-Verify if log request goes through (one/both) - *Select By Day logs twice at 17:20, 10 seconds between selections, confirm requests went through*
-Confirm if logs uploaded are correct - *Confirmed At 17:23 and 17:23 logs appear*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed*
 
 *Case N) Multiple Log Requests –By Day, then All Logs*
-Verify if log request goes through (one/both) - *Requested at 17:26 / Then at 17:26. At 17:26 and 17:26 logs appear: By Day and All Logs respectively*
-Confirm if logs uploaded are correct - *Confirmed at 17:37*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed at 15:20*
