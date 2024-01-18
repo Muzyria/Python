@@ -2,22 +2,22 @@
 
 class Wordplay:
     def __init__(self, words=None):
-        if words is None:
+        if not words:
             words = []
-        self.words = words
+        self.words = words[:]
 
     def add_word(self, word):
         if word not in self.words:
             self.words.append(word)
 
     def words_with_length(self, n):
-        pass
+        return [el for el in self.words if len(el) == n]
 
-    def only(self, *data):
-        pass
+    def only(self, *args):
+        return [el for el in self.words if all([char in args for char in set(el)])]
 
-    def avoid(self, data):
-        pass
+    def avoid(self, *args):
+        return [el for el in self.words if all([char not in args for char in set(el)])]
 
 
 wordplay = Wordplay()
@@ -43,3 +43,6 @@ wordplay = Wordplay(['o', 'to', 'otto', 'top', 't'])
 print(wordplay.only('o', 't'))
 
 
+wordplay = Wordplay(['a', 'arthur', 'timur', 'bee', 'geek', 'python', 'stepik'])
+
+print(wordplay.avoid('a', 'b', 'c'))  # ['timur', 'geek', 'python', 'stepik']
