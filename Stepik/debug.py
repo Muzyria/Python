@@ -16,9 +16,12 @@ class BankAccount:
     def withdraw(self, amount):
         """метод, уменьшающий баланс счета"""
         if isinstance(amount, (int, float)):
-            self._balance += amount
+            if self._balance - amount < 0:
+                raise ValueError("Неверный формат данных.")
+            else:
+                self._balance -= amount
         else:
-            raise ValueError("На счете недостаточно средств")
+            raise ValueError("Неверный формат данных.")
 
 
 account = BankAccount()
