@@ -1,27 +1,39 @@
 
 
-def hash_function(password):
-    hash_value = 0
-    for char, index in zip(password, range(len(password))):
-         hash_value += ord(char) * index
-    return hash_value % 10**9
-
-
-class Account:
-    def __init__(self, login, password):
-        self.login = login
-        self.password = password
+class Color:
+    def __init__(self, hexcode):
+        self.hexcode = hexcode
 
     @property
-    def login(self) -> str:
-        return self._login
+    def hexcode(self) -> str:
+        return self._hexcode
 
-    @login.setter
-    def login(self, data):
-        self._login = data
+    @property
+    def r(self) -> int:
+        return self._r
+
+    @property
+    def g(self) -> int:
+        return self._g
+
+    @property
+    def b(self) -> int:
+        return self._b
+
+    @hexcode.setter
+    def hexcode(self, value: str) -> None:
+        self._hexcode = value
+        self._r = int(value[0: 2], 16)
+        self._g = int(value[2: 4], 16)
+        self._b = int(value[4: 7], 16)
 
 
-account = Account('hannymad', 'cakeisalie')
+color = Color('0000FF')
+print(color.__dict__)
 
-print(account.login)
-print(account.password)
+color.hexcode = 'A782E3'
+print(color.__dict__)
+print(color.hexcode)
+print(color.r)
+print(color.g)
+print(color.b)
