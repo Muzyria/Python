@@ -1,39 +1,38 @@
+import re
 
 
-class Color:
-    def __init__(self, hexcode):
-        self.hexcode = hexcode
+class CaseHelper:
 
-    @property
-    def hexcode(self) -> str:
-        return self._hexcode
+    @staticmethod
+    def is_snake(string: str):
+        return all(i.islower() for i in string.split('_'))
 
-    @property
-    def r(self) -> int:
-        return self._r
+    @staticmethod
+    def is_upper_camel(string):
+        return
 
-    @property
-    def g(self) -> int:
-        return self._g
+    @staticmethod
+    def to_snake(string):
+        return
 
-    @property
-    def b(self) -> int:
-        return self._b
-
-    @hexcode.setter
-    def hexcode(self, value: str) -> None:
-        self._hexcode = value
-        self._r = int(value[0: 2], 16)
-        self._g = int(value[2: 4], 16)
-        self._b = int(value[4: 7], 16)
+    @staticmethod
+    def to_upper_camel(string):
+        return
 
 
-color = Color('0000FF')
-print(color.__dict__)
+print(CaseHelper.is_snake('beegeek'))
+print(CaseHelper.is_snake('bee_geek'))
+print(CaseHelper.is_snake('Beegeek'))
+print(CaseHelper.is_snake('BeeGeek'))
+print()
+print(CaseHelper.is_upper_camel('beegeek'))
+print(CaseHelper.is_upper_camel('bee_geek'))
+print(CaseHelper.is_upper_camel('Beegeek'))
+print(CaseHelper.is_upper_camel('BeeGeek'))
+print()
+print(CaseHelper.to_snake('Beegeek'))
+print(CaseHelper.to_snake('BeeGeek'))
+print()
+print(CaseHelper.to_upper_camel('beegeek'))
+print(CaseHelper.to_upper_camel('bee_geek'))
 
-color.hexcode = 'A782E3'
-print(color.__dict__)
-print(color.hexcode)
-print(color.r)
-print(color.g)
-print(color.b)
