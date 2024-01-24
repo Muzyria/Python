@@ -1,38 +1,35 @@
-import re
+from functools import singledispatchmethod
+from datetime import date
+
+class BirthInfo:
+    @singledispatchmethod
+    def __init__(self, birth_date):
+        raise TypeError('Аргумент переданного типа не поддерживается')
+
+    @__init__.register(list)
+    @__init__.register(tuple)
+    def from_list_tuple(self, birth_date):
+        self.birth_date = date(*birth_date)
+
+    @__init__.register(date)
+    def from_object(self, birth_date):
+        self.birth_date = birth_date
+
+    @__init__.register(str)
+    def from_str(self, birth_date):
+        self.birth_date = date.fromisoformat(birth_date)
+
+    @property
+    def age(self):
+        age = date.today().year - self.birth_date.year - 1
+        age += (date.today().month, date.today().day) >= (self.birth_date.month, self.birth_date.day)
+        return age
 
 
-class CaseHelper:
+birthinfo1 = BirthInfo('2020-09-18')
+birthinfo2 = BirthInfo(date(2010, 10, 10))
+birthinfo3 = BirthInfo([2016, 1, 1])
 
-    @staticmethod
-    def is_snake(string: str):
-        return all(i.islower() for i in string.split('_'))
-
-    @staticmethod
-    def is_upper_camel(string):
-        return
-
-    @staticmethod
-    def to_snake(string):
-        return
-
-    @staticmethod
-    def to_upper_camel(string):
-        return
-
-
-print(CaseHelper.is_snake('beegeek'))
-print(CaseHelper.is_snake('bee_geek'))
-print(CaseHelper.is_snake('Beegeek'))
-print(CaseHelper.is_snake('BeeGeek'))
-print()
-print(CaseHelper.is_upper_camel('beegeek'))
-print(CaseHelper.is_upper_camel('bee_geek'))
-print(CaseHelper.is_upper_camel('Beegeek'))
-print(CaseHelper.is_upper_camel('BeeGeek'))
-print()
-print(CaseHelper.to_snake('Beegeek'))
-print(CaseHelper.to_snake('BeeGeek'))
-print()
-print(CaseHelper.to_upper_camel('beegeek'))
-print(CaseHelper.to_upper_camel('bee_geek'))
-
+print(birthinfo1.birth_date)
+print(birthinfo2.birth_date)
+print(birthinfo3.birth_date)
