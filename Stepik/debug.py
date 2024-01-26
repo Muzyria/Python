@@ -1,35 +1,27 @@
-from functools import singledispatchmethod
-from datetime import date
-
-class BirthInfo:
-    @singledispatchmethod
-    def __init__(self, birth_date):
-        raise TypeError('Аргумент переданного типа не поддерживается')
-
-    @__init__.register(list)
-    @__init__.register(tuple)
-    def from_list_tuple(self, birth_date):
-        self.birth_date = date(*birth_date)
-
-    @__init__.register(date)
-    def from_object(self, birth_date):
-        self.birth_date = birth_date
-
-    @__init__.register(str)
-    def from_str(self, birth_date):
-        self.birth_date = date.fromisoformat(birth_date)
-
-    @property
-    def age(self):
-        age = date.today().year - self.birth_date.year - 1
-        age += (date.today().month, date.today().day) >= (self.birth_date.month, self.birth_date.day)
-        return age
 
 
-birthinfo1 = BirthInfo('2020-09-18')
-birthinfo2 = BirthInfo(date(2010, 10, 10))
-birthinfo3 = BirthInfo([2016, 1, 1])
+class AnyClass:
+    def __init__(self, **kwargs):
+        self.__dict__ = kwargs
 
-print(birthinfo1.birth_date)
-print(birthinfo2.birth_date)
-print(birthinfo3.birth_date)
+    def __repr__(self):
+        return f'{self.__class__.__name__}({",".join(map(lambda x: x, self.__dict__.items()))})'
+
+    def __str__(self):
+        return f'AnyClass: {self.__dict__}'
+
+
+any = AnyClass()
+
+print(str(any))
+print(repr(any))
+
+cowboy = AnyClass(name='John', surname='Marston')
+
+print(str(cowboy))
+print(repr(cowboy))
+
+obj = AnyClass(attr1=10, attr2='beegeek', attr3=True, attr4=[1, 2, 3], attr5=('one', 'two'), attr6=None)
+
+print(str(obj))
+print(repr(obj))
