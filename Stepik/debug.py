@@ -5,10 +5,10 @@ class AnyClass:
         self.__dict__ = kwargs
 
     def __repr__(self):
-        return f'{self.__class__.__name__}({",".join(map(lambda x: x, self.__dict__.items()))})'
+        return f'{self.__class__.__name__}({", ".join(map(lambda x:  f"{x[0]}={repr(x[1])}", self.__dict__.items()))})'
 
     def __str__(self):
-        return f'AnyClass: {self.__dict__}'
+        return f'AnyClass: {", ".join(map(lambda x:  f"{x[0]}={repr(x[1])}", self.__dict__.items()))}'
 
 
 any = AnyClass()
