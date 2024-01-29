@@ -1,5 +1,15 @@
 
 
+class Gun:
+    def shoot(self):
+        print('pif')
+
+
+gun = Gun()
+
+gun.shoot()
+
+
 class Color:
     def __init__(self, hexcode):
         self.hexcode = hexcode
