@@ -1,10 +1,10 @@
-*Date: 01.29.2024
+*Date: 01.30.2024
 Environment: LIVE
 OS Build: 1.54.0
 APK Build: 2.1.98
 Cable FW Build (if applicable):
 Device(s): YTX
-Device ID: L10116001811250A52*
+Device ID: L10115001805220010*
 
 *%{background:yellow}All test cases passed with expected behavior%*
 
@@ -16,7 +16,7 @@ Device ID: L10116001811250A52*
 
 Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
 
-*%{background:yellow}DC Full Controller%*
+*%{background:yellow}EFI Full Controller%*
 
 *Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
 *CASE A:*

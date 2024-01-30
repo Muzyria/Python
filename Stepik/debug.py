@@ -1,45 +1,32 @@
 
 
-class Queue:
+class SortKey:
     def __init__(self, *args):
-        self.queue = list(args)
+        self.args = tuple(args)
 
-    def add(self, *args):
-        self.queue += list(args)
-
-    def pop(self):
-        if self.queue:
-            return self.queue.pop(0)
-        else:
-            return None
-
-    def __str__(self):
-        return " -> ".join(map(str, self.queue))
-
-    def __eq__(self, other):
-        if isinstance(other, Queue):
-            return self.queue == other.queue
-        return NotImplemented
-
-    def __add__(self, other):
-        if isinstance(other, Queue):
-            return Queue(*(self.queue + other.queue))
-        return NotImplemented
-
-    def __iadd__(self, other):
-        if isinstance(other, Queue):
-            self.queue += other.queue
-            return self
-        return NotImplemented
-
-    def __rshift__(self, other):
-        if isinstance(other, int):
-            if other >= len(self.queue):
-                return Queue()
-            return Queue(*self.queue[other:])
-        return NotImplemented
+    def __call__(self, obj):
+        print("Экземпляр класса User -->", obj)
+        print("Словарь с атрибутами -->", obj.__dict__)
+        print("Название/я атрибута --->>>", tuple(atr for atr in obj.__dict__))
+        print("Значение/я атрибута/ов переданных в key=SortKey(...,...))) СПОСОБ №1 --->>>",
+              tuple(obj.__getattribute__(i) for i in self.args))
+        print("Значение/я атрибута/ов переданных в key=SortKey(...,...))) СПОСОБ №2  --->>>",
+              tuple(obj.__dict__[i] for i in self.args))
+        print()
+        return "ТЕСТ"
 
 
-queue = Queue(1, 2, 3, 4, 5)
+class User:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-print(queue >> 3)
+    def __repr__(self):
+        return f'User({self.name}, {self.age})'
+
+users = [User('Gvido', 67), User('Timur', 30), User('Arthur', 20), User('Timur', 45), User('Gvido', 60)]
+
+# print(sorted(users, key=SortKey('name')))
+print(sorted(users, key=SortKey('name', 'age')))
+# print(sorted(users, key=SortKey('age')))
+# print(sorted(users, key=SortKey('age', 'name')))
