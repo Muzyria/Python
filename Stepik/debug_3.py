@@ -9,4 +9,44 @@ class RomanNumeral:
                5: 'V', 4: 'IV', 1: 'I'}
 
     def __init__(self, number):
-        self.number = self.convert_to_arabic(number)
+        self.number = number
+
+    @property
+    def number(self) -> int:
+        return self._number
+
+    @number.setter
+    def number(self, value: str) -> None:
+        self._number = self._roman[value]
+
+    def __str__(self):
+        return self._arabic[self.number]
+
+    def __int__(self):
+        return self.number
+
+    def __eq__(self, other):
+        if isinstance(other, RomanNumeral):
+            return self.number == other.number
+        return NotImplemented
+
+    def __gt__(self, other):
+        if isinstance(other, RomanNumeral):
+            return self.number > other.number
+        return NotImplemented
+
+    def __add__(self, other):
+        if isinstance(other, RomanNumeral):
+            return RomanNumeral(self.number + other.number)
+        return NotImplemented
+
+    def __sub__(self, other):
+        if isinstance(other, RomanNumeral):
+            return RomanNumeral(self.number + other.number)
+        return NotImplemented
+
+
+number = RomanNumeral('IV') + RomanNumeral('VIII')
+
+print(number)
+print(int(number))
