@@ -1,29 +1,10 @@
 
 
-class ProtectedObject:
-    def __init__(self, **kwargs):
-        [object.__setattr__(self, k, v) for k, v in kwargs.items()]
+from time import perf_counter
 
-    def __getattribute__(self, item: str):
-        if item.startswith('_'):
-            raise AttributeError('Доступ к защищенному атрибуту невозможен')
-        return object.__getattribute__(self, item)
+start = perf_counter()
 
-    def __setattr__(self, key: str, value):
-        if key.startswith('_'):
-            raise AttributeError('Доступ к защищенному атрибуту невозможен')
-        object.__setattr__(self, key, value)
+hash('b' * 100_000_000)
 
-    def __delattr__(self, item: str):
-        if item.startswith('_'):
-            raise AttributeError('Доступ к защищенному атрибуту невозможен')
-        object.__delattr__(self, item)
-
-
-user = ProtectedObject(login='PG_kamiya', _password='alreadybanned')
-
-try:
-    user._password = 'qwerty12345'
-except AttributeError as e:
-    print(e)
-
+end = perf_counter()
+print(end - start)                      # результат в секундах
