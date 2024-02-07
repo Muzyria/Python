@@ -1,25 +1,44 @@
-from copy import deepcopy
 
 
-class SequenceZip:
-    def __init__(self, *args):
-        self.sequences = [deepcopy(seq) for seq in args]
-
+class AttrDict:
+    def __init__(self, data=None):
+        if data is None:
+            data = {}
+        self._data = data.copy()
 
     def __len__(self):
-        if self.sequences:
-            return min(len(seq) for seq in self.sequences)
-        else:
-            return 0
+        return len(self._data)
 
-    def __getitem__(self, item):
+    def __iter__(self):
+        return iter(self._data)
 
-        return tuple(deepcopy(seq[item]) for seq in self.sequences)
+    def __getattr__(self, attr):
+        return self._data[attr]
 
-    # def __iter__(self):
-    #     return iter(zip(*self.sequences))
+    def __getitem__(self, key):
+        return self._data[key]
+
+    def __setitem__(self, key, value):
+        self._data[key] = value
 
 
-sequencezip = SequenceZip()
-print(len(sequencezip))
-print(list(sequencezip))
+
+# attrdict = AttrDict({'name': 'X Æ A-12', 'father': 'Elon Musk'})
+#
+#
+# print(attrdict['name'])
+# print(attrdict.father)
+# print(len(attrdict))
+#
+# attrdict = AttrDict()
+#
+# attrdict['school_name'] = 'BEEGEEK'
+# print(attrdict['school_name'])
+# print(attrdict.school_name)
+
+d = dict.fromkeys(range(100), None)
+attrdict = AttrDict(d)
+print(*attrdict)
+
+d[100] = None
+print(*attrdict)
