@@ -1,226 +1,68 @@
-*Date: 10.24.23
-OS Build: 2.54.0
-APK Build: 2.1.77
+*Date: 02.09.2024
+OS Build: 1.49.6, 1.53.0
+APK Build: 2.0.43, 2.1.98
 Environment: Live
-Cable FW Build:
+Cable FW Build (if applicable):
 Device(s): YTX
-Device ID: L10116001811250A52
-Test Location: Office
-UUA : 1.4.1*
+Device ID: L10115001805220010
+Test Location: Office*
 
-*%{Background:yellow}Test passed with expected results%*
+*%{Background:yellow}Test Results Overview: All tests passed with expected results.%*
 
-*WiFi*
+*Test Background*
+The purpose of this test plan is to confirm if customers upgrade the APK WITHOUT upgrading the OS will there be any major failure's or problems
 
-*APK*
-*CASE A: Cart Barn Sleep*
-1. With device awake, que an update within Control - *Confirmed at 14:12*
-2. Confirm device recognizes an update available (via logs within Android studio) when falling into cart barn sleep - *Confirmed*
-3. Wake up device, and confirm the Play Golf screen loads - *Confirmed at 14:20*
-4. Confirm download status bar is updating during download - *Confirmed*
-- Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
-5. Confirm when download is complete, icon indicates download was successful - *Confirmed*
-6. Confirm device installs upon waking up from Cart Barn Sleep - *Confirmed at 14:25*
-- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed*
-9. Put the device into Cart Barn sleep and que another update - *Confirmed*
-10. Wake up device, and confirm it downloaded the update (check the download icon status on PlayGolf screen) - *Confirmed*
+*Test Setup*
+1. Use a table that is assigned to CCRB CPO and double check that Bluetooth is enabled for that course *Confirmed*
+2. Manually flash OS Version 0047U_R7/1.48.1/1.49.6 *1.49.6*
+3. Boot up tablet and in control 360, queue up APK Update to 2.1.93, *12:25*
+4. In YamahaTrack go to Menu --> Tablet Settings --> Updates --> Update YamaTrack app and confirm you want to receive APK upgrade to 2.1.98 *Confirmed 12:27*
 
-*OS*
-*CASE A: Cart Barn Sleep*
-1. With device awake, que an update within Control - *Confirmed at 14:45*
-2. Confirm device recognizes an update available (via logs within Android studio) when falling into cart barn sleep - *Confirmed*
-3. Wake up device, and confirm the Play Golf screen loads - *Confirmed*
-4. Confirm download status bar is updating during download - *Confirmed*
-- Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
-5. Confirm when download is complete, icon indicates download was successful - *Confirmed*
-6. Confirm device installs upon waking up from Cart Barn Sleep - *Confirmed at 14:57*
-- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed*
-9. Put the device into Cart Barn sleep and que another update - *Confirmed*
-10. Wake up device, and confirm it downloaded the update (check the download icon status on PlayGolf screen) - *Confirmed at 15:05*
-11. Exit YamaTrack app and check the UUA app (Applies only for OS) - *Confirmed*
-- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update
-- Confirm within APK Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
-- Confirm after installing the update, exiting UUA and then returning to UUA, no updates are available - *Confirmed at 15:15*
+*Test Plan*
+1. Old OS Checks
+A) General Functionality
+- Confirm the following features still work and application or tablet does not crash
+- Changing holes *Confirmed 12:27*
+- Going through different YamaTrack menus *Confirmed 12:28*
+- confirm device is continuing to check in live (latest check-in timestamp is updating) in either Control 360 or Syncwise 360 Accounts. *Confirmed 12:32*
 
-*APK*
-*CASE B: Off Hole Sleep*
-1. With device awake, que an update within Control - *Confirmed at 15:15*
-2. Confirm device recognizes an update available (via logs within Android studio) when falling into Off Hole sleep - *Confirmed*
-3. Wake up device, and confirm the Play Golf screen brightens again - *Confirmed*
-4. Confirm download status bar is updating during download - *Confirmed*
-- Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
-- Confirm download status bar is updating during download - *Confirmed*
-- Confirm when download is complete, icon indicates download was successful - *Confirmed at 15:26*
-Note: Device will never install an update when waking up from/going into Off Hole sleep (it may when going to sleep, but only if sleep period is very short)
+B) BT Check
+- Check if BT button brings up Discovery Prompt. If so, try to pair with phone and see what happens *Confirmed brings up prompt 12:32*
+- Expected Behavior is either the button does NOTHING or it will not properly pair or have sync problems (Document behavior seen) *Pairs, but has sync problems*
+- Also check if Menu Screen - BT Option is even present in the menu screen If so, try to pair with phone and see what happens *Confirmed 12:38*
+- Expected Behavior is either the menu option is not even available or it will not properly pair or have sync problems (Document behavior seen) *Pairs, but has sync problems*
 
-*OS*
-*CASE B: Off Hole Sleep*
-1. With device awake, que an update within Control - *Confirmed at 16:13*
-2. Confirm device recognizes an update available (via logs within Android studio) when falling into Off Hole sleep - *Confirmed*
-3. Wake up device, and confirm the Play Golf screen brightens again - *Confirmed*
-4. Confirm download status bar is updating during download - *Confirmed*
-- Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - *Confirmed*
-- Confirm download status bar is updating during download - *Confirmed*
-- Confirm when download is complete, icon indicates download was successful - *Confirmed at 16:13*
-Note: Device will never install an update when waking up from/going into Off Hole sleep (it may when going to sleep, but only if sleep period is very short)
-5. Exit YamaTrack app and check the UUA app (Applies only for OS) - *Confirmed*
-- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update
-- Confirm within APK Asset Details, 360, and Control - updated software version is displayed - *Confirmed*
-- Confirm after installing the update, exiting UUA and then returning to UUA, no updates are available - *Confirmed*
+C) Cart Control
+- Perform Basic Cart Control Geofence Testing and confirm it works properly for all:
+- AC Shut-Down #12615
+- AC Full Controller #12614 *Confirmed*
+- EFI Full Controller #12618 *Confirmed*
+- DC Shut Down #12617
+- DC Full Controller #12616 *Confirmed*
 
-*APK*
-*CASE C: Upon Boot Up*
-1. With device in ship mode/powered off, que an update - *Confirmed at 15:34*
-2. Confirm device recognizes an update available (via logs, or by tapping the flag to display the download icon status) when powering on - *Confirmed*
-3. Confirm there is no visible interference with the Play Golf/APK while download is taking place - *Confirmed*
-4. Confirm download status bar is updating during download - Note: ER=Unknown for this specific step, I don't believe this will apply - *Confirmed*
-5. Confirm when download is complete, icon indicates download was successful - *Confirmed*
-6. Confirm device installs download upon falling/waking up from sleep - *Confirmed*
-- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed at 15:39*
+D) Wake Up Via Accelerometer #12621
+- Confirm if tablet wakes up via motion and touch by default (not changing settings in 360) from cart barn sleep and standby *CBS Confirmed 14:23, Standby Confirmed 14:24*
+- Update settings in 360 to Only Touch, and confirm updated settings save and tablet is only able to wake up via touch from cart barn sleep and standby *CBS Confirmed 14:30, Standby Confirmed 14:31*
 
-*OS*
-*CASE C: Upon Boot Up*
-1. With device in ship mode/powered off, que an update - *Confirmed at 15:46*
-2. Confirm device recognizes an update available (via logs, or by tapping the flag to display the download icon status) when powering on - *Confirmed*
-3. Confirm there is no visible interference with the Play Golf/APK while download is taking place - *Confirmed*
-4. Confirm download status bar is updating during download - Note: ER=Unknown for this specific step, I don't believe this will apply - *Confirmed*
-5. Confirm when download is complete, icon indicates download was successful - *Confirmed*
-6. Confirm device installs download upon falling/waking up from sleep - *Confirmed*
-- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed at 16:00*
+E) Languages #12622
+- Confirm default language is American English *Confirmed*
+- Confirm user can update language on the tablet and translations are correct *Confirmed*
+- Update language setting in 360 and confirm tablet updates language correctly upon tablet sync only *Confirmed*
+- Update English language settings in 360 and confirm flag updates on tablet upon tablet syn *Confirmed*
 
-*APK*
-*CASE D: Full App Reset*
-1. With device awake, que an update in Control - *Confirmed at 15:18*
-2. Select Full App Reset within the APK, Menu options. - *Confirmed*
-3. Confirm the app resets, and checks/loads any updates. Note this process may be a little longer than normal as it is downloading and installing the updated SW version. - *Confirmed*
-4. Confirm app loads completely on Play Golf screen, and does not again reattempt to install software update at a later time. - *Confirmed*
-5. Confirm the device installed the updated software version - *Confirmed*
-- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed*
+F) Tournaments #12623
+- Following basic tournament test plan (quick run through)
+- Create a Tournament within 360 and confirm tournaments load OTA properly for different scenarios (inside/outside geofence lockdown zone) *Confirmed*
+- Join Prompt Alert works properly *Confirmed*
+- Adding/assigning players works properly *Confirmed*
+- Scoring works properly *Confirmed*
+- Clear/End scorecard works properly *Confirmed*
 
-*OS*
-*CASE D: Full App Reset*
-1. With device awake, que an update in Control - *Confirmed*
-2. Select Full App Reset within the APK, Menu options. - *Confirmed*
-3. Confirm the app resets, and checks/loads any updates. Note this process may be a little longer than normal as it is downloading and installing the updated SW version. - *Confirmed*
-4. Confirm app loads completely on Play Golf screen, and does not again reattempt to install software update at a later time. - *Confirmed*
-5. Confirm the device installed the updated software version - *Confirmed*
-- Confirm updated software version is displayed in APK Asset Details, 360, and Control - *Confirmed*
-
-*CASE E: Simultaneous OS/APK Updates*
-1. With device awake, que BOTH an OS/APK update within Control - *Confirmed*
-2. Confirm device recognizes OS and APK updates upon
-- Falling into Cart Barn Sleep *Confirmed*
-- Falling into Off Hole Sleep *Confirmed*
-- Waking up from Cart Barn Sleep - *Confirmed at 16:26 First downloaded OS then APK*
-- Waking up from Off Hole Sleep - *Confirmed at 16:37 First downloaded OS then APK*
-- Boot up - *Confirmed at First downloaded OS then APK*
-3. Verify what update takes precedence (OS v. APK) ER = OS , APK
-4. Confirm Update icon status updates accordingly - *Confirmed*
-5. Confirm the downloaded update installs upon
-- Falling into Cart Barn Sleep *Confirmed*
-- Falling into Off Hole Sleep *Confirmed*
-- Waking up from Cart Barn Sleep - *Confirmed at 16:39 First installed OS then APK*
-- Waking up from Off Hole Sleep - *NOT Confirmed - It's Expected*
-- Boot up - *Confirmed at 17:06 First installed OS then APK*
-6. Note if there is any difference in precedence in what installs first (OS v. APK)
-
-
-II. TOLERANCE TEST CASES
-- Complete each test case once with OS updates, then again with APK updates
-- Be sure to clearly state what versions updating to/from for each case, and what time the update was queued
-
-*CELL*
-
-*APK
-CASE A: Download Is Unsuccessful*
-1. Disable WIFI on device
-2. Start with device in Cart Barn sleep and que an update within Control - *Confirmed*
-2. Wake up device and quickly place into Faraday cage to try to stop download - *Confirmed*
-- Confirm if Update status indicates download was unsuccessful
-3. Take device out of Faraday cage, establish cell connect, and allow device to go to Cart Barn Sleep - *Confirmed*
-4. Wake device up and confirm if download/install occurred - ER=device should technically have downloaded, and installed update upon falling asleep, then waking up
-
-*OS
-CASE A: Download Is Unsuccessful*
-1. Disable WIFI on device
-2. Start with device in Cart Barn sleep and que an update within Control - *Confirmed*
-2. Wake up device and quickly place into Faraday cage to try to stop download - *Confirmed*
-- Confirm if Update status indicates download was unsuccessful - *Confirmed*
-3. Take device out of Faraday cage, establish cell connect, and allow device to go to Cart Barn Sleep - *Confirmed*
-4. Wake device up and confirm if download/install occurred - ER=device should technically have downloaded, and installed update upon falling asleep, then waking up - *Confirmed*
-
-*APK
-CASE B: Download Is Unsuccessful - Cut Power/App Crash*
-1. Start with device asleep and que an update within Control (do not have connected to power source) - *Confirmed*
-2. Wake up device and confirm if device recognizes download - *Confirmed*
-3. Before download completes, disconnect tablet battery to kill power - *Confirmed*
-4. Power device back on and confirm if it reattempts the download and is successful - *Confirmed*
-
-*OS
-CASE B: Download Is Unsuccessful - Cut Power/App Crash*
-1. Start with device asleep and que an update within Control (do not have connected to power source) - *Confirmed*
-2. Wake up device and confirm if device recognizes download - *Confirmed*
-3. Before download completes, disconnect tablet battery to kill power - *Confirmed*
-4. Power device back on and confirm if it reattempts the download and is successful - *Confirmed*
-
-*APK
-CASE C: Install Is Unsuccessful - Cut Power/App Crash*
-1. Start with device wake and que an update within Control (do not have connected to power source) - *Confirmed*
-2. Allow device to go to Cart Barn/Off hole sleep (please specify) - *Confirmed*
-3. Wake up device and confirm if device recognizes download - *Confirmed*
-3. Before download completes, disconnect tablet battery to kill power - *Confirmed*
-4. Power device back on and confirm if it reattempts the download and is successful - *Confirmed*
-
-*OS
-CASE C: Install Is Unsuccessful - Cut Power/App Crash*
-1. Start with device wake and que an update within Control (do not have connected to power source) - *Confirmed*
-2. Allow device to go to Cart Barn/Off hole sleep (please specify) - *Confirmed*
-3. Wake up device and confirm if device recognizes download - *Confirmed*
-3. Before download completes, disconnect tablet battery to kill power - *Confirmed*
-4. Power device back on and confirm if it reattempts the download and is successful - *Confirmed*
-
-*APK
-CASE D:Update Queued and then Removed*
-1. Start with device in Cart Barn sleep, and que an update in Control - *Confirmed*
-2. Wake up device and confirm it downloaded the update - *Confirmed*
-3. Remove the update from Control, and allow the device to go to Cart Barn sleep - *Confirmed*
-4. Wake up the device - *Confirmed*
-- Confirm if the device installed the software version - *Confirmed*
-5. With device awake, Que another update and keep device awake for 3min. - *Confirmed*
-6. Remove the queued software version from Control - *Confirmed*
-7. Allow device to go to sleep and wake up - *Confirmed*
-- Confirm if device DID NOT download a new software version - *Confirmed*
-
-*OS
-CASE D:Update Queued and then Removed*
-1. Start with device in Cart Barn sleep, and que an update in Control - *Confirmed*
-2. Wake up device and confirm it downloaded the update - *Confirmed*
-3. Remove the update from Control, and allow the device to go to Cart Barn sleep - *Confirmed*
-4. Wake up the device - *Confirmed*
-- Confirm if the device installed the software version - *Confirmed*
-5. With device awake, Que another update and keep device awake for 3min. - *Confirmed*
-6. Remove the queued software version from Control - *Confirmed*
-7. Allow device to go to sleep and wake up - *Confirmed*
-- Confirm if device DID NOT download a new software version - *Confirmed*
-
-*APK
-CASE E:Update Queued and then Replaced*
-1. Start with device awake, and que an update in Control - *Confirmed*
-2. Remove the current update from Control, and que a NEW software version in Control. - *Confirmed*
-3. Allow the device to go to Cart Barn sleep, and then wake up - *Confirmed*
-- Confirm if the device downloaded and installed the NEW queued software version
-4. Put the device in Cart Barn sleep, and que an update in Control wait several minutes - *Confirmed*
-5. Remove the current update from Control, and que a NEW software version in Control. - *Confirmed*
-6. Wake up device - *Confirmed*
-- Confirm if device Downloaded the NEW software version - *Confirmed*
-
-*OS
-CASE E:Update Queued and then Replaced*
-1. Start with device awake, and que an update in Control - *Confirmed*
-2. Remove the current update from Control, and que a NEW software version in Control. - *Confirmed*
-3. Allow the device to go to Cart Barn sleep, and then wake up - *Confirmed*
-- Confirm if the device downloaded and installed the NEW queued software version
-4. Put the device in Cart Barn sleep, and que an update in Control wait several minutes - *Confirmed*
-5. Remove the current update from Control, and que a NEW software version in Control. - *Confirmed*
-6. Wake up device - *Confirmed*
-- Confirm if device Downloaded the NEW software version - *Confirmed*
+G) GPS Static Hold
+- Confirm GPS Static Hold default settings (OFF and 2mph) *Confirmed*
+- Confirm there is no noticeable drift when driving at speeds less than the speed threshold when GPS Static Hold is ON *Confirmed*
+- Confirm yardage and everything updates as normal, when driving on course and switching holes/flyovers... stop during flyover and check to see if yardage updates to real-location, or if it is stuck on same yardage as when flyover started *Confirmed*
+- Confirm when turning OFF GPS Static Hold there is noticeable drift *Confirmed*
+2. Upgrade to New OS
+- Go to Android Settings --> About Tablet --> Check for systems updates and upgrade OS to 1.53.0
+- After the Upgrade completes, verify that APK Version 2.1.98 is still present *Confirmed 14:41*
