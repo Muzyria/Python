@@ -1,68 +1,97 @@
-*Date: 02.09.2024
-OS Build: 1.49.6, 1.53.0
-APK Build: 2.0.43, 2.1.98
+*Date: 01.09.24
+OS Build: 2.14.7_E
+APK Build: 2.1.96
 Environment: Live
-Cable FW Build (if applicable):
-Device(s): YTX
-Device ID: L10115001805220010
-Test Location: Office*
+Cable FW Build:
+Device(s): YTR
+Device ID: S10150000211018049
+Test Location:
+UUA : 1.4.0
+MB: 1.5*
 
-*%{Background:yellow}Test Results Overview: All tests passed with expected results.%*
 
-*Test Background*
-The purpose of this test plan is to confirm if customers upgrade the APK WITHOUT upgrading the OS will there be any major failure's or problems
+*%{Background:yellow}All  cases passed with expected behavior%*
 
-*Test Setup*
-1. Use a table that is assigned to CCRB CPO and double check that Bluetooth is enabled for that course *Confirmed*
-2. Manually flash OS Version 0047U_R7/1.48.1/1.49.6 *1.49.6*
-3. Boot up tablet and in control 360, queue up APK Update to 2.1.93, *12:25*
-4. In YamahaTrack go to Menu --> Tablet Settings --> Updates --> Update YamaTrack app and confirm you want to receive APK upgrade to 2.1.98 *Confirmed 12:27*
+h2. Test Plan
 
-*Test Plan*
-1. Old OS Checks
-A) General Functionality
-- Confirm the following features still work and application or tablet does not crash
-- Changing holes *Confirmed 12:27*
-- Going through different YamaTrack menus *Confirmed 12:28*
-- confirm device is continuing to check in live (latest check-in timestamp is updating) in either Control 360 or Syncwise 360 Accounts. *Confirmed 12:32*
+*Preconditions:*
+* Assign tablet to the *SUPERIOR* test account
 
-B) BT Check
-- Check if BT button brings up Discovery Prompt. If so, try to pair with phone and see what happens *Confirmed brings up prompt 12:32*
-- Expected Behavior is either the button does NOTHING or it will not properly pair or have sync problems (Document behavior seen) *Pairs, but has sync problems*
-- Also check if Menu Screen - BT Option is even present in the menu screen If so, try to pair with phone and see what happens *Confirmed 12:38*
-- Expected Behavior is either the menu option is not even available or it will not properly pair or have sync problems (Document behavior seen) *Pairs, but has sync problems*
+h3. I. 1.5x FIXES
 
-C) Cart Control
-- Perform Basic Cart Control Geofence Testing and confirm it works properly for all:
-- AC Shut-Down #12615
-- AC Full Controller #12614 *Confirmed*
-- EFI Full Controller #12618 *Confirmed*
-- DC Shut Down #12617
-- DC Full Controller #12616 *Confirmed*
+*CASE A: Map Loading After Exiting Food/Drink Menu* - Issue #11132 *Confirmed at 12:51*
+* See Issue #11132 for test plan
 
-D) Wake Up Via Accelerometer #12621
-- Confirm if tablet wakes up via motion and touch by default (not changing settings in 360) from cart barn sleep and standby *CBS Confirmed 14:23, Standby Confirmed 14:24*
-- Update settings in 360 to Only Touch, and confirm updated settings save and tablet is only able to wake up via touch from cart barn sleep and standby *CBS Confirmed 14:30, Standby Confirmed 14:31*
+*CASE B: New Hole Prompt + Advertising* - Issue #11124 *Confirmed at 13:10*
+Confirm bug cannot be reproduced by following workflow in Issue #11124
 
-E) Languages #12622
-- Confirm default language is American English *Confirmed*
-- Confirm user can update language on the tablet and translations are correct *Confirmed*
-- Update language setting in 360 and confirm tablet updates language correctly upon tablet sync only *Confirmed*
-- Update English language settings in 360 and confirm flag updates on tablet upon tablet syn *Confirmed*
+*CASE C: Advertisement Optimization* - Issue #11111 *Confirmed 13:39*
+* Test with LIVE GPS
+* See Issue #10994-3 for additional test plan
+** (Covers: Advertisement Failing to Download - Issue #10994 / Network Timeout Handling Issue #10774)
 
-F) Tournaments #12623
-- Following basic tournament test plan (quick run through)
-- Create a Tournament within 360 and confirm tournaments load OTA properly for different scenarios (inside/outside geofence lockdown zone) *Confirmed*
-- Join Prompt Alert works properly *Confirmed*
-- Adding/assigning players works properly *Confirmed*
-- Scoring works properly *Confirmed*
-- Clear/End scorecard works properly *Confirmed*
+*CASE E: Automatic Brightness Update* - #10827 / #10895 *Confirmed*
+* See #10827-4 update 4 for test plan
+* Make sure bug in 10895 is resolved
 
-G) GPS Static Hold
-- Confirm GPS Static Hold default settings (OFF and 2mph) *Confirmed*
-- Confirm there is no noticeable drift when driving at speeds less than the speed threshold when GPS Static Hold is ON *Confirmed*
-- Confirm yardage and everything updates as normal, when driving on course and switching holes/flyovers... stop during flyover and check to see if yardage updates to real-location, or if it is stuck on same yardage as when flyover started *Confirmed*
-- Confirm when turning OFF GPS Static Hold there is noticeable drift *Confirmed*
-2. Upgrade to New OS
-- Go to Android Settings --> About Tablet --> Check for systems updates and upgrade OS to 1.53.0
-- After the Upgrade completes, verify that APK Version 2.1.98 is still present *Confirmed 14:41*
+*CASE F: Beeping to Non Beeping Geofences* - #10853 *Confirmed*
+* Requires testing outdoor with GPS Module
+* Review bug in #10853 and confirm bug is no longer occurring
+** Make sure tablet is configured as an AC cart and do beeping only geofence VS message only geofence
+
+*CASE G: Default Distance Unit Settings Handling* - Issue #10850 --- KEY FEATURE *Confirmed*
+* See #10850-3 update 3 for test plan
+
+*CASE H: App Does Not Crash in Demo Mode* - Issue #10684 (1.5.3) *Confirmed*
+* Review issue and confirm bug cannot be replicated
+
+*CASE I: Update Menu - No Server Info* (1.5.2) - #10610 *Confirmed*
+* Confirm correct error message when requesting updates but with no cellular signal
+* Confirm dynamic updating of screen when returning to good coverage area
+
+
+h3. II. Deep Regression Tests
+
+*CASE A: Asset Lock Down* #13008
+
+*CASE B: Updates via Tablet Sync*: Pin-Locations, Advertisements, Food & Beverage *Confirmed*
+1. With Cell/Wifi Connection
+* Place tablet into cart-barn sleep
+* Within 360 update pin-locations/advertisements/food & beverage
+** For Pin Locations complete:  A) Move the pin location  B) Change the rotation date, from a different date, to the current test date (for example have it set to rotate on Thursday, but update it to Tuesday if testing on a Tuesday)
+* Confirm when waking up if tablet receives updates *Confirmed*
+* With tablet awake - update pin-locations/advertisements/food & beverage items
+* On YTX/YTR go to Menu > Settings > Updates and check to see if an update is recognized for each item, when an update was made
+* If update is recognized, select UPDATE, and confirm update applies *Confirmed*
+
+2. Without Cell/Wifi Connection *Confirmed*
+* Place tablet in cartbarn geofence, and disable cell/wifi.
+* Allow device to go to sleep then update pin locations/advertisements/food & bev within 360
+* Wake up tablet - allow YamaTrack app to fully load on Play Golf Screen
+* Enter scores within scorecard for several holes
+* Enable cell/wifi and confirm if tablet will automatically perform tablet sync (splash screen appears with "Loading Updates" message *Confirmed*
+* Confirm all previous changes updated successfully
+* Confirm scores within scorecard were not cleared *Confirmed*
+
+*CASE C: Dynamic Updates*: Geofences, Pin-Locations *Confirmed*
+* Have tablet on/active
+* Update a geofence settings, turn/on off within 360
+* Wait 2 min. and confirm if updated settings apply
+* Re-draw geofence lines for a specific geofence within 360
+* Wait 2 min. and confirm if updated settings apply  *Confirmed*
+* Update Pin-location for a hole within 360
+* Wait 2 min. and on the YTX select the hole that was updated
+* Confirm the pin-location on the screen updated *Confirmed*
+
+*CASE D: Cart Path Only Functionality* *Confirmed*
+* Confirm new CPO methodology works
+# On Test Course account create multiple CPO geofences associated with different holes
+#  From "Course Map" Screen in Accounts 360, activate "Cart Path Only" for some of the holes, but leave other holes disabled (for example if you created CPO geofences for hole 1, 2, 3, only activate 1 and 3) with SPEED control
+# Confirm that speed control and CPO messages only show up for holes that are active and does not activate in holes that are not active *Confirmed*
+# Change "Cart Path Only" control to "Immediate Shutdown" and repeat step 2
+# When stuck in a shutdown geofence, restore movement through the "Asset Details" >> "Asset Shutdown" screen and press Restore Cart
+# Confirm cart drive-ability is restored *Confirmed*
+
+*CASE E: Screen freezes after tapping Home (Power button) button while going to standby mode*  (1.5.1) - #10758 *Confirmed at 16:30*
+* Review Redmine Issue for nature of the bug and confirm it cannot be replicated
+* Between taps, confirm that no "Android Not Responding" messages arise. *Confirmed*
