@@ -9,10 +9,29 @@ class AdvancedTimer:
         self.max = None
 
     def __enter__(self):
-        pass
+        self.start = perf_counter()
+        return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        pass
+        self.last_run = perf_counter() - self.start
+        self.runs.append(self.last_run)
+        self.min = min(self.runs)
+        self.max = max(self.runs)
 
 
+from time import sleep
 
+timer = AdvancedTimer()
+
+with timer:
+    sleep(1.5)
+
+with timer:
+    sleep(0.7)
+
+with timer:
+    sleep(1)
+
+print([round(runtime, 1) for runtime in timer.runs])
+print(round(timer.min, 1))
+print(round(timer.max, 1))
