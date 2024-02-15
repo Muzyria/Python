@@ -1,91 +1,97 @@
-*%{background:yellow}All cases passed with expected behavior%*
+*Date: 01.09.24
+OS Build: 2.14.7_E
+APK Build: 2.1.96
+Environment: Live
+Cable FW Build:
+Device(s): YTR
+Device ID: S10150000211018049
+Test Location:
+UUA : 1.4.0
+MB: 1.5*
 
 
-*Downloading Logs - Test Plan*
+*%{Background:yellow}All  cases passed with expected behavior%*
 
-Complete all tests – Once over WIFI and Once over Cellular
+h2. Test Plan
 
-*Passed with WI-FI network*
+*Preconditions:*
+* Assign tablet to the *SUPERIOR* test account
 
-*Case A) Download All Logs*
-Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 17:13*
-Select Download all logs within Control – Record Time – *Confirmed at 17:12*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 17:13*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 17:17*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. - *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+h3. I. 1.5x FIXES
 
-*Case B) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 17:15*
-Wait several minutes, then flip to RUN/supply power to a device- *Confirmed*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 17:21*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 17:24*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+*CASE A: Map Loading After Exiting Food/Drink Menu* - Issue #11132 *Confirmed at 12:51*
+* See Issue #11132 for test plan
 
-*Case C) Device Powered on > Sleep mode > Woke up*
-Select Download all logs within Control – Record Time - *Confirmed at 17:27*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 17:32*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+*CASE B: New Hole Prompt + Advertising* - Issue #11124 *Confirmed at 13:10*
+Confirm bug cannot be reproduced by following workflow in Issue #11124
 
-*Case D) Download Logs by Day in Past*
-Select to download logs for a day in the past - *Confirmed at 17:35*
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 17:30*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 17:40*
+*CASE C: Advertisement Optimization* - Issue #11111 *Confirmed 13:39*
+* Test with LIVE GPS
+* See Issue #10994-3 for additional test plan
+** (Covers: Advertisement Failing to Download - Issue #10994 / Network Timeout Handling Issue #10774)
 
-*Case E) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 17:37*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 17:38*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 17:39*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 17:42*
-Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 17:46*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 17:45*
+*CASE E: Automatic Brightness Update* - #10827 / #10895 *Confirmed*
+* See #10827-4 update 4 for test plan
+* Make sure bug in 10895 is resolved
 
-*Case F) Device Powered on > Sleep mode > Woke up*
-Select Download for a day in the past within Control – Record Time - *Confirmed at 17:49*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 17:52*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 17:58*
+*CASE F: Beeping to Non Beeping Geofences* - #10853 *Confirmed*
+* Requires testing outdoor with GPS Module
+* Review bug in #10853 and confirm bug is no longer occurring
+** Make sure tablet is configured as an AC cart and do beeping only geofence VS message only geofence
 
-*Case G) Download Logs by Day – Current Day*
-Select to download logs for SAME DAY
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 18:00*
-Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 18:03*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 18:06*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 18:08*
+*CASE G: Default Distance Unit Settings Handling* - Issue #10850 --- KEY FEATURE *Confirmed*
+* See #10850-3 update 3 for test plan
 
-*Case H) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 18:12*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 18:12*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 18:15*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 18:21*
-Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 18:24*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 18:26*
+*CASE H: App Does Not Crash in Demo Mode* - Issue #10684 (1.5.3) *Confirmed*
+* Review issue and confirm bug cannot be replicated
 
-*Case I) Device Powered on > Sleep mode > Woke up*
-Select Download for a current Day within Control – Record Time - *Confirmed at 18:33*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 18:37*
-Note – these may not upload until the device wakes up
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 18:42*
+*CASE I: Update Menu - No Server Info* (1.5.2) - #10610 *Confirmed*
+* Confirm correct error message when requesting updates but with no cellular signal
+* Confirm dynamic updating of screen when returning to good coverage area
 
-*Corner Cases:*
 
-*Case J) Multiple Log Requests – Send All Logs request two times*
-Verify if log request goes through (one/both) -  *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 18:52*
+h3. II. Deep Regression Tests
 
-*Case K) Multiple Log Requests – Send All Logs request, then By Day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
+*CASE A: Asset Lock Down* #13008
 
-*Case L) Multiple Log Requests - By Day – same day 2x times*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
+*CASE B: Updates via Tablet Sync*: Pin-Locations, Advertisements, Food & Beverage *Confirmed*
+1. With Cell/Wifi Connection
+* Place tablet into cart-barn sleep
+* Within 360 update pin-locations/advertisements/food & beverage
+** For Pin Locations complete:  A) Move the pin location  B) Change the rotation date, from a different date, to the current test date (for example have it set to rotate on Thursday, but update it to Tuesday if testing on a Tuesday)
+* Confirm when waking up if tablet receives updates *Confirmed*
+* With tablet awake - update pin-locations/advertisements/food & beverage items
+* On YTX/YTR go to Menu > Settings > Updates and check to see if an update is recognized for each item, when an update was made
+* If update is recognized, select UPDATE, and confirm update applies *Confirmed*
 
-*Case M) Multiple Log Requests - By Day – one day, then another day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
+2. Without Cell/Wifi Connection *Confirmed*
+* Place tablet in cartbarn geofence, and disable cell/wifi.
+* Allow device to go to sleep then update pin locations/advertisements/food & bev within 360
+* Wake up tablet - allow YamaTrack app to fully load on Play Golf Screen
+* Enter scores within scorecard for several holes
+* Enable cell/wifi and confirm if tablet will automatically perform tablet sync (splash screen appears with "Loading Updates" message *Confirmed*
+* Confirm all previous changes updated successfully
+* Confirm scores within scorecard were not cleared *Confirmed*
 
-*Case N) Multiple Log Requests –By Day, then All Logs*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 19:28*
+*CASE C: Dynamic Updates*: Geofences, Pin-Locations *Confirmed*
+* Have tablet on/active
+* Update a geofence settings, turn/on off within 360
+* Wait 2 min. and confirm if updated settings apply
+* Re-draw geofence lines for a specific geofence within 360
+* Wait 2 min. and confirm if updated settings apply  *Confirmed*
+* Update Pin-location for a hole within 360
+* Wait 2 min. and on the YTX select the hole that was updated
+* Confirm the pin-location on the screen updated *Confirmed*
+
+*CASE D: Cart Path Only Functionality* *Confirmed*
+* Confirm new CPO methodology works
+# On Test Course account create multiple CPO geofences associated with different holes
+#  From "Course Map" Screen in Accounts 360, activate "Cart Path Only" for some of the holes, but leave other holes disabled (for example if you created CPO geofences for hole 1, 2, 3, only activate 1 and 3) with SPEED control
+# Confirm that speed control and CPO messages only show up for holes that are active and does not activate in holes that are not active *Confirmed*
+# Change "Cart Path Only" control to "Immediate Shutdown" and repeat step 2
+# When stuck in a shutdown geofence, restore movement through the "Asset Details" >> "Asset Shutdown" screen and press Restore Cart
+# Confirm cart drive-ability is restored *Confirmed*
+
+*CASE E: Screen freezes after tapping Home (Power button) button while going to standby mode*  (1.5.1) - #10758 *Confirmed at 16:30*
+* Review Redmine Issue for nature of the bug and confirm it cannot be replicated
+* Between taps, confirm that no "Android Not Responding" messages arise. *Confirmed*
