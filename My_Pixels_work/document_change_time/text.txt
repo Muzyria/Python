@@ -1,98 +1,201 @@
-*Date: 02.02.24
-OS Build: 1.54.0
-APK Build: 2.1.98
+Date: 03.17.23
+OS Build: 2.11.12_E
+APK Build: 2.1.84
 Environment: Live
 Cable FW Build:
 Device(s): YTR
-Device ID: L10115001805220010
+Device ID: S10150000211018050
 Test Location: Office
-UUA : 1.4.1*
+UUA : 1.4.0
+MB: 1.7
 
+All cases passed with expected behavior
 
-Complete *each*  of the following cases once over CELLULAR, and once over WIFI
+PRECONDITIONS
+Confirm current update.txt server settings
+Flash modules to different FW versions, to perform updates
+Assign device to test course
+Setup/enable cart barn geofence
+Test will require access to cell/WIFI
+Tolerance Test Cases will require Faraday cage
+I. GENERAL FUNCTIONALITY TEST CASES
+- Confirm a solid data connection prior to testing
+- Complete each test case once with the UBLOX module and once with the LC79D module
+- Be sure to clearly state what versions updating to/form for each case, and what time the update was queued
 
-*%{background:yellow}Confirmed all cases passed with expected behavior%*
+CELL
+with the LC79D module
 
+CASE A: Cart Barn Sleep
+1. With device awake, connect the device to GPS module (with different FW qued on the server) and confirm device establishes a GPS fix - Confirmed
+2. Allow device to go to Cart Barn Sleep - Confirmed at 10:47
+3. Wake up device - Confirmed at 10:46
+- Note if able to tap flag to see GPS download available status - Confirmed
+- If YES - Confirm download status bar is updating during download - Confirmed
+- Confirm when download is complete, the icon indicates the download was successful - Confirmed
+4. Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - Confirmed
+5. Allow device to go back to CBS, and then wake up - Confirmed at 10:55
+6. Confirm GPS module installs new FW version upon waking up from Cart Barn Sleep - Confirmed
+- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - Confirmed
+7. Put the device into Cart Barn sleep and then update the server to a different FW version available when the device is asleep (or switch the GPS module to a different FW version) - Confirmed at 11:26
+8. Wake up device, and confirm it downloaded the update (check the download icon status on PlayGolf screen) - Confirmed
+9. Exit the YamaTrack app and check the UUA app - Confirmed at 10 :53
+- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update - Confirmed
+- Confirm within tablet Asset Details, 360, and Control - updated software version is displayed - Confirmed
+- Confirm after installing the update, exiting UUA and then returning to UUA, no updates are available - Confirmed
 
-*%{background:yellow}CELL%*
+CASE B: Off Hole Sleep
+1. With device awake, connect device to GPS module (with different FW qued on server) and confirm device establishes a GPS fix - Confirmed
+2. Allow device to go to Off Hole Sleep - Confirmed
+3. Wake up device - Confirmed at 11:32
+- Note if able to tap flag to see GPS download available status - Confirmed
+- If YES - Confirm download status bar is updating during download - Confirmed
+- Confirm when download is complete, the icon indicates the download was successful - Confirmed
+4. Confirm there is no kind of disruption when download is in process (User shouldn't even know it's occurring, unless icons status is open) - Confirmed
+5. Allow device to go back to Off Hole Sleep and then wake up - Confirmed
+6. Confirm GPS module DOES NOT install new FW version upon waking up from Off Hole Sleep - Confirmed
+7. Press the checkmark icon, and confirm the GPS FW will install - Confirmed at 11:38
+- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - Confirmed
+8. With device awake, connect device to GPS module (with different FW qued on server) and confirm device establishes a GPS fix - Confirmed
+9. Allow device to go to Off Hole Sleep - Confirmed at 11:43
+10. . Wake up the device, and confirm it downloaded the update (check the download icon status on the PlayGolf screen) - Confirmed
+10. Exit the YamaTrack app and check the UUA app (install updates) - Confirmed
+- If the download is successful, confirm the UUA does not RE-DOWNLOAD the update (confirm within logs). ER = the device should just install the update - Confirmed
+- Confirm after installing the update, exiting UUA, and then returning to UUA, no updates are available - Confirmed
+- Confirm within tablet Asset Details, 360, and Control - updated software version is displayed - Confirmed
 
-*A) Connecting to Network*
-# Start with device that is currently not assigned, and OTA/flash new OS onto device *Confirmed 15:52*
-# Assign device to test course *Assigned 15:59*
-# Power on device and check to see if device loads course data *Confirmed 16:02*
-# Confirm device connects to 3G/4G network on cell (displayed in Android status bar) *Confirmed 16:04*
-# Confirm device displays correct modem FW within Tablet Settings/Control (if applicable) *Confirmed*
+CASE C: Upon Boot Up
+1. With device in ship mode/powered off, connect to GPS module with different FW than what is queud on the server - Confirmed Ship Mode at 11:49
+2. Confirm device recognizes an update available (via logs, or by tapping the flag to display the download icon status) when powering on - Confirmed at 11:48
+- Confirm there is no visible interference with the Play Golf/APK while the download is taking place - Confirmed
+- Confirm download status bar is updating during download - Note: ER=Unknown for this specific step, I don't believe this will apply - Confirmed
+- Confirm when download is complete, the icon indicates the download was successful - Confirmed
+6. Put device to CBS, confirm device installs download upon waking up from sleep - Confirmed at 11:54
+- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - Confirmed
 
-*B) Switching Data Connections and Reconnecting*
-# Confirm ability to switch from Cell > WIFI, and device checks in *Confirmed 16:07*
-# Confirm ability to switch from WIFI > Cell, and device checks in *Confirmed 16:10*
-# Confirm device re-connects automatically to WIFI network after:
-- Power cycling *Confirmed 16:38*
-- Tablet sync *Confirmed 16:43*
-- Off hole sleep *Confirmed 16:33*
-- Shipmode *Confirmed 16:49*
-# Confirm ability to reconnect to Cell after:
-- Power cycling *Confirmed 17:14*
-- Tablet sync *Confirmed 17:16*
-- Off hole sleep *Confirmed 17:02*
-- Shipmode *Confirmed 17:22*
+CASE D: Full App Reset - Don't know if this applies
+1. With device awake, connect to GPS module with different FW than what is queud on the server - Confirmed
+2. Select Full App Reset within the APK, Menu options. - Confirmed
+3. Confirm the app resets, and checks/loads any updates. Note this process maybe a little longer than normal as it is downloading and installing the updated SW version. - Confirmed (Only downloaded update - It's Expected)
+4. Confirm app loads completely on Play Golf screen, and does not again reattempt to install software update at a later time - Confirmed (after Full Up Reset).
+5. Confirm the device installed the updated software version - Confirmed
+- Confirm updated software version is displayed in tablet Asset Details, 360, and Control - Confirmed
 
-*C) APK Updates: Regular*
-# Confirm current APK version on device. Power on device, and confirm it is checking in. *Confirmed 2.1.98 17:28*
-# Que new APK version 2.1.71 in Control and hit save. *Confirmed*
-# Go to YamaTrack Updates to update APK *Confirmed*
-# Click Update, to install new APK version *Confirmed*
-# Confirm update is taking place *Confirmed*
-# Confirm update completes successfully *Confirmed 17:34*
-# Confirm device checks into 360/Control with updated APK build *Confirmed*
+CASE E: Simultaneous OS/APK and GPS Updates
+1. With device awake, que all OS and APK update within Control - Confirmed
+2. Connect the device to the GPS module with a different FW that is queued on the server - Confirmed
+2. Confirm how the device recognizes and handles OS and APK and GPS updates.
+- Falling asleep/waking up from Cart Barn Sleep - Confirmed at 15:00 (GPS, OS, APK)
+- Falling asleep/waking up from Off hole sleep - Confirmed at 15:24
+- Power on - Confirmed at 14:16 (GPS, OS, APK)
+- Device Reset/Full App Reset - Confirmed at 11:12
+3. Verify order of priority for each case (expected: 1st-OS, 2nd-APK, 3rd-GPS)
+4. Confirm Update icon status updates accordingly (if applies)
+5. Confirm the downloaded update installs upon
+- Falling asleep/waking up from Cart Barn Sleep - Confirmed at 15:22 (1st-OS, 2nd-APK, 3rd-GPS)
+- Falling asleep/waking up from Off hole sleep - NOT Confirmed - It's Expected
+- Power on (device asleep, connected to a module with different FW) - Confirmed at 14:33 (1st-OS, 2nd-APK, 3rd-GPS)
+- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - Confirmed (1st-OS, 2nd-APK, 3rd-GPS)
+6. Note if there is any difference in precedence in what installs - Confirmed
 
-*D) APK Update: No Signal*
-# Confirm device checks in and displays current APK version within CONTROL *Confirmed 17:37*
-# Place device in a no signal area (Faraday Cage) and attempt to update APK FW without any signal *Confirmed*
-# Confirm an error message is displayed with a retry option *Confirmed 17:38*
-# Confirm download is only allowed once it regains some kind of signal *Confirmed 17:41*
+APK and GPS
+CASE F: Simultaneous APK and GPS Updates
+1. With device awake, que APK update within Control Que - Confirmed at 15:39
+2. Connect the device to GPS module with a different FW that is queued on the server
+2. Confirm how device recognizes and handles APK and GPS updates.
+- Falling asleep/waking up from Cart Barn Sleep CBS - Confirmed at 15:45
+- Falling asleep/waking up from Off hole sleep - Confirmed at 16:01
+- Power on Ship Mode - Confirmed
+- Device Reset/Full App Reset - Confirmed at 16:12
+3. Verify order of priority for each case (ex: 1st-APK, 2nd-GPS)
+- Falling asleep/waking up from Cart Barn Sleep - Confirmed at 15:44 (GPS, APK)
+- Falling asleep/waking up from Off hole sleep - Confirmed (GPS, APK)
+- Power on - Confirmed (GPS, APK)
+- Device Reset/Full App Reset - Confirmed (GPS, APK)
+4. Confirm Update icon status updates accordingly (if applies)
+5. Confirm the downloaded update installs upon
+- Falling asleep/waking up from Cart Barn Sleep - Confirmed at 15:52
+- Falling asleep/waking up from Off hole sleep Off Hole Sleep - NOT Confirmed - It's Expected
+- Power on (device asleep, connected to module with different FW) - Confirmed
+- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - Confirmed
+6. Note if there is any difference in precedence in what installs (ex: 1st-APK, 2nd-GPS)
+- Falling asleep/waking up from Cart Barn Sleep - Confirmed at 16:03 (1st-APK, 2nd-GPS)
+- Falling asleep/waking up from Off hole sleep - NOT Confirmed - It's Expected
+- Power on (device asleep, connected to module with different FW) - Confirmed at 16:13 (1st-APK, 2nd-GPS)
+- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - Confirmed at 16:17 (1st-APK, 2nd-GPS)
 
-*E) APK Updates: Initiate Download with initial signal > Loss of Signal*
-# Initiate update, and BEFORE the download can finish, place the device in a no signal area. *Confirmed*
-# Confirm an error message is displayed with a retry option. *Confirmed 17:43*
+OS and GPS
+CASE G: Simultaneous OS and GPS Updates
+1. With device awake, que all OS update within Control Que - Confirmed
+2. Connect device to GPS module with a different FW that is queued on the server - Confirmed
+2. Confirm how device recognizes and handles OS and GPS updates upon. - Confirmed
+- Falling asleep/waking up from Cart Barn Sleep - Confirmed at 12:48
+- Falling asleep/waking up from Off hole sleep - Confirmed at 12:39
+- Power on Ship Mode - Confirmed at 13:02
+- Device Reset/Full App Reset at - Confirmed
+3. Verify order of priority for each case (ex: 1st-OS, 2nd-GPS)
+- Falling asleep/waking up from Cart Barn Sleep - Confirmed at 12:39 (GPS, OS)
+- Falling asleep/waking up from Off hole sleep - Confirmed
+- Power on - Confirmed at 12:52 (GPS, OS)
+- Device Reset/Full App Reset - Confirmed
+4. Confirm Update icon status updates accordingly (if applies) - Confirmed
+5. Confirm the downloaded update installs upon - Confirmed
+- Falling asleep/waking up from Cart Barn Sleep - Confirmed
+- Falling asleep/waking up from Off hole sleep - NOT Confirmed - It's Expected
+- Power on (device asleep, connected to module with different FW) - Confirmed
+- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - Confirmed
+6. Note if there is any difference in precedence in what installs (ex: 1st-OS, 2nd-GPS)
+- Falling asleep/waking up from Cart Barn Sleep - Confirmed at 12:59 (1st-OS, 2nd-GPS)
+- Falling asleep/waking up from Off hole sleep - NOT Confirmed - It's Expected
+- Power on (device asleep, connected to module with different FW) - Confirmed
+- Device Reset/Full App Reset (device awake, then swictch GPS module with different FW) - Confirmed
 
-*F) APK Updates: Initiate Download > Loss of Signal > Regain Signal*
-# Initiate update, and BEFORE the download can finish, place the device in a no signal area for a short period of time to delay the download, then take it back out of the signal area to confirm the download can resume and recover. *Unable to to resume download, must restart download all over again*
+CASE H: Confirm Full-Functionality of UUA
+1. With device awake, connect GPS module with different FW than what is queued on the server - Confirmed at 14:59
+- Confirm GPS establishes a fix - Confirmed
+2. Exit YamaTrack App, and open the UUA app - Confirmed
+3. Select GPS FW Updates - Confirmed
+4. Confirm if the device recognizes an update available - Confirmed
+5. Press install and confirm the device downloads firmware properly. - Confirmed
+6. Confirm FW installs successfully - Confirmed
+7. Exit UUA and boot YamaTrack - Confirmed
+8. Exit YamaTrack and return to UUA to check if the device DOES NOT recognize GPS FW update available - Confirmed at 15:04
 
-*G) Download Logs*
-# Confirm ability to download ALL logs
-- verify device receives custom message, logs upload to control, and logs match what was requested *Confirmed 18:13*
-# Confirm ability to download logs BY DAY
-- verify device receives custom message, logs upload to control, and logs match what was requested *Confirmed 18:37*
+TOLERANCE CASES ( check once with GPS and once with OS + APK + GPS)
+Automatic OS + APK + GPS Updates: Test Cases:
 
+Test Results: Provide test summary here/highlight any issues
 
-*%{background:yellow}WIFI%*
+A) No WIFI/Cellular - Confirmed at 15:14
+ER: Device is unable to download OS , APK & GPS update files until it establishes cellular or wifi connectivity
 
+B) No Power From Cable - Confirmed
+ER: Device can download/install OS/APK/GPS updates even if the device is not connected to cart/receiving power from cable - Confirmed
 
-*C) APK Updates: Regular*
-# Confirm current APK version on device. Power on device, and confirm it is checking in. *Confirmed 2.1.98 18:43*
-# Que new APK version 2.1.71 in Control and hit save. *Confirmed 18:47*
-# Go to YamaTrack Updates to update APK *Confirmed*
-# Click Update, to install new APK version *Confirmed*
-# Confirm update is taking place *Confirmed*
-# Confirm update completes successfully *Confirmed 18:53*
-# Confirm device checks into 360/Control with updated APK build *Confirmed 18:54*
+C) GPS update queued – but then removed
+- For these cases, we need to also consider if a device is off when an update is queued
+ER: If the device downloaded update files successfully, the device proceeds to install downloaded files next time it wakes up from tablet sync/power cycles Confirmed
+If the device did NOT download files successfully, the device does not reattempt to download files once the update queue is removed from the Control Confirmed
+- For these cases, we need to also consider if a device is off when an update is queued - (CBS)- Confirmed
 
-*D) APK Update: No Signal*
-# Confirm device checks in and displays current APK version within CONTROL *Confirmed 19:02*
-# Place device in a no signal area (Faraday Cage) and attempt to update APK FW without any signal *Confirmed*
-# Confirm an error message is displayed with a retry option
-# Confirm download is only allowed once it regains some kind of signal *Confirmed*
+D) GPS update queued – then updated to a different version Skiped (There is no other version)
+- For these cases, we need to also consider if a device is off when an update is queued
+ER: If previous update files did not download successfully/completely, the tablet will see a new updated version available and will download the updated version queued -
+If updated files DID download successfully, the device will check and compare different/new updated versions that are available and will download new OS/APK/GPS update files available (NOT INSTALL previously downloaded files).
 
-*E) APK Updates: Initiate Download with initial signal > Loss of Signal*
-# Initiate update, and BEFORE the download can finish, place the device in a no signal area. *Confirmed*
-# Confirm an error message is displayed with a retry option. *Confirmed*
+E) OS/APK/GPS update queued – files downloaded, update still queued - Confirmed
+- For these cases we need to also consider if a device is off when update is queued
+ER: Device checks if any new updates are queued Confirmed
+If files downloaded = the same update that is currently queued, device installs files upon tablet sync/power cycle.
+If files downloaded are DIFFERENT than update version that is queued - see logic for Case F (downloads new files instead) - Confirmed
 
-*F) APK Updates: Initiate Download > Loss of Signal > Regain Signal*
-# Initiate update, and BEFORE the download can finish, place the device in a no signal area for a short period of time to delay the download, then take it back out of the signal area to confirm the download can resume and recover. *Unable to to resume download, must restart download all over again*
+F) OS/APK/GPS update queued – files installed, update still queued - Confirmed
+ER: Device checks if any new updates are queued Confirmed
+If files installed = the same update that is currently queued, nothing occurs
+If files installed are DIFFERENT than update version that is queued - see logic for Case F (downloads new files )
 
-*G) Download Logs*
-# Confirm ability to download ALL logs
-- verify device receives custom message, logs upload to control, and logs match what was requested *Confirmed 19:17*
-# Confirm ability to download logs BY DAY
-- verify device receives custom message, logs upload to control, and logs match what was requested *Confirmed 19:46*
+G) Download/Install of APK/OS/GPS in process, then app crashes
+ER: App will be able to load correctly, and upon recovering that app will attempt to re-download the queued update the next time to goes through tablet sync, power up, falling asleep). (Full Up)
+- Test process of downloading APK, then exit app - while download APK exit app then launch Yamatrack and confirm - APK downloading again Confirmed
+- Test process of downloading OS, then exit app - while download OS exit app then launch Yamatrack and confirm - OS downloading again - Confirmed
+- Test process of installing GPS, then exit app - while installing GPS exit app then launch Yamatrack and confirm - GPS installing again - Confirmed

@@ -1,12 +1,14 @@
+from playwright.sync_api import sync_playwright
 
+with sync_playwright() as p:
+    browser = p.chromium.launch()
+    context = browser.new_context(
+        **p.devices['iPhone 11 Pro Max']  # Эмуляция устройства iPhone 11 Pro Max
+    )
+    page = context.new_page()
+    page.goto('https://google.com')
 
-class HtmlTag:
-    INDENT = 2
-    depth = 0
+    # Создание скриншота страницы
+    page.screenshot(path='screenshot.png')
 
-    def __init__(self, tag, inline=False):
-        self.tag = tag
-        self.depth = type(self).depth
-        self.inline = inline
-        self.end_char = '' if inline else '\n'
-
+    browser.close()
