@@ -1,29 +1,19 @@
-songs_db = [ {
- 'artist': 'Led Zeppelin',
- 'title': 'Stairways to heaven',
- 'playback': '09:20'
-}, {
- 'artist': 'Metallica',
- 'title': 'Master of puppets',
- 'playback': '04:30'
-}, {
- 'artist': 'Nirvana',
- 'title': 'The Man who sold the world',
- 'playback': '03:10'
-}, {
- 'artist': 'Stepan',
- 'title': 'Letter to mom',
- 'playback': '02:20'
-}]
 
 
-def get_song(song_list, seconds):
-    for item in song_list:
-        time_song = int(item['playback'][:2]) * 60 + int(item['playback'][3:])
-        if time_song < seconds:
-            return item['artist'], item['title']
+class Triangle:
+    def __init__(self, a, b, c):
+        self.a, self.b, self.c = a, b, c
+
+    def perimeter(self):
+        return sum(self.__dict__.values())
+
+class EquilateralTriangle(Triangle):
+    def __init__(self, side):
+        super().__init__(side, side, side)
 
 
-print(get_song(songs_db, 190))
+triangle1 = Triangle(3, 4, 5)
+triangle2 = EquilateralTriangle(3)
 
-
+print(triangle1.perimeter())
+print(triangle2.perimeter())
