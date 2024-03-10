@@ -1,38 +1,22 @@
+import copy
 
 
-class FieldTracker:
-    def __init__(self):
-        self._values = {item: getattr(self, item) for item in self.fields}
+def get_min_max(iterable):
+    try:
+        copy_iterable = copy.deepcopy(iterable)
+        return min(iterable), max(copy_iterable)
+    except:
+        return None
 
-    def base(self, name) -> int:
-        return self._values[name]
+iterable = iter(range(10))
 
-    def has_changed(self, name) -> bool:
-        return getattr(self, name) != self._values[name]
-
-    def changed(self) -> dict:
-        return {k: v for k, v in self._values.items() if self.has_changed(k)}
-
-    def save(self) -> None:
-        for k in self.changed().keys():
-            self._values[k] = getattr(self, k)
+print(get_min_max(iterable))
 
 
+iterable = [6, 4, 2, 33, 19, 1]
 
-class Point(FieldTracker):
-    fields = ('x', 'y', 'z')
+print(get_min_max(iterable))
 
-    def __init__(self, x, y, z):
-        self.x, self.y, self.z = x, y, z
-        super().__init__()
+iterable = iter([])
 
-point = Point(1, 2, 3)
-point.x = 0
-point.z = 4
-point.save()
-
-print(point.base('x'))
-print(point.base('z'))
-print(point.has_changed('x'))
-print(point.has_changed('z'))
-print(point.changed())
+print(get_min_max(iterable))
