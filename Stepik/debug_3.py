@@ -1,22 +1,29 @@
-import copy
 
 
-def get_min_max(iterable):
-    try:
-        copy_iterable = copy.deepcopy(iterable)
-        return min(iterable), max(copy_iterable)
-    except:
-        return None
+class CardDeck:
+    KEY = ("пик", "треф", "бубен", "червей")
+    VALUE = ("2", "3", "4", "5", "6", "7", "8", "9", "10", "валет", "дама", "король", "туз")
 
-iterable = iter(range(10))
+    def __init__(self):
+        self.coloda = iter([(k, v) for v in self.KEY for k in self.VALUE])
 
-print(get_min_max(iterable))
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return "{} {}".format(*next(self.coloda))
 
 
-iterable = [6, 4, 2, 33, 19, 1]
+cards = CardDeck()
 
-print(get_min_max(iterable))
+print(next(cards))
+print(next(cards))
 
-iterable = iter([])
+print()
 
-print(get_min_max(iterable))
+cards = list(CardDeck())
+
+print(cards[9])
+print(cards[23])
+print(cards[37])
+print(cards[51])
