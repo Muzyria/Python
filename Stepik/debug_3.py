@@ -1,24 +1,18 @@
 
-class Xrange:
-    def __init__(self, start, end, step=1):
-        self.step = step
-        self.end = end
-        self.start = start - step
 
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        self.start += self.step
-        if self.start >= self.end and self.step > 0:
-            raise StopIteration
-        if self.start <= self.end and self.step < 0:
-            raise StopIteration
-        return self.start
+def card_deck(suit: str):
+    suits = ['пик', 'треф', 'бубен', 'червей']
+    face_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'валет', 'дама', 'король', 'туз']
+    suits.remove(suit)
+    while True:
+        for suit_ in suits:
+            for face_value in face_values:
+                yield f'{face_value} {suit_}'
 
 
 
-xrange = Xrange(5, 10)
 
-print(*xrange)
+generator = card_deck('треф')
+cards = [next(generator) for _ in range(40)]
+
+print(*cards)
