@@ -1,18 +1,6 @@
+from sys import getsizeof
 
+def cubes_of_odds(iterable):
+    return (i**3 for i in iterable if i % 2)
 
-def card_deck(suit: str):
-    suits = ['пик', 'треф', 'бубен', 'червей']
-    face_values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'валет', 'дама', 'король', 'туз']
-    suits.remove(suit)
-    while True:
-        for suit_ in suits:
-            for face_value in face_values:
-                yield f'{face_value} {suit_}'
-
-
-
-
-generator = card_deck('треф')
-cards = [next(generator) for _ in range(40)]
-
-print(*cards)
+print(*cubes_of_odds([1, 2, 3, 4, 5]))
