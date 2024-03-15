@@ -1,4 +1,4 @@
-# with open(r'C:\Users\Sasha\Downloads\file.txt', 'r', encoding='utf-8') as file:
+# with open(r'C:\Users\Sasha\Downloads\file1.txt', 'r', encoding='utf-8') as file:
 #     li = list(map(lambda x: x.strip(), file.readlines()))
 #
 #     lenli = len(li)
@@ -17,7 +17,7 @@
 #     print(lenli, 'lines')
 
     # '''
-    # with open('file.txt') as file:
+    # with open('file1.txt') as file:
     #     text = file.read()
     #     print('Input file contains:')
     #     print(sum(map(lambda x: x.isalpha(), text)), 'letters')
