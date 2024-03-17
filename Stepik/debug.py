@@ -1,32 +1,45 @@
 
-
-class SortKey:
-    def __init__(self, *args):
-        self.args = tuple(args)
-
-    def __call__(self, obj):
-        print("Экземпляр класса User -->", obj)
-        print("Словарь с атрибутами -->", obj.__dict__)
-        print("Название/я атрибута --->>>", tuple(atr for atr in obj.__dict__))
-        print("Значение/я атрибута/ов переданных в key=SortKey(...,...))) СПОСОБ №1 --->>>",
-              tuple(obj.__getattribute__(i) for i in self.args))
-        print("Значение/я атрибута/ов переданных в key=SortKey(...,...))) СПОСОБ №2  --->>>",
-              tuple(obj.__dict__[i] for i in self.args))
-        print()
-        return "ТЕСТ"
+import unittest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 
 
-class User:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
+class TestUniqueSelectors(unittest.TestCase):
 
-    def __repr__(self):
-        return f'User({self.name}, {self.age})'
+    def setUp(self):
+        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
-users = [User('Gvido', 67), User('Timur', 30), User('Arthur', 20), User('Timur', 45), User('Gvido', 60)]
+    def fill_form(self, link):
+        browser = self.driver
+        browser.implicitly_wait(5)
+        browser.get(link)
 
-# print(sorted(users, key=SortKey('name')))
-print(sorted(users, key=SortKey('name', 'age')))
-# print(sorted(users, key=SortKey('age')))
-# print(sorted(users, key=SortKey('age', 'name')))
+        browser.find_element(By.CSS_SELECTOR, '.first_block .first').send_keys('Kesa')
+        browser.find_element(By.CSS_SELECTOR, '.first_block .second').send_keys('Lisa')
+        browser.find_element(By.CSS_SELECTOR, '.third_class .third').send_keys('KL@google.com')
+
+        browser.find_element(By.CSS_SELECTOR, "button.btn").click()
+
+        welcome_text = browser.find_element(By.TAG_NAME, 'h1').text
+        return welcome_text
+
+    def test_registration(self):
+        link = 'http://suninjuly.github.io/registration1.html'
+        registration_result = self.fill_form(link)
+
+        self.assertEqual("Congratulations! You have successfully registered!", registration_result)
+
+    def test_registration_bug(self):
+        link = 'http://suninjuly.github.io/registration2.html'
+        registration_result = self.fill_form(link)
+
+        self.assertEqual("Congratulations! You have successfully registered!", registration_result)
+
+    def tearDown(self):
+        self.driver.close()
+
+
+if __name__ == "__main__":
+    unittest.main()
