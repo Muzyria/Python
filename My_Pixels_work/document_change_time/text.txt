@@ -1,187 +1,74 @@
-*Date: 09.02.22 - 09.05.22
-OS Build: 2.12.0_E
-APK Build: 2.1.71
+*Date: 02.16.24
+OS Build: 1.54.0
+APK Build: 2.1.98
 Environment: Live
 Cable FW Build:
-Device(s): YTR
-Device ID: S10150000211018049
-Test Location: SALT CREEK GOLF CLUB
-UUA : 1.4.0*
+Device(s): YTX
+Device ID: L101140017180605A5
+Test Location:
+UUA : 1.4.1*
 
 
-*Test Results Overview:*
-%{background:yellow} NEED TO REVIEW PAST TESTING AND ADD ADDITIONAL CHECKS TO VERIFY BUG FIXES (language)... Provide an over of test results and if any issues are reported, note specific CASE and STEPS and highlight issues below.%
 
+%{Background:yellow} *Overview of Test Results: All test cases passed according to expected result.
+exect Cable voltage not translated in asset details, also sending message with any non-english characters shows up wrong on 360 (For example any Chinese/Korean/Japanese characters or letters with accents (É)*%
 
-*%{background:yellow} All cases passed with expected behavior%*
+*Preconditions*
+Check that the full list of the languages is available in 360 (ref. to task #12359) *Confirmed 11:41*
 
-h2. Test Plan
+*General checks*
 
-h3. Preliminary/Precondition Tests
+*Case A: 360 – Select Language*
+1. 360 Confirm Language can be selected from YamaTrack Module > Course Set Up *Confirmed 11:43*
+2. Confirm default language is English (American) on YTR *Confirmed 11:44*
+3. Confirm selecting the various English versions updates the flag icon on YTR when tablet syncs
+- English (American) *Confirmed 11:44*
+- English (UK) *Confirmed 11:47*
+- English (AUS) *Confirmed 11:48*
+4. Test all other languages and confirm it updates flag on YTR upon tablet sync
+Chinese *Confirmed 11:48*
+French *Confirmed 11:49*
+German *Confirmed 11:50*
+Japanese *Confirmed 11:51*
+Korean *Confirmed 11:52*
+Italian *Confirmed 11:53*
+Spanish. *Confirmed 11:55*
 
-# Assign tablet and player to device at  *SALT CREEK GOLF CLUB *
-# Create tournament within 360 and confirm it loads via tablet sync or OTA onto the tablet *Confirmed*
+*Case B: Settings Save 360*
+1. Select a language other than default language in 360 *Confirmed default language selected Spanish 11:55*
+2. Confirm selected language updates upon tablet sync *Confirmed 11:58*
+3. Log out and confirm updated language setting saved within 360 and did not go back to default *Confirmed updated language saved in 360 12:02*
+4. Confirm tablet still displays selected language. *Confirmed 12:04*
 
-h2. OTA Tournament Updates
+*Case C: YamaTrack – Select NEW Language and Clear Settings/End Round*
+1. Confirm 360 default language selected appears on tablet – (ENGLISH) *Confirmed 12:05*
+2. Select new language on tablet (SPANISH) and confirm language updates and user is taken back to Play Golf Screen *Confirmed 12:06*
+3. Test run a round and confirm language remains throughout the entire round. *Confirmed 12:09*
+4. Update language ¼ of the round on YTR to a new language (different than the default- FRENCH). *Confirmed 12:12*
+5. Confirm language update saves for the next couple of holes. *Confirmed 12:12*
+6. Update default language in 360 to a new language (CHINESE) *Confirmed 12:13*
+7. Confirm tablet language settings still display last selected language in APK FRENCH (only updates upon tablet sync) *Confirmed 12:14*
+8. Confirm language returns back to default language set in 360 upon tablet sync (CHINESE). *Confirmed 12:18*
+- waking up from a cart barn sleep *Confirmed 12:26*
+- device launch *Confirmed 12:26*
+- settings update in Yamatrack. *Confirmed 12:29*
 
-*CASE A: Device is NOT within tournament lockdown geofence*
-# With device awake, add new tournament for today (will need to add player and generate tee times), starting in 25 minutes. *T1 = 13:25*
-a) Keeping device awake, confirm device receives tournament OTA within 20 minutes of start time and displays the prompt "Are you playing in 'QWERTY' tournament". *Confirmed 13:10*
-b) Select Yes, and confirm screen goes to tournament welcome screen. *Confirmed*
-c) Confirm tournament button should also be available in Play Menu. *Confirmed*
-# With device asleep (cart barn), add new tournament for today, starting in 25 minutes. *CBS 13:17, T1 =13:45
-a) Wake up device, see if device gets tournament OTA and within 20 minutes of start time displays the prompt "Are you playing in 'QWERTY' tournament". *Confirmed 13:25*
-b) Select Yes, and confirm screen goes to tournament welcome screen. *Confirmed*
-c) Confirm Tournament button is also available in Play Menu. *Confirmed*
-# With device awake, add new tournament for today, starting in 25 minutes. *T1=14:15*
-a) Go to Play menu -> Settings -> Updates -> Update Tournaments. *Confirmed*
-b) Confirm'update available' is shown, go through the update process. *Confirmed 13:50*
-c) Return to Play Menu and make sure new tournament is available (within 20 minutes of start time). *Confirmed 13:55*
+*Case D: Geofence/Alerts and Messages*
+1. Enter a standard shut-down Geofence, confirm the correct Geofence message appears in selected language *Confirmed 12:29*
+2. Enter a standard Geofence with speed control, confirm the correct Geofence message appears in selected language *Confirmed 12:33*
+3. Enter a CPO geofence and confirm correct CPO alert message appears in selected language *Confirmed 12:39*
+4. Select a language other than the default language in 360 and send a message from the tablet to "the club house" (360). Check within 360 if the message appears in the default language, or the selected language (note:ER is currently unknown/undefined). *Confirmed 12:46 / Select the language Spanish and the message arrived appears exactly in Spanish, which I have by default in 360*
 
+*Additional checks - Please post your test reports here as well for the following items:*
+Check to verify fixes:
+#12152 *Confirmed*
+ #12269 *Confirmed*
+ #12271 *Confirmed*
+ #12299 *Confirmed*
 
-*CASE B: Device is within tournament lockdown geofence*
-# With device awake, add new tournament for today w/ tournament lockdown geofence set to now+20min (will need to add player and generate tee times), starting in 25 minutes. *T1=14:55*
-a) Keeping device awake, see if device gets tournament OTA geofence and displays lock down tournament screen *Confirmed 14:35 - lockdown*
-b) Confirm device releases geofence within 5 minutes of start time and displays the tournament welcome screen. *Confirmed 14:50*
-c) Confirm Tournament button should also be available in Play Menu. *Confirmed 14:50*
-# With device asleep (cart barn), add new tournament for today w/ tournament lockdown geofence set to now+20min (will need to add player and generate tee times), starting in 25 minutes.  *T1=15:25*
-a) Wake up device, confirm device gets tournament OTA and geofence displays lock down tournament screen *Wake up 15:00, Confirmed 15:05 - lockdown*
-b) Confirm device releases geofence within 5 minutes of start time and displays the tournament welcome screen. *Confirmed 15:20*
-c) Confirm Tournament button should also be available in Play Menu. *Confirmed 15:20*
-# With device awake, add new tournament for today w/ tournament lockdown geofence set to now+20min (will need to add player and generate tee times). *T1=16:00*
-a) Go to Play menu -> Settings -> Updates -> Update Tournaments. *Confirmed 15:40*
-b) Confirm 'update available' is shown, go through the update process. *Confirmed*
-c) Return to play golf screen, and confirm device releases geofence within 5 minutes of start time and displays the tournament welcome screen. *Confirmed*
-d) Confirm Tournament button also is available in Play Menu. *Confirmed 15:55*
+Missing Alert Messages:
+ #12168 *Confirmed*
 
+Add any Missing Language
+Translations: #12160 , #12161 , #12162 , #12163, #12381, #12382, #12383 %{Background:yellow} *Cable voltage not translated in asset details, also sending message with any non-english characters shows up wrong on 360 (For example any Chinese/Korean/Japanese characters or letters with accents (É)*%
 
-h2. Join Prompt Alert
-
-*CASE A: Create two tournaments that do not overlap (give at least 5-10 minutes gap between each) *T1=16:30-16:50, T2=17:00-17:20*
-# When Tournament A is still active, but Tournament B is starting in 20 minutes, verify that the 20 minute "Are you playing in the [B] tournament?" prompt does not pop-up *Confirmed prompt does not appear*
-# Verify that it shows up ONLY AFTER Tournament A ends *Confirmed 16:50*
-# Check issues #12029 and confirm bug does not exist. *Confirmed*
-
-*CASE B: A tournament is starting soon, and use a tablet that is not already synced to the tournament*
-# After receiving an "Are you playing..." tournament prompt, PRESS NO. *T1= 17:30. Pressed NO 17:20*
-# Verify this prompt is never displayed again while the tournament is occurring. *Confirmed*
-# BEFORE the tournament starts, allow tablet to go into cart barn sleep, and then wake tablet back up. *CBS 17:25*
-# Verify that the "Are you playing" tournament prompt does not show up after waking back up. *Confirmed*
-# Repeat step 2 AFTER tournament starts *Confirmed 17:50*
-# Re-create a new tournament and repeat steps 1-3, but this time press YES when asked if you're playing in the tournament *Select YES 17:30*
-# Upon selecting YES to play in the tournament- confirm tournament scorecard appears *Confirmed 20:05 when device has players assigned*
-
-
-h2. Tournament Staging/Lock Down Geofence Testing
-
-_For all cases map staging geofence area in 360 control panel/pace mapping module, create tournament within 360._
-
-*CASE A: Standard Staging Area Geofence - No Tournament Lockdown*
-# Have device enter geofence *Confirmed 11:05*
-# Confirm Splash screen for course is displayed *Confirmed*
-# Confirm if screen is touched, normal UI appears for 1 minute before returning to Splash screen *Confirmed 11:06*
-# Confirm if device leaves staging geofence, splash screen should disappear and normal UI resumes *Confirmed*
-
-*CASE B: Tournament Lockdown Geofence - inside lockdown time*
-# On device within the APK, go to Settings -> Updates -> Update Tournaments to get the latest tournament information. *Confirmed 11:31*
-# Have device enter geofence within that tournament lockdown geofence time period *Enter 11:38*
-# Confirm Welcome screen for the tournament displays *Confirmed*
-# Confirm No 'x' is available in the top left corner of Welcome Screen (so user cannot leave the Welcome flow) *Confirmed*
-# Lockdown end time is displayed in red text beneath the tournament name *Confirmed*
-# User can see player names if already assigned, and if not, user can search for players and assign to cart *Confirmed*
-# At end of lockdown time, confirm Welcome screen will still be shown but user is able to drive cart and exit welcome screen via 'x' in top left *Confirmed 11:43*
-# Confirm the start time of the round is reached, the welcome screen goes away automatically so the user can start playing *Confirmed - not implemented*
-
-*CASE C: Tournament Lockdown Geofence - outside of lockdown time*
-# Add Tournament lockdown geofence within 360 Web Interface with lockdown selected *Confirmed 12:54*
-# On device within the APK, go to Settings -> Updates -> Update Tournaments to get the latest tournament information. *Confirmed 12:57*
-# Have device enter geofence outside of the tournament lockdown geofence time period *Enter 12:59*
-# Confirm nothing happens on device and welcome screen is not displayed *Confirmed 13:09*
-
-*CASE D: Tournament Lockdown Geofence - with geofence turned off*
-# Add Tournament lockdown geofence within 360 Web Interface with NO lockdown selected *Confirmed 13:29*
-# On device within the APK, go to Settings -> Updates -> Update Tournaments to get the latest tournament information. *Confirmed*
-# Have device enter geofence inside of the tournament lockdown geofence time period *Confirmed 13:44*
-# Confirm Welcome screen for the tournament is displayed and check the following *Confirmed*
-a) 'x' is available in top left corner, and user has full access to UI *Confirmed*
-b) User can get back to the Welcome screen by selecting Tournament from the Play Menu *Confirmed*
-c) If the start time of the round is reached, the welcome screen goes away automatically so the user can start playing *Confirmed - not implemented*
-
-
-h2. Tournament Scorecard
-
-*CASE A: Scorecard Updating*
-# Create and Join/Sync A Tournament on Two Tablets with 2 players on each tablet. *T1=14:20, Confirmed two players per device 14:23*
-# Enter in 3 out of 4 players scores and wait to confirm Leaderboard has been synced to all tablets. *Confirmed 14:25*
-# After confirming this, add score for 4th player *Confirmed 14:26*
-# On Same tablet, immediately switch to the leaderboard. Confirm that the leaderboard on that tablet immediately shows the added 4th player's score *Confirmed 15:16*
-# Switch flights to Net Scores and confirm the 4th player's score is still there, and the back to the Gross # Scores to reconfirm again *Confirmed 14:27*
-# Verify on the other tablets after leaderboard is synced on that tablet that 4th player's score is visible. *Confirmed 14:28*
-# Repeat steps 2-3 a couple more times with additional scoring data to confirm that leaderboard ON A TABLET THAT JUST ENTERED it's scores always shows the latest scores that the player just entered into that particular tablet *Confirmed 14:29*
-# Check to make sure all scores entered on tablet sync to 360 *Confirmed 14:30*
-# Exit YamaTrack application – confirm previously entered scoring is still stored *Confirmed 14:31*
-# Reset tablet and confirm previously entered scoring is still stored *Confirmed 14:34*
-
-*CASE B: Clearing Scorecard/End Round* Check issue #12054 to confirm bug has been resolved.
-# Enter in scores for all players – upon last hole, confirm end round prompt appears on play golf screen *Confirmed 14:48*
-# Select END ROUND from prompt- confirm it just 'exits' the tournament on the device for the selected players and check to confirm it does not clear scores within 360 *Confirmed 14:48*
-# Select END ROUND from Tournament SCORECARD- confirm it just 'exits' the tournament on the device for the selected players and check to confirm it does not clear scores within 360 *Confirmed 14:50*
-# Select CLEAR SCORES from tournament SCORECARD – confirm the selected player remains in the tournament, and selected player scores are cleared on tablet and within 360 *Confirmed 14:52*
-
-
-*CASE C: Multiple Rounds/Tournaments ~3 hrs* Check issue #12035 and confirm bug is resolved.
-> Example:
-> Tournament 1 / Round 1 - 13:25-13:45
-> Tournament 1 / Round 2 - 13:50-14:10
-> Tournament 2 / Round 1 - 14:20-14:40
-> Tournament 2 / Round 2 - 14:50-15:10
-
-# Within a one day period, create two tournaments each with two rounds – 20 mins long
-a) Make sure the 1st round do not overlap with 2nd round and are separated by 5 minutes, and each tournament should not overlap and is separated by 10-60 min.
-# Record Tournament and Round times *T1/R1 = 15:10-15:30, T1/R2 = 15:40-16:00, T2/R1=16:10-16:30, T2/R2=16:40-17:00*
-# Within 20 minutes of T1/R1 starting
-a) Confirm: Join T1/R1 Prompt Shows up automatically at 20 minutes OR if you press tournament button, welcome screen for T1/R1 is available. *Conifrmed 14:50*
-b) Confirm you do NOT get a list option and only T1/R1 is available *Confirmed*
-# While T1/R1 is still ongoing, press Tournament button within 1 Hour of T1/R2 starting, but more than 20 minutes before T1/R2 starts
-a) Confirm: Tournament Button does not show a list of tournaments/rounds. It should only show T1/R1 information *Confirmed 15:12, T1/R1*
-# While Tournament 1 is still ongoing, press Tournament button within 1 Hour of T1/R2 starting, AND within 20 minutes of T1/R2 starting
-a) Confirm there was NO auto-prompt asking to join T1/R2 *Confirmed 15:19*
-b) Confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) continue with T1/R1 *Confirmed 15:20 T1/R1, T1/R2*
-# While still within T1/R1 time period, and AND within 20 minute period before T1/R2, FINISH T1/R1 scoring *Confirmed 15:27*
-a) If auto-prompt asking to join Round 2 occurs, Press "No"
-b) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed list 15:28*
-c) Join T1/R2 *15:28*
-# While still within 1 hour of T1/R1 ENDING AND within T1/R2 Time period
-a) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2(It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed 15:29*
-b) Repeat Steps 3-6
-# Within 20 minutes of T1/R2 starting
-a) Confirm: Join T1/R2 Prompt Shows up automatically at 20 minutes OR if you press tournament button, welcome screen for T1/R2 is available. *Conifrmed 13:35, joined from previous step*
-b) Confirm you do NOT get a list option and only T1/R1 is available *Confirmed list available T1/R1, T1/R2*
-# While T1/R2 is still ongoing, press Tournament button within 1 Hour of T2/R1 starting, but more than 20 minutes before T2/R1 starts
-a) Confirm: Tournament Button does not show a list of tournaments/rounds. It should only show T1/R1, T1/R2 information *Confirmed 15:35, T1/R1, T1/R2*
-# While T1/R2 is still ongoing, press Tournament button within 1 Hour of T1/R2 starting, AND within 20 minutes of T2/R1 starting
-a) Confirm there was NO auto-prompt asking to join T2/R1 *Confirmed 15:41*
-b) Confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) continue with T1/R1 *Confirmed 15:50, T1/R2, T1/R2, T2/R1*
-# While still within T1/R2 time period, and AND within 20 minute period before T2/R1, FINISH T1/R2 scoring *Confirmed 18:58*
-a) If auto-prompt asking to join Round 2 occurs, Press "No"
-b) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed list 16:08, T1/R2, T1/R2, T2/R1*
-c) Join T2/R1 *19:01*
-# While still within 1 hour of T1/R2 ENDING AND within T2/R1 Time period
-a) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2(It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed 16:06*
-b) Repeat Steps 3-6
-# Within 20 minutes of T2/R1 starting
-a) Confirm: Join T2/R1 Prompt Shows up automatically at 20 minutes OR if you press tournament button, welcome screen for T2/R1 is available. *Confirmed 19:07, joined from previous step. 16:07 T2 OTA popped up*
-b) Confirm you do NOT get a list option and only T1/R1 is available *Confirmed 19:07, list available T1/R1, T1/R2, T2/R1*
-# While T2/R1 is still ongoing, press Tournament button within 1 Hour of T2/R2 starting, but more than 20 minutes before T2/R2 starts
-a) Confirm: Tournament Button does not show a list of tournaments/rounds. It should only show T1/R1 information *Confirmed 16:12, T1/R1, T1/R2, T2/R1*
-# While Tournament 1 is still ongoing, press Tournament button within 1 Hour of T2/R2 starting, AND within 20 minutes of T2/R2 starting
-a) Confirm there was NO auto-prompt asking to join T2/R2 *Confirmed 16:12*
-b) Confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) continue with T1/R1 *Confirmed list 16:21, T1/R2, T1/R2, T2/R1, T2/R2*
-# While still within T2/R1 time period, and AND within 20 minute period before T2/R2, FINISH T2/R1 scoring *Confirmed 16:24*
-a) If auto-prompt asking to join Round 2 occurs, Press "No"
-b) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed list 16:34, T1/R2, T1/R2, T2/R1, T2/R2*
-c) Join T2/R2 *16:35*
-# While still within 1 hour of T2/R1 ENDING AND within T2/R2 Time period
-a) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2(It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed*
-b) Repeat Steps 3-6
-# After 1 hour has passed since each round has ended, confirm that when pressing the tournament button, rounds older than 1 hour no longer show up on the list *Confirmed*
