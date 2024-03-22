@@ -44,11 +44,11 @@ def test_guest_should_see_login_link(browser):
     time.sleep(1)
 
     email_field = browser.find_element(By.ID, "id_login_email")
-    email_field.send_keys("Fila090580@gmail.com")
+    email_field.send_keys("")
     time.sleep(1)
 
     password_field = browser.find_element(By.ID, "id_login_password")
-    password_field.send_keys("5250")
+    password_field.send_keys("")
     time.sleep(1)
 
     # button_submit = browser.find_element(By.CLASS_NAME, "sign-form__btn button_with-loader")
