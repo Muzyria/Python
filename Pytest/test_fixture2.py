@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
 link = "http://selenium1py.pythonanywhere.com/"
@@ -11,7 +12,7 @@ def browser():
     print()
     print("\nstart browser for test..")
     print()
-    browser = webdriver.Chrome(ChromeDriverManager().install())
+    browser = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     return browser
 
 
