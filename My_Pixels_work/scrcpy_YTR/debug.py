@@ -76,6 +76,7 @@
 #
 #     # Перемещаем курсор на новые координаты
 #     pyautogui.moveTo(x, y)
+import random
 
 # import math
 # import pyautogui
@@ -111,4 +112,3 @@
 #
 # # Запускаем Telegram Desktop
 # subprocess.Popen(r"C:\Users\Fila\AppData\Roaming\Telegram Desktop\Telegram.exe")
-

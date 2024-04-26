@@ -92,14 +92,15 @@ class SyncwiseClient(SyncwiseAPI):
         #
         # print(poligone_list)
 
-    def course_vector_details(self):
+    def course_vector_details(self, id_course):
         """
         Get course vector details
         """
         action = "CourseVectorDetails"
         url = f"{self.host}/rest/action/{self.create_url_test_with_private(action, self.SECRET_KEY)}"
         payload = json.dumps({
-            "id_course": "KoyhA-zWt6os"
+            # "id_course": "KoyhA-zWt6os"
+            "id_course": id_course
         })
         headers = {
             'authority': 'api2.syncwise360.com',

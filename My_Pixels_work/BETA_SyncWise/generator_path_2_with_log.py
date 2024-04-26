@@ -1,4 +1,5 @@
 import os
+import random
 from datetime import datetime, timedelta
 
 from sincwise_clients_method import SyncwiseClient
@@ -18,8 +19,9 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.2.28'}
-    START_COORDINATES = "50.07807852323376, 36.23065154766116"
+    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.101'}
+    # START_COORDINATES = "50.07807852323376, 36.23065154766116" # superior
+    START_COORDINATES = "49.86316203910068, 24.029529539745567" # lviv demo
 
     def __init__(self):
         ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
@@ -31,7 +33,11 @@ class IntermediateCoordinatesGenerator:
 
         self.client_data = SyncwiseClient("https://api2.syncwise360.com")
         self.client_data.user_account_login()
-        self.client_data.course_vector_details()
+
+        # superior "KoyhA-zWt6os"
+        # lviv demo FFlxm9vaKp-a
+
+        self.client_data.course_vector_details("FFlxm9vaKp-a")
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
     @execution_time_decorator
@@ -97,16 +103,24 @@ class IntermediateCoordinatesGenerator:
                         time_minute = now
                         self.touch_screen()
 
-    def run_device_by_time(self, minutes):  #  генераци нахождения на лунке по времени
-        steps = int(minutes * 40)
+    def run_device_by_time(self, minutes=None):  #  генераци нахождения на лунке по времени
+        # steps = int(minutes * 40) # ----------------------------
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
+            # ------------- ---------------- -------------- -----------------
+            minutes = random.randint(4, 5)
+            #--------------------
+
             time_start_on_hole = datetime.now()
             time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-1)
             time_minute = datetime.now().time().minute
             message = f'STARTING TRIP ON HOLE -> {i} from {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}'
             self.log_to_file(message)
             print(message)
+
+            # ---------------------------------------------------------
+            steps = int(minutes * 40) # -------------------------------------------------------------------------------
+            print(f"-------------------------- STEP TIME {steps} -----------------------------------------------")
 
             for step_patch in (current_patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps)):
                 lat, lng = step_patch['lat'], step_patch['lng']
@@ -134,10 +148,10 @@ generator = IntermediateCoordinatesGenerator()
 print()
 print(f"START GAME - -----------------------------------------------------------------------------------------")
 generator.log_to_file(f'the game started at {datetime.now().strftime("%H:%M:%S")}')
-generator.get_start_coordinates(1)
+generator.get_start_coordinates(3)
 # generator.run_device(6)
-generator.run_device_by_time(2)
-generator.get_start_coordinates(1)
+generator.run_device_by_time(5)
+generator.get_start_coordinates(3)
 print()
 generator.log_to_file(f'the game finished at {datetime.now().strftime("%H:%M:%S")}')
 print(f'FINISH GAME ------------------------------------------------------------------------------------------')

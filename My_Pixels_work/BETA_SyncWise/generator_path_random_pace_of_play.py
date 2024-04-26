@@ -20,7 +20,7 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.3.221'}
+    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.103'}
 
     START_COORDINATES = [{'lat': 50.07807852323376, 'lng': 36.23065154766116}]
     OUT_OFF_COURSE_COORDINATES = [{'lat': 50.07810572861073, 'lng': 36.22751781974624}]
@@ -202,7 +202,7 @@ generator = IntermediateCoordinatesGenerator()
 
 generator.get_start_coordinates(10)
 # generator.generate_random_path(3, (10, 10))
-generator.run_device_by_time(0.5)
+# generator.run_device_by_time(0.5)
 # generator.run_device_by_random_path()
 generator.run_device_last_step_to_next_point([generator.last_coordinate[0], generator.START_COORDINATES[0]], 40)
 generator.get_start_coordinates(10)
