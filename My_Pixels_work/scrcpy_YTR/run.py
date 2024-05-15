@@ -36,6 +36,6 @@ pyautogui.typewrite(r'cd C:\scrcpy-win64-v2.0\scrcpy-win64-v2.0')
 pyautogui.press('enter')
 
 # pyautogui.typewrite(r'scrcpy --tcpip=192.168.3.128:40375')  # MY POCO in office
-pyautogui.typewrite(r'scrcpy --tcpip=192.168.0.104:40847')  # MY POCO at home
+pyautogui.typewrite(r'scrcpy --tcpip=192.168.0.103:40323')  # MY POCO at home
 # pyautogui.typewrite(r'scrcpy --tcpip=192.168.0.110:5555')
 pyautogui.press('enter')
