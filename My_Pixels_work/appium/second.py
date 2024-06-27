@@ -5,7 +5,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 capabilities = dict(
     platformName='android',
     automationName='uiautomator2',
-    deviceName='192.168.3.221'
+    deviceName='192.168.0.100'
     )
 
 appium_server_url = 'http://127.0.0.1:4723/wd/hub'

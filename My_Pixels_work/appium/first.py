@@ -5,7 +5,7 @@ from appium import webdriver
 from appium.webdriver.common.appiumby import By
 
 os.system(f'adb disconnect')
-os.system(f'adb connect 192.168.3.221')
+os.system(f'adb connect 192.168.0.100')
 
 capabilities = dict(
     platformName='android',
