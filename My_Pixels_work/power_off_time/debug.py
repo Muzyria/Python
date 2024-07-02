@@ -1,15 +1,18 @@
-from appium import webdriver
+import asyncio
+import websockets
 
-desired_caps = {
-    'platformName': 'Android',
-    'udid': '192.168.3.127',  # Замените на IP-адрес вашего устройства
-    'appPackage': 'com.android.settings',
-    'appActivity': '.Settings',
-    'noReset': 'true'
-}
 
-driver = webdriver.Remote('http://192.168.3.127:4723/wd/hub', desired_caps)
+async def websocket_handler(websocket, path):
+    while True:
+        message = await websocket.recv()
 
-# Ваш код для взаимодействия с настройками
+        print(f"Отримано повідомлення: {message}")
 
-driver.quit()
+        response = f"Ви сказали: {message}"
+        await websocket.send(response)
+
+
+start_server = websockets.serve(websocket_handler, 'localhost', 8765)
+
+asyncio.get_event_loop().run_until_complete(start_server)
+asyncio.get_event_loop().run_forever()
