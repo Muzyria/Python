@@ -1,6 +1,3 @@
-import time
-import math
 
-answer = math.log(int(time.time()))
 
-print(answer)
+print(__import__("string").ascii_letters)
