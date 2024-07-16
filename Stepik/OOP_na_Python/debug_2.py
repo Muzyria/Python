@@ -1,21 +1,24 @@
-import time
+class DateUSA:
+    def __init__(self, day, month, year):
+        self.day = day
+        self.month = month
+        self.year = year
+
+    def format(self):
+        return f"{self.month:02}/{self.day:02}/{self.year:04}"
+
+    def isoformat(self):
+        return f"{self.year:04}-{self.month:02}-{self.day:02}"
 
 
-class Timer:
-    def __init__(self, func):
-        self.func = func
+class DateEurope:
+    def __init__(self, day, month, year):
+        self.day = day
+        self.month = month
+        self.year = year
 
-    def __call__(self, *args, **kwargs):
-        start = time.time()
-        self.func()
-        finish = time.time()
-        result = finish - start
-        print(f"Время работы программы {result}")
+    def format(self):
+        return f"{self.day:02}/{self.month:02}/{self.year:04}"
 
-
-@Timer
-def calculate():
-    for i in range(10000000):
-        2**100
-
-calculate()
+    def isoformat(self):
+        return f"{self.year:04}-{self.month:02}-{self.day:02}"
