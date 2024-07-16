@@ -1,24 +1,43 @@
-class DateUSA:
-    def __init__(self, day, month, year):
-        self.day = day
-        self.month = month
-        self.year = year
 
-    def format(self):
-        return f"{self.month:02}/{self.day:02}/{self.year:04}"
+class BankAccount:
+    def __init__(self, name, balance):
+        self.name = name
+        self.balance = balance
 
-    def isoformat(self):
-        return f"{self.year:04}-{self.month:02}-{self.day:02}"
+    def __str__(self):
+        return self.name
+
+    def __add__(self, other):
+        if isinstance(other, (int, float)):
+            return self.balance + other
+
+    def __radd__(self, other):
+        return self.balance + other
 
 
-class DateEurope:
-    def __init__(self, day, month, year):
-        self.day = day
-        self.month = month
-        self.year = year
+class Numbers:
+    def __init__(self, values: list):
+        self._values = values
 
-    def format(self):
-        return f"{self.day:02}/{self.month:02}/{self.year:04}"
+    @property
+    def balance(self):
+        return sum(self._values)
 
-    def isoformat(self):
-        return f"{self.year:04}-{self.month:02}-{self.day:02}"
+    def __add__(self, other):
+        if isinstance(other, (int, float)):
+            return self.balance + other
+
+    def __radd__(self, other):
+        return self.balance + other
+
+
+lst = [
+    BankAccount('Jack', 1000),
+    Numbers([1, 2, 3, 4, 5]),
+    BankAccount('Ivan', 30),
+    7.5,
+    Numbers([10, 20, 30, 40, 50]),
+    BankAccount('Frank', 2000),
+    10
+]
+print(sum(lst))
