@@ -1,43 +1,79 @@
+class ShoppingCart:
+    def __init__(self):
+        self.items = {}
 
-class BankAccount:
-    def __init__(self, name, balance):
-        self.name = name
-        self.balance = balance
+    def __getitem__(self, item):
+        return self.items.get(item, 0)
 
-    def __str__(self):
-        return self.name
+    def __setitem__(self, key, value):
+        self.items[key] = value
 
-    def __add__(self, other):
-        if isinstance(other, (int, float)):
-            return self.balance + other
+    def __delitem__(self, key):
+        del self.items[key]
 
-    def __radd__(self, other):
-        return self.balance + other
+    def add_item(self, key, value=1):
+        if key not in self.items:
+            self.__setitem__(key, value)
+        else:
+            self.items[key] = self.items[key] + value
 
-
-class Numbers:
-    def __init__(self, values: list):
-        self._values = values
-
-    @property
-    def balance(self):
-        return sum(self._values)
-
-    def __add__(self, other):
-        if isinstance(other, (int, float)):
-            return self.balance + other
-
-    def __radd__(self, other):
-        return self.balance + other
+    def remove_item(self, key, value=1):
+        if self.__getitem__(key):
+            if value >= self.items[key]:
+                del self.items[key]
+            else:
+                self.items[key] -= value
 
 
-lst = [
-    BankAccount('Jack', 1000),
-    Numbers([1, 2, 3, 4, 5]),
-    BankAccount('Ivan', 30),
-    7.5,
-    Numbers([10, 20, 30, 40, 50]),
-    BankAccount('Frank', 2000),
-    10
-]
-print(sum(lst))
+# Ниже код для проверки методов класса ShoppingCart
+
+# Create a new shopping cart
+cart = ShoppingCart()
+
+# Add some items to the cart
+cart.add_item('Apple', 3)
+cart.add_item('Banana', 2)
+cart.add_item('Orange')
+
+assert cart['Banana'] == 2
+assert cart['Orange'] == 1
+assert cart['Kivi'] == 0
+
+cart.add_item('Orange', 9)
+assert cart['Orange'] == 10
+
+print("Shopping Cart:")
+for item_name in cart.items:
+    print(f"{item_name}: {cart[item_name]}")
+
+cart['Apple'] = 5
+cart['Banana'] = 7
+cart['Kivi'] = 11
+assert cart['Apple'] == 5
+assert cart['Banana'] == 7
+assert cart['Kivi'] == 11
+
+print("Updated Shopping Cart:")
+for item_name in cart.items:
+    print(f"{item_name}: {cart[item_name]}")
+
+# Remove an item from the cart
+cart.remove_item('Banana')
+assert cart['Banana'] == 6
+
+cart.remove_item('Apple', 4)
+assert cart['Apple'] == 1
+
+cart.remove_item('Apple', 2)
+assert cart['Apple'] == 0
+assert 'Apple' not in cart.items
+
+cart.remove_item('Potato')
+
+del cart['Banana']
+assert cart['Banana'] == 0
+assert 'Banana' not in cart.items
+
+print("Updated Shopping Cart:")
+for item_name in cart.items:
+    print(f"{item_name}: {cart[item_name]}")
