@@ -1,38 +1,23 @@
-class Shape:
-    pass
+class NewInt(int):
+    def repeat(self, n=2):
+        return int("".join([str(self) for i in range(n)]))
 
-class Polygon(Shape):
-    pass
-
-class Triangle(Polygon):
-    pass
-
-class Rectangle(Polygon):
-    pass
-
-class Square(Rectangle):
-    pass
-
-class Ellipse(Shape):
-    pass
-
-class Circle(Ellipse):
-    pass
+    def to_bin(self):
+        return int(bin(self)[2::])
 
 
-shapes = [
-    Polygon(), Triangle(), Ellipse(), Polygon(), Triangle(), Ellipse(), Polygon(), Square(), Polygon(), Circle(),
-    Shape(), Polygon(), Triangle(), Circle(), Ellipse(), Shape(), Circle(), Rectangle(), Circle(), Circle(),
-    Square(), Square(), Circle(), Rectangle(), Rectangle(), Polygon(), Polygon(), Polygon(), Square(), Square(),
-    Rectangle(), Square(), Rectangle(), Polygon(), Circle(), Triangle(), Rectangle(), Shape(), Rectangle(),
-    Polygon(), Polygon(), Ellipse(), Square(), Circle(), Shape(), Polygon(), Ellipse(), Triangle(), Square(),
-    Polygon(), Triangle(), Circle(), Rectangle(), Rectangle(), Ellipse(), Triangle(), Rectangle(), Polygon(),
-    Shape(), Circle(), Rectangle(), Polygon(), Triangle(), Circle(), Polygon(), Rectangle(), Polygon(), Square(),
-    Triangle(), Circle(), Ellipse(), Circle(), Shape(), Circle(), Triangle(), Ellipse(), Square(), Circle(),
-    Triangle(), Polygon(), Square(), Polygon(), Circle(), Ellipse(), Polygon(), Shape(), Triangle(), Rectangle(),
-    Circle(), Square(), Triangle(), Triangle(), Ellipse(), Square(), Circle(), Rectangle(), Ellipse(), Shape(),
-    Triangle(), Ellipse(), Circle(), Shape(), Polygon(), Polygon(), Ellipse(), Rectangle(), Square(), Shape(),
-    Circle(), Triangle(), Circle(), Circle(), Circle(), Triangle(), Ellipse(), Polygon(), Circle(), Ellipse(),
-    Rectangle(), Circle(), Shape(), Polygon(), Polygon(), Triangle(), Rectangle(), Polygon(), Shape(), Circle(),
-    Shape(), Circle(), Triangle(), Ellipse(), Square(), Circle(), Triangle(), Ellipse(), Square(), Circle(),
-]
+c1 = NewInt(9)
+assert isinstance(c1, NewInt)
+assert issubclass(NewInt, int)
+assert c1 + 9 == 18
+assert c1 * 9 == 81
+
+
+c2 = NewInt(31)
+assert c2.repeat() == 3131
+assert c2.repeat(4) == 31313131
+print(NewInt(16).to_bin())
+assert NewInt(16).to_bin() == 10000
+assert NewInt(14).to_bin() == 1110
+
+print('Good')
