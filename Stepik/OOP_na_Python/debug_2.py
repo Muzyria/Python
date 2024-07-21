@@ -1,139 +1,60 @@
-class Device:
-    __slots__ = ["_name", "_location", "_status"]
-    def __init__(self, name, location, status="ON"):
-        self._name = name
-        self._location = location
-        self._status = status
+class Wallet:
+    def __init__(self, currency: str, balance: int):
+        self.currency = currency
+        self.balance = balance
 
     @property
-    def name(self):
-        return self._name
+    def currency(self):
+        return self._currency
+
+    @currency.setter
+    def currency(self, value):
+        if not isinstance(value, str):
+            raise TypeError("Неверный тип валюты")
+        if len(value) != 3:
+            raise NameError("Неверная длина названия валюты")
+        if not all(map(lambda x: x.isupper(), value)):
+            raise ValueError("Название должно состоять только из заглавных букв")
+        else:
+            self._currency = value
 
     @property
-    def location(self):
-        return self._location
+    def balance(self):
+        return self._balance
 
-    @location.setter
-    def location(self, value):
-        self._location = value
+    @balance.setter
+    def balance(self, value):
+        self._balance = value
 
-    @property
-    def status(self):
-        return self._status
+    def __eq__(self, other):
+        if not isinstance(other, Wallet):
+            raise TypeError(f"Wallet не поддерживает сравнение с {other}")
+        if self.currency != other.currency:
+            raise ValueError("Нельзя сравнить разные валюты")
+        else:
+            return self.balance == other.balance
 
-    @status.setter
-    def status(self, value):
-        self._status = value
+    def __add__(self, other):
+        if not isinstance(other, Wallet) or self.currency != other.currency:
+            raise ValueError("Данная операция запрещена")
+        else:
+            return Wallet(self.currency, self.balance + other.balance)
 
-    def turn_on(self):
-        self._status = "ON"
-
-    def turn_off(self):
-        self._status = "OFF"
-
-
-class Light(Device):
-    __slots__ = ["_brightness", "_color"]
-
-    def __init__(self, name, location, brightness, color, status="ON"):
-        super().__init__(name, location, status)
-        self._brightness = brightness
-        self._color = color
-
-    @property
-    def brightness(self):
-        return self._brightness
-
-    @brightness.setter
-    def brightness(self, value):
-        self._brightness = value
-
-    @property
-    def color(self):
-        return self._color
+    def __sub__(self, other):
+        if not isinstance(other, Wallet) or self.currency != other.currency or self.balance < other.balance:
+            raise ValueError("Данная операция запрещена")
+        else:
+            return Wallet(self.currency, self.balance - other.balance)
 
 
-class Thermostat(Device):
-    __slots__ = ["_current_temperature", "_target_temperature"]
-
-    def __init__(self, name, location, current_temperature, target_temperature, status="ON"):
-        super().__init__(name, location, status)
-        self._current_temperature = current_temperature
-        self._target_temperature = target_temperature
-
-    @property
-    def current_temperature(self):
-        return self._current_temperature
-
-    @current_temperature.setter
-    def current_temperature(self, value):
-        self._current_temperature = value
-
-    @property
-    def target_temperature(self):
-        return self._target_temperature
-
-    @target_temperature.setter
-    def target_temperature(self, value):
-        self._target_temperature = value
-
-
-class SmartTV(Device):
-    __slots__ = ["_channel"]
-
-    def __init__(self, name, location, channel, status="ON"):
-        super().__init__(name, location, status)
-        self._channel = channel
-
-    @property
-    def channel(self):
-        return self._channel
-
-    @channel.setter
-    def channel(self, value):
-        self._channel = value
-
-
-# Код ниже не удаляйте, он нужен для проверок
-
-
-device1 = Device('Устройство 1', 'Гостиная')
-assert device1.name == 'Устройство 1'
-assert device1._name == 'Устройство 1'
-assert device1.location == 'Гостиная'
-assert device1._location == 'Гостиная'
-assert device1.status == 'ON'
-assert device1._status == 'ON'
-
-device1.turn_off()
-assert device1.status == 'OFF'
-device1.location = 'Кухня'
-assert device1.location == 'Кухня'
-assert device1._location == 'Кухня'
-device1.turn_on()
-assert device1.status == 'ON'
-
-light1 = Light('Лампа', 'Гостиная', 50, 'белый')
-light1.name == 'Лампа'
-light1.location == 'Гостиная'
-light1.status == 'ON'
-light1.brightness == '50'
-light1.color == 'белый'
-
-light1.turn_off()
-light1.status == 'OFF'
-
-thermostat_1 = Thermostat('Термометр', 'Балкон', 10, 15)
-thermostat_1.name == 'Термометр'
-thermostat_1.location == 'Балкон'
-thermostat_1.status == 'ON'
-thermostat_1.current_temperature == 10
-thermostat_1.target_temperature == 15
-
-tv = SmartTV('Samsung', 'Спальня', 20)
-tv.name == 'Термометр'
-tv.location == 'Балкон'
-tv.status == 'ON'
-tv.channel == 20
-
-print('GOOD')
+wallet1 = Wallet('USD', 250)
+wallet2 = Wallet('RUB', 200)
+wallet3 = Wallet('RUB', 150)
+# wallet4 = Wallet(12, 150)  # исключение TypeError('Неверный тип валюты')
+# wallet5 = Wallet('qwerty', 150)  # исключение NameError('Неверная длина названия валюты')
+# wallet6 = Wallet('abc', 150)  # исключение ValueError('Название должно состоять только из заглавных букв')
+print(wallet2 == wallet3)  # False
+# print(wallet2 == 100)  # TypeError('Wallet не поддерживает сравнение с 100')
+# print(wallet2 == wallet1)  # ValueError('Нельзя сравнить разные валюты')
+wallet7 = wallet2 - wallet3
+print(wallet7.currency, wallet7.balance)  # печатает 'RUB 250'
