@@ -1,31 +1,20 @@
 from dataclasses import dataclass, field
 
-@dataclass
-class Person:
-    first_name: str
-    last_name: str
-    hobbies: set = field(default_factory=set)
+@dataclass(order=True)
+class Athlet:
+    sort_index: int = field(init=False, repr=False)
+    name: str
+    coefficient: float = field(repr=False)
+    scores: list = field(default_factory=list, repr=False)
+
+    def __post_init__(self):
+        self.sort_index = sum(self.scores) / len(self.scores) * self.coefficient
 
 
-hobbies = ["спорт", "чтение", "йога", "спорт", "музыка", "танцы", "путешествия", "кино",
-           "фотография", "музыка", "танцы", "йога", "рисование", "кулинария", "танцы",
-           "садоводство", "йога", "спорт", "велоспорт", "шахматы", "йога",
-           "танцы", "путешествия", "рыбалка", "походы", "спорт",
-           "кулинария", "плавание", "танцы", "музыка",
-           "спорт", "йога"]
+sportsmans = [
+    Athlet('Иван', 1.5, [9.0, 8.0, 7.0]),
+    Athlet('Петр', 1.0, [10.0, 9.0, 8.0]),
+    Athlet('Алексей', 1.2, [8.0, 7.0, 6.0])
+]
 
-ivan = Person("Иван", "Иванов")
-anna = Person("Анна", "Смирнова")
-petr = Person("Петр", "Петров", {"спорт", "скандинавская ходьба"})
-
-for i, hobby in enumerate(hobbies):
-    if i % 3 == 0:
-        ivan.hobbies.add(hobby)
-    elif i % 3 == 1:
-        anna.hobbies.add(hobby)
-    else:
-        petr.hobbies.add(hobby)
-
-print(sorted(ivan.hobbies))
-print(sorted(anna.hobbies))
-print(sorted(petr.hobbies))
+print(f"Победитель соревнований: {max(sportsmans)}")
