@@ -1,8 +1,6 @@
-a = {}
-
-a.update({5: 5})
-a.update({5: 7})
+a = "123.5.200.1"
 
 
+print(all(map(lambda x: x.isdigit(), a.split("."))))
 
-print(a)
+
