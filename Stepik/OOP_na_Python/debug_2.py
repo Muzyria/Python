@@ -1,20 +1,13 @@
-from dataclasses import dataclass, field
+class Circle:
+    def __new__(cls, radius):
+        cls.PI = 3.14
+        instance = super().__new__(cls)
+        instance._radius = radius
+        instance._diameter = 2 * radius
+        cls.get_radius = lambda self: self._radius
+        cls.get_diameter = lambda self: self._diameter
+        cls.get_area = lambda self: self.PI * self._radius ** 2
+        cls.get_perimeter = lambda self: 2 * self.PI * self._radius
+        return instance
 
-@dataclass(order=True)
-class Athlet:
-    sort_index: int = field(init=False, repr=False)
-    name: str
-    coefficient: float = field(repr=False)
-    scores: list = field(default_factory=list, repr=False)
 
-    def __post_init__(self):
-        self.sort_index = sum(self.scores) / len(self.scores) * self.coefficient
-
-
-sportsmans = [
-    Athlet('Иван', 1.5, [9.0, 8.0, 7.0]),
-    Athlet('Петр', 1.0, [10.0, 9.0, 8.0]),
-    Athlet('Алексей', 1.2, [8.0, 7.0, 6.0])
-]
-
-print(f"Победитель соревнований: {max(sportsmans)}")
