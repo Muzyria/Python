@@ -1,13 +1,27 @@
-class Circle:
-    def __new__(cls, radius):
-        cls.PI = 3.14
-        instance = super().__new__(cls)
-        instance._radius = radius
-        instance._diameter = 2 * radius
-        cls.get_radius = lambda self: self._radius
-        cls.get_diameter = lambda self: self._diameter
-        cls.get_area = lambda self: self.PI * self._radius ** 2
-        cls.get_perimeter = lambda self: 2 * self.PI * self._radius
-        return instance
+class Logger:
+    _instance = None
 
+    def __new__(cls, *args, **kwargs):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        cls._instance.log_level = "INFO"
 
+        return cls._instance
+
+    @classmethod
+    def set_level(cls, x):
+        if cls._instance:
+            setattr(cls._instance, "log_level", x)
+        else:
+            raise ValueError('The instance has not been created')
+
+    @staticmethod
+    def get_logger():
+        if not Logger._instance:
+            Logger.__new__(Logger)
+        return Logger._instance
+
+try:
+    logger_1 = Logger.set_level("DEBUG")
+except ValueError as ex:
+    print(ex)
