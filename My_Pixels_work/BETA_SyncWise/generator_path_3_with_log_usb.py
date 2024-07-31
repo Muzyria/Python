@@ -19,7 +19,6 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    # DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.104'}
     DICT_IP_DEVICES = {'W_W_W_->>>': 'dbe407da'}
     START_COORDINATES = "50.07807852323376, 36.23065154766116"  # superior
     # START_COORDINATES = "49.86316203910068, 24.029529539745567"  # lviv demo
@@ -44,7 +43,7 @@ class IntermediateCoordinatesGenerator:
     @execution_time_decorator
     def send_adb_command(self, ip_device, location):
         os.system(
-            rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
+            rf'adb -s {ip_device} shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
     @staticmethod
     def log_to_file(message):
@@ -65,7 +64,7 @@ class IntermediateCoordinatesGenerator:
     @execution_time_decorator
     def touch_screen(self):
         for id_device, ip_device in self.DICT_IP_DEVICES.items():
-            os.system(rf'adb -s {ip_device}:5555 shell input tap 700 500')
+            os.system(rf'adb -s {ip_device} shell input tap 700 500')
             print(f'TOUCH SCREEN {id_device} in {datetime.now().time().strftime("%H:%M")}')
 
     def get_intermediate_coordinates(self, path, steps):  #  переделланный под работу с кусочками маршрута
