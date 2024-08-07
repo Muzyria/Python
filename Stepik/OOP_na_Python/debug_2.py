@@ -29,7 +29,7 @@ def delete_order(*, number_table=None, delete_all=False, **kwargs):
         tables[number_table]["order"].clear()
     else:
         for key, value in kwargs.items():
-            if key in menu and kwargs[key] is True and key in tables[number_table]["order"]:
+            if key in menu and value and key in tables[number_table]["order"]:
                 del tables[number_table]["order"][key]
 
 
