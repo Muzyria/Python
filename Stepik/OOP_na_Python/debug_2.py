@@ -20,8 +20,13 @@ def delete_reservation(number):
 
 def make_order(number, **kwargs):
     for key, value in kwargs.items():
-        if key in menu:
-            tables[number]["order"][key] = value
+        if key in menu and key not in tables[number]["order"]:
+            tables[number]["order"][key] = value.split(",")
+        elif key in menu and key in tables[number]["order"]:
+            tables[number]["order"][key] += value.split(",")
+            # for item in value.split(","):
+            #     if item not in tables[number]["order"][key]:
+            #         tables[number]["order"][key].append(item)
 
 
 def delete_order(*, number_table=None, delete_all=False, **kwargs):
@@ -33,22 +38,25 @@ def delete_order(*, number_table=None, delete_all=False, **kwargs):
                 del tables[number_table]["order"][key]
 
 
+
 tables = {
-    1: {'name': 'Andrey', 'is_vip': True, 'order': {'soup': 'Borsh'}},
+    1: {'name': 'Andrey', 'is_vip': True, 'order': {}},
     2: None,
     3: {'name': 'Vasiliy', 'is_vip': False, 'order': {}},
 }
 
-make_order(1, soup='Borsh')
-make_order(1, soup='Лапша', bring='Салфетку', meal='Манка')
+make_order(1, soup='Borsh,Лапша', desert='Медовик', drink='Cola')
+make_order(1, soup='Гаспачо', desert='Печенье,Наполеон')
 
 reserve_table(2, 'Vlad')
 
-make_order(2, soup='Чечевичный', salad='Цезарь', breakfast='Яичница')
-make_order(2, drink='Raf', main_dish='Утка по-пекински')
+make_order(2, soup='Чечевичный', salad='Цезарь,Мимоза', breakfast='Яичница,Бекон')
+make_order(2, drink='Raf,Coffee,Juice', main_dish='Утка по-пекински,Отбивная')
 make_order(2, desert='Трюфель', call='такси')
-print(tables)
 
+make_order(1, desert='Наполеон', drink='Чай', meal='Манка,Овсянка')
+make_order(1, desert='Вишня', drink='Кофе')
+print(tables)
 delete_order(number_table=2, drink=True, desert=True, call=True, шаурма=True, cheesecake=True)
 delete_order(number_table=1, soup=True, desert=True, call=True)
 print(tables)
