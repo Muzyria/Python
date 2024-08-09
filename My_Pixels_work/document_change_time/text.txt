@@ -1,74 +1,217 @@
-*Date: 06.20.24
-OS Build: 2.15.5_E
+*Date: 07.08.24
+OS Build: 2.15.8_E
 APK Build: 2.2.5
 Environment: Live
 Cable FW Build:
 Device(s): YTR
 Device ID: S10150000211018049
-Test Location:
+Test Location: Office
 UUA : 1.4.1*
 
 
-
-%{Background:yellow} *All test cases passed according to expected result.
-exect Cable voltage not translated in asset details*%
+*%{background:yellow}All test cases passed with expected behavior%*
 
 *Preconditions*
-Check that the full list of the languages is available in 360 (ref. to task #12359) *Confirmed 10:58*
+* Within 360 create/update a cart-barn geofence and hole for test setup *Confirmed*
+* Allow time for geofences to sync and save on tablet *Confirmed*
+* Assign tablet to course (make sure 360 matches APK environment: dev v. live) *Confirmed*
+* Confirm device setting option appears in 360 > YamaTrack Module > Course Set Up *Confirmed*
 
-*General checks*
+Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
 
-*Case A: 360 – Select Language*
-1. 360 Confirm Language can be selected from YamaTrack Module > Course Set Up *Confirmed 10:58*
-2. Confirm default language is English (American) on YTR *Confirmed 10:58*
-3. Confirm selecting the various English versions updates the flag icon on YTR when tablet syncs
-- English (American) *Confirmed 10:59*
-- English (UK) *Confirmed 11:04*
-- English (AUS) *Confirmed 11:03*
-4. Test all other languages and confirm it updates flag on YTR upon tablet sync
-Chinese *Confirmed 11:04*
-French *Confirmed 11:06*
-German *Confirmed 11:07*
-Japanese *Confirmed 11:05*
-Korean *Confirmed 11:07*
-Italian *Confirmed 11:10*
-Spanish. *Confirmed 11:12*
+*%{background:yellow}AC Full Controller%*
 
-*Case B: Settings Save 360*
-1. Select a language other than default language in 360 *Confirmed default language selected Spanish 11:12*
-2. Confirm selected language updates upon tablet sync *Confirmed 11:15*
-3. Log out and confirm updated language setting saved within 360 and did not go back to default *Confirmed updated language saved in 360 11:18*
-4. Confirm tablet still displays selected language. *Confirmed 11:19*
+*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 13:16*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed 13:37*
+- Cart-barn *Confirmed 13:22*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case C: YamaTrack – Select NEW Language and Clear Settings/End Round*
-1. Confirm 360 default language selected appears on tablet – (ENGLISH) *Confirmed 11:21*
-2. Select new language on tablet (SPANISH) and confirm language updates and user is taken back to Play Golf Screen *Confirmed 11:24*
-3. Test run a round and confirm language remains throughout the entire round. *Confirmed 11:25*
-4. Update language ¼ of the round on YTR to a new language (different than the default- FRENCH). *Confirmed 11:27*
-5. Confirm language update saves for the next couple of holes. *Confirmed 11:25*
-6. Update default language in 360 to a new language (CHINESE) *Confirmed 11:30*
-7. Confirm tablet language settings still display last selected language in APK FRENCH (only updates upon tablet sync) *Confirmed 11:32*
-8. Confirm language returns back to default language set in 360 upon tablet sync (CHINESE). *Confirmed 11:33*
-- waking up from a cart barn sleep *Confirmed 11:44*
-- device launch *Confirmed 11:41*
-- settings update in Yamatrack. *Confirmed 11:44*
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed*
+6. Place tablet into Cart Barn sleep *CBS*
+- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
+7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case D: Geofence/Alerts and Messages*
-1. Enter a standard shut-down Geofence, confirm the correct Geofence message appears in selected language *Confirmed 11:47*
-2. Enter a standard Geofence with speed control, confirm the correct Geofence message appears in selected language *Confirmed 11:50*
-3. Enter a CPO geofence and confirm correct CPO alert message appears in selected language *Confirmed 11:55*
-4. Select a language other than the default language in 360 and send a message from the tablet to "the club house" (360). Check within 360 if the message appears in the default language, or the selected language (note:ER is currently unknown/undefined). *Confirmed 12:02 / Select the language Spanish and the message arrived appears exactly in Spanish, which I have by default in 360*
+*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 14:19*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed 14:35*
+- Cart-barn *Confirmed 14:23*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Additional checks - Please post your test reports here as well for the following items:*
-Check to verify fixes:
-#12152 *Confirmed*
- #12269 *Confirmed*
- #12271 *Confirmed*
- #12299 *Confirmed*
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed*
+6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS*
+- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
 
-Missing Alert Messages:
- #12168 *Confirmed*
+*CASE C:*
+- Complete once over cell, then once over WIFI *Cell only*
+1. Place device into cart barn sleep *CBS 15:24*
+2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
+3. Wait 5+ min. *Confirmed*
+4. Confirm device will   wake by Motion/Touch *Confirmed 15:29*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+5. Repeat step 1-3 *Confirmed*
+6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 15:57*
+7. Confirm tablet wakes up automatically *Confirmed*
+- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-Add any Missing Language
-Translations: #12160 , #12161 , #12162 , #12163, #12381, #12382, #12383 %{Background:yellow} *Cable voltage not translated in asset details*%
 
+*%{background:yellow}DC Full Controller%*
+
+*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 15:13*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed 15:40*
+- Cart-barn *Confirmed 15:20*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed*
+6. Place tablet into Cart Barn sleep *CBS*
+- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
+7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+
+*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 16:20*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed 16:38*
+- Cart-barn *Confirmed 16:24*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed*
+6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS*
+- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
+
+*CASE C:*
+- Complete once over cell, then once over WIFI *Cell only*
+1. Place device into cart barn sleep *CBS 17:23*
+2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
+3. Wait 5+ min. *Confirmed*
+4. Confirm device will   wake by Motion/Touch *Confirmed 17:28*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+5. Repeat step 1-3 *Confirmed*
+6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 17:50*
+7. Confirm tablet wakes up automatically *Confirmed*
+- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*
+
+
+*%{background:yellow}EFI Full Controller%*
+
+*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed 17:10*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 17:20*
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed 17:32*
+- Cart-barn *Confirmed 17:20*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 17:35*
+6. Place tablet into Cart Barn sleep *CBS 17:47*
+- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
+7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+
+*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed  18:04*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 18:10*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed 18:32*
+- Cart-barn *Confirmed 18:20*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 18:33*
+6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 18:38*
+- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
+
+*CASE C:*
+- Complete once over cell, then once over WIFI *Cell only*
+1. Place device into cart barn sleep *CBS*
+2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
+3. Wait 5+ min. *Confirmed*
+4. Confirm device will   wake by Motion/Touch *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+5. Repeat step 1-3 *Confirmed*
+6. Turn on TCC (flip cart into RUN/key ON) *Confirmed*
+7. Confirm tablet wakes up automatically *Confirmed*
+- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*

@@ -106,7 +106,7 @@ class IntermediateCoordinatesGenerator:
     def run_device_by_time(self, minutes=None):  #  генераци нахождения на лунке по времени
         # steps = int(minutes * 40) # ----------------------------
 
-        time_list = [0, 4, 5, 7, 4, 5, 7, 4, 5, 7, 4, 5, 7, 4, 5, 7, 4, 5, 7]
+        time_list = [0, 4, 3, 4, 4, 3, 4, 4, 3, 4, 4, 3, 4, 4, 3, 4, 4, 3, 4]
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
             # ------------- ---------------- -------------- -----------------
