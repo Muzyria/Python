@@ -1,6 +1,12 @@
 
-def find_keys(**kwargs) -> list[str]:
-    return [k for k in sorted(kwargs.keys(), key=lambda x: x.lower()) if isinstance(kwargs[k], (list, tuple))]
+def aggregation(func, sequence):
+    ANS = [sequence[0]]
+    for i in sequence[1:]:
+        ANS.append(func(ANS[-1], i))
+    return ANS[1:]
 
 
-print(find_keys(At=[4], awaited=(3,), aDobe=[5]))
+def get_product(x, y):
+    return x * y
+
+print(aggregation(get_product, [2, 6, 5, 10, 5, 1, 2]))
