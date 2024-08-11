@@ -1,16 +1,6 @@
 
-def check_exist_attrs(obj: object, lst: list[str]) -> dict[str, bool]:
-    return {i: hasattr(obj, i) for i in lst}
+def find_keys(**kwargs) -> list[str]:
+    return [k for k in sorted(kwargs.keys(), key=lambda x: x.lower()) if isinstance(kwargs[k], (list, tuple))]
 
 
-def create_attrs(obj: object, lst: list[tuple[str, int|bool|str]]) -> None:
-    [setattr(obj, k, v) for k, v in lst]
-
-
-
-def print_goods(lst):
-    pass
-
-create_attrs(print_goods, [('is_working', False), ('days', 10), ('status', 'Not ready')])
-
-print(check_exist_attrs(print_goods, ['sort', 'is_working', 'days', 'status', 'upper']))
+print(find_keys(At=[4], awaited=(3,), aDobe=[5]))
