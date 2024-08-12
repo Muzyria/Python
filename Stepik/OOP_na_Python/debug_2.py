@@ -1,20 +1,14 @@
-def count_calls() -> callable:
-    def inner() -> None:
-        inner.total_calls += 1
-    inner.total_calls = 0
-    return inner
+def decorator(func):
+    def wrapper(*args, **kwargs):
+        print('---Start calculation---')
+        result = func(*args, **kwargs)
+        print(f'---Finish calculation. Result is {result}---')
+        return result
+    return wrapper
 
 
+@decorator
+def add(*values):
+    return sum(values)
 
-
-
-
-counter = count_calls()
-counter()
-counter()
-print(counter.total_calls)
-counter()
-print(counter.total_calls)
-
-
-
+add(1, 4, 5, 6)
