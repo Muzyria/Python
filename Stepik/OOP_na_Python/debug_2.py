@@ -1,15 +1,20 @@
-
-def aggregation(func, sequence, initial=None):
-    if initial:
-        sequence.insert(0, initial)
-    ANS = [sequence[0]]
-    for i in sequence[1:]:
-        ANS.append(func(ANS[-1], i))
-    return ANS[1:][-1]
+def count_calls() -> callable:
+    def inner() -> None:
+        inner.total_calls += 1
+    inner.total_calls = 0
+    return inner
 
 
-def get_add(x, y):
-    return x + y
 
 
-print(aggregation(get_add, [5, 2, 4, 3, 5], initial=10))
+
+
+counter = count_calls()
+counter()
+counter()
+print(counter.total_calls)
+counter()
+print(counter.total_calls)
+
+
+
