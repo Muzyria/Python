@@ -1,16 +1,12 @@
-def add_attrs(**kwarg) -> callable:
-    def decorator(func: callable) -> callable:
-        def inner(*args, **kwargs):
-            return func(*args, **kwargs)
-        inner.__dict__.update(kwarg)
-        return inner
-    return decorator
+
+def from_hex_to_rgb(color: str) -> tuple[int, int, int]:
+    return tuple(int(color[i:i+2], 16) for i in (1, 3, 5))
 
 
-@add_attrs(test=True, ordered=True)
-def add(a, b):
-    return a + b
+def convert_to_rgb(values: list[str]) -> list[tuple[int, int, int]]:
+    return list(map(from_hex_to_rgb, values))
 
-print(add(10, 5))
-print(add.test)
-print(add.ordered)
+
+
+colors = ['#B22222', '#DC143C', '#FF0000', '#FF6347', '#FF7F50']
+print(convert_to_rgb(colors))
