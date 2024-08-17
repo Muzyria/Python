@@ -1,10 +1,9 @@
 
-def ackermann(m, n):
-    if m == 0:
-        return n + 1
-    if m > 0 and n == 0:
-        return ackermann(m - 1, 1)
-    return ackermann(m - 1, ackermann(m, n - 1))
+def my_rec(x: list[int]) -> int:
+    if len(x) == 1:
+        return x[0]
+    return x[0] * my_rec(x[1:])
 
 
-print(ackermann(1, 5))
+if __name__ == '__main__':
+    print(my_rec(list(range(1, 10))))
