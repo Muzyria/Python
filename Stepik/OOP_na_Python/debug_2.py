@@ -1,9 +1,13 @@
+def quick_power(a: int, n: int) -> int:
+    # Вывод состояния параметров
+    print(f"State: a={a}, n={n}")
 
-def my_rec(x: list[int]) -> int:
-    if len(x) == 1:
-        return x[0]
-    return x[0] * my_rec(x[1:])
+    if n == 0:
+        return 1  # Базовый случай: любое число в нулевой степени равно 1
+    elif n % 2 == 0:
+        half_power = quick_power(a, n // 2)  # Рекурсивный вызов для четного n
+        return half_power * half_power
+    else:
+        return a * quick_power(a, n - 1)  # Рекурсивный вызов для нечетного n
 
-
-if __name__ == '__main__':
-    print(my_rec(list(range(1, 10))))
+print(quick_power(1, 1000))
