@@ -1,84 +1,74 @@
-*Passed with CELL network*
+*Date: 08.30.24
+OS Build: 2.20.0
+APK Build: 2.2.12
+Environment: Live
+Cable FW Build:
+Device(s): YTR
+Device ID: S10150000211018049
+Test Location:
+UUA : 1.4.1*
 
-*Case A) Download All Logs*
-Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 15:38*
-Select Download all logs within Control – Record Time – *Confirmed at 15:38*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 15:37*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:42*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. - *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
 
-*Case B) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 15:44*
-Wait several minutes, then flip to RUN/supply power to a device- *Confirmed*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 15:47*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 15:50*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
 
-*Case C) Device Powered on > Sleep mode > Woke up*
-Select Download all logs within Control – Record Time - *Confirmed at 15:52*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 16:00*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+%{Background:yellow} *All test cases passed according to expected result.
+exect Cable voltage not translated in asset details*%
 
-*Case D) Download Logs by Day in Past*
-Select to download logs for a day in the past - *Confirmed at 16:02*
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 15:56*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 16:05*
+*Preconditions*
+Check that the full list of the languages is available in 360 (ref. to task #12359) *Confirmed 11:01*
 
-*Case E) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 16:04*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 16:06*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 16:07*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 16:08*
-Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 16:13*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:12*
+*General checks*
 
-*Case F) Device Powered on > Sleep mode > Woke up*
-Select Download for a day in the past within Control – Record Time - *Confirmed at 16:15*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 16:17*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:24*
+*Case A: 360 – Select Language*
+1. 360 Confirm Language can be selected from YamaTrack Module > Course Set Up *Confirmed 11:01*
+2. Confirm default language is English (American) on YTR *Confirmed 11:01*
+3. Confirm selecting the various English versions updates the flag icon on YTR when tablet syncs
+- English (American) *Confirmed 11:01*
+- English (UK) *Confirmed 11:08*
+- English (AUS) *Confirmed 11:05*
+4. Test all other languages and confirm it updates flag on YTR upon tablet sync
+Chinese *Confirmed 11:06*
+French *Confirmed 11:09*
+German *Confirmed 11:10*
+Japanese *Confirmed 11:08*
+Korean *Confirmed 11:10*
+Italian *Confirmed 11:13*
+Spanish. *Confirmed 11:15*
 
-*Case G) Download Logs by Day – Current Day*
-Select to download logs for SAME DAY
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 16:25*
-Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 16:27*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 16:32*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:34*
+*Case B: Settings Save 360*
+1. Select a language other than default language in 360 *Confirmed default language selected Spanish 11:15*
+2. Confirm selected language updates upon tablet sync *Confirmed 11:18*
+3. Log out and confirm updated language setting saved within 360 and did not go back to default *Confirmed updated language saved in 360 11:21*
+4. Confirm tablet still displays selected language. *Confirmed 11:23*
 
-*Case H) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 16:36*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 16:37*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 16:42*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 16:46*
-Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 16:51*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:51*
+*Case C: YamaTrack – Select NEW Language and Clear Settings/End Round*
+1. Confirm 360 default language selected appears on tablet – (ENGLISH) *Confirmed 11:25*
+2. Select new language on tablet (SPANISH) and confirm language updates and user is taken back to Play Golf Screen *Confirmed 11:26*
+3. Test run a round and confirm language remains throughout the entire round. *Confirmed 11:28*
+4. Update language ¼ of the round on YTR to a new language (different than the default- FRENCH). *Confirmed 11:30*
+5. Confirm language update saves for the next couple of holes. *Confirmed 11:28*
+6. Update default language in 360 to a new language (CHINESE) *Confirmed 11:33*
+7. Confirm tablet language settings still display last selected language in APK FRENCH (only updates upon tablet sync) *Confirmed 11:35*
+8. Confirm language returns back to default language set in 360 upon tablet sync (CHINESE). *Confirmed 11:36*
+- waking up from a cart barn sleep *Confirmed 11:46*
+- device launch *Confirmed 11:44*
+- settings update in Yamatrack. *Confirmed 11:48*
 
-*Case I) Device Powered on > Sleep mode > Woke up*
-Select Download for a current Day within Control – Record Time - *Confirmed at 16:57*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 17:01*
-Note – these may not upload until the device wakes up
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 17:08*
+*Case D: Geofence/Alerts and Messages*
+1. Enter a standard shut-down Geofence, confirm the correct Geofence message appears in selected language *Confirmed 11:50*
+2. Enter a standard Geofence with speed control, confirm the correct Geofence message appears in selected language *Confirmed 11:53*
+3. Enter a CPO geofence and confirm correct CPO alert message appears in selected language *Confirmed 11:58*
+4. Select a language other than the default language in 360 and send a message from the tablet to "the club house" (360). Check within 360 if the message appears in the default language, or the selected language (note:ER is currently unknown/undefined). *Confirmed 12:05 / Select the language Spanish and the message arrived appears exactly in Spanish, which I have by default in 360*
 
-*Corner Cases:*
+*Additional checks - Please post your test reports here as well for the following items:*
+Check to verify fixes:
+#12152 *Confirmed*
+ #12269 *Confirmed*
+ #12271 *Confirmed*
+ #12299 *Confirmed*
 
-*Case J) Multiple Log Requests – Send All Logs request two times*
-Verify if log request goes through (one/both) -  *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 17:20*
+Missing Alert Messages:
+ #12168 *Confirmed*
 
-*Case K) Multiple Log Requests – Send All Logs request, then By Day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
+Add any Missing Language
+Translations: #12160 , #12161 , #12162 , #12163, #12381, #12382, #12383 %{Background:yellow} *Cable voltage not translated in asset details*%
 
-*Case L) Multiple Log Requests - By Day – same day 2x times*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case M) Multiple Log Requests - By Day – one day, then another day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case N) Multiple Log Requests –By Day, then All Logs*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 17:55*
