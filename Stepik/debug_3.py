@@ -1,11 +1,29 @@
-numbers = [100, 70, 34, 45, 30, 83, 12, 83, -28, 49, -8, -2, 6, 62, 64, -22, -19, 61, 13, 5, 80, -17, 7, 3, 21, 73, 88, -11, 16, -22]
 
-it_numbers = iter(numbers)
+class DictItemsIterator:
+    def __init__(self, data: dict):
+        self.data = iter(map(lambda x: (x, data[x]), data))
 
-while True:
-    try:
-        res = next(it_numbers)
+    def __iter__(self):
+        return self
 
-    except StopIteration:
-        print(res)
-        break
+    def __next__(self):
+        if self.data:
+            return next(self.data)
+        raise StopIteration
+
+
+data = {'Arthur': [100, 5], 'Timur': [100, 6], 'Dima': [100, 7, 8],
+        'Anri': [100, 101], 'Roma': [99]}
+
+pairs = DictItemsIterator(data)
+
+print(next(pairs))
+print(next(pairs))
+print(next(pairs))
+print(next(pairs))
+print(next(pairs))
+
+try:
+    print(next(pairs))
+except StopIteration:
+    print('Error')
