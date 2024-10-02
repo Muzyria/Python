@@ -1,10 +1,10 @@
 import os
-import random
+
 from datetime import datetime, timedelta
 
 from sincwise_clients_method import SyncwiseClient
 from connect_device import ConnectDevice
-from time import perf_counter
+
 import time
 
 
@@ -17,11 +17,13 @@ def execution_time_decorator(func):
         return result
     return wrapper
 
+
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.105'}
+    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.102'}
     # START_COORDINATES = "50.07807852323376, 36.23065154766116" # superior
-    START_COORDINATES = "49.86316203910068, 24.029529539745567" # lviv demo
+    # START_COORDINATES = "49.86316203910068, 24.029529539745567" # lviv demo
+    START_COORDINATES = "41.399138246290164, -75.71986696282578"  # Eighteen Hole-Pine
 
     def __init__(self):
         ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
@@ -31,14 +33,12 @@ class IntermediateCoordinatesGenerator:
         #     ConnectDevice.connect_device(ip_device)
         #     time.sleep(10)
 
-        self.client_data = SyncwiseClient("https://dev-api.syncwise360.com")
+        self.client_data = SyncwiseClient("https://dev-api-gateway.syncwise360.com")
         self.client_data.user_account_login()
 
-        # superior "KoyhA-zWt6os"
-        # lviv demo FFlxm9vaKp-a
+        self.client_data.course_vector_details("Xy4NX6enHAhQ")  # Eighteen Hole-Pine
+        # self.client_data.course_vector_details("vUBhsVKC7vLg")  # Par 3-Pine Hills
 
-        # self.client_data.course_vector_details("xqrRgFzOAmmP")
-        self.client_data.course_vector_details("3D45jieTBpON")  # lviv demo
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
     @execution_time_decorator
@@ -67,6 +67,7 @@ class IntermediateCoordinatesGenerator:
         for id_device, ip_device in self.DICT_IP_DEVICES.items():
             os.system(rf'adb -s {ip_device}:5555 shell input tap 700 500')
             print(f'TOUCH SCREEN {id_device} in {datetime.now().time().strftime("%H:%M")}')
+
 
     def get_intermediate_coordinates(self, path, steps):  #  переделланный под работу с кусочками маршрута
         if steps <= 1 or len(path) <= 1:
