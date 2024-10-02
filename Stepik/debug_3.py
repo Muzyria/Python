@@ -1,36 +1,22 @@
 
-class Account:
-    def __init__(self, login: str, password: str):
-        self.login = login
-        self.password = password
 
-    def hash_function(self, password: str) -> int:
-        hash_value = 0
-        for char, index in zip(password, range(len(password))):
-            hash_value += ord(char) * index
-        return hash_value % 10 ** 9
+class Color:
+    def __init__(self, hexcode: str):
+        self.hexcode = hexcode
 
     @property
-    def login(self) -> str:
-        return self._login
+    def hexcode(self) -> str:
+        return self._hexcode
 
-    @login.setter
-    def login(self, value: str) -> None:
-        if not hasattr(self, "_login"):
-            self._login = value
-        else:
-            raise AttributeError("Изменение логина невозможно")
+    @hexcode.setter
+    def hexcode(self, value: str) -> None:
+        self._hexcode = value
+        self.r, self.g, self.b = int(value[:2], 16), int(value[2:4], 16), int(value[4:], 16)
 
-    @property
-    def password(self) -> int:
-        return self._password
+color = Color('0000FF')
 
-    @password.setter
-    def password(self, value: str) -> None:
-        self._password = self.hash_function(value)
-
-account = Account('timyr-guev', 'lovebeegeek')
-try:
-    account.login = 'timyrik30'
-except AttributeError as e:
-    print(e)
+color.hexcode = 'A782E3'
+print(color.hexcode)
+print(color.r)
+print(color.g)
+print(color.b)
