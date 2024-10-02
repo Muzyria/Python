@@ -36,8 +36,8 @@ class IntermediateCoordinatesGenerator:
         self.client_data = SyncwiseClient("https://dev-api-gateway.syncwise360.com")
         self.client_data.user_account_login()
 
-        self.client_data.course_vector_details("Xy4NX6enHAhQ")  # Eighteen Hole-Pine
-        # self.client_data.course_vector_details("vUBhsVKC7vLg")  # Par 3-Pine Hills
+        # self.client_data.course_vector_details("Xy4NX6enHAhQ")  # Eighteen Hole-Pine
+        self.client_data.course_vector_details("vUBhsVKC7vLg")  # Par 3-Pine Hills
 
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
@@ -108,8 +108,8 @@ class IntermediateCoordinatesGenerator:
     def run_device_by_time(self, minutes=None):  #  генераци нахождения на лунке по времени
         # steps = int(minutes * 40) # ----------------------------
 
-        time_list = [0, 4, 5, 4, 5, 4, 5, 4, 5, 4]
-        # time_list = [0, 4, 7, 4, 7, 4, 7, 4, 7, 4, 7, 4, 7, 4, 7, 4, 7, 4, 7]
+        time_list = [0, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+        # time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
         # for i in range(1, 4):

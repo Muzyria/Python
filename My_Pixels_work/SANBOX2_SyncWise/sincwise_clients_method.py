@@ -126,27 +126,14 @@ class SyncwiseClient(SyncwiseAPI):
                 {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
 
 
-
-if __name__ == '__main__':
-
-    test_1 = SyncwiseClient("https://dev-api-gateway.syncwise360.com")
-    test_1.user_account_login()
-
-    print(test_1.SECRET_KEY)
-
-    test_1.course_vector_details("Xy4NX6enHAhQ")
-
-    print(test_1.COURSE_VECTOR_DETAILS)
-# print(test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR)
-
-# for k, v in test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR.items():  # Create shape geofence
-#     test_1.course_geofence_create(f"a_shape_{k}", test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR[k])
-#     print(f"CREATE GEOFENCE - {k}")
-#     time.sleep(10)
-
-# for k, v in test_1.COURSE_VECTOR_DETAILS_CLUBHOUSE.items():
-#     print(k, v, len(v))
-
-# print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
-
-# test_1.course_geofence_create('Back_ground', test_1.COURSE_VECTOR_DETAILS_BACKGROUND[1])
+#
+# if __name__ == '__main__':
+#
+#     test_1 = SyncwiseClient("https://dev-api-gateway.syncwise360.com")
+#     test_1.user_account_login()
+#
+#     print(test_1.SECRET_KEY)
+#
+#     test_1.course_vector_details("Xy4NX6enHAhQ")
+#
+#     print(test_1.COURSE_VECTOR_DETAILS)
