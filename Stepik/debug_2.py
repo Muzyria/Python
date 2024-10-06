@@ -1,3 +1,4 @@
-s = "qweRty"
+s = "1.1.0.10"
+a = [1, 2]
 
-print(s.s)
+print(repr(a), repr(s))

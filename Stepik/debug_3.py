@@ -1,21 +1,18 @@
 
-from functools import singledispatchmethod
-from datetime import date
 
-class BirthInfo:
+class AnyClass:
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
+        self.string = ", ".join(list(map(lambda x: f"{x[0]}='{x[1]}'" if isinstance(x[1], str) else f"{x[0]}={x[1]}", self.__dict__.items())))
 
-    @singledispatchmethod
-    def __init__(self, birth_date):
-        raise TypeError("Аргумент переданного типа не поддерживается")
+    def __str__(self):
+        return f"{self.__class__.__name__}: {self.string}"
 
-    @__init__.register
-    def _init_(self, birth_date: date):
-        self.birth_date = birth_date
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.string})"
 
-    @property
-    def age(self):
-        return self.birth_date
 
-birthinfo = BirthInfo(date(2023, 2, 26))
+obj = AnyClass(attr1=10, attr2='beegeek', attr3=True, attr4=[1, 2, 3], attr5=('one', 'two'), attr6=None)
 
-print(birthinfo.age)
+print(str(obj))
+print(repr(obj))
