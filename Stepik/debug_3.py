@@ -1,18 +1,31 @@
+from functools import total_ordering
 
 
-class AnyClass:
-    def __init__(self, **kwargs):
-        self.__dict__.update(kwargs)
-        self.string = ", ".join(list(map(lambda x: f"{x[0]}='{x[1]}'" if isinstance(x[1], str) else f"{x[0]}={x[1]}", self.__dict__.items())))
-
-    def __str__(self):
-        return f"{self.__class__.__name__}: {self.string}"
+@total_ordering
+class Version:
+    def __init__(self, version: str):
+        self.version = ".".join((version.split(".") + ["0", "0"])[:3])
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.string})"
+        return f"{self.__class__.__name__}({repr(self.version)})"
+
+    def __str__(self):
+        return self.version
+
+    def __eq__(self, other):
+        if isinstance(other, Version):
+            return list(map(int, self.version.split("."))) == list(map(int, other.version.split(".")))
+        return NotImplemented
+
+    def __gt__(self, other):
+        if isinstance(other, Version):
+            return list(map(int, self.version.split("."))) > list(map(int, other.version.split(".")))
+        return NotImplemented
 
 
-obj = AnyClass(attr1=10, attr2='beegeek', attr3=True, attr4=[1, 2, 3], attr5=('one', 'two'), attr6=None)
+versions = [Version('2'), Version('2.1'), Version('1.9.1')]
 
-print(str(obj))
-print(repr(obj))
+print(sorted(versions))
+print(min(versions))
+print(max(versions))
+
