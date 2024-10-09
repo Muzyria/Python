@@ -34,8 +34,11 @@ class SyncwiseClient(SyncwiseAPI):
         url = f"{self.host}/auth-service/action/{self.create_url_test_with_public()}"
 
         payload = json.dumps({
-            "username": "nessahills2",
-            "password": "Nesss!123"
+            # "username": "nessahills2",  # Par 3-Pine Hills
+            # "password": "Nesss!123"
+
+            "username": "eighteendev",  # Eighteen-Sleepy Hollow Country Club
+            "password": "Qwerty01!"
         })
         headers = {
             'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
@@ -126,14 +129,14 @@ class SyncwiseClient(SyncwiseAPI):
                 {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
 
 
-#
-# if __name__ == '__main__':
-#
-#     test_1 = SyncwiseClient("https://dev-api-gateway.syncwise360.com")
-#     test_1.user_account_login()
-#
-#     print(test_1.SECRET_KEY)
-#
-#     test_1.course_vector_details("Xy4NX6enHAhQ")
-#
-#     print(test_1.COURSE_VECTOR_DETAILS)
+
+if __name__ == '__main__':
+
+    test_1 = SyncwiseClient("https://dev-api-gateway.syncwise360.com")
+    test_1.user_account_login()
+
+    print(test_1.SECRET_KEY)
+
+    test_1.course_vector_details("Xy4NX6enHAhQ")
+
+    print(test_1.COURSE_VECTOR_DETAILS)

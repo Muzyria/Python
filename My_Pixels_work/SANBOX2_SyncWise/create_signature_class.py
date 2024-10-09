@@ -27,7 +27,8 @@ class SyncwiseAPI:
     def create_url_test_with_private(self, action, user_secret_key):
         application_api_key = "FVyzsVqr-BmP280"
         application_secret_key = "L4ccbyhS9xlDjd3vgnw_LZTqsrCvLO"
-        username = "nessahills2"
+        # username = "nessahills2" # Par 3-Pine Hills
+        username = "eighteendev"  # Eighteen-Sleepy Hollow Country Club
 
         url = self.get_url_for_action(action, True, user_secret_key, username,
                                       application_api_key, application_secret_key)

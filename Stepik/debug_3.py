@@ -1,31 +1,28 @@
-from functools import total_ordering
 
 
-@total_ordering
-class Version:
-    def __init__(self, version: str):
-        self.version = ".".join((version.split(".") + ["0", "0"])[:3])
+class ColoredPoint:
+    def __init__(self, x: int, y: int, color: tuple[int, int, int] = (0, 0, 0)):
+        self.x = x
+        self.y = y
+        self.color = color
+        print(dict(**self.__dict__))
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({repr(self.version)})"
+        return f"{self.__class__.__name__}({self.x}, {self.y}, {self.color})"
 
     def __str__(self):
-        return self.version
+        return f"{self.x, self.y}"
 
-    def __eq__(self, other):
-        if isinstance(other, Version):
-            return list(map(int, self.version.split("."))) == list(map(int, other.version.split(".")))
-        return NotImplemented
+    def __pos__(self):
+        return ColoredPoint(self.x, self.y, self.color)
 
-    def __gt__(self, other):
-        if isinstance(other, Version):
-            return list(map(int, self.version.split("."))) > list(map(int, other.version.split(".")))
-        return NotImplemented
+    def __neg__(self):
+        return ColoredPoint(self.x * -1, self.y * -1, self.color)
 
+    def __invert__(self):
+        return ColoredPoint(self.y, self.x, (255 - self.color[0], 255 - self.color[1], 255 - self.color[2]))
 
-versions = [Version('2'), Version('2.1'), Version('1.9.1')]
+point = ColoredPoint(2, -3)
 
-print(sorted(versions))
-print(min(versions))
-print(max(versions))
-
+print(+point)
+print(-point)
