@@ -1,28 +1,41 @@
 
 
-class ColoredPoint:
-    def __init__(self, x: int, y: int, color: tuple[int, int, int] = (0, 0, 0)):
-        self.x = x
-        self.y = y
-        self.color = color
-        print(dict(**self.__dict__))
+class FoodInfo:
+    def __init__(self, proteins: int | float, fats: int | float, carbohydrates: int | float):
+        self.proteins = proteins
+        self.fats = fats
+        self.carbohydrates = carbohydrates
 
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.x}, {self.y}, {self.color})"
+        return f"{self.__class__.__name__}({self.proteins}, {self.fats}, {self.carbohydrates})"
 
-    def __str__(self):
-        return f"{self.x, self.y}"
+    def __add__(self, other):
+        if isinstance(other, FoodInfo):
+            return FoodInfo(*tuple([i[0] + i[1] for i in zip(self.__dict__.values(), other.__dict__.values())]))
+        return NotImplemented
 
-    def __pos__(self):
-        return ColoredPoint(self.x, self.y, self.color)
+    def __mul__(self, other):
+        if isinstance(other, (int, float)):
+            return FoodInfo(*tuple([i * other for i in self.__dict__.values()]))
+        return NotImplemented
 
-    def __neg__(self):
-        return ColoredPoint(self.x * -1, self.y * -1, self.color)
+    def __truediv__(self, other):
+        if isinstance(other, (int, float)):
+            return FoodInfo(*tuple([i / other for i in self.__dict__.values()]))
+        return NotImplemented
 
-    def __invert__(self):
-        return ColoredPoint(self.y, self.x, (255 - self.color[0], 255 - self.color[1], 255 - self.color[2]))
+    def __floordiv__(self, other):
+        if isinstance(other, (int, float)):
+            return FoodInfo(*tuple([i // other for i in self.__dict__.values()]))
+        return NotImplemented
 
-point = ColoredPoint(2, -3)
 
-print(+point)
-print(-point)
+
+food1 = FoodInfo(10, 20, 30)
+food2 = FoodInfo(10, 10, 20)
+
+print(food1 + food2)
+print(food1 * 2)
+print(food1 / 2)
+print(food1 // 2)
+
