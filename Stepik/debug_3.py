@@ -1,45 +1,46 @@
 
 
-class SuperString:
-    def __init__(self, string: str):
-        self.string = string
+class Queue:
+    def __init__(self, *args):
+        self.queue = list(args)
+
+    def add(self, *args):
+        self.queue.extend(args)
+
+    def pop(self):
+        if self.queue:
+            return self.queue.pop(0)
 
     def __str__(self):
-        return self.string
+        return " -> ".join(list(map(str, self.queue)))
+
+    def __eq__(self, other):
+        if isinstance(other, Queue):
+            return self.queue == other.queue
+        return NotImplemented
 
     def __add__(self, other):
-        if isinstance(other, SuperString):
-            return SuperString(self.string + other.string)
+        if isinstance(other, Queue):
+            return Queue(*(self.queue + other.queue))
         return NotImplemented
 
-    def __mul__(self, other):
+    def __iadd__(self, other):
+        if isinstance(other, Queue):
+            self.queue += other.queue
+            return self
+        return NotImplemented
+
+    def __rshift__(self, other):
         if isinstance(other, int):
-            return SuperString(self.string * other)
-        return NotImplemented
-
-    def __rmul__(self, other):
-        return self.__mul__(other)
-
-    def __truediv__(self, other):
-        if isinstance(other, int):
-            return SuperString(self.string[: len(self.string) // other])
-        return NotImplemented
-
-    def __lshift__(self, other: int) -> 'SuperString':
-        if isinstance(other, int):
-            if other >= len(self.string):
-                return SuperString('')
-            return SuperString(self.string[:len(self.string) - other])
-        return NotImplemented
-
-    def __rshift__(self, other: int) -> 'SuperString':
-        if isinstance(other, int):
-            if other >= len(self.string):
-                return SuperString('')
-            return SuperString(self.string[other:])
+            if other >= len(self.queue):
+                return Queue()
+            return Queue(*self.queue[other:])
         return NotImplemented
 
 
-s = SuperString('beegeek')
-for i in range(9):
-    print(f'{s} >> {i} =', s >> i)
+queue1 = Queue(1, 2, 3)
+queue2 = Queue(1, 2)
+
+print(queue1 == queue2)
+queue2.add(3)
+print(queue1 == queue2)
