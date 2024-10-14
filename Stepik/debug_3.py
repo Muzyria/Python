@@ -1,41 +1,45 @@
 
 
-class FoodInfo:
-    def __init__(self, proteins: int | float, fats: int | float, carbohydrates: int | float):
-        self.proteins = proteins
-        self.fats = fats
-        self.carbohydrates = carbohydrates
+class SuperString:
+    def __init__(self, string: str):
+        self.string = string
 
-    def __repr__(self):
-        return f"{self.__class__.__name__}({self.proteins}, {self.fats}, {self.carbohydrates})"
+    def __str__(self):
+        return self.string
 
     def __add__(self, other):
-        if isinstance(other, FoodInfo):
-            return FoodInfo(*tuple([i[0] + i[1] for i in zip(self.__dict__.values(), other.__dict__.values())]))
+        if isinstance(other, SuperString):
+            return SuperString(self.string + other.string)
         return NotImplemented
 
     def __mul__(self, other):
-        if isinstance(other, (int, float)):
-            return FoodInfo(*tuple([i * other for i in self.__dict__.values()]))
+        if isinstance(other, int):
+            return SuperString(self.string * other)
         return NotImplemented
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
 
     def __truediv__(self, other):
-        if isinstance(other, (int, float)):
-            return FoodInfo(*tuple([i / other for i in self.__dict__.values()]))
+        if isinstance(other, int):
+            return SuperString(self.string[: len(self.string) // other])
         return NotImplemented
 
-    def __floordiv__(self, other):
-        if isinstance(other, (int, float)):
-            return FoodInfo(*tuple([i // other for i in self.__dict__.values()]))
+    def __lshift__(self, other: int) -> 'SuperString':
+        if isinstance(other, int):
+            if other >= len(self.string):
+                return SuperString('')
+            return SuperString(self.string[:len(self.string) - other])
+        return NotImplemented
+
+    def __rshift__(self, other: int) -> 'SuperString':
+        if isinstance(other, int):
+            if other >= len(self.string):
+                return SuperString('')
+            return SuperString(self.string[other:])
         return NotImplemented
 
 
-
-food1 = FoodInfo(10, 20, 30)
-food2 = FoodInfo(10, 10, 20)
-
-print(food1 + food2)
-print(food1 * 2)
-print(food1 / 2)
-print(food1 // 2)
-
+s = SuperString('beegeek')
+for i in range(9):
+    print(f'{s} >> {i} =', s >> i)
