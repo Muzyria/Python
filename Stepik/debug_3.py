@@ -1,24 +1,28 @@
 
 
-class Temperature:
-    def __init__(self, temperature):
-        self.temperature = temperature
+class ProtectedObject:
+    def __init__(self, **kwargs):
+        [object.__setattr__(self, k, v) for k, v in kwargs.items()]
 
-    def to_fahrenheit(self):
-        return 9/5 * self.temperature + 32
+    def __getattribute__(self, item: str):
+        if item.startswith("_"):
+            raise AttributeError("Доступ к защищенному атрибуту невозможен")
+        return object.__getattribute__(self, item)
 
-    @classmethod
-    def from_fahrenheit(cls, temperature):
-        return Temperature(5/9 * (temperature - 32))
+    def __setattr__(self, key: str, value):
+        if key.startswith("_"):
+            raise AttributeError("Доступ к защищенному атрибуту невозможен")
+        object.__setattr__(self, key, value)
 
-    def __str__(self):
-        return f'{round(self.temperature, 2)}°C'
+    def __delattr__(self, item: str):
+        if item.startswith("_"):
+            raise AttributeError("Доступ к защищенному атрибуту невозможен")
+        object.__delattr__(self, item)
 
-    def __bool__(self):
-        return self.temperature > 0
+user = ProtectedObject(login='PG_kamiya', _password='alreadybanned')
 
-    def __int__(self):
-        return int(self.temperature)
-
-    def __float__(self):
-        return float(self.temperature)
+try:
+    print(user.login)
+    print(user._password)
+except AttributeError as e:
+    print(e)
