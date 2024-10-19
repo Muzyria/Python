@@ -1,28 +1,35 @@
 
 
-class ProtectedObject:
+class Row:
     def __init__(self, **kwargs):
         [object.__setattr__(self, k, v) for k, v in kwargs.items()]
 
-    def __getattribute__(self, item: str):
-        if item.startswith("_"):
-            raise AttributeError("Доступ к защищенному атрибуту невозможен")
-        return object.__getattribute__(self, item)
+    def __setattr__(self, key, value):
+        if key not in self.__dict__:
+            raise AttributeError("Установка нового атрибута невозможна")
+        raise AttributeError("Изменение значения атрибута невозможно")
 
-    def __setattr__(self, key: str, value):
-        if key.startswith("_"):
-            raise AttributeError("Доступ к защищенному атрибуту невозможен")
-        object.__setattr__(self, key, value)
+    def __delattr__(self, item):
+        raise AttributeError("Удаление атрибута невозможно")
 
-    def __delattr__(self, item: str):
-        if item.startswith("_"):
-            raise AttributeError("Доступ к защищенному атрибуту невозможен")
-        object.__delattr__(self, item)
+    def __repr__(self):
+        return f"{self.__class__.__name__}({",".join([f"{k}={repr(v)}" for k, v in self.__dict__.items()])})"
 
-user = ProtectedObject(login='PG_kamiya', _password='alreadybanned')
+    def __eq__(self, other):
+        if isinstance(other, Row):
+            return tuple(self.__dict__.items()) == tuple(other.__dict__.items())
+        return NotImplemented
 
-try:
-    print(user.login)
-    print(user._password)
-except AttributeError as e:
-    print(e)
+    def __hash__(self):
+        return hash(tuple(self.__dict__.items()))
+
+
+
+row1 = Row(a=1, b=2, c=3)
+row2 = Row(a=1, b=2, c=3)
+row3 = Row(b=2, c=3, a=1)
+
+print(row1 == row2)
+print(hash(row1) == hash(row2))
+print(row1 == row3)
+print(hash(row1) == hash(row3))
