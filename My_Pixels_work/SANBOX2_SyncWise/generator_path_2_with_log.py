@@ -24,7 +24,8 @@ class IntermediateCoordinatesGenerator:
     # START_COORDINATES = "50.07807852323376, 36.23065154766116" # superior
     # START_COORDINATES = "49.86316203910068, 24.029529539745567" # lviv demo
     # START_COORDINATES = "41.399138246290164, -75.71986696282578"  # Eighteen Hole-Pine
-    START_COORDINATES = "41.12502128041975, -73.85760706390852"  # Eighteen-Sleepy Hollow Country Club
+    # START_COORDINATES = "41.12502128041975, -73.85760706390852"  # Eighteen-Sleepy Hollow Country Club
+    START_COORDINATES = "43.48540681475642, -79.77989637028654"  # Angels View-Oakville Executive Golf Courses 9 holes
 
     def __init__(self):
         ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
@@ -40,6 +41,7 @@ class IntermediateCoordinatesGenerator:
         # self.client_data.course_vector_details("Xy4NX6enHAhQ")  # Eighteen Hole-Pine
         # self.client_data.course_vector_details("vUBhsVKC7vLg")  # Par 3-Pine Hills
         self.client_data.course_vector_details("7rOQfXBAtJ2C")  # Eighteen-Sleepy Hollow Country Club
+        # self.client_data.course_vector_details("GfzkZL9LMMuc")  # Angels View-Oakville Executive Golf Courses 9 holes
 
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
@@ -110,8 +112,8 @@ class IntermediateCoordinatesGenerator:
     def run_device_by_time(self, minutes=None):  #  генераци нахождения на лунке по времени
         # steps = int(minutes * 40) # ----------------------------
 
-        # time_list = [0, 6, 6, 6, 6, 6, 6, 6, 6, 6]
-        time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+        time_list = [0, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        # time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
         # time_list = [0, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):

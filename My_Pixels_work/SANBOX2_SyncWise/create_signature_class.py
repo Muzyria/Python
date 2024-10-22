@@ -29,6 +29,7 @@ class SyncwiseAPI:
         application_secret_key = "L4ccbyhS9xlDjd3vgnw_LZTqsrCvLO"
         # username = "nessahills2" # Par 3-Pine Hills
         username = "eighteendev"  # Eighteen-Sleepy Hollow Country Club
+        # username = "olehangels"  # Angels View-Oakville Executive Golf Courses 9 holes
 
         url = self.get_url_for_action(action, True, user_secret_key, username,
                                       application_api_key, application_secret_key)

@@ -39,6 +39,9 @@ class SyncwiseClient(SyncwiseAPI):
 
             "username": "eighteendev",  # Eighteen-Sleepy Hollow Country Club
             "password": "Qwerty01!"
+
+            # "username": "olehangels",  # Angels View-Oakville Executive Golf Courses 9 holes
+            # "password": "Qwerty01!"
         })
         headers = {
             'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
@@ -137,6 +140,6 @@ if __name__ == '__main__':
 
     print(test_1.SECRET_KEY)
 
-    test_1.course_vector_details("Xy4NX6enHAhQ")
+    test_1.course_vector_details("7rOQfXBAtJ2C")
 
     print(test_1.COURSE_VECTOR_DETAILS)
