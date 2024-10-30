@@ -1,20 +1,34 @@
 
-import sys
 
-class UpperPrint:
-    def __enter__(self):
-        self.write = sys.stdout.write
-        sys.stdout.write = lambda x: self.write(x.upper())
+class RandomNumber:
+    def __init__(self, start: int, end: int, cache: bool = False):
+        self.start = start
+        self.end = end
+        self.cache = cache
+        if self.cache:
+            self.first_value = __import__("random").randint(self.start, self.end)
 
-    def __exit__(self, exc_type, exc_value, traceback):
-        sys.stdout.write = self.write
+    def __set_name__(self, cls, attr):
+        self._attr = attr
 
+    def __get__(self, obj, cls):
+        if obj is None:
+            return self
+        if hasattr(self, "first_value"):
+            return self.first_value
+        return __import__("random").randint(self.start, self.end)
 
-print('Если жизнь одаривает вас лимонами — не делайте лимонад')
-print('Заставьте жизнь забрать их обратно!')
+    def __set__(self, obj, value):
+        raise AttributeError("Изменение невозможно")
 
-with UpperPrint():
-    print('Мне не нужны твои проклятые лимоны!')
-    print('Что мне с ними делать?')
+class MagicPoint:
+    x = RandomNumber(0, 5)
+    y = RandomNumber(0, 5)
+    z = RandomNumber(0, 5)
 
-print('Требуйте встречи с менеджером, отвечающим за жизнь!')
+magicpoint = MagicPoint()
+
+try:
+    magicpoint.x = 10
+except AttributeError as e:
+    print(e)
