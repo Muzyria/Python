@@ -1,29 +1,54 @@
 
 
-class WeatherWarning:
-    def rain(self, date=None):
-        if date:
-            print(date.strftime('%d.%m.%Y'))
-        print('Ожидаются сильные дожди и ливни с грозой')
+class Counter:
+    def __init__(self, start: int = 0):
+        self.value = start
 
-    def snow(self, date=None):
-        if date:
-            print(date.strftime('%d.%m.%Y'))
-        print('Ожидается снег и усиление ветра')
+    @staticmethod
+    def decorator(func):
+        def inner(self, *args, **kwargs):
+            if isinstance(self, DoubledCounter):
+                func(self, *args, **kwargs)
+                func(self, *args, **kwargs)
+            else:
+                func(self, *args, **kwargs)
+        return inner
 
-    def low_temperature(self, date=None):
-        if date:
-            print(date.strftime('%d.%m.%Y'))
-        print('Ожидается сильное понижение температуры')
+    @decorator
+    def inc(self, number: int = 1):
+        self.value += number
+
+    @decorator
+    def dec(self, number: int = 1):
+        self.value -= number
+        if self.value < 0:
+            self.value = 0
+
+class DoubledCounter(Counter):
+    ...
 
 
-class WeatherWarningWithDate(WeatherWarning):
-    pass
 
+counter = Counter(10)
 
-from datetime import date
+print(counter.value)
+counter.inc()
+counter.inc(5)
+print(counter.value)
+counter.dec()
+counter.dec(10)
+print(counter.value)
+counter.dec(10)
+print(counter.value)
 
-weatherwarning = WeatherWarningWithDate()
-dt = date(2022, 12, 12)
+counter = DoubledCounter(20)
 
-weatherwarning.rain(dt)
+print(counter.value)
+counter.inc()
+counter.inc(5)
+print(counter.value)
+counter.dec()
+counter.dec(10)
+print(counter.value)
+counter.dec(10)
+print(counter.value)
