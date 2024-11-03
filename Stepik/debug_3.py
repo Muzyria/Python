@@ -1,54 +1,40 @@
 
 
-class Counter:
-    def __init__(self, start: int = 0):
-        self.value = start
+class FieldTracker:
+    atr = {}
 
-    @staticmethod
-    def decorator(func):
-        def inner(self, *args, **kwargs):
-            if isinstance(self, DoubledCounter):
-                func(self, *args, **kwargs)
-                func(self, *args, **kwargs)
-            else:
-                func(self, *args, **kwargs)
-        return inner
+    def __init__(self):
+        self.atr.update(self.__dict__)
 
-    @decorator
-    def inc(self, number: int = 1):
-        self.value += number
+    def base(self, name: str):
+        return self.atr[name]
 
-    @decorator
-    def dec(self, number: int = 1):
-        self.value -= number
-        if self.value < 0:
-            self.value = 0
+    def has_changed(self, name: str) -> bool:
+        return self.__dict__[name] != self.atr[name]
 
-class DoubledCounter(Counter):
-    ...
+    def changed(self) -> dict:
+        return {x: self.atr[x] for x in self.__dict__ if self.has_changed(x)}
+
+    def save(self) -> None:
+        for name, value in self.__dict__.items():
+            if self.has_changed(name):
+                self.atr[name] = value
 
 
+class Point(FieldTracker):
+    fields = ('x', 'y', 'z')
 
-counter = Counter(10)
+    def __init__(self, x, y, z):
+        self.x, self.y, self.z = x, y, z
+        super().__init__()
 
-print(counter.value)
-counter.inc()
-counter.inc(5)
-print(counter.value)
-counter.dec()
-counter.dec(10)
-print(counter.value)
-counter.dec(10)
-print(counter.value)
+point = Point(1, 2, 3)
+point.x = 0
+point.z = 4
+point.save()
 
-counter = DoubledCounter(20)
-
-print(counter.value)
-counter.inc()
-counter.inc(5)
-print(counter.value)
-counter.dec()
-counter.dec(10)
-print(counter.value)
-counter.dec(10)
-print(counter.value)
+print(point.base('x'))
+print(point.base('z'))
+print(point.has_changed('x'))
+print(point.has_changed('z'))
+print(point.changed())
