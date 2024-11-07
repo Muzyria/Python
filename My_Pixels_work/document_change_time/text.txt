@@ -1,188 +1,217 @@
-*Date: 09.10.23
-OS Build: 2.20.0
-APK Build: 2.12.0
+*Date: 05.24.24
+OS Build: 2.15.4_E
+APK Build: 2.2.4
 Environment: Live
 Cable FW Build:
 Device(s): YTR
 Device ID: S10150000211018049
-Test Location:
-UUA : 1.4.1
-MB: 1.5*
-
-*%{background:yellow}All cases passed with expected behavior%*
+Test Location: Office
+UUA : 1.4.1*
 
 
-*Downloading Logs - Test Plan*
+*%{background:yellow}All test cases passed with expected behavior%*
 
-Complete all tests – Once over WIFI and Once over Cellular
+*Preconditions*
+* Within 360 create/update a cart-barn geofence and hole for test setup *Confirmed*
+* Allow time for geofences to sync and save on tablet *Confirmed*
+* Assign tablet to course (make sure 360 matches APK environment: dev v. live) *Confirmed*
+* Confirm device setting option appears in 360 > YamaTrack Module > Course Set Up *Confirmed*
 
-*Passed with WI-FI network*
+Complete each test case on AC/DC/EFI and Power Supply or Step Down cable.
 
-*Case A) Download All Logs*
-Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 14:10*
-Select Download all logs within Control – Record Time – *Confirmed at 14:08*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 14:10*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 14:15*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. - *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+*%{background:yellow}AC Full Controller%*
 
-*Case B) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 14:13*
-Wait several minutes, then flip to RUN/supply power to a device- *Confirmed*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 14:18*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 14:22*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 12:13*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed 12:36*
+- Cart-barn *Confirmed 12:20*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case C) Device Powered on > Sleep mode > Woke up*
-Select Download all logs within Control – Record Time - *Confirmed at 14:24*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 14:29*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed*
+6. Place tablet into Cart Barn sleep *CBS*
+- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
+7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case D) Download Logs by Day in Past*
-Select to download logs for a day in the past - *Confirmed at 14:33*
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 14:26*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 14:36*
+*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 13:16*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed 13:33*
+- Cart-barn *Confirmed 13:22*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case E) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 14:35*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 14:35*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 14:37*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 14:39*
-Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 14:43*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 14:43*
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed*
+6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS*
+- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
 
-*Case F) Device Powered on > Sleep mode > Woke up*
-Select Download for a day in the past within Control – Record Time - *Confirmed at 14:47*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 14:49*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 14:55*
-
-*Case G) Download Logs by Day – Current Day*
-Select to download logs for SAME DAY
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 14:56*
-Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 14:59*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:04*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:05*
-
-*Case H) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 15:09*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 15:10*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 15:12*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:19*
-Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 15:22*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:22*
-
-*Case I) Device Powered on > Sleep mode > Woke up*
-Select Download for a current Day within Control – Record Time - *Confirmed at 15:31*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 15:33*
-Note – these may not upload until the device wakes up
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:40*
-
-*Corner Cases:*
-
-*Case J) Multiple Log Requests – Send All Logs request two times*
-Verify if log request goes through (one/both) -  *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 15:49*
-
-*Case K) Multiple Log Requests – Send All Logs request, then By Day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case L) Multiple Log Requests - By Day – same day 2x times*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case M) Multiple Log Requests - By Day – one day, then another day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case N) Multiple Log Requests –By Day, then All Logs*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 16:25*
+*CASE C:*
+- Complete once over cell, then once over WIFI *Cell only*
+1. Place device into cart barn sleep *CBS 14:22*
+2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
+3. Wait 5+ min. *Confirmed*
+4. Confirm device will   wake by Motion/Touch *Confirmed 14:27*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+5. Repeat step 1-3 *Confirmed*
+6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 14:54*
+7. Confirm tablet wakes up automatically *Confirmed*
+- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*
 
 
-*Passed with CELL network*
+*%{background:yellow}DC Full Controller%*
 
-*Case A) Download All Logs*
-Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 16:40*
-Select Download all logs within Control – Record Time – *Confirmed at 16:40*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 16:38*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 16:43*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. - *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 14:12*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed 14:37*
+- Cart-barn *Confirmed 14:19*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case B) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 16:45*
-Wait several minutes, then flip to RUN/supply power to a device- *Confirmed*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 16:48*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 16:52*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed*
+6. Place tablet into Cart Barn sleep *CBS*
+- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
+7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case C) Device Powered on > Sleep mode > Woke up*
-Select Download all logs within Control – Record Time - *Confirmed at 16:54*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 17:01*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 15:19*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed 15:35*
+- Cart-barn *Confirmed 15:23*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case D) Download Logs by Day in Past*
-Select to download logs for a day in the past - *Confirmed at 17:03*
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 16:58*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 17:06*
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed*
+6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS*
+- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
 
-*Case E) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 17:06*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 17:08*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 17:08*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 17:09*
-Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 17:14*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 17:14*
+*CASE C:*
+- Complete once over cell, then once over WIFI *Cell only*
+1. Place device into cart barn sleep *CBS 16:21*
+2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
+3. Wait 5+ min. *Confirmed*
+4. Confirm device will   wake by Motion/Touch *Confirmed 16:25*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+5. Repeat step 1-3 *Confirmed*
+6. Turn on TCC (flip cart into RUN/key ON) *Confirmed 16:49*
+7. Confirm tablet wakes up automatically *Confirmed*
+- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case F) Device Powered on > Sleep mode > Woke up*
-Select Download for a day in the past within Control – Record Time - *Confirmed at 17:16*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 17:18*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 17:25*
 
-*Case G) Download Logs by Day – Current Day*
-Select to download logs for SAME DAY
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 17:26*
-Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 17:28*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 17:33*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 17:35*
+*%{background:yellow}EFI Full Controller%*
 
-*Case H) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 17:37*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 17:38*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 17:44*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 17:48*
-Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 17:52*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 17:53*
+*Logic 1: before the accelerometer falls asleep (1-10 seconds after turning off screen)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case I) Device Powered on > Sleep mode > Woke up*
-Select Download for a current Day within Control – Record Time - *Confirmed at 17:58*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 18:02*
-Note – these may not upload until the device wakes up
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 18:10*
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed 16:08*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 16:18*
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed 16:31*
+- Cart-barn *Confirmed 16:19*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 16:32*
+6. Place tablet into Cart Barn sleep *CBS 16:45*
+- When device goes to sleep CONFIRM that final uGaugeType = 4 report is reported
+7. Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Corner Cases:*
+*Logic 2: after the accelerometer falls asleep (at least 5 min. after turning off screen/putting tablet to sleep)*
+*CASE A:*
+- Complete Case A over Cell *Cell only*
+1. Select WAKE UP VIA MOTION & TOUCH in 360 *Confirmed*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm if device wakes up from all types of sleep via MOTION
+- Standby *Confirmed*
+- Cart-barn *Confirmed*
+4. Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
 
-*Case J) Multiple Log Requests – Send All Logs request two times*
-Verify if log request goes through (one/both) -  *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 18:22*
+*CASE B:*
+- Complete Case B over WIFI *WiFi only*
+1. Select WAKE UP VIA TOUCH in 360 *Confirmed  17:02*
+2. Move tablet into cartbarn geofence zone and allow device to go to sleep *CBS 17:07*
+- When device is asleep CONFIRM that final uGaugeType = 4 report is reported
+3. Confirm device DOES NOT wake up from sleep mode via MOTION *Confirmed*
+4. Confirm device ONLY wakes up from sleep mode via TOUCH
+- Standby *Confirmed 17:30*
+- Cart-barn *Confirmed 17:19*
+5. Update settings within 360 to WAKE UP VIA MOTION & TOUCH *Confirmed 17:31*
+6. Place tablet into Cartbarn sleep and let tablet go to sleep *CBS 17:36*
+- Confirm tablet wakes up from sleep mode via MOTION *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+8. Exit YamaTrack (tablet sync) and confirm device updates settings and is able to wake up via Motion. *Confirmed*
 
-*Case K) Multiple Log Requests – Send All Logs request, then By Day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case L) Multiple Log Requests - By Day – same day 2x times*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case M) Multiple Log Requests - By Day – one day, then another day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case N) Multiple Log Requests –By Day, then All Logs*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 18:57*
+*CASE C:*
+- Complete once over cell, then once over WIFI *Cell only*
+1. Place device into cart barn sleep *CBS*
+2. Turn off TCC (flip cart into TOW/key ON) *Confirmed*
+3. Wait 5+ min. *Confirmed*
+4. Confirm device will   wake by Motion/Touch *Confirmed*
+- Confirm after waking up via Cart Barn sleep that data connection is STILL ON and reports UGauge Data *Confirmed*
+5. Repeat step 1-3 *Confirmed*
+6. Turn on TCC (flip cart into RUN/key ON) *Confirmed*
+7. Confirm tablet wakes up automatically *Confirmed*
+- Confirm after waking up that data connection is STILL ON and reports UGauge Data *Confirmed*

@@ -1,40 +1,23 @@
 
 
-class FieldTracker:
-    atr = {}
+class SuperInt(int):
+    def repeat(self, n=2):
+        digit = f"{'-' * (self < 0)}{f'{abs(self)}' * n}"
+        return type(self)(digit)
 
-    def __init__(self):
-        self.atr.update(self.__dict__)
+    def to_bin(self):
+        return f'{self:b}'
 
-    def base(self, name: str):
-        return self.atr[name]
+    def next(self):
+        return type(self)(self + 1)
 
-    def has_changed(self, name: str) -> bool:
-        return self.__dict__[name] != self.atr[name]
+    def prev(self):
+        return type(self)(self - 1)
 
-    def changed(self) -> dict:
-        return {x: self.atr[x] for x in self.__dict__ if self.has_changed(x)}
-
-    def save(self) -> None:
-        for name, value in self.__dict__.items():
-            if self.has_changed(name):
-                self.atr[name] = value
+    def __iter__(self):
+        yield from map(SuperInt, str(abs(self)))
 
 
-class Point(FieldTracker):
-    fields = ('x', 'y', 'z')
+superint1 = SuperInt(17)
 
-    def __init__(self, x, y, z):
-        self.x, self.y, self.z = x, y, z
-        super().__init__()
-
-point = Point(1, 2, 3)
-point.x = 0
-point.z = 4
-point.save()
-
-print(point.base('x'))
-print(point.base('z'))
-print(point.has_changed('x'))
-print(point.has_changed('z'))
-print(point.changed())
+print(superint1.__dict__)
