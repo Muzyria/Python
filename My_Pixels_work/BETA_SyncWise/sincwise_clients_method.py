@@ -204,6 +204,9 @@ class SyncwiseClient(SyncwiseAPI):
         print(response.text)
 
 
+if __name__ == '__main__':
+    ...
+
 # test_1 = SyncwiseClient("https://api2.syncwise360.com")
 # test_1.user_account_login()
 #
