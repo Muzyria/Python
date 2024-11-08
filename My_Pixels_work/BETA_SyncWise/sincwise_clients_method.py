@@ -6,7 +6,41 @@ import json
 from create_signature_class import SyncwiseAPI
 
 
-# api = SyncwiseAPI("https://api2.syncwise360.com")
+import math
+
+
+def calculate_circle_points(center_shape, diameter, num_points=16) -> list[dict]:
+    latitude, longitude = center_shape
+    radius = diameter / 2  # радиус в метрах
+    earth_radius = 6371000  # радиус Земли в метрах
+
+    points_list = []
+    for angle in range(0, 360, int(360 / num_points)):
+        angle_rad = math.radians(angle)
+
+        # Смещение в градусах
+        delta_lat = (radius / earth_radius) * (180 / math.pi)
+        delta_lon = (radius / earth_radius) * (180 / math.pi) / math.cos(math.radians(latitude))
+
+        # Вычисление координат новой точки
+        new_lat = latitude + delta_lat * math.sin(angle_rad)
+        new_lon = longitude + delta_lon * math.cos(angle_rad)
+
+        points_list.append({'lat': new_lat, 'lng': new_lon})
+
+        # points_list.append(points[0])
+
+    return points_list
+
+
+# # Пример использования
+# center = (36.2451303225386, 50.08329004978064)
+# diameter = 50  # в метрах
+# points = calculate_circle_points(center, diameter)
+#
+# for i, point in enumerate(points):
+#     print(f"Point {i + 1}: {point}")
+
 
 
 class SyncwiseClient(SyncwiseAPI):
@@ -159,7 +193,7 @@ class SyncwiseClient(SyncwiseAPI):
             self.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[item + 1] = [
                 {"lat": float(i.split()[1]), "lng": float(i.split()[0])} for i in point_str.split(",")]
 
-    def course_geofence_create(self, name, coordinates):
+    def course_geofence_create(self, name, coordinates: list[dict]):
         """
         Create course geofence
         """
@@ -204,37 +238,41 @@ class SyncwiseClient(SyncwiseAPI):
         print(response.text)
 
 
+# ----------------------------------------------------------------------------------------------------------------------
+
 if __name__ == '__main__':
-    ...
 
-# test_1 = SyncwiseClient("https://api2.syncwise360.com")
-# test_1.user_account_login()
-#
-#
-# print(test_1.SECRET_KEY)
-#
-# test_1.course_geofence_create('QWE5555', [
-#     {
-#       "lat": 50.09112670368736,
-#       "lng": 36.23535633087159
-#     },
-#     {
-#       "lat": 50.09242074333338,
-#       "lng": 36.24127864837647
-#     },
-#     {
-#       "lat": 50.09456822137395,
-#       "lng": 36.23578548431397
-#     }
-#   ])
+    test_1 = SyncwiseClient("https://api2.syncwise360.com")
+    test_1.user_account_login()
+    print(test_1.SECRET_KEY)
+
+    #
+    # test_1.course_geofence_list()
+    # print(test_1.COURSE_GEOFENCE_LIST)
+
+    test_1.course_vector_details("KoyhA-zWt6os")
+    # print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
+    # print(test_1.COURSE_VECTOR_DETAILS_HOLES_GREENCENTER)
+
+    # # Пример использования
+    # center = (50.081868557672756, 36.22947635581976)
+    # diameter = 50  # в метрах
+    # points = calculate_circle_points(center, diameter)
+
+    # print(points)
+
+    for key, value in test_1.COURSE_VECTOR_DETAILS_HOLES_GREENCENTER.items():
+        center_coordinate = (value[0]["lat"], value[0]["lng"])
+        points = calculate_circle_points(center_coordinate, 30, num_points=20)
+        test_1.course_geofence_create(f"{key}_teeeest_", points)
+        time.sleep(5)
 
 
 
-# test_1.course_geofence_list()
-# print(test_1.COURSE_GEOFENCE_LIST)
-#
-# test_1.course_vector_details()
-# print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
+
+
+
+
 # print(test_1.COURSE_VECTOR_DETAILS)
 # print(test_1.COURSE_VECTOR_DETAILS_HOLES_PERIMETR)
 
