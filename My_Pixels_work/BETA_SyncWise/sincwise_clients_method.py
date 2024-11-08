@@ -1,11 +1,7 @@
 import time
-
 import requests
 import json
-
 from create_signature_class import SyncwiseAPI
-
-
 import math
 
 
@@ -27,11 +23,8 @@ def calculate_circle_points(center_shape, diameter, num_points=16) -> list[dict]
         new_lon = longitude + delta_lon * math.cos(angle_rad)
 
         points_list.append({'lat': new_lat, 'lng': new_lon})
-
         # points_list.append(points[0])
-
     return points_list
-
 
 # # Пример использования
 # center = (36.2451303225386, 50.08329004978064)
@@ -40,7 +33,6 @@ def calculate_circle_points(center_shape, diameter, num_points=16) -> list[dict]
 #
 # for i, point in enumerate(points):
 #     print(f"Point {i + 1}: {point}")
-
 
 
 class SyncwiseClient(SyncwiseAPI):
@@ -58,7 +50,6 @@ class SyncwiseClient(SyncwiseAPI):
     COURSE_VECTOR_DETAILS_HOLES_GREENCENTER = {}  # Special format for CREATE GEOFENCE - greencenter
     #
     COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH = {}  # Special format for DEVICE GET or SENS COORDINATES - centralpatch
-
 
     # PUBLIC
     def user_account_login(self):
@@ -263,7 +254,7 @@ if __name__ == '__main__':
 
     for key, value in test_1.COURSE_VECTOR_DETAILS_HOLES_GREENCENTER.items():
         center_coordinate = (value[0]["lat"], value[0]["lng"])
-        points = calculate_circle_points(center_coordinate, 30, num_points=20)
+        points = calculate_circle_points(center_coordinate, 50, num_points=30)
         test_1.course_geofence_create(f"{key}_teeeest_", points)
         time.sleep(5)
 
