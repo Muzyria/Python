@@ -1,23 +1,13 @@
+class ModularTuple(tuple):
+    def __new__(cls, iterable=(), size: int = 100, *args, **kwargs):
+        instance = super().__new__(cls, map(lambda x: x % size, iterable))
+        return instance
+
+modulartuple = ModularTuple([1, 2, 3, 4, 5], 2)
+
+print(modulartuple)
 
 
-class SuperInt(int):
-    def repeat(self, n=2):
-        digit = f"{'-' * (self < 0)}{f'{abs(self)}' * n}"
-        return type(self)(digit)
-
-    def to_bin(self):
-        return f'{self:b}'
-
-    def next(self):
-        return type(self)(self + 1)
-
-    def prev(self):
-        return type(self)(self - 1)
-
-    def __iter__(self):
-        yield from map(SuperInt, str(abs(self)))
 
 
-superint1 = SuperInt(17)
 
-print(superint1.__dict__)
