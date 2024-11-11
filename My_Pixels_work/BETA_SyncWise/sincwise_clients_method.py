@@ -254,10 +254,10 @@ if __name__ == '__main__':
 
     for key, value in test_1.COURSE_VECTOR_DETAILS_HOLES_GREENCENTER.items():
         center_coordinate = (value[0]["lat"], value[0]["lng"])
-        points = calculate_circle_points(center_coordinate, 50, num_points=30)
-        test_1.course_geofence_create(f"{key}_teeeest_", points)
-        time.sleep(5)
-
+        points = calculate_circle_points(center_coordinate, 100, num_points=30)
+        # test_1.course_geofence_create(f"{key}_teeeest_", points)
+        # time.sleep(5)
+        break
 
 
 
