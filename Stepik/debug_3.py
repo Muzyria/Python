@@ -1,10 +1,11 @@
 
-def create_dict() -> callable:
+class First:
+    A = "a"
 
-    def inner(item) -> dict:
-        inner.count += 1
-        inner.cache[inner.count] = item
-        return inner.cache
-    inner.cache = {}
-    inner.count = 0
-    return inner
+class Second(First):
+    B = "b"
+
+
+a = Second()
+
+print(a.A)
