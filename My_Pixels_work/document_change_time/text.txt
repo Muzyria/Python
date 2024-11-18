@@ -1,158 +1,187 @@
-*Date: 09.10.24
+*Date: 09.16.23
 OS Build: 1.55.2
 APK Build: 2.2.12
 Environment: Live
 Cable FW Build:
-Device(s): YTR
+Device(s): YTX
 Device ID: L10115001805220010
-Test Location: Office
+Test Location:
 UUA : 1.4.1*
 
+*%{background:yellow}All cases passed with expected behavior%*
 
-*%{Background:yellow} Summary : In the CPO and advertising reports, the values are grouped (it is expected that each entry into the geofence will be displayed on a separate line).
-All other geofence reports are displayed as expected%*
 
-Preconditions:
-- Cart must be assigned to test golf course with holes, and to properly test reports must "start a round"
-- Create regular geofences, CPO, and Advertising geofences prior to starting test
-- Assign devices to test course
+*Downloading Logs - Test Plan*
 
-*Case A) Control Cable - Regular Geofences*
-Test each kind of geofence: Shut Down, Timed Shut Down, Shutdown Time & Restore, Speed, Message Only, Beeping, Non-Beeping, Reverse only
-- Record the entry and exit time for each test attempt. Test entry and exiting for each type of geofence at least 2x
-Actively view course within 360 to verify the following details
-Confirm when entering a geofence an alert is sent to 360 (geofence alert notification)
-- ER: These should be received upon entry, and not only during the 1min check in.
-Confirm when entering a geofence, the alert can also be viewed within the Asset Alerts section (icon located on Course Map)
-After testing is complete, run report within SyncWise 360 to inspect if ALL geofence alerts appear - include picture
+Complete all tests – Once over WIFI and Once over Cellular
 
-At 13:18 enter Message Only geofence
-Confirm message
-At 13:19 leave Message Only geofence
+*Passed with WI-FI network*
 
-At 13:36 enter Message Only geofence
-Confirm message
-At 13:37 leave Message Only geofence
+*Case A) Download All Logs*
+Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 12:11*
+Select Download all logs within Control – Record Time – *Confirmed at 12:09*
+Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 12:12*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 12:17*
+Confirm Logs appear in Control with the specified type “All Logs” in the list. - *Confirmed*
+Review logs to confirm they contain logs more than one day - *Confirmed*
 
-At 13:21 enter 10mph no beep geofence
-Confirm message
-At 13:21 leave 10mph no beep geofence
+*Case B) Device Powered Off/Disconnected > Power On*
+With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 12:14*
+Wait several minutes, then flip to RUN/supply power to a device- *Confirmed*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 12:19*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 12:24*
+Confirm Logs appear in Control with the specified type “All Logs” in the list. *Confirmed*
+Review logs to confirm they contain logs more than one day - *Confirmed*
 
-At 13:39 enter 10mph no beep geofence
-Confirm message
-At 13:39 leave 10mph no beep geofence
+*Case C) Device Powered on > Sleep mode > Woke up*
+Select Download all logs within Control – Record Time - *Confirmed at 12:26*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 12:31*
+Review logs to confirm they contain logs more than one day - *Confirmed*
 
-At 13:35 enter 3mph with beep geofence
-Confirm message
-At 13:35 leave 3mph with beep geofence
+*Case D) Download Logs by Day in Past*
+Select to download logs for a day in the past - *Confirmed at 12:34*
+Confirm request is sent/displays correctly within Control – Record Time - *Confirmed*
+Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 12:28*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 12:38*
 
-At 13:34 enter 3mph with beep geofence
-Confirm message
-At 13:34 leave 3mph with beep geofence
+*Case E) Device Powered Off/Disconnected > Power On*
+With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 12:36*
+Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 12:37*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 12:38*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 12:41*
+Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 12:44*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 12:44*
 
-At 13:09 enter Shut Down geofence
-Confirm message
-At 13:09 leave Shut Down geofence
+*Case F) Device Powered on > Sleep mode > Woke up*
+Select Download for a day in the past within Control – Record Time - *Confirmed at 12:48*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 12:50*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 12:56*
 
-At 13:28 enter Shut Down geofence
-Confirm message
-At 13:28 leave Shut Down geofence
+*Case G) Download Logs by Day – Current Day*
+Select to download logs for SAME DAY
+Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 12:58*
+Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 13:01*
+Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:06*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 13:06*
 
-At 13:11 enter Timed Shut Down geofence
-Confirm message
-At 13:11 leave Timed Shut Down geofence
+*Case H) Device Powered Off/Disconnected > Power On*
+With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 13:10*
+Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 13:11*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 13:13*
+Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:20*
+Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 13:23*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 13:23*
 
-At 13:30 enter Timed Shut Down geofence
-Confirm message
-At 13:30 leave Timed Shut Down geofence
+*Case I) Device Powered on > Sleep mode > Woke up*
+Select Download for a current Day within Control – Record Time - *Confirmed at 13:32*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 13:34*
+Note – these may not upload until the device wakes up
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 13:41*
 
-At 13:13 enter Shutdown Time & Restore geofence
-Confirm message
-At 13:12 leave Shutdown Time & Restore geofence
+*Corner Cases:*
 
-At 13:15 enter Shutdown Time & Restore geofence
-Confirm message
-At 13:15 leave Shutdown Time & Restore geofence
+*Case J) Multiple Log Requests – Send All Logs request two times*
+Verify if log request goes through (one/both) -  *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed at 13:50*
 
-At 13:19 enter Beeping geofence
-Confirm message
-At 13:19 leave Beeping geofence
+*Case K) Multiple Log Requests – Send All Logs request, then By Day*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed*
 
-At 13:38 enter Beeping geofence
-Confirm message
-At 13:38 leave Beeping geofence
+*Case L) Multiple Log Requests - By Day – same day 2x times*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed*
 
-At 13:23 enter Reverse only geofence
-Confirm message
-At 13:23 leave Reverse only geofence
+*Case M) Multiple Log Requests - By Day – one day, then another day*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed*
 
-At 13:41 enter Reverse only geofence
-Confirm message
-At 13:41 leave Reverse only geofence
+*Case N) Multiple Log Requests –By Day, then All Logs*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed at 14:27*
 
-!CGA.png!
 
-*Case B) Control Cable - Advertising*
-Test each kind of geofence: Complete similar testing, but with Advertising Geofences
-- Record the entry and exit time for each test attempt. Test entry and exiting adv. geofence at least 5x
-Actively view course within 360 to verify the following details
-Record time when entering geofence area
-Record time when exiting geofence area
-After testing is complete, run Advertising report within SyncWise 360 to inspect if geofence alerts appear - please provide picture
-Run a regular Geofence report and be sure advertising geofence alerts are not grouped into regular geofence alerts are are separate - please provide picture
+*Passed with CELL network*
 
-At 13:43 enter Advertising geofence
-No message
-At 13:43 leave Advertising geofence and enter to other geofences
+*Case A) Download All Logs*
+Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 14:41*
+Select Download all logs within Control – Record Time – *Confirmed at 14:42*
+Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 14:39*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 14:44*
+Confirm Logs appear in Control with the specified type “All Logs” in the list. - *Confirmed*
+Review logs to confirm they contain logs more than one day - *Confirmed*
 
-At 13:45 enter Advertising geofence
-No message
-At 13:45 leave Advertising geofence enter to other geofences
+*Case B) Device Powered Off/Disconnected > Power On*
+With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 14:46*
+Wait several minutes, then flip to RUN/supply power to a device- *Confirmed*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 14:50*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 14:53*
+Confirm Logs appear in Control with the specified type “All Logs” in the list. *Confirmed*
+Review logs to confirm they contain logs more than one day - *Confirmed*
 
-At 13:47 enter Advertising geofence
-No message
-At 13:47 leave Advertising geofence enter to other geofences
+*Case C) Device Powered on > Sleep mode > Woke up*
+Select Download all logs within Control – Record Time - *Confirmed at 14:56*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 15:02*
+Review logs to confirm they contain logs more than one day - *Confirmed*
 
-At 13:49 enter Advertising geofence
-No message
-At 13:49 leave Advertising geofence enter to other geofences
+*Case D) Download Logs by Day in Past*
+Select to download logs for a day in the past - *Confirmed at 15:04*
+Confirm request is sent/displays correctly within Control – Record Time - *Confirmed*
+Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 14:59*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:08*
 
-At 13:51 enter Advertising geofence
-No message
-At 13:51 leave Advertising geofence enter to other geofences
+*Case E) Device Powered Off/Disconnected > Power On*
+With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 15:08*
+Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 15:10*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 15:10*
+Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:11*
+Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 15:15*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:15*
 
-*%{Background:yellow}Reports are not separated%*
-!CAA.png!
+*Case F) Device Powered on > Sleep mode > Woke up*
+Select Download for a day in the past within Control – Record Time - *Confirmed at 15:18*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 15:19*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:26*
 
-*Case C) Control Cable - CPO Geofences*
-Test each kind of geofence: Complete similar testing, but with CPO Geofences
-- Record the entry and exit time for each test attempt. Test entry and exiting CPO geofence at least 5x
-Actively view course within 360 to verify the following details
-Confirm when entering a geofence an alert is sent to 360 (geofence alert notification)
-- ER: These should be received upon entry, and not only during the 1min check in.
-Confirm when entering a geofence, the alert can also be viewed within the Asset Alerts section (icon located on Course Map)
-After testing is complete, run report within SyncWise 360 to inspect if ALL geofence alerts appear - include picture
-Run a regular geofence alert after and be sure CPO geofence alerts are not grouped into regular geofence alerts are are separate - include picture
+*Case G) Download Logs by Day – Current Day*
+Select to download logs for SAME DAY
+Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 15:28*
+Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 15:29*
+Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:34*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:36*
 
-At 13:42 enter CPO geofence
-Confirm message
-At 13:42 leave CPO geofence enter to other geofences
+*Case H) Device Powered Off/Disconnected > Power On*
+With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 15:39*
+Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 15:39*
+Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 15:46*
+Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:50*
+Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 15:54*
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:54*
 
-At 13:44 enter CPO geofence
-Confirm message
-At 13:44 leave CPO geofence enter to other geofences
+*Case I) Device Powered on > Sleep mode > Woke up*
+Select Download for a current Day within Control – Record Time - *Confirmed at 15:59*
+Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 16:04*
+Note – these may not upload until the device wakes up
+Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:11*
 
-At 13:46 enter CPO geofence
-Confirm message
-At 13:46 leave CPO geofence enter to other geofences
+*Corner Cases:*
 
-At 13:48 enter CPO geofence
-Confirm message
-At 13:48 leave CPO geofence enter to other geofences
+*Case J) Multiple Log Requests – Send All Logs request two times*
+Verify if log request goes through (one/both) -  *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed at 16:23*
 
-At 13:50 enter CPO geofence
-Confirm message
-At 13:50 leave CPO geofence enter to other geofences
+*Case K) Multiple Log Requests – Send All Logs request, then By Day*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed*
 
-*%{Background:yellow}Reports are not separated%*
-!CPA.png!
+*Case L) Multiple Log Requests - By Day – same day 2x times*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed*
+
+*Case M) Multiple Log Requests - By Day – one day, then another day*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed*
+
+*Case N) Multiple Log Requests –By Day, then All Logs*
+Verify if log request goes through (one/both) - *Confirmed*
+Confirm if logs uploaded are correct - *Confirmed at 16:58*
