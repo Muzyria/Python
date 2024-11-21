@@ -1,187 +1,186 @@
-*Date: 09.16.23
-OS Build: 1.55.2
-APK Build: 2.2.12
+*Date: 06.24.24 - 06.25.24
+OS Build: 2.15.5_E
+APK Build: 2.2.5
 Environment: Live
 Cable FW Build:
-Device(s): YTX
-Device ID: L10115001805220010
+Device(s): YTR
+Device ID: S10150000211018049
 Test Location:
 UUA : 1.4.1*
 
-*%{background:yellow}All cases passed with expected behavior%*
 
 
-*Downloading Logs - Test Plan*
+*Test Results Overview:*
 
-Complete all tests – Once over WIFI and Once over Cellular
+*%{background:yellow} All cases passed with expected behavior%*
 
-*Passed with WI-FI network*
+h2. Test Plan
 
-*Case A) Download All Logs*
-Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 12:11*
-Select Download all logs within Control – Record Time – *Confirmed at 12:09*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 12:12*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 12:17*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. - *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+h3. Preliminary/Precondition Tests
 
-*Case B) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 12:14*
-Wait several minutes, then flip to RUN/supply power to a device- *Confirmed*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 12:19*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 12:24*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+# Assign tablet and player to device at  *GOLF CLUB *
+# Create tournament within 360 and confirm it loads via tablet sync or OTA onto the tablet *Confirmed*
 
-*Case C) Device Powered on > Sleep mode > Woke up*
-Select Download all logs within Control – Record Time - *Confirmed at 12:26*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 12:31*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+h2. OTA Tournament Updates
 
-*Case D) Download Logs by Day in Past*
-Select to download logs for a day in the past - *Confirmed at 12:34*
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 12:28*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 12:38*
-
-*Case E) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 12:36*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 12:37*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 12:38*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 12:41*
-Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 12:44*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 12:44*
-
-*Case F) Device Powered on > Sleep mode > Woke up*
-Select Download for a day in the past within Control – Record Time - *Confirmed at 12:48*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 12:50*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 12:56*
-
-*Case G) Download Logs by Day – Current Day*
-Select to download logs for SAME DAY
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 12:58*
-Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 13:01*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:06*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 13:06*
-
-*Case H) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 13:10*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 13:11*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 13:13*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 13:20*
-Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 13:23*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 13:23*
-
-*Case I) Device Powered on > Sleep mode > Woke up*
-Select Download for a current Day within Control – Record Time - *Confirmed at 13:32*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 13:34*
-Note – these may not upload until the device wakes up
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 13:41*
-
-*Corner Cases:*
-
-*Case J) Multiple Log Requests – Send All Logs request two times*
-Verify if log request goes through (one/both) -  *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 13:50*
-
-*Case K) Multiple Log Requests – Send All Logs request, then By Day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case L) Multiple Log Requests - By Day – same day 2x times*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case M) Multiple Log Requests - By Day – one day, then another day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
-
-*Case N) Multiple Log Requests –By Day, then All Logs*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 14:27*
+*CASE A: Device is NOT within tournament lockdown geofence*
+# With device awake, add new tournament for today (will need to add player and generate tee times), starting in 25 minutes. *T1 = 14:25*
+a) Keeping device awake, confirm device receives tournament OTA within 20 minutes of start time and displays the prompt "Are you playing in 'QW' tournament". *Confirmed 14:10*
+b) Select Yes, and confirm screen goes to tournament welcome screen. *Confirmed*
+c) Confirm tournament button should also be available in Play Menu. *Confirmed*
+# With device asleep (cart barn), add new tournament for today, starting in 25 minutes. *CBS 14:17, T1 =14:17*
+a) Wake up device, see if device gets tournament OTA and within 20 minutes of start time displays the prompt "Are you playing in 'QW' tournament". *Confirmed 14:25*
+b) Select Yes, and confirm screen goes to tournament welcome screen. *Confirmed*
+c) Confirm Tournament button is also available in Play Menu. *Confirmed*
+# With device awake, add new tournament for today, starting in 25 minutes. *T1=15:15*
+a) Go to Play menu -> Settings -> Updates -> Update Tournaments. *Confirmed*
+b) Confirm'update available' is shown, go through the update process. *Confirmed 14:50*
+c) Return to Play Menu and make sure new tournament is available (within 20 minutes of start time). *Confirmed 14:55*
 
 
-*Passed with CELL network*
+*CASE B: Device is within tournament lockdown geofence*
+# With device awake, add new tournament for today w/ tournament lockdown geofence set to now+20min (will need to add player and generate tee times), starting in 25 minutes. *T1=15:55*
+a) Keeping device awake, see if device gets tournament OTA geofence and displays lock down tournament screen *Confirmed 15:35 - lockdown*
+b) Confirm device releases geofence within 5 minutes of start time and displays the tournament welcome screen. *Confirmed 15:50*
+c) Confirm Tournament button should also be available in Play Menu. *Confirmed 15:50*
+# With device asleep (cart barn), add new tournament for today w/ tournament lockdown geofence set to now+20min (will need to add player and generate tee times), starting in 25 minutes.  *T1=16:25*
+a) Wake up device, confirm device gets tournament OTA and geofence displays lock down tournament screen *Wake up 16:00, Confirmed 16:00 - lockdown*
+b) Confirm device releases geofence within 5 minutes of start time and displays the tournament welcome screen. *Confirmed 16:20*
+c) Confirm Tournament button should also be available in Play Menu. *Confirmed 16:20*
+# With device awake, add new tournament for today w/ tournament lockdown geofence set to now+20min (will need to add player and generate tee times). *T1=17:00*
+a) Go to Play menu -> Settings -> Updates -> Update Tournaments. *Confirmed 16:40*
+b) Confirm 'update available' is shown, go through the update process. *Confirmed*
+c) Return to play golf screen, and confirm device releases geofence within 5 minutes of start time and displays the tournament welcome screen. *Confirmed*
+d) Confirm Tournament button also is available in Play Menu. *Confirmed 16:55*
 
-*Case A) Download All Logs*
-Start with a device powered on – confirm it’s checking into 360/Control - *Confirmed at 14:41*
-Select Download all logs within Control – Record Time – *Confirmed at 14:42*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 14:39*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 14:44*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. - *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
 
-*Case B) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download All logs request within Control for device - *Confirmed at 14:46*
-Wait several minutes, then flip to RUN/supply power to a device- *Confirmed*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 14:50*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time – *Confirmed at 14:53*
-Confirm Logs appear in Control with the specified type “All Logs” in the list. *Confirmed*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+h2. Join Prompt Alert
 
-*Case C) Device Powered on > Sleep mode > Woke up*
-Select Download all logs within Control – Record Time - *Confirmed at 14:56*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 15:02*
-Review logs to confirm they contain logs more than one day - *Confirmed*
+*CASE A: Create two tournaments that do not overlap (give at least 5-10 minutes gap between each)* *T1=17:30-17:30, T2=17:30-17:30*
+# When Tournament A is still active, but Tournament B is starting in 20 minutes, verify that the 20 minute "Are you playing in the [B] tournament?" prompt does not pop-up *Confirmed prompt does not appear*
+# Verify that it shows up ONLY AFTER Tournament A ends *Confirmed 17:50*
+# Check issues #12029 and confirm bug does not exist. *Confirmed*
 
-*Case D) Download Logs by Day in Past*
-Select to download logs for a day in the past - *Confirmed at 15:04*
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed*
-Wait several minutes and confirm if a device receives the custom message – Check Android studio logs, use filter word – Custom and check for any mentioning that custom message received. If a custom message received 04 – means Download All Logs request, if 13 – Logs by Day request. - *Confirmed at 14:59*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:08*
+*CASE B: A tournament is starting soon, and use a tablet that is not already synced to the tournament*
+# After receiving an "Are you playing..." tournament prompt, PRESS NO. *T1= 18:30. Pressed NO 18:30*
+# Verify this prompt is never displayed again while the tournament is occurring. *Confirmed*
+# BEFORE the tournament starts, allow tablet to go into cart barn sleep, and then wake tablet back up. *CBS 18:25*
+# Verify that the "Are you playing" tournament prompt does not show up after waking back up. *Confirmed*
+# Repeat step 2 AFTER tournament starts *Confirmed 18:50*
+# Re-create a new tournament and repeat steps 1-3, but this time press YES when asked if you're playing in the tournament *Select YES 18:30*
+# Upon selecting YES to play in the tournament- confirm tournament scorecard appears *Confirmed 19:05 when device has players assigned*
 
-*Case E) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for a day in the past within Control for device - *Confirmed at 15:08*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 15:10*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 15:10*
-Keep device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:11*
-Confirm Logs appear in Control with a specified date in the list. - *Confirmed at 15:15*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:15*
 
-*Case F) Device Powered on > Sleep mode > Woke up*
-Select Download for a day in the past within Control – Record Time - *Confirmed at 15:18*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time. Note – these may not upload until the device wakes up - *Confirmed not upload Then device woke up - logs available at 15:19*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:26*
+h2. Tournament Staging/Lock Down Geofence Testing
 
-*Case G) Download Logs by Day – Current Day*
-Select to download logs for SAME DAY
-Confirm request is sent/displays correctly within Control – Record Time - *Confirmed at 15:28*
-Wait several minutes and confirm if the device receives the custom message – Check Android studio logs, use filter word – “Custom” and check for any mentioning that custom message received. If a custom message received “04” – means Download All Logs request, if “13” – Logs by Day request. - *Confirmed at 15:29*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:34*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:36*
+_For all cases map staging geofence area in 360 control panel/pace mapping module, create tournament within 360._
 
-*Case H) Device Powered Off/Disconnected > Power On*
-With cart in TOW/cable disconnected and device powered off, select Download for the Current Day within Control for device - *Confirmed at 15:39*
-Wait several minutes, then flip to RUN/supply power to a device - *Confirmed at 15:39*
-Confirm if the device boots and then receives the custom message once powered on. - *Confirmed at 15:46*
-Keep the device actively running with the connection. Check Control to verify when logs become available – Record Time - *Confirmed at 15:50*
-Confirm Logs appear in Control with a specified date in the list.  - *Confirmed at 15:54*
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 15:54*
+*CASE A: Standard Staging Area Geofence - No Tournament Lockdown*
+# Have device enter geofence *Confirmed 12:05*
+# Confirm Splash screen for course is displayed *Confirmed*
+# Confirm if screen is touched, normal UI appears for 1 minute before returning to Splash screen *Confirmed 12:06*
+# Confirm if device leaves staging geofence, splash screen should disappear and normal UI resumes *Confirmed*
 
-*Case I) Device Powered on > Sleep mode > Woke up*
-Select Download for a current Day within Control – Record Time - *Confirmed at 15:59*
-Allow the device to go to sleep. Check Control to verify when logs become available – Record Time - *Confirmed at 16:04*
-Note – these may not upload until the device wakes up
-Review logs to confirm they reflect logs for the requested day - *Confirmed at 16:11*
+*CASE B: Tournament Lockdown Geofence - inside lockdown time*
+# On device within the APK, go to Settings -> Updates -> Update Tournaments to get the latest tournament information. *Confirmed 12:31*
+# Have device enter geofence within that tournament lockdown geofence time period *Enter 12:38*
+# Confirm Welcome screen for the tournament displays *Confirmed*
+# Confirm No 'x' is available in the top left corner of Welcome Screen (so user cannot leave the Welcome flow) *Confirmed*
+# Lockdown end time is displayed in red text beneath the tournament name *Confirmed*
+# User can see player names if already assigned, and if not, user can search for players and assign to cart *Confirmed*
+# At end of lockdown time, confirm Welcome screen will still be shown but user is able to drive cart and exit welcome screen via 'x' in top left *Confirmed 12:43*
+# Confirm the start time of the round is reached, the welcome screen goes away automatically so the user can start playing *Confirmed - not implemented*
 
-*Corner Cases:*
+*CASE C: Tournament Lockdown Geofence - outside of lockdown time*
+# Add Tournament lockdown geofence within 360 Web Interface with lockdown selected *Confirmed 13:54*
+# On device within the APK, go to Settings -> Updates -> Update Tournaments to get the latest tournament information. *Confirmed 13:57*
+# Have device enter geofence outside of the tournament lockdown geofence time period *Enter 13:59*
+# Confirm nothing happens on device and welcome screen is not displayed *Confirmed 14:09*
 
-*Case J) Multiple Log Requests – Send All Logs request two times*
-Verify if log request goes through (one/both) -  *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 16:23*
+*CASE D: Tournament Lockdown Geofence - with geofence turned off*
+# Add Tournament lockdown geofence within 360 Web Interface with NO lockdown selected *Confirmed 14:29*
+# On device within the APK, go to Settings -> Updates -> Update Tournaments to get the latest tournament information. *Confirmed*
+# Have device enter geofence inside of the tournament lockdown geofence time period *Confirmed 14:44*
+# Confirm Welcome screen for the tournament is displayed and check the following *Confirmed*
+a) 'x' is available in top left corner, and user has full access to UI *Confirmed*
+b) User can get back to the Welcome screen by selecting Tournament from the Play Menu *Confirmed*
+c) If the start time of the round is reached, the welcome screen goes away automatically so the user can start playing *Confirmed - not implemented*
 
-*Case K) Multiple Log Requests – Send All Logs request, then By Day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
 
-*Case L) Multiple Log Requests - By Day – same day 2x times*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
+h2. Tournament Scorecard
 
-*Case M) Multiple Log Requests - By Day – one day, then another day*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed*
+*CASE A: Scorecard Updating*
+# Create and Join/Sync A Tournament on Two Tablets with 2 players on each tablet. *T1=15:20, Confirmed two players per device 15:20*
+# Enter in 3 out of 4 players scores and wait to confirm Leaderboard has been synced to all tablets. *Confirmed 15:25*
+# After confirming this, add score for 4th player *Confirmed 15:26*
+# On Same tablet, immediately switch to the leaderboard. Confirm that the leaderboard on that tablet immediately shows the added 4th player's score *Confirmed 16:16*
+# Switch flights to Net Scores and confirm the 4th player's score is still there, and the back to the Gross # Scores to reconfirm again *Confirmed 15:27*
+# Verify on the other tablets after leaderboard is synced on that tablet that 4th player's score is visible. *Confirmed 15:28*
+# Repeat steps 2-3 a couple more times with additional scoring data to confirm that leaderboard ON A TABLET THAT JUST ENTERED it's scores always shows the latest scores that the player just entered into that particular tablet *Confirmed 15:29*
+# Check to make sure all scores entered on tablet sync to 360 *Confirmed 15:30*
+# Exit YamaTrack application – confirm previously entered scoring is still stored *Confirmed 15:31*
+# Reset tablet and confirm previously entered scoring is still stored *Confirmed 15:34*
 
-*Case N) Multiple Log Requests –By Day, then All Logs*
-Verify if log request goes through (one/both) - *Confirmed*
-Confirm if logs uploaded are correct - *Confirmed at 16:58*
+*CASE B: Clearing Scorecard/End Round* Check issue #12054 to confirm bug has been resolved.
+# Enter in scores for all players – upon last hole, confirm end round prompt appears on play golf screen *Confirmed 15:48*
+# Select END ROUND from prompt- confirm it just 'exits' the tournament on the device for the selected players and check to confirm it does not clear scores within 360 *Confirmed 15:48*
+# Select END ROUND from Tournament SCORECARD- confirm it just 'exits' the tournament on the device for the selected players and check to confirm it does not clear scores within 360 *Confirmed 15:50*
+# Select CLEAR SCORES from tournament SCORECARD – confirm the selected player remains in the tournament, and selected player scores are cleared on tablet and within 360 *Confirmed 15:52*
+
+
+*CASE C: Multiple Rounds/Tournaments ~3 hrs* Check issue #12035 and confirm bug is resolved.
+> Example:
+> Tournament 1 / Round 1 - 13:25-13:45
+> Tournament 1 / Round 2 - 13:50-14:10
+> Tournament 2 / Round 1 - 14:20-14:40
+> Tournament 2 / Round 2 - 14:50-15:10
+
+# Within a one day period, create two tournaments each with two rounds – 20 mins long
+a) Make sure the 1st round do not overlap with 2nd round and are separated by 5 minutes, and each tournament should not overlap and is separated by 10-60 min.
+# Record Tournament and Round times *T1/R1 = 15:10-15:30, T1/R2 = 15:40-16:00, T2/R1=16:10-16:30, T2/R2=16:40-17:00*
+# Within 20 minutes of T1/R1 starting
+a) Confirm: Join T1/R1 Prompt Shows up automatically at 20 minutes OR if you press tournament button, welcome screen for T1/R1 is available. *Conifrmed 14:50*
+b) Confirm you do NOT get a list option and only T1/R1 is available *Confirmed*
+# While T1/R1 is still ongoing, press Tournament button within 1 Hour of T1/R2 starting, but more than 20 minutes before T1/R2 starts
+a) Confirm: Tournament Button does not show a list of tournaments/rounds. It should only show T1/R1 information *Confirmed 15:12, T1/R1*
+# While Tournament 1 is still ongoing, press Tournament button within 1 Hour of T1/R2 starting, AND within 20 minutes of T1/R2 starting
+a) Confirm there was NO auto-prompt asking to join T1/R2 *Confirmed 15:19*
+b) Confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) continue with T1/R1 *Confirmed 15:20 T1/R1, T1/R2*
+# While still within T1/R1 time period, and AND within 20 minute period before T1/R2, FINISH T1/R1 scoring *Confirmed 15:27*
+a) If auto-prompt asking to join Round 2 occurs, Press "No"
+b) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed list 15:28*
+c) Join T1/R2 *15:28*
+# While still within 1 hour of T1/R1 ENDING AND within T1/R2 Time period
+a) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2(It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed 15:29*
+b) Repeat Steps 3-6
+# Within 20 minutes of T1/R2 starting
+a) Confirm: Join T1/R2 Prompt Shows up automatically at 20 minutes OR if you press tournament button, welcome screen for T1/R2 is available. *Conifrmed 13:35, joined from previous step*
+b) Confirm you do NOT get a list option and only T1/R1 is available *Confirmed list available T1/R1, T1/R2*
+# While T1/R2 is still ongoing, press Tournament button within 1 Hour of T2/R1 starting, but more than 20 minutes before T2/R1 starts
+a) Confirm: Tournament Button does not show a list of tournaments/rounds. It should only show T1/R1, T1/R2 information *Confirmed 15:35, T1/R1, T1/R2*
+# While T1/R2 is still ongoing, press Tournament button within 1 Hour of T1/R2 starting, AND within 20 minutes of T2/R1 starting
+a) Confirm there was NO auto-prompt asking to join T2/R1 *Confirmed 15:41*
+b) Confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) continue with T1/R1 *Confirmed 15:50, T1/R2, T1/R2, T2/R1*
+# While still within T1/R2 time period, and AND within 20 minute period before T2/R1, FINISH T1/R2 scoring *Confirmed 18:58*
+a) If auto-prompt asking to join Round 2 occurs, Press "No"
+b) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed list 16:08, T1/R2, T1/R2, T2/R1*
+c) Join T2/R1 *19:01*
+# While still within 1 hour of T1/R2 ENDING AND within T2/R1 Time period
+a) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2(It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed 16:06*
+b) Repeat Steps 3-6
+# Within 20 minutes of T2/R1 starting
+a) Confirm: Join T2/R1 Prompt Shows up automatically at 20 minutes OR if you press tournament button, welcome screen for T2/R1 is available. *Confirmed 19:07, joined from previous step. 16:07 T2 OTA popped up*
+b) Confirm you do NOT get a list option and only T1/R1 is available *Confirmed 19:07, list available T1/R1, T1/R2, T2/R1*
+# While T2/R1 is still ongoing, press Tournament button within 1 Hour of T2/R2 starting, but more than 20 minutes before T2/R2 starts
+a) Confirm: Tournament Button does not show a list of tournaments/rounds. It should only show T1/R1 information *Confirmed 16:12, T1/R1, T1/R2, T2/R1*
+# While Tournament 1 is still ongoing, press Tournament button within 1 Hour of T2/R2 starting, AND within 20 minutes of T2/R2 starting
+a) Confirm there was NO auto-prompt asking to join T2/R2 *Confirmed 16:12*
+b) Confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) continue with T1/R1 *Confirmed list 16:21, T1/R2, T1/R2, T2/R1, T2/R2*
+# While still within T2/R1 time period, and AND within 20 minute period before T2/R2, FINISH T2/R1 scoring *Confirmed 16:24*
+a) If auto-prompt asking to join Round 2 occurs, Press "No"
+b) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2 (It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed list 16:34, T1/R2, T1/R2, T2/R1, T2/R2*
+c) Join T2/R2 *16:35*
+# While still within 1 hour of T2/R1 ENDING AND within T2/R2 Time period
+a) Press Tournament Button, confirm: Tournament Button shows a list that should include at least T1/R1 AND T1/R2(It may also show any other rounds after Round 2 that will start within 20 minutes) *Confirmed*
+b) Repeat Steps 3-6
+# After 1 hour has passed since each round has ended, confirm that when pressing the tournament button, rounds older than 1 hour no longer show up on the list *Confirmed*
