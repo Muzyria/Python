@@ -1,19 +1,47 @@
-from copy import deepcopy
-
-list_of_dicts = [
-    {"id": 1, "value": [10, 20]},
-    {"id": 2, "value": [30, 40]}
-]
-
-copy_data = deepcopy(list_of_dicts)
+import aiohttp
+import asyncio
+import time
 
 
+async def one():
+    print("start ONE")
+    await asyncio.sleep(5)
+    print("stop ONE")
 
-list_of_dicts[0]["value"][0] = 999
+async def two():
+    print("start TWO")
+    await asyncio.sleep(3)
+    print("stop TWO")
+
+async def three():
+    print("start THREE")
+    await asyncio.sleep(4)
+    print("stop THREE")
+
+async def four():
+    print("start FOUR")
+    await asyncio.sleep(5)
+    print("stop FOUR")
 
 
-print(list_of_dicts)
-print(copy_data)
+async def fetch_url():
+    async with aiohttp.ClientSession() as session:
+        async with session.get("https://demoqa.com/auto-complete") as response:
+            print(f"Status: {response.status}")
 
 
+async def main():
+    # await asyncio.create_task(one())
+    # await asyncio.create_task(two())
+    # await asyncio.create_task(three())
+    # await asyncio.create_task(four())
+    # await  asyncio.gather(one(), two(), three(), four())
+    # await asyncio.create_task(fetch_url())
+    await asyncio.gather(*(fetch_url() for _ in range(5)))
+
+
+if __name__ == '__main__':
+    start = time.time()
+    asyncio.run(main())
+    print(time.time() - start)
 
