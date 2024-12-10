@@ -106,18 +106,22 @@ superior_live.course_geofence_list()
 
 
 for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
-    if item['id_geofenceType'] == 10:
+    if item['id_geofenceType'] == 15:
         print(item)
         print(id_geofence := item['id_geofence'])
-        print(id_geofence_action_type := item['id_geofenceActionType'])
+        # print(id_geofence_action_type := item['id_geofenceActionType'])
         print(name_geofence := item['name'])
         print(points := item['points'])
         print(new_coord := convert_coordinates(new_center, superior_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
+
+        # print(pro_tips_name := name_geofence.split(" ")[1])
+        # superior_live.course_geofence_pro_tips_create(new_coord, pro_tips_name, name_geofence)  # create pro tip type 15
+        time.sleep(2)
 
 
         # superior_live.course_geofence_create(name_geofence, new_coord, id_geofence_action_type)  # regular create type 10
 
 
         # superior_live.course_geofence_advertisement_type_create(name_geofence, f'{id_geofence}.jpg', new_coord) # adv create type 17
-        time.sleep(3)
+
 
