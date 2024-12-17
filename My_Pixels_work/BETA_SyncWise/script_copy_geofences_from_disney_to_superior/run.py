@@ -14,11 +14,11 @@ payloads_live = {'superior': {
                 'disney': {
                     "host": "https://api2.syncwise360.com",
                     "url": "https://beta.syncwise360.com/",
-                    "username": "Syncwiselbv",
+                    "username": "igolfdisney",
                     "password": "92108340",
-                    "id_company": "5566",
-                    "id_course": "ujC49hTDjosD",
-                    "company_code": "wZaD1dZju96w"
+                    "id_company": "4820",
+                    "id_course": "f1wKXtcAgZ1n",
+                    "company_code": "whZVhCNHfCFM"
                           }
                 }
 
@@ -50,7 +50,7 @@ payloads_dev = {'superior': {
 # # Новые координаты (центр) в формате словаря
 
 # # Точка на старой карте в формате словаря
-old_point = {"lat": 28.387614187960118, "lng": -81.53746109082975} # Disney
+old_point = {"lat": 28.405254165089463, "lng": -81.58408369421585} # Disney
 # Новые координаты (центр) в формате словаря
 new_center = {"lat": 50.09005483768335, "lng": 36.23441078665438}   #  Superior
 
@@ -91,37 +91,38 @@ superior_live.course_geofence_list()
 #         # print(id_geofence_action_type := item['id_geofenceActionType'])
 #
 #         # LOAD IMAGE
-#         # data_url_image = disney_live.course_geofence_details(id_geofence)
+#         data_url_image = disney_live.course_geofence_details(id_geofence)
 #         print(name_geofence := item['name'])
-#         # disney_live.course_geofence_advertisement_download_file(id_geofence, data_url_image["adsImage"])
+#         disney_live.course_geofence_advertisement_download_file(id_geofence, data_url_image["adsImage"])
 #
 #
-#         print(points := item['points'])
+#         # print(points := item['points'])
 #         print("---------------------------------------------------------------------------------")
 #         # print(new_coord := superior_live.convert_coordinates_to_float(points))
 #         # print(new_coord := convert_coordinates(new_center, superior_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
 #
-#
-#         break
+#         time.sleep(1)
+        # break
 
 
 for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
-    if item['id_geofenceType'] == 15:
+    if item['id_geofenceType'] == 10:
         print(item)
         print(id_geofence := item['id_geofence'])
-        # print(id_geofence_action_type := item['id_geofenceActionType'])
+        print(id_geofence_action_type := item['id_geofenceActionType'])
         print(name_geofence := item['name'])
         print(points := item['points'])
         print(new_coord := convert_coordinates(new_center, superior_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
 
-        # print(pro_tips_name := name_geofence.split(" ")[1])
-        # superior_live.course_geofence_pro_tips_create(new_coord, pro_tips_name, name_geofence)  # create pro tip type 15
-        time.sleep(2)
+#         # print(pro_tips_name := name_geofence.split(" ")[1])
+#         # superior_live.course_geofence_pro_tips_create(new_coord, pro_tips_name, name_geofence)  # create pro tip type 15
+#         time.sleep(2)
 
 
-        # superior_live.course_geofence_create(name_geofence, new_coord, id_geofence_action_type)  # regular create type 10
-
+        superior_live.course_geofence_create(name_geofence, new_coord, id_geofence_action_type)  # regular create type 10
 
         # superior_live.course_geofence_advertisement_type_create(name_geofence, f'{id_geofence}.jpg', new_coord) # adv create type 17
+        time.sleep(3)
+
 
 
