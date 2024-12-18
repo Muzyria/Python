@@ -1,11 +1,42 @@
-import math
+import subprocess
+import time
+from datetime import datetime
 
-# Параметры задачи
-start_capital = 1000  # начальный капитал
-target_amount = 100000  # конечная сумма
-daily_growth_rate = 0.5  # ежедневный рост (20%)
 
-# Вычисление количества дней
-n = math.log(target_amount / start_capital) / math.log(1 + daily_growth_rate)
+def execute_adb_command():
+    """Выполняет команду adb shell ps и возвращает вывод."""
+    result = subprocess.run(["adb", "shell", "ps"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if result.returncode == 0:
+        return result.stdout
+    else:
+        print(f"Ошибка выполнения команды: {result.stderr}")
+        return None
 
-print(f"Количество дней: {math.ceil(n)}")
+
+def save_output_to_file(output, filename="process_log.txt"):
+    """Сохраняет вывод команды в файл с временной меткой."""
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(filename, "a") as file:
+        file.write(f"=== {timestamp} ===\n")
+        file.write(output)
+        file.write("\n")
+
+
+def main():
+    """Основной цикл для записи данных каждые 30 секунд."""
+    filename = "process_log.txt"
+    print(f"Начинаю запись данных в файл: {filename}")
+
+    try:
+        while True:
+            output = execute_adb_command()
+            if output:
+                save_output_to_file(output, filename)
+            print("Данные сохранены. Ожидание 10 секунд...")
+            time.sleep(10)
+    except KeyboardInterrupt:
+        print("\nСбор данных завершен.")
+
+
+if __name__ == "__main__":
+    main()
