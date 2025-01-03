@@ -140,6 +140,6 @@ if __name__ == '__main__':
 
     print(test_1.SECRET_KEY)
 
-    test_1.course_vector_details("7rOQfXBAtJ2C")
+    test_1.course_vector_details("GsVhpjLhrEIy")
 
     print(test_1.COURSE_VECTOR_DETAILS)

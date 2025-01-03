@@ -10,7 +10,7 @@ def change_time(value):
     time_str = value
     time_obj = datetime.strptime(time_str, '%H:%M')
     # new_time_obj = time_obj + timedelta(hours=1, minutes=randrange(1, 4))
-    new_time_obj = time_obj + timedelta(hours=4, minutes=8)
+    new_time_obj = time_obj + timedelta(hours=2, minutes=30)
     new_time_str = new_time_obj.strftime('%H:%M')
     # print(f'{value} -> {new_time_str}')
     time_list.append(new_time_str)
