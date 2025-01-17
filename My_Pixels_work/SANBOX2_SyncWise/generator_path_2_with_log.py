@@ -113,7 +113,7 @@ class IntermediateCoordinatesGenerator:
     def run_device_by_time(self, minutes=None):  #  генераци нахождения на лунке по времени
         # steps = int(minutes * 40) # ----------------------------
 
-        time_list = [0, 4, 4, 2, 2, 6, 4, 4, 4, 4]
+        time_list = [0, 4, 4, 1, 1, 1, 6, 4, 4, 4]
         # time_list = [0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
         # time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
 
@@ -126,14 +126,14 @@ class IntermediateCoordinatesGenerator:
             #--------------------
 
             time_start_on_hole = datetime.now()
-            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-1)
+            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=1)  # -1 по умочанию
             time_minute = datetime.now().time().minute
             message = f'STARTING TRIP ON HOLE -> {i} from {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}'
             self.log_to_file(message)
             print(message)
 
             # ---------------------------------------------------------
-            steps = int(minutes * 48) #  35 -------------------------------------------------------------------------------
+            steps = int(minutes * 50) #  35 -------------------------------------------------------------------------------
             print(f"-------------------------- STEP TIME {steps} -----------------------------------------------")
 
             for step_patch in (current_patch := self.get_intermediate_coordinates(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH[i], steps))[5:-5]:  # добавил срез для смещения к центру лунки
