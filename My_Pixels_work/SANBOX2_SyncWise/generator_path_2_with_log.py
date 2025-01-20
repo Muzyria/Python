@@ -40,8 +40,8 @@ class IntermediateCoordinatesGenerator:
 
         # self.client_data.course_vector_details("Xy4NX6enHAhQ")  # Eighteen Hole-Pine
         # self.client_data.course_vector_details("vUBhsVKC7vLg")  # Par 3-Pine Hills
-        # self.client_data.course_vector_details("7rOQfXBAtJ2C")  # Eighteen-Sleepy Hollow Country Club
-        self.client_data.course_vector_details("GsVhpjLhrEIy")  # Eighteen-Sleepy Nine
+        self.client_data.course_vector_details("7rOQfXBAtJ2C")  # Eighteen-Sleepy Hollow Country Club
+        # self.client_data.course_vector_details("GsVhpjLhrEIy")  # Eighteen-Sleepy Nine
         # self.client_data.course_vector_details("GfzkZL9LMMuc")  # Angels View-Oakville Executive Golf Courses 9 holes
 
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
@@ -113,8 +113,11 @@ class IntermediateCoordinatesGenerator:
     def run_device_by_time(self, minutes=None):  #  генераци нахождения на лунке по времени
         # steps = int(minutes * 40) # ----------------------------
 
-        time_list = [0, 4, 4, 1, 1, 1, 6, 4, 4, 4]
-        # time_list = [0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
+        # time_list = [0, 4, 4, 1, 1, 1, 6, 4, 4, 4]
+
+                     #  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8
+        time_list = [0, 4, 4, 1, 1, 1, 4, 4, 4, 4]
+        # 1 hole = 3min. on hole 2 = 3 min , on hole 3 = 1 min, hole 4 = 1 min, hole 5 = 1 min, hole 6 = 3 min (7,8,9 = 3 min )
         # time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):  # MAIN
@@ -123,10 +126,11 @@ class IntermediateCoordinatesGenerator:
             # ------------- ---------------- -------------- -----------------
             # minutes = random.randint(4, 5)
             minutes = time_list[i]
+
             #--------------------
 
             time_start_on_hole = datetime.now()
-            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=1)  # -1 по умочанию
+            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=0)  # -1 по умочанию
             time_minute = datetime.now().time().minute
             message = f'STARTING TRIP ON HOLE -> {i} from {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}'
             self.log_to_file(message)
@@ -162,10 +166,10 @@ generator = IntermediateCoordinatesGenerator()
 print()
 print(f"START GAME - -----------------------------------------------------------------------------------------")
 generator.log_to_file(f'the game started at {datetime.now().strftime("%H:%M:%S")}')
-generator.get_start_coordinates(1)
+# generator.get_start_coordinates(1)
 # generator.run_device(6)
 generator.run_device_by_time()
-generator.get_start_coordinates(3)
+generator.get_start_coordinates(4)
 print()
 generator.log_to_file(f'the game finished at {datetime.now().strftime("%H:%M:%S")}')
 print(f'FINISH GAME ------------------------------------------------------------------------------------------')
