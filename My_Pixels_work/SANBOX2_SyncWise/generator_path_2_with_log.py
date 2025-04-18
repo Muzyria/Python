@@ -20,7 +20,7 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.101'}
+    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.103'}
     # START_COORDINATES = "50.07807852323376, 36.23065154766116" # superior
     # START_COORDINATES = "49.86316203910068, 24.029529539745567" # lviv demo
     # START_COORDINATES = "41.399138246290164, -75.71986696282578"  # Eighteen Hole-Pine
@@ -113,15 +113,15 @@ class IntermediateCoordinatesGenerator:
     def run_device_by_time(self, minutes=None):  #  генераци нахождения на лунке по времени
         # steps = int(minutes * 40) # ----------------------------
 
-        # time_list = [0, 4, 4, 1, 1, 1, 6, 4, 4, 4]
+        # time_list = [0, 6, 6, 6, 6, 6, 6, 6, 6, 6]
 
                      #  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8
-        time_list = [0, 4, 4, 1, 1, 1, 4, 4, 4, 4]
-        # 1 hole = 3min. on hole 2 = 3 min , on hole 3 = 1 min, hole 4 = 1 min, hole 5 = 1 min, hole 6 = 3 min (7,8,9 = 3 min )
+        time_list = [0, 6, 6,6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+        # 18 hole = 3min (meaning minimum trigger for pace) , on hole 1 = 3 min , on hole 2 = 1 min, hole 3 = 1 min, hole 4 = 1 min, hole 5 = 5 min (6...17 = 3 min )
         # time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):  # MAIN
-        # for i in [9, 1, 2, 3, 4, 5, 6, 7, 8]:
+        # for i in [18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]:
         # for i in range(1, 4):
             # ------------- ---------------- -------------- -----------------
             # minutes = random.randint(4, 5)
@@ -130,7 +130,7 @@ class IntermediateCoordinatesGenerator:
             #--------------------
 
             time_start_on_hole = datetime.now()
-            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=0)  # -1 по умочанию
+            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=5)  # -1 по умочанию
             time_minute = datetime.now().time().minute
             message = f'STARTING TRIP ON HOLE -> {i} from {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}'
             self.log_to_file(message)
