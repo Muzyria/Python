@@ -19,7 +19,16 @@ payloads_live = {'superior': {
                     "id_company": "4820",
                     "id_course": "f1wKXtcAgZ1n",
                     "company_code": "whZVhCNHfCFM"
-                          }
+                          },
+                'rollinghills': {
+                    "host": "https://api2.syncwise360.com",
+                    "url": "https://beta.syncwise360.com/",
+                    "username": "syncwiserollinghills",
+                    "password": "92108340",
+                    "id_company": "8444",
+                    "id_course": "m1NvHeNUzuZh",
+                    "company_code": "XKhU2Epgh7zI"
+                             },
                 }
 
 
@@ -50,7 +59,8 @@ payloads_dev = {'superior': {
 # # Новые координаты (центр) в формате словаря
 
 # # Точка на старой карте в формате словаря
-old_point = {"lat": 28.405254165089463, "lng": -81.58408369421585} # Disney
+# old_point = {"lat": 28.405254165089463, "lng": -81.58408369421585} # Disney
+old_point = {"lat": 35.020310581105, "lng": -80.569105611572}  #  RollingHills
 # Новые координаты (центр) в формате словаря
 new_center = {"lat": 50.09005483768335, "lng": 36.23441078665438}   #  Superior
 
@@ -69,9 +79,13 @@ def convert_coordinates(center, coordinates, lat_diff, lng_diff):
     return converted_coordinates
 
 
-disney_live = SyncwiseClient(**payloads_live['disney'])  # MAIN
-disney_live.user_account_login()
-disney_live.course_geofence_list()
+# disney_live = SyncwiseClient(**payloads_live['disney'])  # MAIN
+# disney_live.user_account_login()
+# disney_live.course_geofence_list()
+
+rollinghills_live = SyncwiseClient(**payloads_live['rollinghills'])  # MAIN
+rollinghills_live.user_account_login()
+rollinghills_live.course_geofence_list()
 
 superior_live = SyncwiseClient(**payloads_live['superior'])  # MAIN
 superior_live.user_account_login()
@@ -105,24 +119,46 @@ superior_live.course_geofence_list()
         # break
 
 
-for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
-    if item['id_geofenceType'] == 10:
-        print(item)
-        print(id_geofence := item['id_geofence'])
-        print(id_geofence_action_type := item['id_geofenceActionType'])
-        print(name_geofence := item['name'])
-        print(points := item['points'])
-        print(new_coord := convert_coordinates(new_center, superior_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
+
+
+# for item in disney_live.COURSE_GEOFENCE_LIST['resultList']:
+#     if item['id_geofenceType'] == 10:
+#         print(item)
+#         print(id_geofence := item['id_geofence'])
+#         print(id_geofence_action_type := item['id_geofenceActionType'])
+#         print(name_geofence := item['name'])
+#         print(points := item['points'])
+#         print(new_coord := convert_coordinates(new_center, superior_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
 
 #         # print(pro_tips_name := name_geofence.split(" ")[1])
 #         # superior_live.course_geofence_pro_tips_create(new_coord, pro_tips_name, name_geofence)  # create pro tip type 15
 #         time.sleep(2)
 
 
-        superior_live.course_geofence_create(name_geofence, new_coord, id_geofence_action_type)  # regular create type 10
+        # superior_live.course_geofence_create(name_geofence, new_coord, id_geofence_action_type)  # regular create type 10
 
         # superior_live.course_geofence_advertisement_type_create(name_geofence, f'{id_geofence}.jpg', new_coord) # adv create type 17
-        time.sleep(3)
+        # time.sleep(3)
 
 
+for item in rollinghills_live.COURSE_GEOFENCE_LIST['resultList']:
+    if item['id_geofenceType'] == 17:
+        print(item)
+        print(id_geofence := item['id_geofence'])
 
+        print(name_geofence := item['name'])
+        print(points := item['points'])
+        print(new_coord := convert_coordinates(new_center, superior_live.convert_coordinates_to_float(points), lat_diff, lng_diff))
+
+
+        # # LOAD IMAGE
+        # data_url_image = rollinghills_live.course_geofence_details(id_geofence)
+        # print(name_geofence := item['name'])
+        # rollinghills_live.course_geofence_advertisement_download_file(id_geofence, data_url_image["adsImage"])
+
+
+        print("---------------------------------------------------------------------------------")
+        superior_live.course_geofence_advertisement_type_create(name_geofence, f'{id_geofence}.jpg', new_coord) # adv create type 17
+
+        time.sleep(4)
+        # break
