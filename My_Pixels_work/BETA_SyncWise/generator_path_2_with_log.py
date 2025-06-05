@@ -22,8 +22,8 @@ class IntermediateCoordinatesGenerator:
     DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.101'}
     # DICT_IP_DEVICES = {'W_W_W_->>>': 'dbe407da'}
     # START_COORDINATES = "50.07807852323376, 36.23065154766116"  # superior
-    # START_COORDINATES = "50.07807852323376, 36.23065154766116"  # superior 9/1
-    START_COORDINATES = "49.86316203910068, 24.029529539745567"  # lviv demo
+    START_COORDINATES = "50.07807852323376, 36.23065154766116"  # superior 9/1
+    # START_COORDINATES = "49.86316203910068, 24.029529539745567"  # lviv demo
 
     def __init__(self):
         ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
@@ -39,9 +39,9 @@ class IntermediateCoordinatesGenerator:
         # superior "KoyhA-zWt6os"
         # lviv demo FFlxm9vaKp-a
 
-        # self.client_data.course_vector_details("KoyhA-zWt6os") # superior
-        # self.client_data.course_vector_details("WPGmneuDgJ3q")  # superior 9/1
-        self.client_data.course_vector_details("FFlxm9vaKp-a") # lviv demo
+        # self.client_data.course_vector_details("KoyhA-zWt6os")  # superior
+        self.client_data.course_vector_details("WPGmneuDgJ3q")  # superior 9/1
+        # self.client_data.course_vector_details("FFlxm9vaKp-a")  # lviv demo
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
     @execution_time_decorator
@@ -113,6 +113,7 @@ class IntermediateCoordinatesGenerator:
         time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5]
         # time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
 
+
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
             # ------------- ---------------- -------------- -----------------
             # minutes = random.randint(4, 5)
@@ -120,7 +121,7 @@ class IntermediateCoordinatesGenerator:
             #--------------------
 
             time_start_on_hole = datetime.now()
-            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-1)
+            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=5)
             time_minute = datetime.now().time().minute
             message = f'STARTING TRIP ON HOLE -> {i} from {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}'
             self.log_to_file(message)

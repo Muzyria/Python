@@ -40,8 +40,8 @@ class IntermediateCoordinatesGenerator:
 
         # self.client_data.course_vector_details("Xy4NX6enHAhQ")  # Eighteen Hole-Pine
         # self.client_data.course_vector_details("vUBhsVKC7vLg")  # Par 3-Pine Hills
-        # self.client_data.course_vector_details("7rOQfXBAtJ2C")  # Eighteen-Sleepy Hollow Country Club
-        self.client_data.course_vector_details("GsVhpjLhrEIy")  # Eighteen-Sleepy Nine
+        self.client_data.course_vector_details("7rOQfXBAtJ2C")  # Eighteen-Sleepy Hollow Country Club
+        # self.client_data.course_vector_details("GsVhpjLhrEIy")  # Eighteen-Sleepy Nine
         # self.client_data.course_vector_details("GfzkZL9LMMuc")  # Angels View-Oakville Executive Golf Courses 9 holes
 
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
@@ -113,10 +113,10 @@ class IntermediateCoordinatesGenerator:
     def run_device_by_time(self, minutes=None):  #  генераци нахождения на лунке по времени
         # steps = int(minutes * 40) # ----------------------------
 
-        time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+        # time_list = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
                      #  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8
-        # time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+        time_list = [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         # 18 hole = 3min (meaning minimum trigger for pace) , on hole 1 = 3 min , on hole 2 = 1 min, hole 3 = 1 min, hole 4 = 1 min, hole 5 = 5 min (6...17 = 3 min )
         # time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
 
