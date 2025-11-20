@@ -36,12 +36,12 @@ class SyncwiseClient(SyncwiseAPI):
         payload = json.dumps({
             # "username": "nessahills2",  # Par 3-Pine Hills
             # "password": "Nesss!123"
-
-            "username": "eighteendev",  # Eighteen-Sleepy Hollow Country Club
-            "password": "Qwerty01!"
-
+            # "username": "eighteendev",  # Eighteen-Sleepy Hollow Country Club
+            # "password": "Qwerty01!"
             # "username": "olehangels",  # Angels View-Oakville Executive Golf Courses 9 holes
             # "password": "Qwerty01!"
+            "username": "igolfcrosby",
+            "password": "92108340"
         })
         headers = {
             'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
@@ -140,6 +140,6 @@ if __name__ == '__main__':
 
     print(test_1.SECRET_KEY)
 
-    test_1.course_vector_details("7rOQfXBAtJ2C")
-
-    print(test_1.COURSE_VECTOR_DETAILS)
+    # test_1.course_vector_details("7rOQfXBAtJ2C")
+    #
+    # print(test_1.COURSE_VECTOR_DETAILS)

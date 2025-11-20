@@ -19,23 +19,18 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.106'}
+    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.103'}
     # DICT_IP_DEVICES = {'W_W_W_->>>': 'dbe407da'}
-    START_COORDINATES = "50.07807852323376, 36.23065154766116"  # superior 9/1
+    START_COORDINATES = "33.03466071233874, -117.15529713003781"  # CROSBY
 
 
     def __init__(self):
         ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
         time.sleep(5)
 
-        # for ip_device in self.DICT_IP_DEVICES.values():
-        #     ConnectDevice.connect_device(ip_device)
-        #     time.sleep(10)
+        self.client_data = SyncwiseClient()
 
-        self.client_data = SyncwiseClient("https://uat-api-gateway.syncwise360.com")
-        self.client_data.user_account_login()
-
-        self.client_data.course_vector_details("Z7A5Hz9ppV1x")  # CROSBY
+        self.client_data.course_vector_details()  # CROSBY
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
     @execution_time_decorator
