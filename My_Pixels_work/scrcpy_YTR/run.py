@@ -37,8 +37,9 @@ pyautogui.press('enter')
 
 # pyautogui.typewrite(r'scrcpy --tcpip=192.168.3.128:40375')  # MY POCO in office
 # pyautogui.typewrite(r'scrcpy --tcpip=192.168.0.103:42285')  # MY POCO at home
-pyautogui.typewrite(r'scrcpy --tcpip=192.168.0.101:5555')
-# pyautogui.typewrite(r'scrcpy -s 61c74e97')
+# pyautogui.typewrite(r'scrcpy --tcpip=192.168.0.106:5555')
+pyautogui.typewrite(r'scrcpy -s dbe407da')
 pyautogui.press('enter')
+
 
 

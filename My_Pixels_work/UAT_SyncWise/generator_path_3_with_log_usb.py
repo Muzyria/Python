@@ -19,14 +19,12 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.103'}
-    # DICT_IP_DEVICES = {'W_W_W_->>>': 'dbe407da'}
-    # START_COORDINATES = "50.07807852323376, 36.23065154766116"  # superior
-    START_COORDINATES = "50.07807852323376, 36.23065154766116"  # superior 9/1
+    DICT_IP_DEVICES = {'W_W_W_->>>': 'dbe407da'}
+    START_COORDINATES = "50.07807852323376, 36.23065154766116"  # superior
     # START_COORDINATES = "49.86316203910068, 24.029529539745567"  # lviv demo
 
     def __init__(self):
-        ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
+        # ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
         time.sleep(5)
 
         # for ip_device in self.DICT_IP_DEVICES.values():
@@ -39,15 +37,13 @@ class IntermediateCoordinatesGenerator:
         # superior "KoyhA-zWt6os"
         # lviv demo FFlxm9vaKp-a
 
-        # self.client_data.course_vector_details("KoyhA-zWt6os")  # superior
-        self.client_data.course_vector_details("WPGmneuDgJ3q")  # superior 9/1
-        # self.client_data.course_vector_details("FFlxm9vaKp-a")  # lviv demo
+        self.client_data.course_vector_details("KoyhA-zWt6os")
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
     @execution_time_decorator
     def send_adb_command(self, ip_device, location):
         os.system(
-            rf'adb -s {ip_device}:5555 shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
+            rf'adb -s {ip_device} shell am broadcast -a ua.org.jeff.mockgps.ACTION_LOCATION --es location \"{location}\"')
 
     @staticmethod
     def log_to_file(message):
@@ -68,7 +64,7 @@ class IntermediateCoordinatesGenerator:
     @execution_time_decorator
     def touch_screen(self):
         for id_device, ip_device in self.DICT_IP_DEVICES.items():
-            os.system(rf'adb -s {ip_device}:5555 shell input tap 700 500')
+            os.system(rf'adb -s {ip_device} shell input tap 700 500')
             print(f'TOUCH SCREEN {id_device} in {datetime.now().time().strftime("%H:%M")}')
 
     def get_intermediate_coordinates(self, path, steps):  #  переделланный под работу с кусочками маршрута
@@ -110,9 +106,7 @@ class IntermediateCoordinatesGenerator:
     def run_device_by_time(self, minutes=None):  #  генераци нахождения на лунке по времени
         # steps = int(minutes * 40) # ----------------------------
 
-        time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5]
-        # time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
-
+        time_list = [0, 4, 3, 4, 4, 3, 4, 4, 3, 4, 4, 3, 4, 4, 3, 4, 4, 3, 4]
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
             # ------------- ---------------- -------------- -----------------
@@ -121,7 +115,7 @@ class IntermediateCoordinatesGenerator:
             #--------------------
 
             time_start_on_hole = datetime.now()
-            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=5)
+            time_finish_on_hole = time_start_on_hole + timedelta(minutes=minutes, seconds=-1)
             time_minute = datetime.now().time().minute
             message = f'STARTING TRIP ON HOLE -> {i} from {time_start_on_hole.strftime("%H:%M:%S")} to {time_finish_on_hole.strftime("%H:%M:%S")}'
             self.log_to_file(message)
@@ -160,23 +154,12 @@ generator.log_to_file(f'the game started at {datetime.now().strftime("%H:%M:%S")
 generator.get_start_coordinates(1)
 # generator.run_device(6)
 generator.run_device_by_time()
-generator.get_start_coordinates(5)
+generator.get_start_coordinates(4)
 print()
 generator.log_to_file(f'the game finished at {datetime.now().strftime("%H:%M:%S")}')
 print(f'FINISH GAME ------------------------------------------------------------------------------------------')
 
 
 
-#
-# generator = IntermediateCoordinatesGenerator()
-#
-# print()
-# print(f"START GAME - -----------------------------------------------------------------------------------------")
-# generator.log_to_file(f'the game started at {datetime.now().strftime("%H:%M:%S")}')
-# generator.get_start_coordinates(1)
-# # generator.run_device(6)
-# generator.run_device_by_time()
-# generator.get_start_coordinates(3)
-# print()
-# generator.log_to_file(f'the game finished at {datetime.now().strftime("%H:%M:%S")}')
-# print(f'FINISH GAME ------------------------------------------------------------------------------------------')
+
+
