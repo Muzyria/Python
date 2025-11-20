@@ -31,13 +31,14 @@ class IntermediateCoordinatesGenerator:
         #     ConnectDevice.connect_device(ip_device)
         #     time.sleep(10)
 
-        self.client_data = SyncwiseClient("https://api2.syncwise360.com")
+        self.client_data = SyncwiseClient("https://https://uat.syncwise360.com")
         self.client_data.user_account_login()
 
         # superior "KoyhA-zWt6os"
         # lviv demo FFlxm9vaKp-a
+        # crosby Z7A5Hz9ppV1x
 
-        self.client_data.course_vector_details("KoyhA-zWt6os")
+        self.client_data.course_vector_details("Z7A5Hz9ppV1x")
         # print(self.client_data.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
 
     @execution_time_decorator

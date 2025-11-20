@@ -59,7 +59,7 @@ class SyncwiseClient(SyncwiseAPI):
         url = f"{self.host}/auth-service/action/{self.create_url_test_with_public()}"
 
         payload = json.dumps({
-            "username": "igolfccrb",
+            "username": "igolfcrosby",
             "password": "92108340"
         })
         headers = {
@@ -88,7 +88,7 @@ class SyncwiseClient(SyncwiseAPI):
             "id_course": id_course
         })
         headers = {
-            'authority': 'api2.syncwise360.com',
+            'authority': 'uat-api-gateway.syncwise360.com',
             'accept': '*/*',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'content-type': 'application/json',
@@ -101,7 +101,7 @@ class SyncwiseClient(SyncwiseAPI):
             'sec-fetch-mode': 'cors',
             'sec-fetch-site': 'same-site',
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
-            'x-access-token': 'Wrle2mPGpJxOjyVztlCvGVpObNGfJT_xOoiMzRtd1b_eBCIkNBVsemMRGX9f'
+            # 'x-access-token': 'Wrle2mPGpJxOjyVztlCvGVpObNGfJT_xOoiMzRtd1b_eBCIkNBVsemMRGX9f'
         }
 
         response = requests.request("POST", url, headers=headers, data=payload)
@@ -154,12 +154,12 @@ class SyncwiseClient(SyncwiseAPI):
 
 if __name__ == '__main__':
 
-    test_1 = SyncwiseClient("https://uat.syncwise360.com")
+    test_1 = SyncwiseClient("https://uat-api-gateway.syncwise360.com")
     test_1.user_account_login()
 
     print(test_1.SECRET_KEY)
 
-    test_1.course_vector_details("7rOQfXBAtJ2C")
+    test_1.course_vector_details("fAwbKaonIp7Q")
 
     print(test_1.COURSE_VECTOR_DETAILS)
 
