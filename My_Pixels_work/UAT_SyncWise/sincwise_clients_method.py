@@ -59,14 +59,14 @@ class SyncwiseClient(SyncwiseAPI):
         url = f"{self.host}/rest/action/{self.create_url_test_with_public()}"
 
         payload = json.dumps({
-            "username": "igorperetssuperior",
-            "password": "Qwerty01!"
+            "username": "igolfccrb",
+            "password": "92108340"
         })
         headers = {
             'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
             'Accept': '*/*',
             'Content-Type': 'application/json',
-            'Referer': 'https://beta.syncwise360.com/',
+            'Referer': 'https://uat.syncwise360.com/',
             'sec-ch-ua-mobile': '?0',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
             'sec-ch-ua-platform': '"Windows"'
@@ -94,8 +94,8 @@ class SyncwiseClient(SyncwiseAPI):
             'accept': '*/*',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'content-type': 'application/json',
-            'origin': 'https://beta.syncwise360.com',
-            'referer': 'https://beta.syncwise360.com/',
+            'origin': 'https://uat.syncwise360.com',
+            'referer': 'https://uat.syncwise360.com/',
             'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -132,8 +132,8 @@ class SyncwiseClient(SyncwiseAPI):
             'accept': '*/*',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'content-type': 'application/json',
-            'origin': 'https://beta.syncwise360.com',
-            'referer': 'https://beta.syncwise360.com/',
+            'origin': 'https://uat.syncwise360.com',
+            'referer': 'https://uat.syncwise360.com/',
             'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -212,8 +212,8 @@ class SyncwiseClient(SyncwiseAPI):
             'accept': '*/*',
             'accept-language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,uk;q=0.6',
             'content-type': 'application/json',
-            'origin': 'https://beta.syncwise360.com',
-            'referer': 'https://beta.syncwise360.com/',
+            'origin': 'https://uat.syncwise360.com',
+            'referer': 'https://uat.syncwise360.com/',
             'sec-ch-ua': '"Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"',
             'sec-ch-ua-mobile': '?0',
             'sec-ch-ua-platform': '"Windows"',
@@ -233,7 +233,7 @@ class SyncwiseClient(SyncwiseAPI):
 
 if __name__ == '__main__':
 
-    test_1 = SyncwiseClient("https://api2.syncwise360.com")
+    test_1 = SyncwiseClient("https://uat.syncwise360.com")
     test_1.user_account_login()
     print(test_1.SECRET_KEY)
 
@@ -241,7 +241,7 @@ if __name__ == '__main__':
     # test_1.course_geofence_list()
     # print(test_1.COURSE_GEOFENCE_LIST)
 
-    test_1.course_vector_details("KoyhA-zWt6os")
+    test_1.course_vector_details("fAwbKaonIp7Q")
     print(test_1.COURSE_VECTOR_DETAILS_HOLES_CENTRALPATH)
     # print(test_1.COURSE_VECTOR_DETAILS_HOLES_GREENCENTER)
 
