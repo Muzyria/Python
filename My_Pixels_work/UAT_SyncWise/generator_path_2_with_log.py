@@ -19,10 +19,10 @@ def execution_time_decorator(func):
 
 class IntermediateCoordinatesGenerator:
     # DICT_IP_DEVICES = {'S10115002211180009': '192.168.2.30', 'L101140017180605A5': '192.168.3.174'}
-    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.103'}
+    DICT_IP_DEVICES = {'W_W_W_->>>': '192.168.0.109'}
     # DICT_IP_DEVICES = {'W_W_W_->>>': 'dbe407da'}
-    START_COORDINATES = "33.03466071233874, -117.15529713003781"  # CROSBY
-
+    START_COORDINATES = "50.07807852323376, 36.23065154766116"  # superior
+    # START_COORDINATES = "33.03466071233874, -117.15529713003781"  # CROSBY
 
     def __init__(self):
         ConnectDevice.connect_devices(self.DICT_IP_DEVICES)
@@ -100,8 +100,8 @@ class IntermediateCoordinatesGenerator:
         # steps = int(minutes * 40) # ----------------------------
 
         # time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5]
-        time_list = [0, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
-
+        # time_list = [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+        time_list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
         for i in range(1, self.client_data.COURSE_VECTOR_DETAILS_HOLECOUNT + 1):
             # ------------- ---------------- -------------- -----------------
@@ -146,7 +146,7 @@ generator = IntermediateCoordinatesGenerator()
 print()
 print(f"START GAME - -----------------------------------------------------------------------------------------")
 generator.log_to_file(f'the game started at {datetime.now().strftime("%H:%M:%S")}')
-generator.get_start_coordinates(1)
+generator.get_start_coordinates(2)
 # generator.run_device(6)
 generator.run_device_by_time()
 generator.get_start_coordinates(5)
